@@ -1,12 +1,16 @@
 ﻿using iTechArt.Domain.Entities.Commons;
 using iTechArt.Domain.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace iTechArt.Domain.Entities.Pupils
 {
     public class School : Auditable
     {
-        public int SchoolNumber { get; set; }
+        [Required]
+        public ushort SchoolNumber { get; set; }
+        [Required]
         public string Address { get; set; }
+        [Required]
         public SchoolType SchoolType { get; set; }
 
     }
