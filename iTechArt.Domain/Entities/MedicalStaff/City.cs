@@ -11,10 +11,8 @@ namespace iTechArt.Domain.Entities.MedicalStaff
     {
         [Key]
         [Required]
-        public int City_Id { get; set; }
+        public int CityId { get; set; }
 
-        public string City_Name { get; set; }
-
-        public int Country_Id { get; set; }
+        public string CityName { get; set; }
     }
 }

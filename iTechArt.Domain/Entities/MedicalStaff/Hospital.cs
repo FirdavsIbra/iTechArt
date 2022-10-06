@@ -13,9 +13,9 @@ namespace iTechArt.Domain.Entities.MedicalStaff
         [Required]
         public int HospitalId { get; set; }
 
-        public string Hospital_Name { get; set; }
+        public string HospitalName { get; set; }
 
-        public int Location_ID { get; set; }
+        public int LocationId { get; set; }
 
         public string PhoneNumber { get; set; }
 

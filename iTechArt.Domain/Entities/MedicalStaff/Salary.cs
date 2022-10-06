@@ -15,8 +15,8 @@ namespace iTechArt.Domain.Entities.MedicalStaff
 
         public double Amount { get; set; }
 
-        public DateOnly FromDate { get; set; }
+        public DateTime FromDate { get; set; }
 
-        public DateOnly ToDate { get; set; }
+        public DateTime ToDate { get; set; }
     }
 }

@@ -14,11 +14,7 @@ namespace iTechArt.Data.DbContexts
         {
         }
 
-        public DbSet<Assistant> Assistants { get; set; }
-
         public DbSet<City> Cities { get; set; }
-
-        public DbSet<Country> Countries { get; set; }
 
         public DbSet<Department> Departments { get; set; }
 

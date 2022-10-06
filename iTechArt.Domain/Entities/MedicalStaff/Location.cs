@@ -17,6 +17,6 @@ namespace iTechArt.Domain.Entities.MedicalStaff
 
         public string Postal_Code { get; set; }
 
-        public string City { get; set; }
+        public int CityId { get; set; }
     }
 }

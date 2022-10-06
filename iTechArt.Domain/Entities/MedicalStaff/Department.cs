@@ -11,10 +11,10 @@ namespace iTechArt.Domain.Entities.MedicalStaff
     {
         [Key]
         [Required]
-        public int Department_Id { get; set; }
+        public int DeptId { get; set; }
 
-        public string Dept_Name { get; set; }
+        public string DeptName { get; set; }
 
-        public int Hospital_ID { get; set; }
+        public int HospitalId { get; set; }
     }
 }
