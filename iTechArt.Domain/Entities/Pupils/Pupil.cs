@@ -1,6 +1,7 @@
 ﻿using iTechArt.Domain.Entities.Commons;
 using iTechArt.Domain.Enums;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace iTechArt.Domain.Entities.Pupils
 {
@@ -21,6 +22,8 @@ namespace iTechArt.Domain.Entities.Pupils
         [Required]
         public string City { get; set; }
         [Required]
+        public long SchoolId { get; set; }
+        [ForeignKey(nameof(SchoolId))]
         public School School { get; set; }
         [Required]
         public byte Grade { get; set; }

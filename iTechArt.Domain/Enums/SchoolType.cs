@@ -2,7 +2,7 @@
 {
     public enum SchoolType : byte
     {
-        privateSchool,
+        privateSchool = 1,
         gymnaseum,
         governmentSchool,
         languageSchool,
