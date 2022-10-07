@@ -1,12 +1,13 @@
-﻿using iTechArt.Domain.Entities.Commons;
-using iTechArt.Domain.Enums;
+﻿using iTechArt.Domain.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace iTechArt.Domain.Entities.Pupils
 {
-    public class Pupil : Auditable
+    public class Pupil
     {
+        [Key]
+        public long Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
