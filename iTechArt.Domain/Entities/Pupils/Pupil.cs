@@ -14,6 +14,7 @@ namespace iTechArt.Domain.Entities.Pupils
         [Required]
         public DateTime BirthDate { get; set; }
         [Required]
+        [Range(1, 2)]
         public Gender Gender { get; set; }
         [Required]
         public string PhoneNumber { get; set; }
@@ -26,10 +27,13 @@ namespace iTechArt.Domain.Entities.Pupils
         [ForeignKey(nameof(SchoolId))]
         public School School { get; set; }
         [Required]
+        [Range(1, 11)]
         public byte Grade { get; set; }
         [Required]
+        [Range(1, 3)]
         public CourseLanguage CourseLanguage { get; set; }
         [Required]
+        [Range(1, 2)]
         public Shift Shift { get; set; }
     }
 }

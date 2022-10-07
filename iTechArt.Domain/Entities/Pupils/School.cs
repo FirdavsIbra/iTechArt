@@ -11,6 +11,7 @@ namespace iTechArt.Domain.Entities.Pupils
         [Required]
         public string Address { get; set; }
         [Required]
+        [Range(1, 5)]
         public SchoolType SchoolType { get; set; }
 
     }
