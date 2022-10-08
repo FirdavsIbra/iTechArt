@@ -10,6 +10,6 @@ namespace iTechArt.Domain.Entities.Airports
         public string Password { get; set; }
         public string PhoneNumber { get; set; }
 
-        public virtual ICollection<Ticket> Tickets { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

@@ -18,6 +18,7 @@ namespace iTechArt.Data.DbContexts
         public virtual DbSet<Flight> Flights { get; set; }
         public virtual DbSet<Ticket> Tickets { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
