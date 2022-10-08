@@ -1,4 +1,5 @@
-﻿using System;
+﻿using iTechArt.Domain.Entities.Commons;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,16 +8,12 @@ using System.Threading.Tasks;
 
 namespace iTechArt.Domain.Entities.MedicalStaff
 {
-    public class Location
+    public class Location : Auditable
     {
-        [Key]
-        [Required]
-        public int LocationId { get; set; }
+        public string StreetAddress { get; set; }
 
-        public string Street_Address { get; set; }
+        public string PostalCode { get; set; }
 
-        public string Postal_Code { get; set; }
-
-        public int CityId { get; set; }
+        public long CityId { get; set; }
     }
 }

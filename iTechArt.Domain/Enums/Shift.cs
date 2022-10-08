@@ -2,7 +2,7 @@
 {
     public enum Shift : byte
     {
-        day = 1,
-        night
+        Day = 1,
+        Night
     }
 }

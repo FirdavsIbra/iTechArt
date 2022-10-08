@@ -1,4 +1,5 @@
-﻿using System;
+﻿using iTechArt.Domain.Entities.Commons;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace iTechArt.Domain.Entities.MedicalStaff
 {
-    public class Staff
+    public class Staff : Auditable
     {
-        [Key]
-        [Required]
         public string Firstname { get; set; }
 
         public string LastName { get; set; }
@@ -23,11 +22,11 @@ namespace iTechArt.Domain.Entities.MedicalStaff
 
         public string JobTitle { get; set; }
 
-        public int SalaryId { get; set; }
+        public long SalaryId { get; set; }
 
         public DateTime BirthDate { get; set; }
 
-        public int DepartmentId { get; set; }
+        public long DepartmentId { get; set; }
 
         public DateTime HireDate { get; set; }
     }

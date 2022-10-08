@@ -2,10 +2,10 @@
 {
     public enum SchoolType : byte
     {
-        privateSchool = 1,
-        gymnaseum,
-        governmentSchool,
-        languageSchool,
-        homeSchool
+        PrivateSchool = 1,
+        Gymnaseum,
+        GovernmentSchool,
+        LanguageSchool,
+        HomeSchool
     }
 }

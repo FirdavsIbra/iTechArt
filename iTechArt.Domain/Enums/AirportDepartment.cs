@@ -2,7 +2,7 @@
 {
     public enum AirportDepartment : byte
     {
-        Administration,
+        Administration = 1,
         Accounting,
         Marketing,
         Security,
