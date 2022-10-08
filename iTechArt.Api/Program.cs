@@ -10,8 +10,13 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<AirportDbContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("AirportConnection")));
 
+
 builder.Services.AddDbContext<PupilDbContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("PupilConnection")));
+
+builder.Services.AddDbContext<MedStaffDbContext>(option =>
+    option.UseSqlServer(builder.Configuration.GetConnectionString("MedStaffConnection")));
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
