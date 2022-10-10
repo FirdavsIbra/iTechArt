@@ -1,6 +1,5 @@
 ﻿using iTechArt.Domain.Entities.Commons;
 using iTechArt.Domain.Enums;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace iTechArt.Domain.Entities.Students
 {
@@ -20,10 +19,6 @@ namespace iTechArt.Domain.Entities.Students
         
         public DateTime DateOfBirth { get; set; }
         
-        public long UniversityId { get; set; }
-
-
-        [ForeignKey(nameof(UniversityId))]
-        public University Course { get; set; }
+        public string University { get; set; }
     }
 }
