@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace iTechArt.Domain.Entities.MedicalStaff
 {
-    public class Staff : Auditable
+    public class Patient : Auditable
     {
         public string FirstName { get; set; }
 
