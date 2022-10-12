@@ -28,7 +28,6 @@ namespace iTechArt.Data.DbContexts
         /// Pupil tables
         /// </summary>
         public DbSet<Pupil> Pupils { get; set; }
-        public DbSet<School> Schools { get; set; }
 
         /// <summary>
         /// Student tables

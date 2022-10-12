@@ -1,8 +1,9 @@
-﻿namespace iTechArt.Domain.Entities.Airports
+﻿using iTechArt.Domain.Entities.Commons;
+
+namespace iTechArt.Domain.Entities.Airports
 {
-    public class Airport
+    public class Airport : Auditable
     {
-        public ulong Id { get; set; }
         public string AirportName { get; set; }
         public DateTime BuiltDate { get; set; }
         public ushort Capacity { get; set; }
