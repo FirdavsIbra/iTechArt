@@ -1,15 +1,15 @@
 ﻿using iTechArt.Domain.Entities.Commons;
-using System.ComponentModel.DataAnnotations.Schema;
+using iTechArt.Domain.Enums;
 
 namespace iTechArt.Domain.Entities.MedicalStaff
 {
-    public class Staff : Auditable
+    public class Doctor : Auditable
     {
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
 
-        public bool Gender { get; set; }
+        public Gender Gender { get; set; }
 
         public string Email { get; set; }
 
@@ -17,8 +17,14 @@ namespace iTechArt.Domain.Entities.MedicalStaff
 
         public DateTime DateOfBirth { get; set; }
 
-        public long AddressId { get; set; }
-        [ForeignKey(nameof(AddressId))]
-        public Location Address { get; set; }
+        public string Address { get; set; }
+
+        public decimal Salary { get; set; }
+
+        public string HospitalName { get; set; }
+
+        public string PostalCode { get; set; }
+
+        public Shift Shift { get; set; }
     }
 }

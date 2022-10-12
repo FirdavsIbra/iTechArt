@@ -16,22 +16,13 @@ namespace iTechArt.Data.DbContexts
         /// <summary>
         /// Airport tables
         /// </summary>
-        public DbSet<Airport> Airports { get; set; }
+        public virtual DbSet<Airport> Airports { get; set; }
+
 
         /// <summary>
         /// Medicine staff tables
         /// </summary>
-        public DbSet<Patient> Patients { get; set; }
-
-        public DbSet<PatientDoctor> PatientDoctors { get; set; }
-
-        public DbSet<Hospital> Hospitals { get; set; }
-
-        public DbSet<Location> Locations { get; set; }
-
-        public DbSet<StaffHospitalContraction> StaffHospitalContractions { get; set; }
-
-        public DbSet<Staff> Staffs { get; set; }
+        public DbSet<Doctor> Staffs { get; set; }
 
         /// <summary>
         /// Pupil tables
@@ -43,17 +34,5 @@ namespace iTechArt.Data.DbContexts
         /// Student tables
         /// </summary>
         public virtual DbSet<Student> Students { get; set; }
-
-        /// <summary>
-        /// Configure relationships
-        /// </summary>
-        /// <param name="modelBuilder"></param>
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Staff>()
-                .HasOne(s => s.Address)
-                .WithOne()
-                .OnDelete(DeleteBehavior.NoAction);
-        }
     }
 }
