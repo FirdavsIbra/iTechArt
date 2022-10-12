@@ -22,11 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\iTechArt.Data\iTechArt.Data.csproj" />
+    <ProjectReference Include="..\iTechArt.Service\iTechArt.Service.csproj" />
   </ItemGroup>
 
 </Project>
