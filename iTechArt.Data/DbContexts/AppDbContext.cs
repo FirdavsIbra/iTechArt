@@ -16,16 +16,7 @@ namespace iTechArt.Data.DbContexts
         /// <summary>
         /// Airport tables
         /// </summary>
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Airport> Airports { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<Airplane> Airplanes { get; set; }
-        public virtual DbSet<Address> Addresses { get; set; }
-        public virtual DbSet<Flight> Flights { get; set; }
-        public virtual DbSet<Ticket> Tickets { get; set; }
-        public virtual DbSet<Company> Companies { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
-
+        public DbSet<Airport> Airports { get; set; }
 
         /// <summary>
         /// Medicine staff tables
@@ -59,11 +50,6 @@ namespace iTechArt.Data.DbContexts
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Flight>()
-                .HasOne(f => f.Airport)
-                .WithOne()
-                .OnDelete(DeleteBehavior.NoAction);
-
             modelBuilder.Entity<Staff>()
                 .HasOne(s => s.Address)
                 .WithOne()
