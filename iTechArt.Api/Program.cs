@@ -1,4 +1,6 @@
 using iTechArt.Data.DbContexts;
+using iTechArt.Service.Interfaces;
+using iTechArt.Service.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-
+builder.Services.AddSingleton<IGroceryService, GroceryService>();
 builder.Services.AddDbContext<AppDbContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("iTechArtConnection")));
 
