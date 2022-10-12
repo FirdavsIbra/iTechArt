@@ -1,13 +1,16 @@
-﻿using iTechArt.Domain.Entities.Commons;
-
-namespace iTechArt.Domain.Entities.Airports
+﻿namespace iTechArt.Domain.Entities.Airports
 {
-    public class Airport : Auditable
+    public class Airport
     {
-        public string Name { get; set; }
-        public int Capacity { get; set; }
-
-        public long AddressId { get; set; }
-        public Address Address { get; set; }
+        public ulong Id { get; set; }
+        public string AirportName { get; set; }
+        public DateTime BuiltDate { get; set; }
+        public ushort Capacity { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public ushort EmpoyeesCount { get; set; }
+        public long PassengersPerYear { get; set; }
+        public uint FlightsPerYear { get; set; }
+        public ushort AverageTicketPrice { get; set; }
     }
 }
