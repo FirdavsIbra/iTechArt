@@ -11,26 +11,31 @@ export const UNITS: Record<UnitEnum, UnitTypeInterface> = {
   students: {
     title: "Students",
     number: 456454756,
-    icon: '../../assets/students.png'
+    icon: '../../assets/students.png',
+    path: 'students'
   },
   pupils: {
     title: "Pupils",
     number: 456454756,
-    icon: '../../assets/pupils.png'
+    icon: '../../assets/pupils.png',
+    path: 'pupils'
   },
   airport: {
     title: "Airport",
     number: 456454756,
-    icon: '../../assets/airport.png'
+    icon: '../../assets/airport.png',
+    path: 'airport'
   },
   medStaff: {
     title: "MedStaff",
     number: 456454756,
-    icon: '../../assets/medstaff.png'
+    icon: '../../assets/medstaff.png',
+    path: 'med-staff'
   },
   grocery: {
     title: "Grocery",
     number: 456454756,
-    icon: '../../assets/grocery.png'
+    icon: '../../assets/grocery.png',
+    path: 'grocery'
   },
 }
