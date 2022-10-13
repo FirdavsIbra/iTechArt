@@ -9,12 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddSingleton<IAirportsService, AirportService>();
+builder.Services.AddSingleton<IGroceryService, GroceryService>();
+builder.Services.AddSingleton<IPupilService, PupilService>();
+builder.Services.AddSingleton<IMedStaffService, MedStaffService>();
 
 builder.Services.AddDbContext<AppDbContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("iTechArtConnection")));
 
-builder.Services.AddSingleton<IGroceryService, GroceryService>();
-builder.Services.AddSingleton<IPupilService, PupilService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
