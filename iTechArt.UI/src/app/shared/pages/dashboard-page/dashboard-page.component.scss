@@ -1,8 +1,25 @@
 .block {
-  width: 150px;
+  width: 10%;
   padding: 15px;
-  border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  background-color: whitesmoke;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  cursor: pointer;
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    span {
+      font-size: 20px;
+    }
+  }
+  p {
+    font-size: 30px;
+    color: #3a5696;
+    font-weight: bold;
+  }
 }
 
 .dashboard-page {
@@ -10,31 +27,30 @@
   justify-content: space-around;
 }
 
-.airport{
-  background-color: coral;
-}
+//.airport{
+//  background-color: coral;
+//}
+//
+//.grocery{
+//  background-color: cadetblue;
+//}
+//
+//.medStaff{
+//  background-color: darkkhaki;
+//}
+//
+//.pupils{
+//  background-color: cornflowerblue;
+//}
+//
+//.students{
+//  background-color: orchid;
+//}
+//
+//.police{
+//  background-color: sandybrown;
+//}
 
-.grocery{
-  background-color: cadetblue;
-}
-
-.medStaff{
-  background-color: darkkhaki;
-}
-
-.pupils{
-  background-color: cornflowerblue;
-}
-
-.students{
-  background-color: orchid;
-}
-
-.police{
-  background-color: sandybrown;
-}
-
-.nav-cursor{
+.nav-cursor {
   cursor: pointer;
 }
-

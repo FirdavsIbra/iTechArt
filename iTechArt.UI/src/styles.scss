@@ -1,3 +1,25 @@
-body{
-  margin:0
+body {
+  margin: 0;
+}
+
+.button-main {
+  padding: 10px 15px;
+  background-color: #3a5696;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button-secondary {
+  padding: 10px 15px;
+  background-color: white;
+  color: #3a5696;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+hr {
+  height: 1px;
 }
