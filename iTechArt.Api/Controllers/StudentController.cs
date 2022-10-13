@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/student")]
     [ApiController]
     public class StudentController : ControllerBase
     {
@@ -33,7 +33,7 @@ namespace iTechArt.Api.Controllers
         [HttpGet("export")]
         public IActionResult Export()
         {
-            return Ok(_studentService.ExportStudent());
+            return Ok();
         }
     }
 }
