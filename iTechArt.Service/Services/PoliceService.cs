@@ -10,14 +10,7 @@ using System.Threading.Tasks;
 namespace iTechArt.Service.Services
 {
     public class PoliceService : IPoliceService
-    {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public PoliceService(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
+    { 
         public List<string> ExportOfficers()
         {
             return new List<string>();
