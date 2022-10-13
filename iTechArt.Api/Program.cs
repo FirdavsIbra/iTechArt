@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-//builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddSingleton<IGroceryService, GroceryService>();
 builder.Services.AddScoped<IPoliceService, PoliceService>();
 builder.Services.AddDbContext<AppDbContext>(option =>
