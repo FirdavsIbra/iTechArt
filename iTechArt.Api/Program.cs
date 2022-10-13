@@ -10,6 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddSingleton<IAirportsService, AirportService>();
 builder.Services.AddSingleton<IGroceryService, GroceryService>();
+
+builder.Services.AddSingleton<IStudentService, StudentService>();
+
 builder.Services.AddSingleton<IPupilService, PupilService>();
 builder.Services.AddSingleton<IMedStaffService, MedStaffService>();
 
