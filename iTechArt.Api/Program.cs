@@ -1,4 +1,6 @@
 using iTechArt.Data.DbContexts;
+using iTechArt.Data.IRepositories;
+using iTechArt.Data.Repositories;
 using iTechArt.Service.Interfaces;
 using iTechArt.Service.Services;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddSingleton<IGroceryService, GroceryService>();
+builder.Services.AddScoped<IPoliceService, PoliceService>();
 builder.Services.AddDbContext<AppDbContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("iTechArtConnection")));
 

@@ -1,10 +1,11 @@
 ﻿using iTechArt.Data.DbContexts;
+using iTechArt.Data.IRepositories;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace iTechArt.Data.Repositories
 {
-    public class Repository<TSource> where TSource : class
+    public class Repository<TSource> : IRepository<TSource> where TSource : class
     {
         protected readonly AppDbContext dbContext;
         protected readonly DbSet<TSource> dbSet;
