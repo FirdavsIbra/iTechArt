@@ -1,10 +1,15 @@
 .header {
   padding: 0 20px;
   text-align: center;
-  background: aquamarine;
+  background: #3A5696;
   font-size: 15px;
   margin-bottom: 30px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+}
+
+p {
+  color: white;
+  letter-spacing: 0.5px;
 }
 
 nav {
@@ -51,9 +56,4 @@ a {
 
 .nav-cursor{
   cursor: pointer;
-}
-
-.button{
-  border-radius: 2px;
-  border: 1px;
 }

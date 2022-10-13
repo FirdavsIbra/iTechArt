@@ -1,6 +1,6 @@
 export interface UnitTypeInterface {
   title: string,
-  number: number,
+  number: number | string,
   icon: string,
-  path?: string,
+  path: string,
 }

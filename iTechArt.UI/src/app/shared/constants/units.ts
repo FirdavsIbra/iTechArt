@@ -1,41 +1,41 @@
-import { UnitTypeInterface } from "../interfaces/unit-type.interface";
-import { UnitEnum } from "../enums/unit.enum";
+import { UnitTypeInterface } from '../interfaces/unit-type.interface';
+import { UnitEnum } from '../enums/unit.enum';
 
 export const UNITS: Record<UnitEnum, UnitTypeInterface> = {
   police: {
-    title: "Police",
-    number: 456454756,
-    icon: '../../assets/police.png',
-    path: 'police'
+    title: 'Police',
+    number: Math.floor(Math.random() * 1000),
+    icon: '../../assets/building.png',
+    path: 'police',
   },
   students: {
-    title: "Students",
-    number: 456454756,
-    icon: '../../assets/students.png',
-    path: 'students'
+    title: 'Students',
+    number: Math.floor(Math.random() * 1000),
+    icon: '../../assets/building.png',
+    path: 'students',
   },
   pupils: {
-    title: "Pupils",
-    number: 456454756,
-    icon: '../../assets/pupils.png',
-    path: 'pupils'
+    title: 'Pupils',
+    number: Math.floor(Math.random() * 1000),
+    icon: '../../assets/building.png',
+    path: 'pupils',
   },
   airport: {
-    title: "Airport",
-    number: 456454756,
-    icon: '../../assets/airport.png',
-    path: 'airport'
+    title: 'Airport',
+    number: Math.floor(Math.random() * 1000),
+    icon: '../../assets/building.png',
+    path: 'airport',
   },
   medStaff: {
-    title: "MedStaff",
-    number: 456454756,
-    icon: '../../assets/medstaff.png',
-    path: 'med-staff'
+    title: 'MedStaff',
+    number: Math.floor(Math.random() * 1000),
+    icon: '../../assets/building.png',
+    path: 'med-staff',
   },
   grocery: {
-    title: "Grocery",
-    number: 456454756,
-    icon: '../../assets/grocery.png',
-    path: 'grocery'
+    title: 'Grocery',
+    number: Math.floor(Math.random() * 1000),
+    icon: '../../assets/building.png',
+    path: 'grocery',
   },
-}
+};

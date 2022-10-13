@@ -19,5 +19,6 @@ import { StudentsModule } from './modules/students/students.module';
     PupilsModule,
     StudentsModule,
   ],
+  exports: [],
 })
 export class StatsModule {}

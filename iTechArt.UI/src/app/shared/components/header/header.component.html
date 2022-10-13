@@ -3,19 +3,43 @@
     <div class="logo-container header-element">
       <div routerLink="">
         <img class="logo-image" src="/assets/logo.png" alt="" />
-        <p style="margin: 0">Government's statistics</p>
+        <p style="margin: 0">GOVERNMENT'S STATISTICS</p>
       </div>
     </div>
     <ul>
-      <li><p class="nav-cursor" routerLink="{{ units.police.path }}">Police</p></li>
-      <li><p class="nav-cursor" routerLink="{{ units.pupils.path }}">Pupils</p></li>
-      <li><p class="nav-cursor" routerLink="{{ units.students.path }}">Students</p></li>
-      <li><p class="nav-cursor" routerLink="{{ units.airport.path }}">Airport</p></li>
-      <li><p class="nav-cursor" routerLink="{{ units.grocery.path }}">Grocery</p></li>
-      <li><p class="nav-cursor" routerLink="{{ units.medStaff.path }}">MedStaff</p></li>
+      <li>
+        <p class="nav-cursor" routerLink="{{ units.police.path }}">
+          {{ unitsTitles.police.toString().toUpperCase() }}
+        </p>
+      </li>
+      <li>
+        <p class="nav-cursor" routerLink="{{ units.pupils.path }}">
+          {{ unitsTitles.pupils.toString().toUpperCase() }}
+        </p>
+      </li>
+      <li>
+        <p class="nav-cursor" routerLink="{{ units.students.path }}">
+          {{ unitsTitles.students.toString().toUpperCase() }}
+        </p>
+      </li>
+      <li>
+        <p class="nav-cursor" routerLink="{{ units.airport.path }}">
+          {{ unitsTitles.airport.toString().toUpperCase() }}
+        </p>
+      </li>
+      <li>
+        <p class="nav-cursor" routerLink="{{ units.grocery.path }}">
+          {{ unitsTitles.grocery.toString().toUpperCase() }}
+        </p>
+      </li>
+      <li>
+        <p class="nav-cursor" routerLink="{{ units.medStaff.path }}">
+          {{ unitsTitles.medStaff.toString().toUpperCase() }}
+        </p>
+      </li>
     </ul>
     <div class="button-container header-element">
-      <button class="button">Log Out</button>
+      <button class="button-secondary">Log Out</button>
     </div>
   </nav>
 </header>
