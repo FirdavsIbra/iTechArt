@@ -38,12 +38,6 @@ namespace iTechArt.Data.DbContexts
         /// <summary>
         /// Police tables
         /// </summary>
-        public DbSet<Officer> Officers { get; set; }
-        public DbSet<Building> Buildings { get; set; }
-        public DbSet<City> Cities { get; set; }
-        public DbSet<Department> Departments { get; set; }
-        public DbSet<Job> Jobs { get; set; }
-        public DbSet<Location> Locations { get; set; }
-        public DbSet<PhsyicalDescription> PhsyicalDescriptions { get; set; }
+        public DbSet<Police> Officers { get; set; }
     }
 }

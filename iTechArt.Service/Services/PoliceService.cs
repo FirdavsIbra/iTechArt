@@ -18,42 +18,14 @@ namespace iTechArt.Service.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Officer> AddUpdateOfficer(Officer officer)
+        public List<string> ExportOfficers()
         {
-            var objFromDb = await  _unitOfWork.Police.GetAsync(c => c.OfficerId == officer.OfficerId);
-            if (objFromDb.OfficerId > 0)
-            {
-                _unitOfWork.Police.Update(officer);
-                await _unitOfWork.Police.SaveChangesAsync();
-            }
-            else
-            {
-                await _unitOfWork.Police.AddAsync(officer);
-                await _unitOfWork.Police.SaveChangesAsync();
-            }
-            return officer;
+            return new List<string>();
         }
 
-        public async Task<bool> DeleteOfficer(int id)
+        public List<string> ImportOfficers()
         {
-            var objFromDb = await _unitOfWork.Police.GetAsync(c => c.OfficerId == id);
-            if (objFromDb != null)
-            {
-                _unitOfWork.Police.Delete(objFromDb);
-                return true;
-            }
-            return false;
-        }
-
-        public async Task<List<Officer>> GetAllOfficers()
-        {
-            var query = _unitOfWork.Police.GetAll();
-            return query.ToList();
-        }
-
-        public async Task<Officer> GetOfficerById(int id)
-        {
-            return await _unitOfWork.Police.GetAsync(c => c.OfficerId == id);
+            return new List<string>();
         }
     }
 }

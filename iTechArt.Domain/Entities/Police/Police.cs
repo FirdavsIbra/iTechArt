@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace iTechArt.Domain.Entities.Police
 {
-    public class Officer
+    public class Police
     {
         [Key]
         [Required]

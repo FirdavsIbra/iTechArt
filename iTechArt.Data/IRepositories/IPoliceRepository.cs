@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace iTechArt.Data.IRepositories
 {
-    public interface IPoliceRepository : IRepository<Officer>
+    public interface IPoliceRepository : IRepository<Police>
     {
     }
 }

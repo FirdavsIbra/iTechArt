@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace iTechArt.Data.Repositories
 {
-    public class PoliceRepository : Repository<Officer>, IPoliceRepository
+    public class PoliceRepository : Repository<Police>, IPoliceRepository
     {
         public PoliceRepository(AppDbContext dbContext) : base(dbContext)
         {
