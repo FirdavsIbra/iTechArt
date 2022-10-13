@@ -1,17 +1,16 @@
 ﻿using iTechArt.Service.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
 {
-    [ApiController]
-    [Route("api/grocery")]
-    public class GroceryController : Controller
+    [ApiController, Route("api/medStaff")]
+    public class MedStaffController : ControllerBase
     {
-        private readonly IGroceryService _groceryService;
-        public GroceryController(IGroceryService groceryService)
+        public readonly IMedStaffService medStaffService;
+
+        public MedStaffController(IMedStaffService medStaffService)
         {
-            _groceryService = groceryService;
+            this.medStaffService = medStaffService;
         }
 
         [HttpPost("import")]
@@ -19,7 +18,7 @@ namespace iTechArt.Api.Controllers
         {
             if (formFile != null && (formFile.ContentType.Contains("csv") || formFile.ContentType.Contains("officedocument.spreadsheetml.sheet")))
             {
-                return Ok(_groceryService.ImportGrocery());
+                return Ok(medStaffService.ImportMedStaffFile());
             }
             else
             {
@@ -28,9 +27,9 @@ namespace iTechArt.Api.Controllers
         }
 
         [HttpGet("export")]
-        public IActionResult Export() 
+        public IActionResult Export()
         {
-            return Ok(_groceryService.ExportGrocery());
+            return Ok(medStaffService.ExportMedStaffFile());
         }
     }
 }
