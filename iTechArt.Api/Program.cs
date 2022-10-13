@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddSingleton<IGroceryService, GroceryService>();
+builder.Services.AddSingleton<IAirportsService, AirportService>();
 builder.Services.AddDbContext<AppDbContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("iTechArtConnection")));
 
