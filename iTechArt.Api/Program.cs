@@ -1,4 +1,6 @@
 using iTechArt.Data.DbContexts;
+using iTechArt.Data.IRepositories;
+using iTechArt.Data.Repositories;
 using iTechArt.Service.Interfaces;
 using iTechArt.Service.Services;
 using Microsoft.EntityFrameworkCore;
@@ -10,8 +12,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddSingleton<IAirportsService, AirportService>();
 builder.Services.AddSingleton<IGroceryService, GroceryService>();
+
+builder.Services.AddSingleton<IStudentService, StudentService>();
+
 builder.Services.AddSingleton<IPupilService, PupilService>();
 builder.Services.AddSingleton<IMedStaffService, MedStaffService>();
+builder.Services.AddSingleton<IPoliceService, PoliceService>();
+builder.Services.AddScoped<IUnitofWork, UnitofWork>();
 
 builder.Services.AddDbContext<AppDbContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("iTechArtConnection")));
