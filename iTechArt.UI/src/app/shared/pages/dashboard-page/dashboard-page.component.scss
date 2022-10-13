@@ -1,0 +1,44 @@
+.block {
+  width: 150px;
+  padding: 15px;
+  border: 1px solid black;
+  border-radius: 25px;
+}
+
+.unauth-user {
+  background-color: red;
+  width: 150px;
+  padding: 15px;
+  border: 1px solid black;
+  border-radius: 25px;
+}
+
+.dashboard-page {
+  display: flex;
+  justify-content: space-around;
+}
+
+.airport{
+  background-color: coral;
+}
+
+.grocery{
+  background-color: cadetblue;
+}
+
+.medStaff{
+  background-color: darkkhaki;
+}
+
+.pupils{
+  background-color: cornflowerblue;
+}
+
+.students{
+  background-color: orchid;
+}
+
+.police{
+  background-color: sandybrown;
+}
+
