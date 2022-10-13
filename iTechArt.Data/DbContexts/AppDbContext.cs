@@ -16,7 +16,7 @@ namespace iTechArt.Data.DbContexts
         /// <summary>
         /// Airport tables
         /// </summary>
-        public virtual DbSet<Airport> Airports { get; set; }
+        public DbSet<Airport> Airports { get; set; }
 
 
         /// <summary>
