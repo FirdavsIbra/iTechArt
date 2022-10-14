@@ -21,7 +21,7 @@ builder.Services.AddSingleton<IPoliceService, PoliceService>();
 builder.Services.AddScoped<IUnitofWork, UnitofWork>();
 
 builder.Services.AddDbContext<AppDbContext>(option =>
-    option.UseSqlServer(builder.Configuration.GetConnectionString("iTechArtConnection")));
+    option.UseNpgsql(builder.Configuration.GetConnectionString("iTechArtConnection")));
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
