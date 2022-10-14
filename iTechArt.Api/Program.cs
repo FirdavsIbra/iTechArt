@@ -19,6 +19,13 @@ builder.Services.AddSingleton<IPupilService, PupilService>();
 builder.Services.AddSingleton<IMedStaffService, MedStaffService>();
 builder.Services.AddSingleton<IPoliceService, PoliceService>();
 builder.Services.AddScoped<IUnitofWork, UnitofWork>();
+builder.Services.AddCors(option =>
+{
+    option.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+    });
+});
 
 builder.Services.AddDbContext<AppDbContext>(option =>
     option.UseNpgsql(builder.Configuration.GetConnectionString("iTechArtConnection")));
@@ -38,6 +45,8 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthorization();
 
