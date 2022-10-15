@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace iTechArt.Api.Controllers
 {
     [ApiController, Route("api/medStaff")]
-    public class MedStaffController : ControllerBase
+    public sealed class MedStaffController : ControllerBase
     {
         public readonly IMedStaffService medStaffService;
 

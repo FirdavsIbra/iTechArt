@@ -1,12 +1,11 @@
 ﻿using iTechArt.Service.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
 {
     [ApiController]
     [Route("api/grocery")]
-    public class GroceryController : Controller
+    public sealed class GroceryController : Controller
     {
         private readonly IGroceryService _groceryService;
         public GroceryController(IGroceryService groceryService)
@@ -28,7 +27,7 @@ namespace iTechArt.Api.Controllers
         }
 
         [HttpGet("export")]
-        public IActionResult Export() 
+        public IActionResult Export()
         {
             return Ok(_groceryService.ExportGrocery());
         }

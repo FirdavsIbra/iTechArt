@@ -2,7 +2,7 @@
 
 namespace iTechArt.Domain.Entities.Airports
 {
-    public class Airport : Auditable
+    public abstract class Airport : Auditable
     {
         public string AirportName { get; set; }
         public DateTime BuiltDate { get; set; }

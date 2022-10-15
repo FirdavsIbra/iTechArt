@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/airport")]
     [ApiController]
-    public class AirportController : ControllerBase
+    public sealed class AirportController : ControllerBase
     {
         private readonly IAirportsService _airportsService;
         public AirportController(IAirportsService airportsService)
