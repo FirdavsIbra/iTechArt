@@ -3,6 +3,6 @@
     public enum Shift : byte
     {
         Day = 1,
-        Night
+        Night = 2
     }
 }
