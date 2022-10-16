@@ -3,7 +3,7 @@ using iTechArt.Domain.Enums;
 
 namespace iTechArt.Domain.Entities.Pupils
 {
-    public abstract class Pupil : Auditable
+    public sealed class Pupil : Auditable
     {
         public string FirstName { get; set; }
 

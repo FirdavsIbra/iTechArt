@@ -2,7 +2,7 @@
 
 namespace iTechArt.Domain.Entities.Police
 {
-    public abstract class Police
+    public sealed class Police
     {
         [Key]
         [Required]

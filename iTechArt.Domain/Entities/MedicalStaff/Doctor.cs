@@ -3,7 +3,7 @@ using iTechArt.Domain.Enums;
 
 namespace iTechArt.Domain.Entities.MedicalStaff
 {
-    public abstract class Doctor : Auditable
+    public sealed class Doctor : Auditable
     {
         public string FirstName { get; set; }
 
