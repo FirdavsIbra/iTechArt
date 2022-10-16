@@ -2,7 +2,7 @@
 
 namespace iTechArt.Service.Services
 {
-    public class PoliceService : IPoliceService
+    public sealed class PoliceService : IPoliceService
     {
         public List<string> ExportPolice()
         {
