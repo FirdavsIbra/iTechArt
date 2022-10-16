@@ -5,7 +5,7 @@ namespace iTechArt.Api.Controllers
 {
     [ApiController]
     [Route("api/police")]
-    public class PoliceController : ControllerBase
+    public sealed class PoliceController : ControllerBase
     {
         private readonly IPoliceService _policeService;
         public PoliceController(IPoliceService policeService)
