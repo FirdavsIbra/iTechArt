@@ -8,7 +8,7 @@ namespace iTechArt.Service.Interfaces
 {
     public interface IPoliceService
     {
-        List<string> ImportPolice();
-        List<string> ExportPolice();
+        public List<string> ImportPolice();
+        public List<string> ExportPolice();
     }
 }

@@ -10,11 +10,15 @@ namespace iTechArt.Data.Repositories
         protected readonly AppDbContext dbContext;
         protected readonly DbSet<TSource> dbSet;
 
+
+        // Constructor
         public Repository(AppDbContext dbContext)
         {
             this.dbContext = dbContext;
             this.dbSet = dbContext.Set<TSource>();
         }
+
+
 
         public async ValueTask<TSource> AddAsync(TSource entity)
         {
