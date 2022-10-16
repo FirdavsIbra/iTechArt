@@ -13,10 +13,12 @@ namespace iTechArt.Api.Controllers
             this.medStaffService = medStaffService;
         }
 
+        private string[] extentions = { "csv", "officedocument.spreadsheetml.sheet" };
+
         [HttpPost("import")]
         public IActionResult Import(IFormFile formFile)
         {
-            if (formFile != null && (formFile.ContentType.Contains("csv") || formFile.ContentType.Contains("officedocument.spreadsheetml.sheet")))
+            if (formFile != null && extentions.Contains(formFile.ContentType))
             {
                 return Ok(medStaffService.ImportMedStaffFile());
             }
