@@ -2,7 +2,7 @@
 
 namespace iTechArt.Domain.Entities.Police
 {
-    public class Police
+    public class Police : Auditable
     {
         public string FirstName { get; set; }
 

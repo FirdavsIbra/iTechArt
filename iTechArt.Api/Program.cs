@@ -14,11 +14,12 @@ builder.Services.AddSingleton<IAirportsService, AirportService>();
 builder.Services.AddSingleton<IGroceryService, GroceryService>();
 
 builder.Services.AddSingleton<IStudentService, StudentService>();
-
 builder.Services.AddSingleton<IPupilService, PupilService>();
 builder.Services.AddSingleton<IMedStaffService, MedStaffService>();
 builder.Services.AddSingleton<IPoliceService, PoliceService>();
 builder.Services.AddScoped<IUnitofWork, UnitofWork>();
+builder.Services.AddScoped<ITotalStatisticsService, TotalStatisticsService>();
+
 builder.Services.AddCors(option =>
 {
     option.AddDefaultPolicy(builder =>
