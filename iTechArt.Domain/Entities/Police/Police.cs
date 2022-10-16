@@ -1,13 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using iTechArt.Domain.Entities.Commons;
 
 namespace iTechArt.Domain.Entities.Police
 {
-    public abstract class Police
+    public abstract class Police : Auditable
     {
-        [Key]
-        [Required]
-        public int OfficerId { get; set; }
-
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
