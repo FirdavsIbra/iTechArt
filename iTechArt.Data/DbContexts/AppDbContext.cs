@@ -33,7 +33,7 @@ namespace iTechArt.Data.DbContexts
         /// <summary>
         /// Student tables
         /// </summary>
-        public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<Students> Students { get; set; }
 
         /// <summary>
         /// Student tables
