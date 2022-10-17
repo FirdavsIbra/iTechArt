@@ -20,9 +20,9 @@ export class DashboardPageComponent implements OnInit {
     pupilsCount: '',
     studentsCount: '',
     airportCount: '',
-  };
+  }; //delete
 
-  public apis = {
+  public apis = { //to consts
     police: {
       import: 'api/police/import',
       export: 'api/police/export',
@@ -40,13 +40,13 @@ export class DashboardPageComponent implements OnInit {
       export: 'api/pupils/export',
     },
     students: {
-      import: 'Students/import',
-      export: 'Students/export',
+      import: 'api/student/import',
+      export: 'api/student/export',
     },
     airport: {
-      import: 'Airport/import',
-      export: 'Airport/export',
-    },
+      import: 'api/airport/import',
+      export: 'api/airport/export',
+    }, //add dashboard
   };
 
   public constructor(private http: HttpClient) {}
@@ -57,14 +57,14 @@ export class DashboardPageComponent implements OnInit {
     this.getPupils();
     this.getGrocery();
     this.getMedStaff();
-    this.getStudents();
+    this.getStudents();//delete all, add 1 get yours
   }
 
   public getAirport(): void {
     this.http
-      .get<any>(`${this.url}${this.apis.students.export}`)
+      .get<any>(`${this.url}${this.apis.airport.export}`)
       .subscribe((data) => {
-        this.count.airportCount = data.total;
+        this.count.airportCount = data;
       });
 
     console.log(this.count.airportCount);
@@ -74,7 +74,7 @@ export class DashboardPageComponent implements OnInit {
     this.http
       .get<any>(`${this.url}${this.apis.police.export}`)
       .subscribe((data) => {
-        this.count.policeCount = data.total;
+        this.count.policeCount = data;
       });
 
     console.log(this.count.policeCount);
@@ -84,7 +84,7 @@ export class DashboardPageComponent implements OnInit {
     this.http
       .get<any>(`${this.url}${this.apis.medStaff.export}`)
       .subscribe((data) => {
-        this.count.medStaffCount = data.total;
+        this.count.medStaffCount = data;
       });
 
     console.log(this.count.medStaffCount);
@@ -94,7 +94,7 @@ export class DashboardPageComponent implements OnInit {
     this.http
       .get<any>(`${this.url}${this.apis.grocery.export}`)
       .subscribe((data) => {
-        this.count.groceryCount = data.total;
+        this.count.groceryCount = data;
       });
 
     console.log(this.count.groceryCount);
@@ -104,7 +104,7 @@ export class DashboardPageComponent implements OnInit {
     this.http
       .get<any>(`${this.url}${this.apis.students.export}`)
       .subscribe((data) => {
-        this.count.studentsCount = data.total;
+        this.count.studentsCount = data;
       });
 
     console.log(this.count.studentsCount);
@@ -114,7 +114,7 @@ export class DashboardPageComponent implements OnInit {
     this.http
       .get<any>(`${this.url}${this.apis.pupils.export}`)
       .subscribe((data) => {
-        this.count.pupilsCount = data.total;
+        this.count.pupilsCount = data;
       });
 
     console.log(this.count.pupilsCount);
