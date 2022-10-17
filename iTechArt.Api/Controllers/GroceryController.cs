@@ -14,10 +14,10 @@ namespace iTechArt.Api.Controllers
             _groceryService = groceryService;
         }
 
-        [HttpPost("import")]
+        [HttpPost(StaticDetails.Import)]
         public IActionResult Import(IFormFile formFile)
         {
-            if (formFile != null && (formFile.ContentType.Contains("csv") || formFile.ContentType.Contains("officedocument.spreadsheetml.sheet")))
+            if (formFile != null && (formFile.ContentType.Contains(FileExt.FILE_CSV) || formFile.ContentType.Contains(FileExt.FILE_XLSX) || formFile.ContentType.Contains(FileExt.FILE_SPREADSHEET)))
             {
                 return Ok(_groceryService.ImportGrocery());
             }
@@ -27,8 +27,9 @@ namespace iTechArt.Api.Controllers
             }
         }
 
-        [HttpGet("export")]
-        public IActionResult Export() 
+
+        [HttpGet(StaticDetails.Export)]
+        public IActionResult Export()
         {
             return Ok(_groceryService.ExportGrocery());
         }
