@@ -18,9 +18,9 @@ namespace iTechArt.Api.Controllers
         /// </summary>
         /// <returns>reurns IDictionary <string, int></string></returns>
         [HttpGet("total-amounts")]
-        public async IActionResult TotalAmounts()
+        public IActionResult TotalAmounts()
         {
-            return Ok(await _statsService.GetTotalAmounts());
+            return Ok( _statsService.GetTotalAmounts());
         }
     }
 }
