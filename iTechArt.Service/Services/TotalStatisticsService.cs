@@ -23,6 +23,7 @@ namespace iTechArt.Service.Services
             totals.Add("police", _dbContext.Police.Count());
             totals.Add("students", _dbContext.Students.Count());
 
+
             return totals;
         }
     }
