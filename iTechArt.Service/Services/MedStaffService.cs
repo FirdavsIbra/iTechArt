@@ -8,7 +8,7 @@ namespace iTechArt.Service.Services
         /// Takes filestream
         /// </summary>
         /// <returns> List of strings </returns>
-        public List<string> ExportMedStaffFile()
+        public async ValueTask<List<string>> ExportMedStaffFile()
         {
             return new List<string>();
         }
@@ -17,7 +17,7 @@ namespace iTechArt.Service.Services
         /// Takes no input so far
         /// </summary>
         /// <returns> Empty List of string </returns>
-        public List<string> ImportMedStaffFile()
+        public async ValueTask<List<string>> ImportMedStaffFile()
         {
             return new List<string>();
         }

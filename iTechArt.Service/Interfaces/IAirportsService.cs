@@ -2,7 +2,7 @@
 {
     public interface IAirportsService
     {
-        public List<string> ImportAirportExcel();
-        public List<string> ExportAirportExcel();
+        public Task<List<string>> ImportAirportExcel();
+        public Task<List<string>> ExportAirportExcel();
     }
 }
