@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/dashboard")]
     [ApiController]
     public class DashboardController : ControllerBase
     {
@@ -13,11 +13,14 @@ namespace iTechArt.Api.Controllers
         {
             _statsService = statsService;
         }
-
+        /// <summary>
+        /// returns total numbers of entities in db
+        /// </summary>
+        /// <returns>reurns IDictionary <string, int></string></returns>
         [HttpGet("total-amounts")]
-        public IActionResult TotalAmounts()
+        public async IActionResult TotalAmounts()
         {
-            return Ok(_statsService.GetTotalAmounts());
+            return Ok(await _statsService.GetTotalAmounts());
         }
     }
 }
