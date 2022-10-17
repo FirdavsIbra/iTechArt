@@ -5,7 +5,7 @@ namespace iTechArt.Api.Controllers
 {
     [ApiController]
     [Route("api/police")]
-    public class PoliceController : ControllerBase
+    public sealed class PoliceController : ControllerBase
     {
         private readonly IPoliceService _policeService;
         public PoliceController(IPoliceService policeService)
@@ -13,10 +13,11 @@ namespace iTechArt.Api.Controllers
             _policeService = policeService;
         }
 
-        [HttpPost("import")]
+        [HttpPost(StaticDetails.Import)]
         public IActionResult Import(IFormFile formFile)
         {
-            if (formFile != null && (formFile.ContentType.Contains("csv") || formFile.ContentType.Contains("officedocument.spreadsheetml.sheet")))
+            var fileExtensions = new string[] {".csv", ".xlsx", "officedocument.spreadsheetml.sheet", ".xls"};
+            if (formFile != null && fileExtensions.Contains<string>(formFile.ContentType))
             {
                 return Ok(_policeService.ImportPolice());
             }
@@ -26,7 +27,7 @@ namespace iTechArt.Api.Controllers
             }
         }
 
-        [HttpGet("export")]
+        [HttpGet(StaticDetails.Export)]
         public IActionResult Export()
         {
             return Ok(_policeService.ExportPolice());

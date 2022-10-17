@@ -5,7 +5,7 @@ namespace iTechArt.Api.Controllers
 {
     [ApiController]
     [Route("api/pupils")]
-    public class PupilsController : ControllerBase
+    public sealed class PupilsController : ControllerBase
     {
         private readonly IPupilService _pupilService;
         public PupilsController(IPupilService pupilService)

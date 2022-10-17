@@ -4,12 +4,20 @@ namespace iTechArt.Service.Services
 {
     public class MedStaffService : IMedStaffService
     {
-        public List<string> ExportMedStaffFile()
+        /// <summary>
+        /// Takes filestream
+        /// </summary>
+        /// <returns> List of strings </returns>
+        public async ValueTask<List<string>> ExportMedStaffFile()
         {
             return new List<string>();
         }
 
-        public List<string> ImportMedStaffFile()
+        /// <summary>
+        /// Takes no input so far
+        /// </summary>
+        /// <returns> Empty List of string </returns>
+        public async ValueTask<List<string>> ImportMedStaffFile()
         {
             return new List<string>();
         }

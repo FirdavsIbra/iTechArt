@@ -1,5 +1,4 @@
 ﻿using iTechArt.Service.Interfaces;
-using iTechArt.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -8,7 +7,7 @@ namespace iTechArt.Api.Controllers
 {
     [Route("api/student")]
     [ApiController]
-    public class StudentController : ControllerBase
+    public sealed class StudentController : ControllerBase
     {
         private readonly IStudentService _studentService;
         public StudentController(IStudentService studentService)

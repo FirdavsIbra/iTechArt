@@ -2,8 +2,8 @@
 {
     public interface IMedStaffService
     {
-        public List<string> ImportMedStaffFile();
+        public ValueTask<List<string>> ImportMedStaffFile();
 
-        public List<string> ExportMedStaffFile();
+        public ValueTask<List<string>> ExportMedStaffFile();
     }
 }

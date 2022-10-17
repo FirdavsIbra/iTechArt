@@ -10,11 +10,15 @@ namespace iTechArt.Data.Repositories
         protected readonly AppDbContext dbContext;
         protected readonly DbSet<TSource> dbSet;
 
+
+        // Constructor
         public Repository(AppDbContext dbContext)
         {
             this.dbContext = dbContext;
             this.dbSet = dbContext.Set<TSource>();
         }
+
+
 
         public async ValueTask<TSource> AddAsync(TSource entity)
         {
@@ -26,11 +30,11 @@ namespace iTechArt.Data.Repositories
         public void Delete(TSource entity)
             => dbSet.Remove(entity);
 
-        public IQueryable<TSource> GetAll(Expression<Func<TSource, bool>> expression = null)
+        public List<TSource> GetAll(Expression<Func<TSource, bool>> expression = null)
         {
-            IQueryable<TSource> query = expression is null ? dbSet : dbSet.Where(expression);
+            var query = expression is null ? dbSet : dbSet.Where(expression);
 
-            return query;
+            return query.ToList();
         }
 
         public async ValueTask<TSource> GetAsync(Expression<Func<TSource, bool>> expression)
