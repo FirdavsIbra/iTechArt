@@ -1,5 +1,5 @@
-﻿using iTechArt.Service.Interfaces;
-using Microsoft.AspNetCore.Http;
+﻿using iTechArt.Api.Constans;
+using iTechArt.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
@@ -14,10 +14,12 @@ namespace iTechArt.Api.Controllers
             _groceryService = groceryService;
         }
 
-        [HttpPost(StaticDetails.Import)]
+        [HttpPost(RouteConstants.IMPORT)]
         public IActionResult Import(IFormFile formFile)
         {
-            if (formFile != null && (formFile.ContentType.Contains(FileExt.FILE_CSV) || formFile.ContentType.Contains(FileExt.FILE_XLSX) || formFile.ContentType.Contains(FileExt.FILE_SPREADSHEET)))
+            if (formFile != null && (formFile.ContentType.Contains(FileExt.FILE_CSV)
+                || formFile.ContentType.Contains(FileExt.FILE_XLSX)
+                || formFile.ContentType.Contains(FileExt.FILE_SPREADSHEET)))
             {
                 return Ok(_groceryService.ImportGrocery());
             }
@@ -28,7 +30,7 @@ namespace iTechArt.Api.Controllers
         }
 
 
-        [HttpGet(StaticDetails.Export)]
+        [HttpGet(RouteConstants.EXPORT)]
         public IActionResult Export()
         {
             return Ok(_groceryService.ExportGrocery());
