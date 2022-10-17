@@ -13,12 +13,14 @@ namespace iTechArt.Api.Controllers
             this.medStaffService = medStaffService;
         }
 
+        private static readonly string[] extensions = { "csv", "officedocument.spreadsheetml.sheet", "xlsx" };
+
         [HttpPost("import")]
-        public IActionResult Import(IFormFile formFile)
+        public async ValueTask<IActionResult> Import(IFormFile formFile)
         {
-            if (formFile != null && (formFile.ContentType.Contains("csv") || formFile.ContentType.Contains("officedocument.spreadsheetml.sheet")))
+            if (formFile != null && extensions.Contains(formFile.ContentType))
             {
-                return Ok(medStaffService.ImportMedStaffFile());
+                return Ok(await medStaffService.ImportMedStaffFile());
             }
             else
             {
@@ -27,9 +29,9 @@ namespace iTechArt.Api.Controllers
         }
 
         [HttpGet("export")]
-        public IActionResult Export()
+        public async Task<IActionResult> ExportAsync()
         {
-            return Ok(medStaffService.ExportMedStaffFile());
+            return Ok(await medStaffService.ExportMedStaffFile());
         }
     }
 }
