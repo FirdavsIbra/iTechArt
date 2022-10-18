@@ -19,7 +19,7 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
-        "@typescript-eslint/no-explicit-any": ["error"],
+        "@typescript-eslint/no-explicit-any": ["warn"],
         "@typescript-eslint/no-extra-parens": ["error"],
         "no-unused-vars": "off",
         "@typescript-eslint/no-unused-vars": ["error"],
