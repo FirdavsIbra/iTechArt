@@ -1,6 +1,7 @@
 ﻿using iTechArt.Domain.Entities.Airports;
 using iTechArt.Domain.Entities.Grocery;
 using iTechArt.Domain.Entities.MedicalStaff;
+using iTechArt.Domain.Entities.Police;
 using iTechArt.Domain.Entities.Pupils;
 using iTechArt.Domain.Entities.Students;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,7 @@ namespace iTechArt.Data.DbContexts
         /// <summary>
         /// Airport tables
         /// </summary>
-        public virtual DbSet<Airport> Airports { get; set; }
+        public DbSet<Airport> Airports { get; set; }
 
 
         /// <summary>
@@ -30,10 +31,13 @@ namespace iTechArt.Data.DbContexts
         /// </summary>
         public DbSet<Pupil> Pupils { get; set; }
 
+        public virtual DbSet<Students> Students { get; set; }
+
         /// <summary>
         /// Student tables
         /// </summary>
-        public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<Police> Police { get; set; }
+        
         /// <summary>
         /// Grocery tables
         /// </summary>

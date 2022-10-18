@@ -2,9 +2,9 @@
 
 namespace iTechArt.Data.IRepositories
 {
-    public interface IRepository<TSource> where TSource: class
+    public interface IRepository<TSource> where TSource : class
     {
-        IQueryable<TSource> GetAll(Expression<Func<TSource, bool>> expression = null);
+        List<TSource> GetAll(Expression<Func<TSource, bool>> expression = null);
         ValueTask<TSource> AddAsync(TSource entity);
         ValueTask<TSource> GetAsync(Expression<Func<TSource, bool>> expression);
         TSource Update(TSource entity);

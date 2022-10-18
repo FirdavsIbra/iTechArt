@@ -3,7 +3,7 @@
     public enum CourseLanguage : byte
     {
         Russian = 1,
-        Uzbek,
-        English
+        Uzbek = 2,
+        English = 3
     }
 }

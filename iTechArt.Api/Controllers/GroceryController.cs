@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace iTechArt.Api.Controllers
 {
     [ApiController]
-    [Route("grocery")]
-    public class GroceryController : Controller
+    [Route("api/grocery")]
+    public sealed class GroceryController : Controller
     {
         private readonly IGroceryService _groceryService;
         public GroceryController(IGroceryService groceryService)
@@ -31,6 +31,7 @@ namespace iTechArt.Api.Controllers
 
 
         [HttpGet(RouteConstants.EXPORT)]
+
         public IActionResult Export()
         {
             return Ok(_groceryService.ExportGrocery());
