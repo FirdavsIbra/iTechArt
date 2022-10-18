@@ -14,28 +14,28 @@
       <span>{{ units.police.title }}</span>
       <img style="width: 20px" src="{{ units.police.icon }}" alt="" />
     </div>
-    <p>{{ unitCountsInfo?.police  }}</p>
+    <p>{{ unitCountsInfo?.police || 'null' }}</p>
   </div>
   <div class="block" routerLink="{{ units.pupils.path }}">
     <div class="block__title">
       <span>{{ units.pupils.title }}</span>
       <img style="width: 20px" src="{{ units.pupils.icon }}" alt="" />
     </div>
-    <p>{{ unitCountsInfo?.pupils}}</p>
+    <p>{{ unitCountsInfo?.pupils || 'null'}}</p>
   </div>
   <div class="block" routerLink="{{ units.students.path }}">
     <div class="block__title">
       <span>{{ units.students.title }}</span>
       <img style="width: 20px" src="{{ units.students.icon }}" alt="" />
     </div>
-    <p>{{ unitCountsInfo?.students }}</p>
+    <p>{{ unitCountsInfo?.students || 'null' }}</p>
   </div>
   <div class="block" routerLink="{{ units.airport.path }}">
     <div class="block__title">
       <span>{{ units.airport.title }}</span>
       <img style="width: 20px" src="{{ units.airport.icon }}" alt="" />
     </div>
-    <p>{{ unitCountsInfo?.airport }}</p>
+    <p>{{ unitCountsInfo?.airport || 'null' }}</p>
   </div>
   <div class="block" routerLink="{{ units.grocery.path }}">
     <div class="block__title">
@@ -49,6 +49,6 @@
       <span>{{ units.medStaff.title }}</span>
       <img style="width: 20px" src="{{ units.medStaff.icon }}" alt="" />
     </div>
-    <p>{{ unitCountsInfo?.medStaff }}</p>
+    <p>{{ unitCountsInfo?.medStaff || 'null'}}</p>
   </div>
 </section>
