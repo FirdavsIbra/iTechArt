@@ -1,4 +1,5 @@
 ﻿using iTechArt.Domain.Entities.Airports;
+using iTechArt.Domain.Entities.Grocery;
 using iTechArt.Domain.Entities.MedicalStaff;
 using iTechArt.Domain.Entities.Pupils;
 using iTechArt.Domain.Entities.Students;
@@ -33,5 +34,9 @@ namespace iTechArt.Data.DbContexts
         /// Student tables
         /// </summary>
         public virtual DbSet<Student> Students { get; set; }
+        /// <summary>
+        /// Grocery tables
+        /// </summary>
+        public virtual DbSet<Grocery> Grocery { get; set; }
     }
 }
