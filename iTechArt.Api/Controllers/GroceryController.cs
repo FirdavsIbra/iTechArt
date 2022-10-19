@@ -16,7 +16,7 @@ namespace iTechArt.Api.Controllers
         [HttpPost("import")]
         public IActionResult Import(IFormFile formFile)
         {
-            if (formFile != null && (formFile.ContentType.Contains("csv") || formFile.ContentType.Contains("officedocument.spreadsheetml.sheet")))
+            if (formFile != null && (formFile.ContentType.Contains("application/vnd.ms-excel") || formFile.ContentType.Contains("officedocument.spreadsheetml.sheet")))
             {
                 return Ok(_groceryService.ImportGrocery());
             }

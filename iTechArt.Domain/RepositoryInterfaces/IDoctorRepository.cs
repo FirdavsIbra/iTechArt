@@ -2,7 +2,7 @@
 
 namespace iTechArt.Domain.RepositoryInterfaces
 {
-    public interface IPoliceRepository : IRepository<IPolice>
+    public interface IDoctorRepository : IRepository<IDoctor>
     {
     }
 }

@@ -16,9 +16,9 @@ namespace iTechArt.Api.Controllers
         [HttpPost(StaticDetails.IMPORT)]
         public IActionResult Import(IFormFile formFile)
         {
-            var fileExtensions = new string[] {".csv", ".xlsx", "officedocument.spreadsheetml.sheet", ".xls"};
+            var fileExtensions = new string[] { ".application/vnd.ms-excel", ".xlsx", "officedocument.spreadsheetml.sheet", ".xls"};
 
-            if (formFile != null && (formFile.ContentType.Contains("csv") || formFile.ContentType.Contains("officedocument.spreadsheetml.sheet")))
+            if (formFile != null && (formFile.ContentType.Contains("application/vnd.ms-excel") || formFile.ContentType.Contains("officedocument.spreadsheetml.sheet")))
             {
                 return Ok(_policeService.ImportPolice());
             }

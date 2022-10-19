@@ -1,10 +1,10 @@
 ﻿using iTechArt.Domain.RepositoryInterfaces;
-using iTechArt.Database.Entities.Police;
 using iTechArt.Database.DbContexts;
+using iTechArt.Domain.ModelInterfaces;
 
 namespace iTechArt.Repository.Repositories
 {
-    public class PoliceRepository : Repository<Police>, IPoliceRepository
+    public class PoliceRepository : Repository<IPolice>, IPoliceRepository
     {
         public PoliceRepository(AppDbContext dbContext) : base(dbContext)
         {

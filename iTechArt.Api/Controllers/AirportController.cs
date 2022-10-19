@@ -16,7 +16,7 @@ namespace iTechArt.Api.Controllers
         [HttpPost("import")]
         public async Task<IActionResult> ImportAirportExcel(IFormFile file)
         {
-            if (file != null && (file.ContentType.EndsWith("xlsx") || file.ContentType.Contains("officedocument.spreadsheetml.sheet")))
+            if (file != null && (file.ContentType.Contains("application/vnd.ms-excel") || file.ContentType.Contains("officedocument.spreadsheetml.sheet")))
             {
                 return Ok(await _airportsService.ImportAirportExcel());
             }

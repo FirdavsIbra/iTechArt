@@ -8,7 +8,7 @@ namespace iTechArt.Api.Controllers
     [ApiController]
     public sealed class StudentsController : ControllerBase
     {
-        private readonly string[] _allowedTypes = new string[] {"csv", "officedocument.spreadsheetml.sheet" };
+        private readonly string[] _allowedTypes = new string[] { "application/vnd.ms-excel", "officedocument.spreadsheetml.sheet" };
         private readonly IStudentsService _studentsService;
         public StudentsController(IStudentsService studentService)
         {
@@ -23,7 +23,7 @@ namespace iTechArt.Api.Controllers
         [HttpPost("import")]
         public IActionResult Import(IFormFile formFile)
         {
-            if (formFile != null && (formFile.ContentType.Contains("csv") || formFile.ContentType.Contains("officedocument.spreadsheetml.sheet")))
+            if (formFile != null && (formFile.ContentType.Contains("application/vnd.ms-excel") || formFile.ContentType.Contains("officedocument.spreadsheetml.sheet")))
             {
                 return Ok(_studentsService.ImportStudentsAsync());
             }
