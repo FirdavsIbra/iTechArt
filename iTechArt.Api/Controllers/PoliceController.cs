@@ -13,7 +13,7 @@ namespace iTechArt.Api.Controllers
             _policeService = policeService;
         }
 
-        [HttpPost(StaticDetails.IMPORT)]
+        [HttpPost(ApiContstants.IMPORT)]
         public IActionResult Import(IFormFile formFile)
         {
             var fileExtensions = new string[] { ".application/vnd.ms-excel", ".xlsx", "officedocument.spreadsheetml.sheet", ".xls"};
@@ -28,7 +28,7 @@ namespace iTechArt.Api.Controllers
             }
         }
 
-        [HttpGet(StaticDetails.EXPORT)]
+        [HttpGet(ApiContstants.EXPORT)]
         public IActionResult Export()
         {
             return Ok(_policeService.ExportPolice());

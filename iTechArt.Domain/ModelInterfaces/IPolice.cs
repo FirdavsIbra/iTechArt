@@ -2,26 +2,54 @@
 {
     public interface IPolice
     {
+        /// <summary>
+        /// Police Officers Id
+        /// </summary>
         public long Id { get; set; }
 
-        public string FirstName { get; }
+        /// <summary>
+        /// Police Officers Firstname
+        /// </summary>
+        public string FirstName { get; set; }
 
-        public string LastName { get; }
+        /// <summary>
+        /// Police Officers Lastname
+        /// </summary>
+        public string LastName { get; set; }
 
-        public string Email { get; }
+        /// <summary>
+        /// Police Officers email address
+        /// </summary>
+        public string Email { get; set; }
 
-        public string Gender { get; }
+        /// <summary>
+        /// Police Officers gender
+        /// </summary>
+        public string Gender { get; set; }
 
-        public string Address { get; }
+        /// <summary>
+        /// Police Officers address
+        /// </summary>
+        public string Address { get; set; }
 
-        public string JobTitle { get; }
+        /// <summary>
+        /// Police Officers job title
+        /// </summary>
+        public string JobTitle { get; set; }
 
-        public double Height { get; }
+        /// <summary>
+        /// Police Officers height in cm with 2 precision (like 170.24)
+        /// </summary>
+        public double HeightInCm { get; set; }
 
-        public double Weight { get; }
+        /// <summary>
+        /// Police Officers weight in kg with 2 precision (like 75.34)
+        /// </summary>
+        public double WeightInKg { get; set; }
 
-        public DateTime StartDate { get; }
-
-        public DateTime EndDate { get; }
+        /// <summary>
+        /// Police Officers starting date
+        /// </summary>
+        public DateTime JobStartDate { get; set; }
     }
 }
