@@ -18,27 +18,34 @@ namespace iTechArt.Repository.Repositories
         public async ValueTask<TSource> AddAsync(TSource entity)
         {
             var entry = await dbSet.AddAsync(entity);
-
             return entry.Entity;
         }
 
-        public void Delete(TSource entity)
-            => dbSet.Remove(entity);
-
+   
         public List<TSource> GetAll(Expression<Func<TSource, bool>> expression = null)
         {
             var query = expression is null ? dbSet : dbSet.Where(expression);
-
             return query.ToList();
         }
 
         public async ValueTask<TSource> GetAsync(Expression<Func<TSource, bool>> expression)
-            => await dbSet.FirstOrDefaultAsync(expression);
+        {
+            return await dbSet.FirstOrDefaultAsync(expression);
+        }
 
         public TSource Update(TSource entity)
-            => dbSet.Update(entity).Entity;
+        {
+            return dbSet.Update(entity).Entity;
+        }
 
         public async ValueTask SaveChangesAsync()
-            => await dbContext.SaveChangesAsync();
+        {
+            await dbContext.SaveChangesAsync();
+        }
+
+        public void Delete(TSource entity)
+        {
+            dbSet.Remove(entity);
+        }
     }
 }

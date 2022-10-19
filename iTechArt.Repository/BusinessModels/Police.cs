@@ -36,7 +36,7 @@ namespace iTechArt.Repository.BusinessModels
 
         /// <summary>
         /// Police Officers job title
-        /// </summary>
+        /// </summary> 
         public string JobTitle { get; set; }
 
         /// <summary>
@@ -48,10 +48,5 @@ namespace iTechArt.Repository.BusinessModels
         /// Police Officers weight in kg with 2 precision (like 75.34)
         /// </summary>
         public double WeightInKg { get; set; }
-
-        /// <summary>
-        /// Police Officers starting date
-        /// </summary>
-        public DateTime JobStartDate { get; set; }
     }
 }

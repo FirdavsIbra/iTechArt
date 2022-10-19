@@ -5,7 +5,7 @@ namespace iTechArt.Service.Services
     public sealed class PoliceService : IPoliceService
     {
         /// <summary>
-        /// Export data
+        /// Export data from the databse
         /// </summary>
         public List<string> ExportPolice()
         {
@@ -13,7 +13,7 @@ namespace iTechArt.Service.Services
         }
 
         /// <summary>
-        /// Import data
+        /// Import data to the database
         /// </summary>
         public List<string> ImportPolice()
         {

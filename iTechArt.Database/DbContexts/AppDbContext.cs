@@ -37,7 +37,7 @@ namespace iTechArt.Database.DbContexts
         public virtual DbSet<Students> Students { get; set; }
 
         /// <summary>
-        /// Student tables
+        /// Police tables
         /// </summary>
         public virtual DbSet<Police> Police { get; set; }
 

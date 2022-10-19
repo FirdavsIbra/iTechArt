@@ -3,10 +3,13 @@
     public interface IPoliceService
     {
         /// <summary>
-        /// PoliceInterface import function
+        /// function to imports data to the database
         /// </summary>
         public List<string> ImportPolice();
 
+        /// <summary>
+        /// function to exports data from the database
+        /// </summary>
         public List<string> ExportPolice();
     }
 }
