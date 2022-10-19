@@ -1,5 +1,5 @@
-﻿using iTechArt.Data.DbContexts;
-using iTechArt.Service.Interfaces;
+﻿using iTechArt.Database.DbContexts;
+using iTechArt.Domain.ServiceInterfaces;
 
 namespace iTechArt.Service.Services
 {
@@ -15,14 +15,12 @@ namespace iTechArt.Service.Services
         {
             Dictionary<string, int> totals = new Dictionary<string, int>();
 
-            // totals.Add("grocery", _context.Grocery.Count());
-            
+            totals.Add("grocery", _dbContext.Groceries.Count());
             totals.Add("airport", _dbContext.Airports.Count());
             totals.Add("medStaff", _dbContext.Staffs.Count());
             totals.Add("pupils", _dbContext.Pupils.Count());
             totals.Add("police", _dbContext.Police.Count());
             totals.Add("students", _dbContext.Students.Count());
-
 
             return totals;
         }

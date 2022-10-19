@@ -1,4 +1,4 @@
-﻿using iTechArt.Service.Interfaces;
+﻿using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
@@ -13,11 +13,12 @@ namespace iTechArt.Api.Controllers
             _policeService = policeService;
         }
 
-        [HttpPost(StaticDetails.Import)]
+        [HttpPost(StaticDetails.IMPORT)]
         public IActionResult Import(IFormFile formFile)
         {
             var fileExtensions = new string[] {".csv", ".xlsx", "officedocument.spreadsheetml.sheet", ".xls"};
-            if (formFile != null && fileExtensions.Contains<string>(formFile.ContentType))
+
+            if (formFile != null && (formFile.ContentType.Contains("csv") || formFile.ContentType.Contains("officedocument.spreadsheetml.sheet")))
             {
                 return Ok(_policeService.ImportPolice());
             }
@@ -27,7 +28,7 @@ namespace iTechArt.Api.Controllers
             }
         }
 
-        [HttpGet(StaticDetails.Export)]
+        [HttpGet(StaticDetails.EXPORT)]
         public IActionResult Export()
         {
             return Ok(_policeService.ExportPolice());

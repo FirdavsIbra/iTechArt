@@ -1,7 +1,6 @@
-﻿using iTechArt.Service.Interfaces;
+﻿using iTechArt.Domain.ServiceInterfaces;
+using iTechArt.Service.Services;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace iTechArt.Api.Controllers
 {
@@ -22,12 +21,11 @@ namespace iTechArt.Api.Controllers
         /// <param name="formFile"></param>
         /// <returns>if successful returns Status200OK, otherwise Status400BadRequest</returns>
         [HttpPost("import")]
-        public async Task<IActionResult> Import(IFormFile formFile)
+        public IActionResult Import(IFormFile formFile)
         {
-            if (formFile != null && (_allowedTypes.Contains<string>(formFile.ContentType)))
+            if (formFile != null && (formFile.ContentType.Contains("csv") || formFile.ContentType.Contains("officedocument.spreadsheetml.sheet")))
             {
-                await _studentsService.ImportStudentsAsync(formFile);
-                return Ok();
+                return Ok(_studentsService.ImportStudentsAsync());
             }
             else
             {

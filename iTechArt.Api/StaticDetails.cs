@@ -2,8 +2,8 @@
 {
     public sealed class StaticDetails
     {
-        public const string Import = "import";
+        public const string IMPORT = "import";
 
-        public const string Export = "export";
+        public const string EXPORT = "export";
     }
 }

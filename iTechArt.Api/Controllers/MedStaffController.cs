@@ -1,4 +1,4 @@
-﻿using iTechArt.Service.Interfaces;
+﻿using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
@@ -18,7 +18,7 @@ namespace iTechArt.Api.Controllers
         [HttpPost("import")]
         public async ValueTask<IActionResult> Import(IFormFile formFile)
         {
-            if (formFile != null && extensions.Contains(formFile.ContentType))
+            if (formFile != null && (formFile.ContentType.Contains("csv") || formFile.ContentType.Contains("officedocument.spreadsheetml.sheet")))
             {
                 return Ok(await medStaffService.ImportMedStaffFile());
             }

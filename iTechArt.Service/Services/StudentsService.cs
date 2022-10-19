@@ -1,5 +1,4 @@
-﻿using iTechArt.Service.Interfaces;
-using Microsoft.AspNetCore.Http;
+﻿using iTechArt.Domain.ServiceInterfaces;
 
 namespace iTechArt.Service.Services
 {
@@ -14,13 +13,14 @@ namespace iTechArt.Service.Services
             var obj = new List<string>();
             return obj;
         }
+
         /// <summary>
         /// Async method that takes IFormFile as parameter and saves entities into DB
         /// </summary>
-        /// <param name="formFile"></param>
-        public async Task ImportStudentsAsync(IFormFile formFile)
+        /// <returns></returns>
+        public List<string> ImportStudentsAsync()
         {
-
+            return new List<string>();
         }
     }
 }

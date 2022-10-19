@@ -1,15 +1,15 @@
-﻿using iTechArt.Service.Interfaces;
+﻿using iTechArt.Domain.ServiceInterfaces;
 
 namespace iTechArt.Service.Services
 {
     public class PupilService : IPupilService
     {
-        public IEnumerable<string> ExportPupilsFile()
+        public List<string> ExportPupilsFile()
         {
             return new List<string>();
         }
 
-        public IEnumerable<string> ImportPupilsFile()
+        public List<string> ImportPupilsFile()
         {
             return new List<string>();
         }

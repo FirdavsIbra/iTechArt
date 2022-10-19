@@ -1,4 +1,4 @@
-﻿using iTechArt.Service.Interfaces;
+﻿using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
@@ -13,6 +13,7 @@ namespace iTechArt.Api.Controllers
         {
             _statsService = statsService;
         }
+
         /// <summary>
         /// returns total numbers of entities in db
         /// </summary>
