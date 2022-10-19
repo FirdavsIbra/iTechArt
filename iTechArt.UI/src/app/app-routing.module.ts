@@ -17,7 +17,6 @@ const routes: Routes = [
   {path: 'pupils', component: PupilsPageComponent },
   {path: 'grocery', component: GroceryPageComponent},
   {path: 'airport', component: AirportPageComponent }
-
 ];
 
 @NgModule({

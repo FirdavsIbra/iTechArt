@@ -1,4 +1,4 @@
-export enum UnitEnum {
+export enum UnitsEnum {
   police = 'police',
   students = 'students',
   pupils = 'pupils',

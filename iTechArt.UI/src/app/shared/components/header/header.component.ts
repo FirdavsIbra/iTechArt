@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { UNITS } from '../../constants/units';
-import { UnitEnum } from '../../enums/unit.enum';
+import { UnitsEnum } from '../../enums/units.enum';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +9,6 @@ import { UnitEnum } from '../../enums/unit.enum';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  public units = UNITS;
-  public unitsTitles = UnitEnum;
+  public units: typeof UNITS = UNITS;
+  public unitsTitles: typeof UnitsEnum = UnitsEnum;
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 import { UNITS } from '../../constants/units';
-import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { UnitCountDashboardInterface } from "../../interfaces/unit-count-dashboard.interface";
 

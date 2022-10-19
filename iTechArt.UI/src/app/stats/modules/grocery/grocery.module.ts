@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { GroceryPageComponent } from './pages/grocery-page/grocery-page.component';
 import { SharedModule } from "../../../shared/shared.module";
 
 @NgModule({
   declarations: [GroceryPageComponent],
-    imports: [CommonModule, SharedModule]
+  imports: [CommonModule, SharedModule]
 })
 export class GroceryModule {}
