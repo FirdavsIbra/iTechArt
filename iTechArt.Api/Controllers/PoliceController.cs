@@ -8,19 +8,21 @@ namespace iTechArt.Api.Controllers
     public sealed class PoliceController : ControllerBase
     {
         private readonly IPoliceService _policeService;
+        private readonly string[] fileExtensions = new string[] { "application/vnd.ms-excel", ".xlsx", "officedocument.spreadsheetml.sheet", ".xls", ".csv" };
+        
         public PoliceController(IPoliceService policeService)
         {
             _policeService = policeService;
         }
 
-        [HttpPost(ApiContstants.IMPORT)]
+        [HttpPost(ApiConstants.IMPORT)]
         public IActionResult Import(IFormFile formFile)
         {
-            var fileExtensions = new string[] { ".application/vnd.ms-excel", ".xlsx", "officedocument.spreadsheetml.sheet", ".xls"};
-
-            if (formFile != null && (formFile.ContentType.Contains("application/vnd.ms-excel") || formFile.ContentType.Contains("officedocument.spreadsheetml.sheet")))
+            string fileExtension = Path.GetExtension(formFile.FileName);
+            
+            if(fileExtensions.Contains(fileExtension))
             {
-                return Ok(_policeService.ImportPolice());
+                return Ok(_policeService.ImportPoliceData());
             }
             else
             {
@@ -28,10 +30,10 @@ namespace iTechArt.Api.Controllers
             }
         }
 
-        [HttpGet(ApiContstants.EXPORT)]
+        [HttpGet(ApiConstants.EXPORT)]
         public IActionResult Export()
         {
-            return Ok(_policeService.ExportPolice());
+            return Ok(_policeService.ExportPoliceData());
         }
     }
 }

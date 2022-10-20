@@ -1,6 +1,6 @@
 ﻿namespace iTechArt.Api
 {
-    public sealed class ApiContstants
+    public sealed class ApiConstants
     {
         public const string IMPORT = "import";
 
