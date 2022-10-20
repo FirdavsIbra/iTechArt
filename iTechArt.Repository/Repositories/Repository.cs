@@ -12,6 +12,11 @@ namespace iTechArt.Repository.Repositories
             _dbContext = dbContext;
         }
 
+        /// <summary>
+        /// Add entity to database
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         public async Task<TSource> AddAsync(TSource entity)
         {
             var entry = await _dbContext.Set<TSource>().AddAsync(entity);
@@ -19,17 +24,31 @@ namespace iTechArt.Repository.Repositories
 
             return entry.Entity;
         }
-
+        
+        /// <summary>
+        /// Get all entities from database
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<TSource>> GetAllAsync()
         {
             return await _dbContext.Set<TSource>().ToListAsync();
         }
 
+        /// <summary>
+        /// Get entity by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<TSource> GetByIdAsync(long id)
         {
             return await _dbContext.Set<TSource>().FindAsync(id);
         }
 
+        /// <summary>
+        /// Update entity
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         public async Task<TSource> UpdateAsync(TSource entity)
         {
             var entry = _dbContext.Set<TSource>().Update(entity);
@@ -38,6 +57,11 @@ namespace iTechArt.Repository.Repositories
             return entry.Entity;
         }
 
+        /// <summary>
+        /// Delete entity from database
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         public async Task DeleteAsync(TSource entity)
         {
             _dbContext.Set<TSource>().Remove(entity);

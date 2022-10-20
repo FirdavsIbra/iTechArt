@@ -12,11 +12,19 @@ namespace iTechArt.Service.Services
             _pupilRepository = pupilRepository;
         }
 
-        public async Task<List<Pupil>> ExportPupilsFileAsync()
+        /// <summary>
+        /// Get all pupils
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<Pupil>> GetAllAsync()
         {
             return await _pupilRepository.GetAllAsync();
         }
 
+        /// <summary>
+        /// Import pupil's file
+        /// </summary>
+        /// <returns></returns>
         public List<string> ImportPupilsFile()
         {
             return new List<string>();

@@ -5,6 +5,6 @@ namespace iTechArt.Domain.ServiceInterfaces
     public interface IPupilService
     {
         public List<string> ImportPupilsFile();
-        public Task<List<Pupil>> ExportPupilsFileAsync();
+        public Task<List<Pupil>> GetAllAsync();
     }
 }
