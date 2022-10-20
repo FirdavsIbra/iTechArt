@@ -18,10 +18,10 @@ namespace iTechArt.Api.Controllers
         /// returns total numbers of entities in db
         /// </summary>
         /// <returns>reurns IDictionary <string, int></string></returns>
-        [HttpGet("total-amounts")]
+        [HttpGet("count-of-users")]
         public IActionResult TotalAmounts()
         {
-            return Ok( _statsService.GetTotalAmounts());
+            return Ok( _statsService.GetCountOfUsers());
         }
     }
 }
