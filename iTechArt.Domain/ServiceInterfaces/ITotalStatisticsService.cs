@@ -1,7 +1,9 @@
-﻿namespace iTechArt.Domain.ServiceInterfaces
+﻿using iTechArt.Domain.ModelInterfaces;
+
+namespace iTechArt.Domain.ServiceInterfaces
 {
     public interface ITotalStatisticsService
     {
-        public IDictionary<string, int> GetTotalAmounts();
+        public IDashboardInfo GetCountOfUsers();
     }
 }

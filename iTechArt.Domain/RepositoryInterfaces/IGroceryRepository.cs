@@ -4,5 +4,6 @@ namespace iTechArt.Domain.RepositoryInterfaces
 {
     public interface IGroceryRepository : IRepository<IGrocery>
     {
+        public int GetCountOfGrocery();
     }
 }
