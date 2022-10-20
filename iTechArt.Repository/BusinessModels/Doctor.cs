@@ -5,28 +5,65 @@ namespace iTechArt.Repository.BusinessModels
 {
     internal class Doctor : IDoctor
     {
+        /// <summary>
+        /// Unical Id of a Doctor
+        /// </summary>
         public long Id { get; set; }
 
-        public string FirstName { get; set; }
+        /// <summary>
+        /// Firstname of a Doctor
+        /// </summary>
+        public string FirstName { get; internal set; }
 
-        public string LastName { get; set; }
+        /// <summary>
+        /// Lastname of a Doctor
+        /// </summary>
+        public string LastName { get; internal set; }
 
-        public Gender Gender { get; set; }
+        /// <summary>
+        /// Gender of a Doctor
+        /// </summary>
+        public Gender Gender { get; internal set; }
 
-        public string Email { get; set; }
+        /// <summary>
+        /// Email address of a Doctor
+        /// </summary>
+        public string Email { get; internal set; }
 
-        public string PhoneNumber { get; set; }
+        /// <summary>
+        /// Phone number of a Doctor
+        /// string
+        /// </summary>
+        public string PhoneNumber { get; internal set; }
 
-        public DateTime DateOfBirth { get; set; }
+        /// <summary>
+        /// Date of birth of a Doctor
+        /// </summary>
+        public DateTime DateOfBirth { get; internal set; }
 
-        public string Address { get; set; }
+        /// <summary>
+        /// Address of a Doctor
+        /// </summary>
+        public string Address { get; internal set; }
 
-        public decimal Salary { get; set; }
+        /// <summary>
+        /// Monthly salary of a Doctor
+        /// </summary>
+        public decimal Salary { get; internal set; }
 
-        public string HospitalName { get; set; }
+        /// <summary>
+        /// Name of a hospital where the Doctor works
+        /// </summary>
+        public string HospitalName { get; internal set; }
 
-        public string PostalCode { get; set; }
+        /// <summary>
+        /// Postal code of a city where the Doctor works
+        /// </summary>
+        public string PostalCode { get; internal set; }
 
-        public Shift Shift { get; set; }
+        /// <summary>
+        /// Work shift of a Doctor
+        /// </summary>
+        public Shift Shift { get; internal set; }
     }
 }

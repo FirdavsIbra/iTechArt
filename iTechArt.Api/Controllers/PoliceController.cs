@@ -9,7 +9,7 @@ namespace iTechArt.Api.Controllers
     {
         private readonly IPoliceService _policeService;
         private readonly string[] fileExtensions = new string[] { "application/vnd.ms-excel", ".xlsx", "officedocument.spreadsheetml.sheet", ".xls", ".csv" };
-        
+
         public PoliceController(IPoliceService policeService)
         {
             _policeService = policeService;
@@ -19,8 +19,8 @@ namespace iTechArt.Api.Controllers
         public IActionResult Import(IFormFile formFile)
         {
             string fileExtension = Path.GetExtension(formFile.FileName);
-            
-            if(fileExtensions.Contains(fileExtension))
+
+            if (fileExtensions.Contains(fileExtension))
             {
                 return Ok(_policeService.ImportPoliceData());
             }

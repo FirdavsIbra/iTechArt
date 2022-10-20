@@ -1,16 +1,26 @@
-﻿using iTechArt.Domain.ServiceInterfaces;
+﻿using iTechArt.Domain.ModelInterfaces;
+using iTechArt.Domain.RepositoryInterfaces;
+using iTechArt.Domain.ServiceInterfaces;
 
 namespace iTechArt.Service.Services
 {
     public class MedStaffService : IMedStaffService
     {
+        private readonly IDoctorRepository _doctorRepository;
+
+        public MedStaffService(IDoctorRepository doctorRepository)
+        {
+            _doctorRepository = doctorRepository;
+        }
+
+
         /// <summary>
         /// Takes filestream
         /// </summary>
         /// <returns> List of strings </returns>
-        public async ValueTask<List<string>> ExportMedStaffFile()
+        public async ValueTask<List<IDoctor>> ExportMedStaffFile()
         {
-            return new List<string>();
+            return await _doctorRepository.GetAllAsync();
         }
 
         /// <summary>

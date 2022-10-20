@@ -1,5 +1,4 @@
-﻿using iTechArt.Database.DbContexts;
-using iTechArt.Database.Enums;
+﻿using iTechArt.Database.Enums;
 
 namespace iTechArt.Database.Entities.Pupils
 {
@@ -29,7 +28,7 @@ namespace iTechArt.Database.Entities.Pupils
         /// Gender of pupil
         /// </summary>
         public Gender Gender { get; set; }
-        
+
         /// <summary>
         /// Phone number of pupil
         /// </summary>
@@ -39,7 +38,7 @@ namespace iTechArt.Database.Entities.Pupils
         /// Address of pupil
         /// </summary>
         public string Address { get; set; }
-        
+
         /// <summary>
         /// The city, where pupil lives
         /// </summary>

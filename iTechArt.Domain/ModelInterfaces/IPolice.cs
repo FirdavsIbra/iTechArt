@@ -40,7 +40,7 @@
         /// <summary>
         /// Police Officers height in cm with 2 precision (like 170.24)
         /// </summary>
-        public double HeightInCm { get;  set; }
+        public double HeightInCm { get; set; }
 
         /// <summary>
         /// Police Officers weight in kg with 2 precision (like 75.34)

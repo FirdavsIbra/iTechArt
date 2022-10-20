@@ -1,6 +1,5 @@
 ﻿using iTechArt.Database.DbContexts;
 using iTechArt.Database.Entities.Pupils;
-using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 
 namespace iTechArt.Repository.Repositories

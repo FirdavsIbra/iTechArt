@@ -1,5 +1,4 @@
 ﻿using iTechArt.Database.Entities.Pupils;
-using iTechArt.Domain.ModelInterfaces;
 
 namespace iTechArt.Domain.RepositoryInterfaces
 {

@@ -44,6 +44,6 @@ namespace iTechArt.Database.DbContexts
         /// <summary>
         /// Grocery tables
         /// </summary>
-        public virtual DbSet<Grocery> Groceries { get; set; } 
+        public virtual DbSet<Grocery> Groceries { get; set; }
     }
 }
