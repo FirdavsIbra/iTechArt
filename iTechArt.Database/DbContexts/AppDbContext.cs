@@ -18,18 +18,18 @@ namespace iTechArt.Database.DbContexts
         /// <summary>
         /// Airport tables
         /// </summary>
-        public DbSet<Airport> Airports { get; set; }
+        public virtual DbSet<Airport> Airports { get; set; }
 
 
         /// <summary>
         /// Medicine staff tables
         /// </summary>
-        public DbSet<Doctor> Staffs { get; set; }
+        public virtual DbSet<Doctor> Staffs { get; set; }
 
         /// <summary>
         /// Pupil tables
         /// </summary>
-        public DbSet<Pupil> Pupils { get; set; }
+        public virtual DbSet<Pupil> Pupils { get; set; }
 
         /// <summary>
         /// Student tables

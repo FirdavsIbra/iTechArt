@@ -1,9 +1,13 @@
-﻿using iTechArt.Database.Enums;
+﻿using iTechArt.Database.DbContexts;
+using iTechArt.Database.Enums;
 
 namespace iTechArt.Database.Entities.Pupils
 {
     public sealed class Pupil
     {
+        /// <summary>
+        /// Id if pupil
+        /// </summary>
         public long Id { get; set; }
 
         /// <summary>
@@ -42,9 +46,9 @@ namespace iTechArt.Database.Entities.Pupils
         public string City { get; set; }
 
         /// <summary>
-        /// The number of school, where pupil study
+        /// The name of school, where pupil study
         /// </summary>
-        public string SchoolNumber { get; set; }
+        public string SchoolName { get; set; }
 
         /// <summary>
         /// The grade of study of pupil

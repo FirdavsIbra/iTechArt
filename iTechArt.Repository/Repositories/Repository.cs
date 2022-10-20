@@ -1,51 +1,47 @@
 ﻿using iTechArt.Database.DbContexts;
 using iTechArt.Domain.RepositoryInterfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 
 namespace iTechArt.Repository.Repositories
 {
-    public class Repository<TSource> : IRepository<TSource> where TSource : class
+    public abstract class Repository<TSource> : IRepository<TSource> where TSource : class
     {
-        protected readonly AppDbContext dbContext;
-        protected readonly DbSet<TSource> dbSet;
+        protected readonly AppDbContext _dbContext;
         public Repository(AppDbContext dbContext)
         {
-            this.dbContext = dbContext;
-            this.dbSet = dbContext.Set<TSource>();
+            _dbContext = dbContext;
         }
 
-        public async ValueTask<TSource> AddAsync(TSource entity)
+        public async Task<TSource> AddAsync(TSource entity)
         {
-            var entry = await dbSet.AddAsync(entity);
+            var entry = await _dbContext.Set<TSource>().AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
+
             return entry.Entity;
         }
 
-   
-        public List<TSource> GetAll(Expression<Func<TSource, bool>> expression = null)
+        public async Task<List<TSource>> GetAllAsync()
         {
-            var query = expression is null ? dbSet : dbSet.Where(expression);
-            return query.ToList();
+            return await _dbContext.Set<TSource>().ToListAsync();
         }
 
-        public async ValueTask<TSource> GetAsync(Expression<Func<TSource, bool>> expression)
+        public async Task<TSource> GetByIdAsync(long id)
         {
-            return await dbSet.FirstOrDefaultAsync(expression);
+            return await _dbContext.Set<TSource>().FindAsync(id);
         }
 
-        public TSource Update(TSource entity)
+        public async Task<TSource> UpdateAsync(TSource entity)
         {
-            return dbSet.Update(entity).Entity;
+            var entry = _dbContext.Set<TSource>().Update(entity);
+            await _dbContext.SaveChangesAsync();
+
+            return entry.Entity;
         }
 
-        public async ValueTask SaveChangesAsync()
+        public async Task DeleteAsync(TSource entity)
         {
-            await dbContext.SaveChangesAsync();
-        }
-
-        public void Delete(TSource entity)
-        {
-            dbSet.Remove(entity);
+            _dbContext.Set<TSource>().Remove(entity);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

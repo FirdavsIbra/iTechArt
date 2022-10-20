@@ -5,37 +5,37 @@
         /// <summary>
         /// Police Officers Id
         /// </summary>
-        public long Id { get; internal set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// Police Officers Firstname
         /// </summary>
-        public string FirstName { get; internal set; }
+        public string FirstName { get; set; }
 
         /// <summary>
         /// Police Officers Lastname
         /// </summary>
-        public string LastName { get; internal set; }
+        public string LastName { get; set; }
 
         /// <summary>
         /// Police Officers email address
         /// </summary>
-        public string Email { get; internal set; }
+        public string Email { get; set; }
 
         /// <summary>
         /// Police Officers gender
         /// </summary>
-        public string Gender { get; internal set; }
+        public string Gender { get; set; }
 
         /// <summary>
         /// Police Officers address
         /// </summary>
-        public string Address { get; internal set; }
+        public string Address { get; set; }
 
         /// <summary>
         /// Police Officers job title
         /// </summary>
-        public string JobTitle { get; internal set; }
+        public string JobTitle { get; set; }
 
         /// <summary>
         /// Police Officers height in cm with 2 precision (like 170.24)

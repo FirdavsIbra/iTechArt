@@ -1,8 +1,10 @@
-﻿namespace iTechArt.Domain.ServiceInterfaces
+﻿using iTechArt.Database.Entities.Pupils;
+
+namespace iTechArt.Domain.ServiceInterfaces
 {
     public interface IPupilService
     {
         public List<string> ImportPupilsFile();
-        public List<string> ExportPupilsFile();
+        public Task<List<Pupil>> ExportPupilsFileAsync();
     }
 }

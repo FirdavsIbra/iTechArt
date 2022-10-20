@@ -27,9 +27,9 @@ namespace iTechArt.Api.Controllers
         }
 
         [HttpGet("export")]
-        public IActionResult Export()
+        public async Task<IActionResult> ExportAsync()
         {
-            return Ok(_pupilService.ExportPupilsFile());
+            return Ok(await _pupilService.ExportPupilsFileAsync());
         }
     }
 }

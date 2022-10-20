@@ -1,12 +1,21 @@
-﻿using iTechArt.Domain.ServiceInterfaces;
+﻿using iTechArt.Database.Entities.Pupils;
+using iTechArt.Domain.ModelInterfaces;
+using iTechArt.Domain.RepositoryInterfaces;
+using iTechArt.Domain.ServiceInterfaces;
 
 namespace iTechArt.Service.Services
 {
-    public class PupilService : IPupilService
+    public sealed class PupilService : IPupilService
     {
-        public List<string> ExportPupilsFile()
+        private readonly IPupilRepository _pupilRepository;
+        public PupilService(IPupilRepository pupilRepository)
         {
-            return new List<string>();
+            _pupilRepository = pupilRepository;
+        }
+
+        public async Task<List<Pupil>> ExportPupilsFileAsync()
+        {
+            return await _pupilRepository.GetAllAsync();
         }
 
         public List<string> ImportPupilsFile()

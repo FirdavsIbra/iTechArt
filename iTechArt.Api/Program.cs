@@ -3,19 +3,23 @@ using Microsoft.EntityFrameworkCore;
 using iTechArt.Service.Services;
 using iTechArt.Serivce.Services;
 using iTechArt.Database.DbContexts;
+using iTechArt.Domain.RepositoryInterfaces;
+using iTechArt.Repository.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddSingleton<IAirportsService, AirportService>();
-builder.Services.AddSingleton<IStudentsService, StudentsService>();
-builder.Services.AddSingleton<IGroceryService, GroceryService>();
-builder.Services.AddSingleton<IPupilService, PupilService>();
-builder.Services.AddSingleton<IMedStaffService, MedStaffService>();
-builder.Services.AddSingleton<IPoliceService, PoliceService>();
+builder.Services.AddScoped<IAirportsService, AirportService>();
+builder.Services.AddScoped<IStudentsService, StudentsService>();
+builder.Services.AddScoped<IGroceryService, GroceryService>();
+builder.Services.AddScoped<IPupilService, PupilService>();
+builder.Services.AddScoped<IMedStaffService, MedStaffService>();
+builder.Services.AddScoped<IPoliceService, PoliceService>();
 builder.Services.AddScoped<ITotalStatisticsService, TotalStatisticsService>();
+builder.Services.AddScoped<IPupilRepository, PupilRepository>();
+builder.Services.AddScoped<IPupilService, PupilService>();
 
 builder.Services.AddCors(option =>
 {
