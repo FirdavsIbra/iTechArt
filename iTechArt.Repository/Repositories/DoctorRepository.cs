@@ -5,7 +5,7 @@ using iTechArt.Domain.RepositoryInterfaces;
 
 namespace iTechArt.Repository.Repositories
 {
-    public class DoctorRepository : Repository<IDoctor>, IDoctorRepository
+    public class DoctorRepository : Repository<Doctor>, IDoctorRepository
     {
         public DoctorRepository(AppDbContext dbContext) : base(dbContext)
         {

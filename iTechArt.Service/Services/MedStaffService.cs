@@ -1,4 +1,5 @@
-﻿using iTechArt.Domain.ModelInterfaces;
+﻿using iTechArt.Database.Entities.MedicalStaff;
+using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 
@@ -13,12 +14,11 @@ namespace iTechArt.Service.Services
             _doctorRepository = doctorRepository;
         }
 
-
         /// <summary>
         /// Takes filestream
         /// </summary>
         /// <returns> List of strings </returns>
-        public async ValueTask<List<IDoctor>> ExportMedStaffFile()
+        public async ValueTask<List<Doctor>> ExportMedStaffFile()
         {
             return await _doctorRepository.GetAllAsync();
         }
