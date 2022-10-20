@@ -7,7 +7,7 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Export data from the databse
         /// </summary>
-        public List<string> ExportPolice()
+        public List<string> ExportPoliceData()
         {
             return new List<string>();
         }
@@ -15,7 +15,7 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Import data to the database
         /// </summary>
-        public List<string> ImportPolice()
+        public List<string> ImportPoliceData()
         {
             return new List<string>();
         }

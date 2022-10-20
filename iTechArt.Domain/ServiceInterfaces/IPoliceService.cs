@@ -5,11 +5,11 @@
         /// <summary>
         /// function to imports data to the database
         /// </summary>
-        public List<string> ImportPolice();
+        public List<string> ImportPoliceData();
 
         /// <summary>
         /// function to exports data from the database
         /// </summary>
-        public List<string> ExportPolice();
+        public List<string> ExportPoliceData();
     }
 }
