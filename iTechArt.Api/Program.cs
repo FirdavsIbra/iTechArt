@@ -1,10 +1,10 @@
-using iTechArt.Domain.ServiceInterfaces;
-using Microsoft.EntityFrameworkCore;
-using iTechArt.Service.Services;
-using iTechArt.Serivce.Services;
 using iTechArt.Database.DbContexts;
 using iTechArt.Domain.RepositoryInterfaces;
+using iTechArt.Domain.ServiceInterfaces;
 using iTechArt.Repository.Repositories;
+using iTechArt.Serivce.Services;
+using iTechArt.Service.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 

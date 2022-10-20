@@ -2,7 +2,7 @@
 
 namespace iTechArt.Database.Entities.Groceries
 {
-    public sealed class Grocery 
+    public sealed class Grocery
     {
         public long Id { get; set; }
 

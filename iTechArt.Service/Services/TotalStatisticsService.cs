@@ -8,7 +8,7 @@ namespace iTechArt.Service.Services
         private readonly AppDbContext _dbContext;
         public TotalStatisticsService(AppDbContext dbContext)
         {
-             _dbContext = dbContext;
+            _dbContext = dbContext;
         }
 
         public IDictionary<string, int> GetTotalAmounts()

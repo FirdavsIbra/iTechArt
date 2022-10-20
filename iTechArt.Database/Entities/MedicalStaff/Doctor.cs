@@ -4,6 +4,9 @@ namespace iTechArt.Database.Entities.MedicalStaff
 {
     public sealed class Doctor
     {
+        /// <summary>
+        /// Unical Id of a Doctor
+        /// </summary>
         public long Id { get; set; }
 
         /// <summary>

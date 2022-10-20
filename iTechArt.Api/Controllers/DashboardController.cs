@@ -21,7 +21,7 @@ namespace iTechArt.Api.Controllers
         [HttpGet("total-amounts")]
         public IActionResult TotalAmounts()
         {
-            return Ok( _statsService.GetTotalAmounts());
+            return Ok(_statsService.GetTotalAmounts());
         }
     }
 }

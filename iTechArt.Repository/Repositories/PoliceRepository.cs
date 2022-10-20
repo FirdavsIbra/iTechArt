@@ -1,6 +1,6 @@
-﻿using iTechArt.Domain.RepositoryInterfaces;
-using iTechArt.Database.DbContexts;
+﻿using iTechArt.Database.DbContexts;
 using iTechArt.Domain.ModelInterfaces;
+using iTechArt.Domain.RepositoryInterfaces;
 
 namespace iTechArt.Repository.Repositories
 {

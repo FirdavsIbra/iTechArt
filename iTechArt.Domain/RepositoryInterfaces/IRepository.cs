@@ -1,6 +1,4 @@
-﻿using iTechArt.Database.DbContexts;
-
-namespace iTechArt.Domain.RepositoryInterfaces
+﻿namespace iTechArt.Domain.RepositoryInterfaces
 {
     public interface IRepository<TSource> where TSource : class
     {
