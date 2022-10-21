@@ -1,4 +1,4 @@
-﻿using iTechArt.Service.Interfaces;
+﻿using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
@@ -16,7 +16,7 @@ namespace iTechArt.Api.Controllers
         [HttpPost("import")]
         public IActionResult Import(IFormFile formFile)
         {
-            if (formFile != null && (formFile.ContentType.Contains("csv") || formFile.ContentType.Contains("officedocument.spreadsheetml.sheet")))
+            if (formFile != null && (formFile.ContentType.Contains("application/vnd.ms-excel") || formFile.ContentType.Contains("officedocument.spreadsheetml.sheet")))
             {
                 return Ok(_pupilService.ImportPupilsFile());
             }
@@ -27,9 +27,9 @@ namespace iTechArt.Api.Controllers
         }
 
         [HttpGet("export")]
-        public IActionResult Export()
+        public async Task<IActionResult> GetAllAsync()
         {
-            return Ok(_pupilService.ExportPupilsFile());
+            return Ok(await _pupilService.GetAllAsync());
         }
     }
 }

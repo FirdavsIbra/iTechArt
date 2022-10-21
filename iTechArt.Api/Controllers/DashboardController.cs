@@ -1,9 +1,9 @@
-﻿using iTechArt.Service.Interfaces;
+﻿using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/dashboard")]
     [ApiController]
     public class DashboardController : ControllerBase
     {
@@ -14,10 +14,14 @@ namespace iTechArt.Api.Controllers
             _statsService = statsService;
         }
 
-        [HttpGet("total-amounts")]
+        /// <summary>
+        /// returns total numbers of entities in db
+        /// </summary>
+        /// <returns>reurns IDictionary <string, int></string></returns>
+        [HttpGet("count-of-users")]
         public IActionResult TotalAmounts()
         {
-            return Ok(_statsService.GetTotalAmounts());
+            return Ok( _statsService.GetCountOfUsers());
         }
     }
 }

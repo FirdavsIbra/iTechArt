@@ -1,4 +1,4 @@
-﻿using iTechArt.Service.Interfaces;
+﻿using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
@@ -8,18 +8,21 @@ namespace iTechArt.Api.Controllers
     public sealed class PoliceController : ControllerBase
     {
         private readonly IPoliceService _policeService;
+        private readonly string[] fileExtensions = new string[] { "application/vnd.ms-excel", ".xlsx", "officedocument.spreadsheetml.sheet", ".xls", ".csv" };
+
         public PoliceController(IPoliceService policeService)
         {
             _policeService = policeService;
         }
 
-        [HttpPost(StaticDetails.Import)]
+        [HttpPost(ApiConstants.IMPORT)]
         public IActionResult Import(IFormFile formFile)
         {
-            var fileExtensions = new string[] {".csv", ".xlsx", "officedocument.spreadsheetml.sheet", ".xls"};
-            if (formFile != null && fileExtensions.Contains<string>(formFile.ContentType))
+            string fileExtension = Path.GetExtension(formFile.FileName);
+
+            if (fileExtensions.Contains(fileExtension))
             {
-                return Ok(_policeService.ImportPolice());
+                return Ok(_policeService.ImportPoliceData());
             }
             else
             {
@@ -27,10 +30,10 @@ namespace iTechArt.Api.Controllers
             }
         }
 
-        [HttpGet(StaticDetails.Export)]
+        [HttpGet(ApiConstants.EXPORT)]
         public IActionResult Export()
         {
-            return Ok(_policeService.ExportPolice());
+            return Ok(_policeService.ExportPoliceData());
         }
     }
 }

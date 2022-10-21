@@ -1,4 +1,4 @@
-﻿using iTechArt.Service.Interfaces;
+﻿using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
@@ -16,7 +16,7 @@ namespace iTechArt.Api.Controllers
         [HttpPost(StaticDetails.Import)]
         public IActionResult Import(IFormFile formFile)
         {
-            if (formFile != null && FileExt.fileExt.Contains<string>(formFile.ContentType))
+            if (formFile != null && (formFile.ContentType.Contains("application/vnd.ms-excel") || formFile.ContentType.Contains("officedocument.spreadsheetml.sheet")))
             {
                 return Ok(_groceryService.ImportGrocery());
             }

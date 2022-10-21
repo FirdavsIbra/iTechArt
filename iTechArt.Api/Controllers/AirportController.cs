@@ -1,4 +1,4 @@
-﻿using iTechArt.Service.Interfaces;
+﻿using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
@@ -14,11 +14,11 @@ namespace iTechArt.Api.Controllers
         }
 
         [HttpPost("import")]
-        public IActionResult ImportAirportExcel(IFormFile file)
+        public async Task<IActionResult> ImportAirportExcel(IFormFile file)
         {
-            if (file != null && (file.ContentType.EndsWith("xlsx") || file.ContentType.Contains("officedocument.spreadsheetml.sheet")))
+            if (file != null && (file.ContentType.Contains("application/vnd.ms-excel") || file.ContentType.Contains("officedocument.spreadsheetml.sheet")))
             {
-                return Ok(_airportsService.ImportAirportExcel());
+                return Ok(await _airportsService.ImportAirportExcel());
             }
             else
             {
@@ -27,9 +27,9 @@ namespace iTechArt.Api.Controllers
         }
 
         [HttpGet("export")]
-        public IActionResult ExportAirportExcel()
+        public async Task<IActionResult> ExportAirportExcel()
         {
-            return Ok(_airportsService.ExportAirportExcel());
+            return Ok(await _airportsService.ExportAirportExcel());
         }
     }
 }
