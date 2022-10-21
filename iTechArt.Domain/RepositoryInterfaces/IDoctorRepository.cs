@@ -5,7 +5,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
 {
     public interface IDoctorRepository : IRepository<Doctor>
     {
-        /// <summary>
+        /// </summary>
         /// Get count of doctors
         /// </summary>
         /// <returns></returns>

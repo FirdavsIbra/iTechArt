@@ -4,7 +4,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
 {
     public interface IStudentRepository : IRepository<IStudent>
     {
-        /// <summary>
+        /// </summary>
         /// Get count of students
         /// </summary>
         /// <returns></returns>
