@@ -4,6 +4,9 @@ namespace iTechArt.Database.Entities.Groceries
 {
     public sealed class Grocery
     {
+        /// <summary>
+        /// ID of grocery employee
+        /// </summary>
         public long Id { get; set; }
 
         /// <summary>

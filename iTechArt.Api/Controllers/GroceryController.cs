@@ -13,7 +13,7 @@ namespace iTechArt.Api.Controllers
             _groceryService = groceryService;
         }
 
-        [HttpPost(StaticDetails.Import)]
+        [HttpPost(ApiConstants.IMPORT)]
         public IActionResult Import(IFormFile formFile)
         {
             if (formFile != null && (formFile.ContentType.Contains("application/vnd.ms-excel") || formFile.ContentType.Contains("officedocument.spreadsheetml.sheet")))
@@ -26,7 +26,7 @@ namespace iTechArt.Api.Controllers
             }
         }
 
-        [HttpGet(StaticDetails.Export)]
+        [HttpGet(ApiConstants.EXPORT)]
         public IActionResult Export()
         {
             return Ok(_groceryService.ExportGrocery());
