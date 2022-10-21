@@ -10,6 +10,10 @@ namespace iTechArt.Database.DbContexts
 {
     public class AppDbContext : DbContext
     {
+        /// <summary>
+        /// Makes DI into DbContext
+        /// </summary>
+        /// <param name="options"></param>
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {

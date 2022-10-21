@@ -7,7 +7,7 @@ namespace iTechArt.Api.Controllers
     [ApiController]
     public sealed class StudentsController : ControllerBase
     {
-        private readonly string[] _allowedTypes = new string[] { "application/vnd.ms-excel", "officedocument.spreadsheetml.sheet" };
+        private readonly string[] _allowedTypes = new string[] { "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"};
         private readonly IStudentsService _studentsService;
         public StudentsController(IStudentsService studentService)
         {
@@ -19,16 +19,16 @@ namespace iTechArt.Api.Controllers
         /// </summary>
         /// <param name="formFile"></param>
         /// <returns>if successful returns Status200OK, otherwise Status400BadRequest</returns>
-        [HttpPost("import")]
+        [HttpPost(ApiConstants.IMPORT)]
         public IActionResult Import(IFormFile formFile)
         {
-            if (formFile != null && (formFile.ContentType.Contains("application/vnd.ms-excel") || formFile.ContentType.Contains("officedocument.spreadsheetml.sheet")))
+            if (formFile != null && _allowedTypes.Contains(formFile.ContentType))
             {
                 return Ok(_studentsService.ImportStudentsAsync());
             }
             else
             {
-                return BadRequest("Invalid file format!");
+                return BadRequest("Invalid file type!");
             }
         }
 
@@ -36,7 +36,7 @@ namespace iTechArt.Api.Controllers
         /// route: api/students/export. Returns Status200OK
         /// </summary>
         /// <returns></returns>
-        [HttpGet("export")]
+        [HttpGet(ApiConstants.EXPORT)]
         public async Task<IActionResult> Export()
         {
             return Ok(await _studentsService.ExportStudentsAsync());
