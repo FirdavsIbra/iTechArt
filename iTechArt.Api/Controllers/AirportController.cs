@@ -8,15 +8,19 @@ namespace iTechArt.Api.Controllers
     public sealed class AirportController : ControllerBase
     {
         private readonly IAirportsService _airportsService;
+        private readonly string[] fileExtensions = {".xlsx", ".xls", ".csv", "application/vnd.ms-excel", "officedocument.spreadsheetml.sheet" };
+
         public AirportController(IAirportsService airportsService)
         {
             _airportsService = airportsService;
         }
 
-        [HttpPost("import")]
+        [HttpPost(ApiConstants.IMPORT)]
         public async Task<IActionResult> ImportAirportExcel(IFormFile file)
         {
-            if (file != null && (file.ContentType.Contains("application/vnd.ms-excel") || file.ContentType.Contains("officedocument.spreadsheetml.sheet")))
+            var fileExtension = Path.GetExtension(file.FileName);   
+
+            if (fileExtensions.Contains(fileExtension))
             {
                 return Ok(await _airportsService.ImportAirportExcel());
             }
@@ -26,7 +30,7 @@ namespace iTechArt.Api.Controllers
             }
         }
 
-        [HttpGet("export")]
+        [HttpGet(ApiConstants.EXPORT)]
         public async Task<IActionResult> ExportAirportExcel()
         {
             return Ok(await _airportsService.ExportAirportExcel());
