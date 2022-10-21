@@ -4,9 +4,10 @@ namespace iTechArt.Domain.RepositoryInterfaces
 {
     public interface IPupilRepository : IRepository<Pupil>
     {
-        /// <summary>
-        /// Return Number Of Pupils
         /// </summary>
+        /// Get count of pupils
+        /// </summary>
+        /// <returns></returns>
         public int GetCountOfPupils();
     }
 }
