@@ -5,7 +5,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
 {
     public interface IAirportRepository : IRepository<IAirport, Airport>
     {
-        /// <summary>
+        /// </summary>
         /// Get count of airports
         /// </summary>
         /// <returns></returns>

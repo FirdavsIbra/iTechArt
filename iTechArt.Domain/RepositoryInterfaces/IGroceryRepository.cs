@@ -5,7 +5,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
 {
     public interface IGroceryRepository : IRepository<IGrocery, Grocery>
     {
-        /// <summary>
+        /// </summary>
         /// Get count of groceries
         /// </summary>
         /// <returns></returns>

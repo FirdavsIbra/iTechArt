@@ -5,7 +5,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
 {
     public interface IPoliceRepository : IRepository<IPolice, Police>
     {
-        /// <summary>
+        /// </summary>
         /// Get count of polices
         /// </summary>
         /// <returns></returns>
