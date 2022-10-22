@@ -29,7 +29,10 @@ namespace iTechArt.Api.Controllers
         [HttpGet("export")]
         public async Task<IActionResult> GetAllAsync()
         {
-            return Ok(await _pupilService.GetAllAsync());
+            return Ok(_pupilService.GetAllAsync());
         }
+
+        //[HttpGet("id")]
+        //public async Task<IActionResult> Get([FromQuery] long id) => Ok(await _pupilService.GetByIdAsync(id));
     }
 }

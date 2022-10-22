@@ -1,13 +1,14 @@
-﻿using iTechArt.Database.DbContexts;
+﻿using AutoMapper;
+using iTechArt.Database.DbContexts;
 using iTechArt.Database.Entities.Groceries;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 
 namespace iTechArt.Repository.Repositories
 {
-    public class GroceryRepository : Repository<IGrocery>, IGroceryRepository
+    public class GroceryRepository : Repository<IGrocery, Grocery>, IGroceryRepository
     {
-        public GroceryRepository(AppDbContext dbContext) : base(dbContext)
+        public GroceryRepository(AppDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
 

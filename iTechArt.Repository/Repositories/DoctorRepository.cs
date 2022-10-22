@@ -1,13 +1,14 @@
-﻿using iTechArt.Database.DbContexts;
+﻿using AutoMapper;
+using iTechArt.Database.DbContexts;
 using iTechArt.Database.Entities.MedicalStaff;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 
 namespace iTechArt.Repository.Repositories
 {
-    public class DoctorRepository : Repository<Doctor>, IDoctorRepository
+    public class DoctorRepository : Repository<IDoctor, Doctor>, IDoctorRepository
     {
-        public DoctorRepository(AppDbContext dbContext) : base(dbContext)
+        public DoctorRepository(AppDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
 
