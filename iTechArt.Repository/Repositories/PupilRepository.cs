@@ -1,12 +1,14 @@
-﻿using iTechArt.Database.DbContexts;
+﻿using AutoMapper;
+using iTechArt.Database.DbContexts;
 using iTechArt.Database.Entities.Pupils;
+using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 
 namespace iTechArt.Repository.Repositories
 {
-    public sealed class PupilRepository : Repository<Pupil>, IPupilRepository
+    public sealed class PupilRepository : Repository<IPupil, Pupil>, IPupilRepository
     {
-        public PupilRepository(AppDbContext dbContext) : base(dbContext)
+        public PupilRepository(AppDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
 

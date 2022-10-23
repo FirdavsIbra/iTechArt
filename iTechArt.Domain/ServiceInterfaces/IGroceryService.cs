@@ -1,8 +1,10 @@
-﻿namespace iTechArt.Domain.ServiceInterfaces
+﻿using iTechArt.Domain.ModelInterfaces;
+
+namespace iTechArt.Domain.ServiceInterfaces
 {
     public interface IGroceryService
     {
-        public List<string> ImportGrocery();
-        public List<string> ExportGrocery();
+        public IGrocery[] ImportGrocery();
+        public IGrocery[] ExportGrocery();
     }
 }

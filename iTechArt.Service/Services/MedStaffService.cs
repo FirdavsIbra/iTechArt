@@ -18,18 +18,18 @@ namespace iTechArt.Service.Services
         /// Takes filestream
         /// </summary>
         /// <returns> List of strings </returns>
-        public async ValueTask<List<Doctor>> ExportMedStaffFile()
+        public IDoctor[] ExportMedStaffFile()
         {
-            return await _doctorRepository.GetAllAsync();
+            return _doctorRepository.GetAll();
         }
 
         /// <summary>
         /// Takes no input so far
         /// </summary>
         /// <returns> Empty List of string </returns>
-        public async ValueTask<List<string>> ImportMedStaffFile()
+        public IDoctor[] ImportMedStaffFile()
         {
-            return new List<string>();
+            return _doctorRepository.GetAll();
         }
     }
 }

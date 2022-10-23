@@ -16,19 +16,17 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Export data from the databse
         /// </summary>
-        /// <returns> List of police officers from database </returns>    
-        public async Task<List<IPolice>> ExportPoliceData()
+        public IPolice[] ExportPoliceData()
         {
-            return await _policeRepository.GetAllAsync();
+            return _policeRepository.GetAll();
         }
 
         /// <summary>
         /// Import data to the database
         /// </summary>
-        /// <returns> Empty List of string </returns>
-        public async Task<List<string>> ImportPoliceData()
+        public IPolice[] ImportPoliceData()
         {
-            return new List<string>();
+            return _policeRepository.GetAll();
         }
     }
 }

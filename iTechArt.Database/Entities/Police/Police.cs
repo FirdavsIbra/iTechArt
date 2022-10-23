@@ -1,6 +1,8 @@
-﻿namespace iTechArt.Database.Entities.Police
+﻿using iTechArt.Database.DbContexts;
+
+namespace iTechArt.Database.Entities.Police
 {
-    public sealed class Police
+    public sealed class Police : IDbModel
     {
         /// <summary>
         /// Police Officers Id

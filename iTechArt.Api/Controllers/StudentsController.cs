@@ -39,7 +39,7 @@ namespace iTechArt.Api.Controllers
         [HttpGet("export")]
         public async Task<IActionResult> Export()
         {
-            return Ok(await _studentsService.ExportStudentsAsync());
+            return Ok(_studentsService.ExportStudentsAsync());
         }
     }
 }
