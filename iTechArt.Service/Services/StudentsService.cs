@@ -23,7 +23,7 @@ namespace iTechArt.Service.Services
         }
 
         /// <summary>
-        /// Async method that takes IFormFile as parameter and saves entities into DB
+        /// Async method that saves entities into DB
         /// </summary>
         /// <returns></returns>
         public IStudent[] ImportStudentsAsync()

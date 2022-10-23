@@ -3,24 +3,51 @@ using iTechArt.Domain.ModelInterfaces;
 
 namespace iTechArt.Repository.BusinessModels
 {
-    internal class Student : IStudent
+    internal sealed class Student : IStudent
     {
-        public long Id { get; set; }
+        /// <summary>
+        /// Id of business model entities
+        /// </summary>
+        public long Id { get; internal set; }
+        
+        /// <summary>
+        /// First name of student
+        /// </summary>
+        public string FirstName { get; internal set; }
 
-        public string FirstName { get; set; }
+        /// <summary>
+        /// Last name of student
+        /// </summary>
+        public string LastName { get; internal set; }
 
-        public string LastName { get; set; }
+        /// <summary>
+        /// Email of student
+        /// </summary>
+        public string Email { get; internal set; }
 
-        public string Email { get; set; }
+        /// <summary>
+        /// Password of student
+        /// </summary>
+        public string Password { get; internal set; }
 
-        public string Password { get; set; }
+        /// <summary>
+        /// String value majority, field of study
+        /// </summary>
+        public string Majority { get; internal set; }
 
-        public string Majority { get; set; }
+        /// <summary>
+        /// Gender entity of student
+        /// </summary>
+        public Gender Gender { get; internal set; }
 
-        public Gender Gender { get; set; }
+        /// <summary>
+        /// Birthday of student
+        /// </summary>
+        public DateTime DateOfBirth { get; internal set; }
 
-        public DateTime DateOfBirth { get; set; }
-
-        public string University { get; set; }
+        /// <summary>
+        /// Name of university of student
+        /// </summary>
+        public string University { get; internal set; }
     }
 }

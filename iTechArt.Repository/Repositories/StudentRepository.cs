@@ -8,6 +8,10 @@ namespace iTechArt.Repository.Repositories
 {
     public class StudentRepository : Repository<IStudent, Students>, IStudentRepository
     {
+        /// <summary>
+        /// Dbcontext instance injected
+        /// </summary>
+        /// <param name="dbContext"></param>
         public StudentRepository(AppDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
