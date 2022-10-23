@@ -1,12 +1,20 @@
-﻿using iTechArt.Database.Entities.MedicalStaff;
-using iTechArt.Domain.ModelInterfaces;
+﻿using iTechArt.Domain.ModelInterfaces;
 
 namespace iTechArt.Domain.ServiceInterfaces
 {
     public interface IMedStaffService
     {
-        public ValueTask<List<string>> ImportMedStaffFile();
+        /// <summary>
+        /// Uploads a file of data 
+        /// </summary>
+        /// <returns></returns>
+        public IDoctor[] ImportMedStaffFile();
 
-        public ValueTask<List<Doctor>> ExportMedStaffFile();
+
+        /// <summary>
+        /// Gets all info from database
+        /// </summary>
+        /// <returns></returns>
+        public IDoctor[] ExportMedStaffFile();
     }
 }

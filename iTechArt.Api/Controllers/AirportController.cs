@@ -18,7 +18,7 @@ namespace iTechArt.Api.Controllers
         {
             if (file != null && (file.ContentType.Contains("application/vnd.ms-excel") || file.ContentType.Contains("officedocument.spreadsheetml.sheet")))
             {
-                return Ok(await _airportsService.ImportAirportExcel());
+                return Ok(_airportsService.ImportAirportExcel());
             }
             else
             {
@@ -29,7 +29,7 @@ namespace iTechArt.Api.Controllers
         [HttpGet("export")]
         public async Task<IActionResult> ExportAirportExcel()
         {
-            return Ok(await _airportsService.ExportAirportExcel());
+            return Ok(_airportsService.ExportAirportExcel());
         }
     }
 }

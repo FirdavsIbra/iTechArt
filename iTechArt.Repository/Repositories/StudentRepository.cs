@@ -1,13 +1,18 @@
-﻿using iTechArt.Database.DbContexts;
+﻿using AutoMapper;
+using iTechArt.Database.DbContexts;
 using iTechArt.Database.Entities.Students;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 
 namespace iTechArt.Repository.Repositories
 {
-    public class StudentRepository : Repository<IStudent>, IStudentRepository
+    public class StudentRepository : Repository<IStudent, Students>, IStudentRepository
     {
-        public StudentRepository(AppDbContext dbContext) : base(dbContext)
+        /// <summary>
+        /// Dbcontext instance injected
+        /// </summary>
+        /// <param name="dbContext"></param>
+        public StudentRepository(AppDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
 

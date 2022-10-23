@@ -1,13 +1,14 @@
-﻿using iTechArt.Database.DbContexts;
+﻿using AutoMapper;
+using iTechArt.Database.DbContexts;
 using iTechArt.Database.Entities.Airports;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 
 namespace iTechArt.Repository.Repositories
 {
-    public class AirportRepository : Repository<IAirport>, IAirportRepository
+    public class AirportRepository : Repository<IAirport, Airport>, IAirportRepository
     {
-        public AirportRepository(AppDbContext dbContext) : base(dbContext)
+        public AirportRepository(AppDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
 

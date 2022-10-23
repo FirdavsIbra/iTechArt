@@ -1,8 +1,9 @@
-﻿using iTechArt.Database.Enums;
+﻿using iTechArt.Database.DbContexts;
+using iTechArt.Database.Enums;
 
 namespace iTechArt.Database.Entities.Pupils
 {
-    public sealed class Pupil
+    public sealed class Pupil : IDbModel
     {
         /// <summary>
         /// Id if pupil

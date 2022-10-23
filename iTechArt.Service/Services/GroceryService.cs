@@ -1,28 +1,31 @@
-﻿using iTechArt.Domain.ServiceInterfaces;
+﻿using iTechArt.Domain.ModelInterfaces;
+using iTechArt.Domain.RepositoryInterfaces;
+using iTechArt.Domain.ServiceInterfaces;
 
 namespace iTechArt.Serivce.Services
 {
     public class GroceryService : IGroceryService
     {
-        private readonly IGroceryService _groceryService;
-
-        public GroceryService(IGroceryService groceryService)
+        private readonly IGroceryRepository _groceryRepository;
+        public GroceryService(IGroceryRepository groceryRepository)
         {
-            _groceryService = groceryService;
+            _groceryRepository = groceryRepository;
         }
+
         /// <summary>
         /// Export grocery data
         /// </summary>
-        public List<string> ExportGrocery()
+        public IGrocery[] ExportGrocery()
         {
-            return new List<string>();
+            return _groceryRepository.GetAll();
         }
+        
         /// <summary>
         /// Import grocery data
         /// </summary>
-        public List<string> ImportGrocery()
+        public IGrocery[] ImportGrocery()
         {
-            return new List<string>();
+            return _groceryRepository.GetAll();
         }
     }
 }

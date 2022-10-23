@@ -2,12 +2,13 @@
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Database.Entities.Police;
+using AutoMapper;
 
 namespace iTechArt.Repository.Repositories
 {
-    public sealed class PoliceRepository : Repository<IPolice>, IPoliceRepository
+    public sealed class PoliceRepository : Repository<IPolice, Police>, IPoliceRepository
     {
-        public PoliceRepository(AppDbContext dbContext) : base(dbContext)
+        public PoliceRepository(AppDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
 

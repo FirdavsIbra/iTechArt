@@ -7,11 +7,11 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// function to imports data to the database
         /// </summary>
-        public Task<List<string>> ImportPoliceData();
+        public IPolice[] ImportPoliceData();
 
         /// <summary>
         /// function to exports data from the database
         /// </summary>
-        public Task<List<IPolice>> ExportPoliceData();
+        public IPolice[] ExportPoliceData();
     }
 }
