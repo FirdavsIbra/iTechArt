@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using iTechArt.Database.DbContexts;
 using iTechArt.Domain.RepositoryInterfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace iTechArt.Repository.Repositories
 {
@@ -22,12 +21,10 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public async Task<RepoModel> AddAsync(DatabaseModel entity)
+        public async Task AddAsync(DatabaseModel entity)
         {
             var entry = await _dbContext.Set<DatabaseModel>().AddAsync(entity);
             await _dbContext.SaveChangesAsync();
-
-            return _mapper.Map<RepoModel>(entry);
         }
         
         /// <summary>
@@ -66,12 +63,10 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public async Task<RepoModel> UpdateAsync(DatabaseModel entity)
+        public async Task UpdateAsync(DatabaseModel entity)
         {
             var entry = _dbContext.Set<DatabaseModel>().Update(entity);
             await _dbContext.SaveChangesAsync();
-
-            return _mapper.Map<RepoModel>(entry);
         }
 
         /// <summary>

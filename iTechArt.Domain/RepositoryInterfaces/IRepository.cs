@@ -17,7 +17,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// </summary>
         /// <param name="entity"></param>
         /// <returns> Resopisitory model interface </returns>
-        Task<RepoModel> AddAsync(DatabaseModel entity);
+        Task AddAsync(DatabaseModel entity);
 
         /// <summary>
         /// Get entity by id
@@ -31,7 +31,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// </summary>
         /// <param name="entity"></param>
         /// <returns> Resopisitory model interface </returns>
-        Task<RepoModel> UpdateAsync(DatabaseModel entity);
+        Task UpdateAsync(DatabaseModel entity);
 
         /// <summary>
         /// Delete entity from database
