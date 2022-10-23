@@ -1,5 +1,4 @@
-﻿using iTechArt.Database.Entities.Pupils;
-using iTechArt.Domain.ModelInterfaces;
+﻿using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 
@@ -17,7 +16,6 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Get all pupils
         /// </summary>
-        /// <returns></returns>
         public IPupil[] GetAllAsync()
         {
             return _pupilRepository.GetAll();
@@ -26,7 +24,6 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Import pupil's file
         /// </summary>
-        /// <returns></returns>
         public IPupil[] ImportPupilsFile()
         {
             return _pupilRepository.GetAll();

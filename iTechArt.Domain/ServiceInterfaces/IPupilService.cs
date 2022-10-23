@@ -1,12 +1,25 @@
-﻿using iTechArt.Database.Entities.Pupils;
-using iTechArt.Domain.ModelInterfaces;
+﻿using iTechArt.Domain.ModelInterfaces;
 
 namespace iTechArt.Domain.ServiceInterfaces
 {
     public interface IPupilService
     {
+        /// <summary>
+        /// Upload pupil's file
+        /// </summary>
+        /// <returns></returns>
         public IPupil[] ImportPupilsFile();
+        
+        /// <summary>
+        /// Get all pupils
+        /// </summary>
+        /// <returns></returns>
         public IPupil[] GetAllAsync();
+        
+        /// <summary>
+        /// Get pupil by id
+        /// </summary>
+        /// <param name="id"></param>
         public Task<IPupil> GetByIdAsync(long id);
     }
 }
