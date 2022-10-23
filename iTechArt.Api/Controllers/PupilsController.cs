@@ -13,6 +13,10 @@ namespace iTechArt.Api.Controllers
             _pupilService = pupilService;
         }
 
+        /// <summary>
+        /// Upload pupil's file
+        /// </summary>
+        /// <param name="formFile"></param>
         [HttpPost("import")]
         public IActionResult Import(IFormFile formFile)
         {
@@ -26,6 +30,9 @@ namespace iTechArt.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Get all pupils
+        /// </summary>
         [HttpGet("export")]
         public async Task<IActionResult> GetAllAsync()
         {

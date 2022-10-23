@@ -19,8 +19,7 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Add entity to database
         /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
+        /// <param name="entity"></param>   
         public async Task AddAsync(DatabaseModel entity)
         {
             var entry = await _dbContext.Set<DatabaseModel>().AddAsync(entity);
@@ -30,7 +29,6 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get all entities from database
         /// </summary>
-        /// <returns></returns>
         public RepoModel[] GetAll()
         {
             var models = _dbContext.Set<DatabaseModel>();
@@ -47,7 +45,6 @@ namespace iTechArt.Repository.Repositories
         /// Get entity by id
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
         public async Task<RepoModel> GetByIdAsync(long id)
         {
             var databaseModel = await _dbContext.Set<DatabaseModel>().FindAsync(id);
@@ -62,7 +59,6 @@ namespace iTechArt.Repository.Repositories
         /// Update entity
         /// </summary>
         /// <param name="entity"></param>
-        /// <returns></returns>
         public async Task UpdateAsync(DatabaseModel entity)
         {
             var entry = _dbContext.Set<DatabaseModel>().Update(entity);
@@ -73,7 +69,6 @@ namespace iTechArt.Repository.Repositories
         /// Delete entity from database
         /// </summary>
         /// <param name="entity"></param>
-        /// <returns></returns>
         public async Task DeleteAsync(DatabaseModel entity)
         {
             _dbContext.Set<DatabaseModel>().Remove(entity);
