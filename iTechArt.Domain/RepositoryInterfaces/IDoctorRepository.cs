@@ -3,7 +3,7 @@ using iTechArt.Domain.ModelInterfaces;
 
 namespace iTechArt.Domain.RepositoryInterfaces
 {
-    public interface IDoctorRepository : IRepository<Doctor>
+    public interface IDoctorRepository : IRepository<IDoctor, Doctor>
     {
         /// </summary>
         /// Get count of doctors

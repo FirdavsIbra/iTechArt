@@ -1,15 +1,17 @@
-﻿namespace iTechArt.Domain.ServiceInterfaces
+﻿using iTechArt.Domain.ModelInterfaces;
+
+namespace iTechArt.Domain.ServiceInterfaces
 {
     public interface IStudentsService
     {
         /// <summary>
         /// Imports entities into DB from file
         /// </summary>
-        public Task<List<string>> ImportStudentsAsync();
+        public IStudent[] ImportStudentsAsync();
+
         /// <summary>
         /// Exports entities from DB
         /// </summary>
-        public Task<List<string>> ExportStudentsAsync();
-
+        public IStudent[] ExportStudentsAsync();
     }
 }

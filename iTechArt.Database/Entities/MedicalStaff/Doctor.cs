@@ -1,8 +1,9 @@
-﻿using iTechArt.Database.Enums;
+﻿using iTechArt.Database.DbContexts;
+using iTechArt.Database.Enums;
 
 namespace iTechArt.Database.Entities.MedicalStaff
 {
-    public sealed class Doctor
+    public sealed class Doctor : IDbModel
     {
         /// <summary>
         /// Unical Id of a Doctor

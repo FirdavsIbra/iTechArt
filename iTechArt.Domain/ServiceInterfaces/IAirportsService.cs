@@ -1,8 +1,10 @@
-﻿namespace iTechArt.Domain.ServiceInterfaces
+﻿using iTechArt.Domain.ModelInterfaces;
+
+namespace iTechArt.Domain.ServiceInterfaces
 {
     public interface IAirportsService
     {
-        public Task<List<string>> ImportAirportExcel();
-        public Task<List<string>> ExportAirportExcel();
+        public IAirport[] ImportAirportExcel();
+        public IAirport[] ExportAirportExcel();
     }
 }
