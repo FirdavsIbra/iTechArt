@@ -17,7 +17,6 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// returns total numbers of entities in db
         /// </summary>
-        /// <returns>reurns IDictionary <string, int></string></returns>
         [HttpGet("count-of-users")]
         public IActionResult TotalAmounts()
         {

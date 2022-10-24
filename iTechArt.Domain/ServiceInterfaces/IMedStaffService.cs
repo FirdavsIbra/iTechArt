@@ -7,14 +7,12 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// Uploads a file of data 
         /// </summary>
-        /// <returns></returns>
         public IDoctor[] ImportMedStaffFile();
 
 
         /// <summary>
         /// Gets all info from database
         /// </summary>
-        /// <returns></returns>
         public IDoctor[] ExportMedStaffFile();
     }
 }

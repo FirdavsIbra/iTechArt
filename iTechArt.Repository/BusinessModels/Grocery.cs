@@ -3,7 +3,7 @@ using iTechArt.Domain.ModelInterfaces;
 
 namespace iTechArt.Repository.BusinessModels
 {
-    internal class Grocery : IGrocery
+    internal sealed class Grocery : IGrocery
     {
         /// <summary>
         /// Id of grocery

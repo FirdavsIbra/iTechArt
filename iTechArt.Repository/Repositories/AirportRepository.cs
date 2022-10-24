@@ -15,7 +15,6 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get total count of airport
         /// </summary>
-        /// <returns></returns>
         public int GetCountOfAirport()
         {
             return _dbContext.Set<Airport>().Count();

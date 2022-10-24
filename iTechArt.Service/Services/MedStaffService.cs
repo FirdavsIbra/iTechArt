@@ -17,7 +17,6 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Takes filestream
         /// </summary>
-        /// <returns> List of strings </returns>
         public IDoctor[] ExportMedStaffFile()
         {
             return _doctorRepository.GetAll();
@@ -26,7 +25,6 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Takes no input so far
         /// </summary>
-        /// <returns> Empty List of string </returns>
         public IDoctor[] ImportMedStaffFile()
         {
             return _doctorRepository.GetAll();

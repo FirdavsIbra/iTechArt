@@ -8,7 +8,6 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// </summary>
         /// Get count of polices
         /// </summary>
-        /// <returns></returns>
         public int GetCountOfPolice();
     }
 }

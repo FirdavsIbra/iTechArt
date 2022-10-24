@@ -2,7 +2,7 @@
 
 namespace iTechArt.Repository.BusinessModels
 {
-    internal class Police : IPolice
+    internal sealed class Police : IPolice
     {
         /// <summary>
         /// Police Officers Id

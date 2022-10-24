@@ -15,7 +15,6 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get total count of police
         /// </summary>
-        /// <returns></returns>
         public int GetCountOfPolice()
         {
             return _dbContext.Set<Police>().Count();

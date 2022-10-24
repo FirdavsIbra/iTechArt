@@ -15,7 +15,6 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get total count of pupils
         /// </summary>
-        /// <returns></returns>
         public int GetCountOfPupils()
         {
             return _dbContext.Set<Pupil>().Count();

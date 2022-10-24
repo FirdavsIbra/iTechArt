@@ -1,5 +1,4 @@
-﻿
-using iTechArt.Database.DbContexts;
+﻿using iTechArt.Database.DbContexts;
 
 namespace iTechArt.Database.Entities.Airports
 {

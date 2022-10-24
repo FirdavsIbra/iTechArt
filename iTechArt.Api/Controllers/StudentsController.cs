@@ -35,7 +35,6 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// route: api/students/export. Returns Status200OK
         /// </summary>
-        /// <returns></returns>
         [HttpGet(ApiConstants.EXPORT)]
         public async Task<IActionResult> Export()
         {

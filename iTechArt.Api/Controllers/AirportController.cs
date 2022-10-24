@@ -19,7 +19,6 @@ namespace iTechArt.Api.Controllers
         /// Controller of Importing airport data
         /// </summary>
         /// <param name="file"></param>
-
         [HttpPost(ApiConstants.IMPORT)]
         public async Task<IActionResult> ImportAirportExcel(IFormFile file)
         {
@@ -38,8 +37,6 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// Controller of Exporting airport data
         /// </summary>
-        /// <returns></returns>
-
         [HttpGet(ApiConstants.EXPORT)]
         public async Task<IActionResult> ExportAirportExcel()
         {

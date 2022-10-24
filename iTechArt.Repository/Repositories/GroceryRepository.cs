@@ -15,7 +15,6 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get total count of grocery
         /// </summary>
-        /// <returns></returns>
         public int GetCountOfGrocery()
         {
             return _dbContext.Set<Grocery>().Count();

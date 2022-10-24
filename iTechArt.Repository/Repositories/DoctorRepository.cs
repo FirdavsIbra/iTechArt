@@ -15,7 +15,6 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get total count of medstaff
         /// </summary>
-        /// <returns></returns>
         public int GetCountOfDoctors()
         {
             return _dbContext.Set<Doctor>().Count();

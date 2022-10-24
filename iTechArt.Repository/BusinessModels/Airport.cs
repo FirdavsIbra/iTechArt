@@ -2,7 +2,7 @@
 
 namespace iTechArt.Repository.BusinessModels
 {
-    internal class Airport : IAirport
+    internal sealed class Airport : IAirport
     {
         /// <summary>
         /// Id of airport

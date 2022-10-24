@@ -3,7 +3,7 @@ using iTechArt.Domain.ModelInterfaces;
 
 namespace iTechArt.Repository.BusinessModels
 {
-    internal class Doctor : IDoctor
+    internal sealed class Doctor : IDoctor
     {
         /// <summary>
         /// Unical Id of a Doctor
