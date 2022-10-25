@@ -5,35 +5,34 @@ namespace iTechArt.Domain.RepositoryInterfaces
     public interface IGroceryRepository
     {
         /// <summary>
-        /// Get all entities from database
+        /// Get all groceries from database
         /// </summary>
         /// <returns> Array of Repository Model Interfaces </returns>
         IGrocery[] GetAll();
 
         /// <summary>
-        /// Add entity to database
+        /// Add grocery to database
         /// </summary>
-        /// <param name="entity"></param>
-        Task AddAsync(IGrocery entity);
+        /// <param name="grocery"></param>
+        Task AddAsync(IGrocery grocery);
 
         /// <summary>
-        /// Get entity by id
+        /// Get grocery by id
         /// </summary>
         /// <param name="id"></param>
         /// <returns> Resopisitory model interface </returns>
         Task<IGrocery> GetByIdAsync(long id);
 
         /// <summary>
-        /// Update entity
+        /// Update grocery
         /// </summary>
-        /// <param name="entity"></param>
-        Task UpdateAsync(IGrocery entity);
+        /// <param name="grocery"></param>
+        Task UpdateAsync(IGrocery grocery);
 
         /// <summary>
-        /// Delete entity from database
+        /// Delete grocery from database
         /// </summary>
-        /// <param name="entity"></param>
-        Task DeleteAsync(IGrocery entity);
+        Task DeleteAsync(long id);
 
         /// </summary>
         /// Get count of groceries

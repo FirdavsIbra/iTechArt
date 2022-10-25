@@ -19,7 +19,17 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// </summary>
         /// <param name="id"></param>
         public Task<IPupil> GetByIdAsync(long id);
+
+        /// <summary>
+        /// Add pupil to database
+        /// </summary>
+        /// <param name="pupil"></param>
         public Task AddAsync(IPupil pupil);
+
+        /// <summary>
+        /// Delete pupil from database
+        /// </summary>
+        /// <param name="id"></param>
         public Task DeleteAsync(long id);
         
     }

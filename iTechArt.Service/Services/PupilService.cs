@@ -29,16 +29,28 @@ namespace iTechArt.Service.Services
             return _pupilRepository.GetAll();
         }
 
+        /// <summary>
+        /// Get pupil by id
+        /// </summary>
+        /// <param name="id"></param>
         public Task<IPupil> GetByIdAsync(long id) 
         { 
             return _pupilRepository.GetByIdAsync(id);
         }
 
+        /// <summary>
+        /// Add pupil to database
+        /// </summary>
+        /// <param name="pupil"></param>
         public async Task AddAsync(IPupil pupil)
         {
             await _pupilRepository.AddAsync(pupil);
         }
 
+        /// <summary>
+        /// Delete pupil
+        /// </summary>
+        /// <param name="id"></param>
         public async Task DeleteAsync(long id)
         {
             await _pupilRepository.DeleteAsync(id);

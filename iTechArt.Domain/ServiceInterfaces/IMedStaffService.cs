@@ -9,7 +9,6 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// </summary>
         public IDoctor[] ImportMedStaffFile();
 
-
         /// <summary>
         /// Gets all info from database
         /// </summary>

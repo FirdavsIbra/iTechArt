@@ -7,13 +7,11 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// Interface of Importing airport datas
         /// </summary>
-
         public IAirport[] ImportAirportExcel();
 
         /// <summary>
         /// Interface of Exporting airport datas
         /// </summary>
-
         public IAirport[] ExportAirportExcel();
     }
 }

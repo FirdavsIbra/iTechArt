@@ -5,35 +5,34 @@ namespace iTechArt.Domain.RepositoryInterfaces
     public interface IDoctorRepository
     {
         /// <summary>
-        /// Get all entities from database
+        /// Get all doctors from database
         /// </summary>
         /// <returns> Array of Repository Model Interfaces </returns>
         IDoctor[] GetAll();
 
         /// <summary>
-        /// Add entity to database
+        /// Add doctor to database
         /// </summary>
-        /// <param name="entity"></param>
-        Task AddAsync(IDoctor entity);
+        /// <param name="doctor"></param>
+        Task AddAsync(IDoctor doctor);
 
         /// <summary>
-        /// Get entity by id
+        /// Get doctor by id
         /// </summary>
         /// <param name="id"></param>
         /// <returns> Resopisitory model interface </returns>
         Task<IDoctor> GetByIdAsync(long id);
 
         /// <summary>
-        /// Update entity
+        /// Update doctor
         /// </summary>
-        /// <param name="entity"></param>
-        Task UpdateAsync(IDoctor entity);
+        /// <param name="doctor"></param>
+        Task UpdateAsync(IDoctor doctor);
 
         /// <summary>
-        /// Delete entity from database
+        /// Delete doctor from database
         /// </summary>
-        /// <param name="entity"></param>
-        Task DeleteAsync(IDoctor entity);
+        Task DeleteAsync(long id);
 
         /// </summary>
         /// Get count of doctors

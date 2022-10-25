@@ -5,35 +5,35 @@ namespace iTechArt.Domain.RepositoryInterfaces
     public interface IAirportRepository
     {
         /// <summary>
-        /// Get all entities from database
+        /// Get all airports from database
         /// </summary>
         /// <returns> Array of Repository Model Interfaces </returns>
         IAirport[] GetAll();
 
         /// <summary>
-        /// Add entity to database
+        /// Add airport to database
         /// </summary>
-        /// <param name="entity"></param>
-        Task AddAsync(IAirport entity);
+        /// <param name="airport"></param>
+        Task AddAsync(IAirport airport);
 
         /// <summary>
-        /// Get entity by id
+        /// Get airport by id
         /// </summary>
         /// <param name="id"></param>
         /// <returns> Resopisitory model interface </returns>
         Task<IAirport> GetByIdAsync(long id);
 
         /// <summary>
-        /// Update entity
+        /// Update airport
         /// </summary>
-        /// <param name="entity"></param>
-        Task UpdateAsync(IAirport entity);
+        /// <param name="airport"></param>
+        Task UpdateAsync(IAirport airport);
 
         /// <summary>
-        /// Delete entity from database
+        /// Delete airport from database
         /// </summary>
-        /// <param name="entity"></param>
-        Task DeleteAsync(IAirport entity);
+        /// <param name="airport"></param>
+        Task DeleteAsync(IAirport airport);
 
         /// </summary>
         /// Get count of airports

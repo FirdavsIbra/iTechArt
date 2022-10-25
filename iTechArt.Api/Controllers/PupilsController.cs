@@ -40,9 +40,20 @@ namespace iTechArt.Api.Controllers
             return Ok(_pupilService.GetAllAsync());
         }
 
+        /// <summary>
+        /// Get pupil by id
+        /// </summary>
+        /// <param name="id"></param>
         [HttpGet("id")]
-        public async Task<IActionResult> Get([FromQuery] long id) => Ok(await _pupilService.GetByIdAsync(id));
-
+        public async Task<IActionResult> GetByIdAsync([FromQuery] long id)
+        {
+            return Ok(await _pupilService.GetByIdAsync(id));
+        }
+        
+        /// <summary>
+        /// Delete pupil
+        /// </summary>
+        /// <param name="id"></param>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(long id)
         {

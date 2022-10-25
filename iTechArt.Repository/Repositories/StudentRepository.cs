@@ -3,6 +3,8 @@ using iTechArt.Database.DbContexts;
 using iTechArt.Database.Entities.Students;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
+using iTechArt.Repository.BusinessModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace iTechArt.Repository.Repositories
 {
@@ -22,65 +24,63 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Add entity to database
+        /// Add student to database
         /// </summary>
-        /// <param name="entity"></param>   
-        public async Task AddAsync(IStudent entity)
+        /// <param name="student"></param>   
+        public async Task AddAsync(IStudent student)
         {
-            var entry = await _dbContext.Set<StudentDb>().AddAsync(_mapper.Map<StudentDb>(entity));
+            await _dbContext.Set<StudentDb>().AddAsync(_mapper.Map<StudentDb>(student));
 
             await _dbContext.SaveChangesAsync();
         }
 
         /// <summary>
-        /// Get all entities from database
+        /// Get all students from database
         /// </summary>
         public IStudent[] GetAll()
         {
-            var models = _dbContext.Set<StudentDb>();
+            var students = _dbContext.Set<StudentDb>();
 
             List<IStudent> result = new List<IStudent>();
 
-            foreach (var i in models)
+            foreach (var student in students)
             {
-                result.Add(_mapper.Map<IStudent>(i));
+                result.Add(_mapper.Map<Student>(student));
             }
 
             return result.ToArray();
         }
 
         /// <summary>
-        /// Get entity by id
+        /// Get student by id
         /// </summary>
         /// <param name="id"></param>
         public async Task<IStudent> GetByIdAsync(long id)
         {
-            var databaseModel = await _dbContext.Set<StudentDb>().FindAsync(id);
+            var studentDb = await _dbContext.Set<StudentDb>().FirstOrDefaultAsync(s => s.Id == id);
 
-            if (databaseModel is null)
-                return null;
-
-            return _mapper.Map<IStudent>(databaseModel);
+            return _mapper.Map<Student>(studentDb);
         }
 
         /// <summary>
-        /// Update entity
+        /// Update student
         /// </summary>
-        /// <param name="entity"></param>
-        public async Task UpdateAsync(IStudent entity)
+        /// <param name="student"></param>
+        public async Task UpdateAsync(IStudent student)
         {
-            var entry = _dbContext.Set<StudentDb>().Update(_mapper.Map<StudentDb>(entity));
+            _dbContext.Set<StudentDb>().Update(_mapper.Map<StudentDb>(student));
 
             await _dbContext.SaveChangesAsync();
         }
 
         /// <summary>
-        /// Delete entity from database
+        /// Delete student from database
         /// </summary>
-        /// <param name="entity"></param>
-        public async Task DeleteAsync(IStudent entity)
+        public async Task DeleteAsync(long id)
         {
-            _dbContext.Set<StudentDb>().Remove(_mapper.Map<StudentDb>(entity));
+            var student = await _dbContext.Set<StudentDb>().FirstOrDefaultAsync(s => s.Id == id);
+
+            _dbContext.Set<StudentDb>().Remove(_mapper.Map<StudentDb>(student));
 
             await _dbContext.SaveChangesAsync();
         }

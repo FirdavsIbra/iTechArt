@@ -3,6 +3,7 @@ using iTechArt.Database.DbContexts;
 using iTechArt.Database.Entities.Pupils;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
+using iTechArt.Repository.BusinessModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace iTechArt.Repository.Repositories
@@ -23,9 +24,8 @@ namespace iTechArt.Repository.Repositories
         /// <param name="pupil"></param>
         public async Task AddAsync(IPupil pupil)
         {
-            var pupilDb = _mapper.Map<PupilDb>(pupil);
-
-            await _dbContext.Set<PupilDb>().AddAsync(pupilDb);
+            await _dbContext.Set<PupilDb>().AddAsync(_mapper.Map<PupilDb>(pupil));
+         
             await _dbContext.SaveChangesAsync();
         }
 
@@ -40,7 +40,7 @@ namespace iTechArt.Repository.Repositories
 
             foreach (var pupil in pupils)
             {
-                result.Add(_mapper.Map<BusinessModels.Pupil>(pupil));
+                result.Add(_mapper.Map<Pupil>(pupil));
             }
 
             return result.ToArray();
@@ -54,7 +54,7 @@ namespace iTechArt.Repository.Repositories
         {
             var databaseModel = await _dbContext.Set<PupilDb>().FirstOrDefaultAsync(p => p.Id == id);
 
-            return _mapper.Map<BusinessModels.Pupil>(databaseModel);
+            return _mapper.Map<Pupil>(databaseModel);
         }
 
         /// <summary>
@@ -64,18 +64,19 @@ namespace iTechArt.Repository.Repositories
         public async Task UpdateAsync(IPupil pupil)
         {
             _dbContext.Set<PupilDb>().Update(_mapper.Map<PupilDb>(pupil));
+
             await _dbContext.SaveChangesAsync();
         }
 
         /// <summary>
         /// Delete pupil from database
         /// </summary>
-        /// <param name="pupil"></param>
         public async Task DeleteAsync(long id)
         {
             var pupil = await _dbContext.Set<PupilDb>().FirstOrDefaultAsync(p => p.Id == id);
 
             _dbContext.Set<PupilDb>().Remove(_mapper.Map<PupilDb>(pupil));
+
             await _dbContext.SaveChangesAsync();
         }
 

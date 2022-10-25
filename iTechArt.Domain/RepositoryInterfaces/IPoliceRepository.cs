@@ -5,35 +5,34 @@ namespace iTechArt.Domain.RepositoryInterfaces
     public interface IPoliceRepository
     {
         /// <summary>
-        /// Get all entities from database
+        /// Get all polices from database
         /// </summary>
         /// <returns> Array of Repository Model Interfaces </returns>
         IPolice[] GetAll();
 
         /// <summary>
-        /// Add entity to database
+        /// Add police to database
         /// </summary>
-        /// <param name="entity"></param>
-        Task AddAsync(IPolice entity);
+        /// <param name="police"></param>
+        Task AddAsync(IPolice police);
 
         /// <summary>
-        /// Get entity by id
+        /// Get police by id
         /// </summary>
         /// <param name="id"></param>
         /// <returns> Resopisitory model interface </returns>
         Task<IPolice> GetByIdAsync(long id);
 
         /// <summary>
-        /// Update entity
+        /// Update police
         /// </summary>
-        /// <param name="entity"></param>
-        Task UpdateAsync(IPolice entity);
+        /// <param name="police"></param>
+        Task UpdateAsync(IPolice police);
 
         /// <summary>
-        /// Delete entity from database
+        /// Delete police from database
         /// </summary>
-        /// <param name="entity"></param>
-        Task DeleteAsync(IPolice entity);
+        Task DeleteAsync(long id);
 
         /// </summary>
         /// Get count of polices
