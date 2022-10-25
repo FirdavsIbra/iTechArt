@@ -18,6 +18,6 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// Get pupil by id
         /// </summary>
         /// <param name="id"></param>
-        public Task<IPupil> GetByIdAsync(long id);
+        //public Task<IPupil> GetByIdAsync(long id);
     }
 }
