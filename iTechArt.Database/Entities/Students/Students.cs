@@ -1,5 +1,5 @@
 ﻿using iTechArt.Database.DbContexts;
-using iTechArt.Database.Enums;
+using iTechArt.Domain.Enums;
 
 namespace iTechArt.Database.Entities.Students
 {
