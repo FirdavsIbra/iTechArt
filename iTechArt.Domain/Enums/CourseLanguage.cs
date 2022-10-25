@@ -1,4 +1,4 @@
-﻿namespace iTechArt.Database.Enums
+﻿namespace iTechArt.Domain.Enums
 {
     public enum CourseLanguage : byte
     {
