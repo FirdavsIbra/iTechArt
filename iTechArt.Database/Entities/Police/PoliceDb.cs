@@ -2,7 +2,7 @@
 
 namespace iTechArt.Database.Entities.Police
 {
-    public sealed class Police : IDbModel
+    public sealed class PoliceDb : IDbModel
     {
         /// <summary>
         /// Police Officers Id

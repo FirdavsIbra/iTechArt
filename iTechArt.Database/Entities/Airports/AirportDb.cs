@@ -2,7 +2,7 @@
 
 namespace iTechArt.Database.Entities.Airports
 {
-    public sealed class Airport : IDbModel
+    public sealed class AirportDb : IDbModel
     {
         /// <summary>
         /// Id of airport

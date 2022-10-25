@@ -7,61 +7,61 @@ namespace iTechArt.Domain.ModelInterfaces
         /// <summary>
         /// Id if pupil
         /// </summary>
-        public long Id { get; }
+        public long Id { get; set; }
 
         /// <summary>
         /// Name of pupil
         /// </summary>
-        public string FirstName { get; }
+        public string FirstName { get; set; }
 
         /// <summary>
         /// Surname of pupil
         /// </summary>
-        public string LastName { get; }
+        public string LastName { get; set; }
 
         /// <summary>
         /// Birthdate of pupil
         /// </summary>
-        public DateTime DateOfBirth { get; }
+        public DateTime DateOfBirth { get; set; }
 
         /// <summary>
         /// Gender of pupil
         /// </summary>
-        public Gender Gender { get; }
+        public Gender Gender { get; set; }
 
         /// <summary>
         /// Phone number of pupil
         /// </summary>
-        public string PhoneNumber { get; }
+        public string PhoneNumber { get; set; }
 
         /// <summary>
         /// Address of pupil
         /// </summary>
-        public string Address { get; }
+        public string Address { get; set; }
 
         /// <summary>
         /// The city, where pupil lives
         /// </summary>
-        public string City { get; }
+        public string City { get; set; }
 
         /// <summary>
         /// The name of school, where pupil study
         /// </summary>
-        public string SchoolName { get; }
+        public string SchoolName { get; set; }
 
         /// <summary>
         /// The grade of study of pupil
         /// </summary>
-        public byte Grade { get; }
+        public byte Grade { get; set; }
 
         /// <summary>
         /// The language of education
         /// </summary>
-        public CourseLanguage CourseLanguage { get; }
+        public CourseLanguage CourseLanguage { get; set; }
 
         /// <summary>
         /// The shift of study
         /// </summary>
-        public Shift Shift { get; }
+        public Shift Shift { get; set; }
     }
 }

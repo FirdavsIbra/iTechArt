@@ -31,7 +31,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// Delete pupil from database
         /// </summary>
         /// <param name="pupil"></param>
-        public Task DeleteAsync(IPupil pupil);
+        public Task DeleteAsync(long id);
 
         /// </summary>
         /// Get count of pupils

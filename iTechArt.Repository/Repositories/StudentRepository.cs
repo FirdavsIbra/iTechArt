@@ -27,7 +27,7 @@ namespace iTechArt.Repository.Repositories
         /// <param name="entity"></param>   
         public async Task AddAsync(IStudent entity)
         {
-            var entry = await _dbContext.Set<Students>().AddAsync(_mapper.Map<Students>(entity));
+            var entry = await _dbContext.Set<StudentDb>().AddAsync(_mapper.Map<StudentDb>(entity));
 
             await _dbContext.SaveChangesAsync();
         }
@@ -37,12 +37,14 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public IStudent[] GetAll()
         {
-            var models = _dbContext.Set<Students>();
+            var models = _dbContext.Set<StudentDb>();
 
             List<IStudent> result = new List<IStudent>();
 
             foreach (var i in models)
+            {
                 result.Add(_mapper.Map<IStudent>(i));
+            }
 
             return result.ToArray();
         }
@@ -53,7 +55,7 @@ namespace iTechArt.Repository.Repositories
         /// <param name="id"></param>
         public async Task<IStudent> GetByIdAsync(long id)
         {
-            var databaseModel = await _dbContext.Set<Students>().FindAsync(id);
+            var databaseModel = await _dbContext.Set<StudentDb>().FindAsync(id);
 
             if (databaseModel is null)
                 return null;
@@ -67,7 +69,7 @@ namespace iTechArt.Repository.Repositories
         /// <param name="entity"></param>
         public async Task UpdateAsync(IStudent entity)
         {
-            var entry = _dbContext.Set<Students>().Update(_mapper.Map<Students>(entity));
+            var entry = _dbContext.Set<StudentDb>().Update(_mapper.Map<StudentDb>(entity));
 
             await _dbContext.SaveChangesAsync();
         }
@@ -78,7 +80,7 @@ namespace iTechArt.Repository.Repositories
         /// <param name="entity"></param>
         public async Task DeleteAsync(IStudent entity)
         {
-            _dbContext.Set<Students>().Remove(_mapper.Map<Students>(entity));
+            _dbContext.Set<StudentDb>().Remove(_mapper.Map<StudentDb>(entity));
 
             await _dbContext.SaveChangesAsync();
         }
@@ -89,7 +91,7 @@ namespace iTechArt.Repository.Repositories
         /// <returns></returns>
         public int GetCountOfStudents()
         {
-            return _dbContext.Set<Students>().Count();
+            return _dbContext.Set<StudentDb>().Count();
         }
     }
 }

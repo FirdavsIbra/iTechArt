@@ -3,6 +3,7 @@ using iTechArt.Database.DbContexts;
 using iTechArt.Database.Entities.Pupils;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace iTechArt.Repository.Repositories
 {
@@ -22,9 +23,9 @@ namespace iTechArt.Repository.Repositories
         /// <param name="pupil"></param>
         public async Task AddAsync(IPupil pupil)
         {
-            var pupilDb = _mapper.Map<Pupil>(pupil);
+            var pupilDb = _mapper.Map<PupilDb>(pupil);
 
-            await _dbContext.Set<Pupil>().AddAsync(pupilDb);
+            await _dbContext.Set<PupilDb>().AddAsync(pupilDb);
             await _dbContext.SaveChangesAsync();
         }
 
@@ -33,12 +34,14 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public IPupil[] GetAll()
         {
-            var pupils = _dbContext.Set<Pupil>();
+            var pupils = _dbContext.Set<PupilDb>();
 
             List<IPupil> result = new List<IPupil>();
 
             foreach (var pupil in pupils)
-                result.Add(_mapper.Map<IPupil>(pupil));
+            {
+                result.Add(_mapper.Map<BusinessModels.Pupil>(pupil));
+            }
 
             return result.ToArray();
         }
@@ -49,12 +52,9 @@ namespace iTechArt.Repository.Repositories
         /// <param name="id"></param>
         public async Task<IPupil> GetByIdAsync(long id)
         {
-            var databaseModel = await _dbContext.Set<Pupil>().FindAsync(id);
+            var databaseModel = await _dbContext.Set<PupilDb>().FirstOrDefaultAsync(p => p.Id == id);
 
-            if (databaseModel is null)
-                return null;
-
-            return _mapper.Map<IPupil>(databaseModel);
+            return _mapper.Map<BusinessModels.Pupil>(databaseModel);
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace iTechArt.Repository.Repositories
         /// <param name="pupil"></param>
         public async Task UpdateAsync(IPupil pupil)
         {
-            _dbContext.Set<Pupil>().Update(_mapper.Map<Pupil>(pupil));
+            _dbContext.Set<PupilDb>().Update(_mapper.Map<PupilDb>(pupil));
             await _dbContext.SaveChangesAsync();
         }
 
@@ -71,9 +71,11 @@ namespace iTechArt.Repository.Repositories
         /// Delete pupil from database
         /// </summary>
         /// <param name="pupil"></param>
-        public async Task DeleteAsync(IPupil pupil)
+        public async Task DeleteAsync(long id)
         {
-            _dbContext.Set<Pupil>().Remove(_mapper.Map<Pupil>(pupil));
+            var pupil = await _dbContext.Set<PupilDb>().FirstOrDefaultAsync(p => p.Id == id);
+
+            _dbContext.Set<PupilDb>().Remove(_mapper.Map<PupilDb>(pupil));
             await _dbContext.SaveChangesAsync();
         }
 
@@ -82,7 +84,7 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public int GetCountOfPupils()
         {
-            return _dbContext.Set<Pupil>().Count();
+            return _dbContext.Set<PupilDb>().Count();
         }
     }
 }

@@ -3,7 +3,7 @@ using iTechArt.Domain.Enums;
 
 namespace iTechArt.Database.Entities.MedicalStaff
 {
-    public sealed class Doctor : IDbModel
+    public sealed class DoctorDb : IDbModel
     {
         /// <summary>
         /// Unical Id of a Doctor

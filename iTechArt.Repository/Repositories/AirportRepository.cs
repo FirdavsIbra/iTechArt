@@ -22,7 +22,7 @@ namespace iTechArt.Repository.Repositories
         /// <param name="entity"></param>   
         public async Task AddAsync(IAirport entity)
         {
-            var entry = await _dbContext.Set<Airport>().AddAsync(_mapper.Map<Airport>(entity));
+            var entry = await _dbContext.Set<AirportDb>().AddAsync(_mapper.Map<AirportDb>(entity));
 
             await _dbContext.SaveChangesAsync();
         }
@@ -32,12 +32,14 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public IAirport[] GetAll()
         {
-            var models = _dbContext.Set<Airport>();
+            var models = _dbContext.Set<AirportDb>();
 
             List<IAirport> result = new List<IAirport>();
 
             foreach (var i in models)
+            {
                 result.Add(_mapper.Map<IAirport>(i));
+            }
 
             return result.ToArray();
         }
@@ -48,7 +50,7 @@ namespace iTechArt.Repository.Repositories
         /// <param name="id"></param>
         public async Task<IAirport> GetByIdAsync(long id)
         {
-            var databaseModel = await _dbContext.Set<Airport>().FindAsync(id);
+            var databaseModel = await _dbContext.Set<AirportDb>().FindAsync(id);
 
             if (databaseModel is null)
                 return null;
@@ -62,7 +64,7 @@ namespace iTechArt.Repository.Repositories
         /// <param name="entity"></param>
         public async Task UpdateAsync(IAirport entity)
         {
-            var entry = _dbContext.Set<Airport>().Update(_mapper.Map<Airport>(entity));
+            var entry = _dbContext.Set<AirportDb>().Update(_mapper.Map<AirportDb>(entity));
 
             await _dbContext.SaveChangesAsync();
         }
@@ -73,7 +75,7 @@ namespace iTechArt.Repository.Repositories
         /// <param name="entity"></param>
         public async Task DeleteAsync(IAirport entity)
         {
-            _dbContext.Set<Airport>().Remove(_mapper.Map<Airport>(entity));
+            _dbContext.Set<AirportDb>().Remove(_mapper.Map<AirportDb>(entity));
 
             await _dbContext.SaveChangesAsync();
         }
@@ -83,7 +85,7 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public int GetCountOfAirport()
         {
-            return _dbContext.Set<Airport>().Count();
+            return _dbContext.Set<AirportDb>().Count();
         }
     }
 }

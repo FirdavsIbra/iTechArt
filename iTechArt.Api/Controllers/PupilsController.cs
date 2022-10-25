@@ -1,4 +1,5 @@
-﻿using iTechArt.Domain.ServiceInterfaces;
+﻿using iTechArt.Domain.ModelInterfaces;
+using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
@@ -39,7 +40,22 @@ namespace iTechArt.Api.Controllers
             return Ok(_pupilService.GetAllAsync());
         }
 
-        //[HttpGet("id")]
-        //public async Task<IActionResult> Get([FromQuery] long id) => Ok(await _pupilService.GetByIdAsync(id));
+        [HttpGet("id")]
+        public async Task<IActionResult> Get([FromQuery] long id) => Ok(await _pupilService.GetByIdAsync(id));
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAsync(long id)
+        {
+            await _pupilService.DeleteAsync(id);
+            return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddAsync(IPupil pupil)
+        {
+            await _pupilService.AddAsync(pupil);
+            return Ok();
+        }
+
     }
 }

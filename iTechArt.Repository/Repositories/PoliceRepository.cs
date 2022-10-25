@@ -22,7 +22,7 @@ namespace iTechArt.Repository.Repositories
         /// <param name="entity"></param>   
         public async Task AddAsync(IPolice entity)
         {
-            var entry = await _dbContext.Set<Police>().AddAsync(_mapper.Map<Police>(entity));
+            var entry = await _dbContext.Set<PoliceDb>().AddAsync(_mapper.Map<PoliceDb>(entity));
 
             await _dbContext.SaveChangesAsync();
         }
@@ -32,12 +32,14 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public IPolice[] GetAll()
         {
-            var models = _dbContext.Set<Police>();
+            var models = _dbContext.Set<PoliceDb>();
 
             List<IPolice> result = new List<IPolice>();
 
             foreach (var i in models)
+            {
                 result.Add(_mapper.Map<IPolice>(i));
+            }
 
             return result.ToArray();
         }
@@ -48,7 +50,7 @@ namespace iTechArt.Repository.Repositories
         /// <param name="id"></param>
         public async Task<IPolice> GetByIdAsync(long id)
         {
-            var databaseModel = await _dbContext.Set<Police>().FindAsync(id);
+            var databaseModel = await _dbContext.Set<PoliceDb>().FindAsync(id);
 
             if (databaseModel is null)
                 return null;
@@ -62,7 +64,7 @@ namespace iTechArt.Repository.Repositories
         /// <param name="entity"></param>
         public async Task UpdateAsync(IPolice entity)
         {
-            var entry = _dbContext.Set<Police>().Update(_mapper.Map<Police>(entity));
+            var entry = _dbContext.Set<PoliceDb>().Update(_mapper.Map<PoliceDb>(entity));
 
             await _dbContext.SaveChangesAsync();
         }
@@ -73,7 +75,7 @@ namespace iTechArt.Repository.Repositories
         /// <param name="entity"></param>
         public async Task DeleteAsync(IPolice entity)
         {
-            _dbContext.Set<Police>().Remove(_mapper.Map<Police>(entity));
+            _dbContext.Set<PoliceDb>().Remove(_mapper.Map<PoliceDb>(entity));
 
             await _dbContext.SaveChangesAsync();
         }
@@ -83,7 +85,7 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public int GetCountOfPolice()
         {
-            return _dbContext.Set<Police>().Count();
+            return _dbContext.Set<PoliceDb>().Count();
         }
     }
 }

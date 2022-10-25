@@ -3,7 +3,7 @@ using iTechArt.Domain.Enums;
 
 namespace iTechArt.Database.Entities.Groceries
 {
-    public sealed class Grocery : IDbModel
+    public sealed class GroceryDb : IDbModel
     {
         /// <summary>
         /// ID of grocery employee

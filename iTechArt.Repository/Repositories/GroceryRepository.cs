@@ -22,7 +22,7 @@ namespace iTechArt.Repository.Repositories
         /// <param name="entity"></param>   
         public async Task AddAsync(IGrocery entity)
         {
-            var entry = await _dbContext.Set<Grocery>().AddAsync(_mapper.Map<Grocery>(entity));
+            var entry = await _dbContext.Set<GroceryDb>().AddAsync(_mapper.Map<GroceryDb>(entity));
 
             await _dbContext.SaveChangesAsync();
         }
@@ -32,12 +32,14 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public IGrocery[] GetAll()
         {
-            var models = _dbContext.Set<Grocery>();
+            var models = _dbContext.Set<GroceryDb>();
 
             List<IGrocery> result = new List<IGrocery>();
 
             foreach (var i in models)
+            {
                 result.Add(_mapper.Map<IGrocery>(i));
+            }
 
             return result.ToArray();
         }
@@ -48,7 +50,7 @@ namespace iTechArt.Repository.Repositories
         /// <param name="id"></param>
         public async Task<IGrocery> GetByIdAsync(long id)
         {
-            var databaseModel = await _dbContext.Set<Grocery>().FindAsync(id);
+            var databaseModel = await _dbContext.Set<GroceryDb>().FindAsync(id);
 
             if (databaseModel is null)
                 return null;
@@ -62,7 +64,7 @@ namespace iTechArt.Repository.Repositories
         /// <param name="entity"></param>
         public async Task UpdateAsync(IGrocery entity)
         {
-            var entry = _dbContext.Set<Grocery>().Update(_mapper.Map<Grocery>(entity));
+            var entry = _dbContext.Set<GroceryDb>().Update(_mapper.Map<GroceryDb>(entity));
 
             await _dbContext.SaveChangesAsync();
         }
@@ -83,7 +85,7 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public int GetCountOfGrocery()
         {
-            return _dbContext.Set<Grocery>().Count();
+            return _dbContext.Set<GroceryDb>().Count();
         }
     }
 }

@@ -3,7 +3,7 @@ using iTechArt.Domain.Enums;
 
 namespace iTechArt.Database.Entities.Students
 {
-    public sealed class Students : IDbModel
+    public sealed class StudentDb : IDbModel
     {
 
         /// <summary>

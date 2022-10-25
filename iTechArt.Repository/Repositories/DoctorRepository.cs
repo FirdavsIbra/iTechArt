@@ -22,7 +22,7 @@ namespace iTechArt.Repository.Repositories
         /// <param name="entity"></param>   
         public async Task AddAsync(IDoctor entity)
         {
-            var entry = await _dbContext.Set<Doctor>().AddAsync(_mapper.Map<Doctor>(entity));
+            var entry = await _dbContext.Set<DoctorDb>().AddAsync(_mapper.Map<DoctorDb>(entity));
 
             await _dbContext.SaveChangesAsync();
         }
@@ -32,12 +32,14 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public IDoctor[] GetAll()
         {
-            var models = _dbContext.Set<Doctor>();
+            var models = _dbContext.Set<DoctorDb>();
 
             List<IDoctor> result = new List<IDoctor>();
 
             foreach (var i in models)
+            {
                 result.Add(_mapper.Map<IDoctor>(i));
+            }
 
             return result.ToArray();
         }
@@ -48,7 +50,7 @@ namespace iTechArt.Repository.Repositories
         /// <param name="id"></param>
         public async Task<IDoctor> GetByIdAsync(long id)
         {
-            var databaseModel = await _dbContext.Set<Doctor>().FindAsync(id);
+            var databaseModel = await _dbContext.Set<DoctorDb>().FindAsync(id);
 
             if (databaseModel is null)
                 return null;
@@ -62,7 +64,7 @@ namespace iTechArt.Repository.Repositories
         /// <param name="entity"></param>
         public async Task UpdateAsync(IDoctor entity)
         {
-            var entry = _dbContext.Set<Doctor>().Update(_mapper.Map<Doctor>(entity));
+            var entry = _dbContext.Set<DoctorDb>().Update(_mapper.Map<DoctorDb>(entity));
 
             await _dbContext.SaveChangesAsync();
         }
@@ -73,7 +75,7 @@ namespace iTechArt.Repository.Repositories
         /// <param name="entity"></param>
         public async Task DeleteAsync(IDoctor entity)
         {
-            _dbContext.Set<Doctor>().Remove(_mapper.Map<Doctor>(entity));
+            _dbContext.Set<DoctorDb>().Remove(_mapper.Map<DoctorDb>(entity));
 
             await _dbContext.SaveChangesAsync();
         }
@@ -83,7 +85,7 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public int GetCountOfDoctors()
         {
-            return _dbContext.Set<Doctor>().Count();
+            return _dbContext.Set<DoctorDb>().Count();
         }
     }
 }

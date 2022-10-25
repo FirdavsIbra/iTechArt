@@ -13,17 +13,23 @@ namespace iTechArt.Repository.Mappers
     {
         public MappingProfile()
         {
-            CreateMap<IAirport, Airport>().ReverseMap();
+            CreateMap<IAirport, AirportDb>();
+            CreateMap<AirportDb, BusinessModels.Airport>();
 
-            CreateMap<IDoctor, Doctor>().ReverseMap();
+            CreateMap<IDoctor, DoctorDb>().ReverseMap();
+            CreateMap<DoctorDb, BusinessModels.Doctor>();
+            
+            CreateMap<IGrocery, GroceryDb>().ReverseMap();
+            CreateMap<GroceryDb, BusinessModels.Grocery>();
 
-            CreateMap<IGrocery, Grocery>().ReverseMap();
+            CreateMap<IPolice, PoliceDb>().ReverseMap();
+            CreateMap<PoliceDb, BusinessModels.Police>();
 
-            CreateMap<IPolice, Police>().ReverseMap();
+            CreateMap<IPupil, PupilDb>();
+            CreateMap<PupilDb, BusinessModels.Pupil>();
 
-            CreateMap<IPupil, Pupil>().ReverseMap();
-
-            CreateMap<IStudent, Students>().ReverseMap();
+            CreateMap<IStudent, StudentDb>().ReverseMap();
+            CreateMap<StudentDb, BusinessModels.Student>();
         }
     }
 }
