@@ -19,7 +19,7 @@ namespace iTechArt.Serivce.Services
         {
             return _groceryRepository.GetAll();
         }
-        
+
         /// <summary>
         /// Import grocery data
         /// </summary>

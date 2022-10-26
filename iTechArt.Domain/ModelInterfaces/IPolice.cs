@@ -5,7 +5,7 @@
         /// <summary>
         /// Police Officers Id
         /// </summary>
-        public long Id { get;}
+        public long Id { get; }
 
         /// <summary>
         /// Police Officers Firstname

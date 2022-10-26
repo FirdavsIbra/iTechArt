@@ -1,9 +1,8 @@
-﻿using iTechArt.Database.DbContexts;
-using iTechArt.Domain.Enums;
+﻿using iTechArt.Domain.Enums;
 
 namespace iTechArt.Database.Entities.Groceries
 {
-    public sealed class GroceryDb : IDbModel
+    public sealed class GroceryDb
     {
         /// <summary>
         /// ID of grocery employee

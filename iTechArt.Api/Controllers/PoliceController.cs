@@ -28,7 +28,7 @@ namespace iTechArt.Api.Controllers
 
             if (formFile != null)
             {
-                if(fileExtensions.Contains(fileExtension) || contentTypes.Contains(formFile.ContentType))
+                if (fileExtensions.Contains(fileExtension) || contentTypes.Contains(formFile.ContentType))
                 {
                     return Ok(_policeService.ImportPoliceData());
                 }

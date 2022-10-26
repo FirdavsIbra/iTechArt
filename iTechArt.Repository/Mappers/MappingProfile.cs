@@ -19,20 +19,20 @@ namespace iTechArt.Repository.Mappers
             CreateMap<AirportDb, BusinessModels.Airport>();
 
 
-            // map from IDoctor to DoctorDb
-            CreateMap<IDoctor, DoctorDb>().ReverseMap();
-            // map from DoctorDb to DoctorBm
-            CreateMap<DoctorDb, BusinessModels.Doctor>();
-            
+            // map from IMedStaff to MedStaffDb
+            CreateMap<IMedStaff, MedStaffDb>();
+            // map from MedStaffDb to MedStaffBm
+            CreateMap<MedStaffDb, BusinessModels.MedStaff>();
+
 
             // map from IGrocery to GroceryDb
-            CreateMap<IGrocery, GroceryDb>().ReverseMap();
+            CreateMap<IGrocery, GroceryDb>();
             // map from GroceryDb to GroceryBm
             CreateMap<GroceryDb, BusinessModels.Grocery>();
 
-            
+
             // map from IPolice to PoliceDb
-            CreateMap<IPolice, PoliceDb>().ReverseMap();
+            CreateMap<IPolice, PoliceDb>();
             // map from PoliceDb to PoliceBm
             CreateMap<PoliceDb, BusinessModels.Police>();
 
@@ -41,9 +41,9 @@ namespace iTechArt.Repository.Mappers
             // map from PupilDb to PupilBm
             CreateMap<PupilDb, BusinessModels.Pupil>();
 
-            
+
             // map from IStudent to StudentDb
-            CreateMap<IStudent, StudentDb>().ReverseMap();
+            CreateMap<IStudent, StudentDb>();
             // map from StudentDb to StudentBm
             CreateMap<StudentDb, BusinessModels.Student>();
         }

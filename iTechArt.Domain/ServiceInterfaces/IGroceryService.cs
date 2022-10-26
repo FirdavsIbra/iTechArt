@@ -8,7 +8,7 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// Import data for grocery
         /// </summary>
         public IGrocery[] ImportGrocery();
-        
+
         /// <summary>
         /// Export data for grocery
         /// </summary>
