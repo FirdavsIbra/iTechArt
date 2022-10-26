@@ -20,7 +20,7 @@ namespace iTechArt.Api.Controllers
         [HttpGet("count-of-users")]
         public IActionResult TotalAmounts()
         {
-            return Ok( _statsService.GetCountOfUsers());
+            return Ok(_statsService.GetCountOfUsers());
         }
     }
 }

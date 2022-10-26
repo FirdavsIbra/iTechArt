@@ -2,7 +2,7 @@
 
 namespace iTechArt.Domain.ModelInterfaces
 {
-    public interface IDoctor
+    public interface IMedStaff
     {
         /// <summary>
         /// Id of a doctor

@@ -1,9 +1,8 @@
-﻿using iTechArt.Database.DbContexts;
-using iTechArt.Domain.Enums;
+﻿using iTechArt.Domain.Enums;
 
 namespace iTechArt.Database.Entities.Students
 {
-    public sealed class StudentDb : IDbModel
+    public sealed class StudentDb
     {
 
         /// <summary>

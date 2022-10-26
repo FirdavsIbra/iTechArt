@@ -18,12 +18,12 @@ namespace iTechArt.Repository.BusinessModels
         /// Count of groceries
         /// </summary>
         public int GroceryCount { get; set; }
-        
+
         /// <summary>
         /// Count of polices
         /// </summary>
         public int PoliceCount { get; set; }
-        
+
         /// <summary>
         /// Count of doctors
         /// </summary>

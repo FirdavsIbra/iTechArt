@@ -9,7 +9,7 @@ namespace iTechArt.Repository.BusinessModels
         /// Id of business model entities
         /// </summary>
         public long Id { get; internal set; }
-        
+
         /// <summary>
         /// First name of student
         /// </summary>

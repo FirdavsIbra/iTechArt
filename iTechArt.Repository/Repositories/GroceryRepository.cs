@@ -75,7 +75,7 @@ namespace iTechArt.Repository.Repositories
         /// <param name="grocery"></param>
         public async Task DeleteAsync(long id)
         {
-            var grocery = await _dbContext.Set<DoctorDb>().FirstOrDefaultAsync(g => g.Id == id);
+            var grocery = await _dbContext.Set<MedStaffDb>().FirstOrDefaultAsync(g => g.Id == id);
 
             _dbContext.Set<IGrocery>().Remove(_mapper.Map<IGrocery>(grocery));
 
