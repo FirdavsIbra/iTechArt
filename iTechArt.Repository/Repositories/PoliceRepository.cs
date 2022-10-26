@@ -1,7 +1,11 @@
 ﻿using AutoMapper;
 using iTechArt.Database.DbContexts;
+using iTechArt.Database.Entities.MedicalStaff;
+using iTechArt.Database.Entities.Police;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
+using iTechArt.Repository.BusinessModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace iTechArt.Repository.Repositories
 {
@@ -31,7 +35,7 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public IPolice[] GetAll()
         {
-            var models = _dbContext.Set<Police>();
+            var models = _dbContext.Police;
 
             List<IPolice> result = new List<IPolice>();
 
@@ -47,7 +51,7 @@ namespace iTechArt.Repository.Repositories
         /// <param name="id"></param>
         public async Task<IPolice> GetByIdAsync(long id)
         {
-            var databaseModel = await _dbContext.Set<Police>().FindAsync(id);
+            var databaseModel = await _dbContext.Set<PoliceDb>().FirstOrDefaultAsync(p => p.Id == id);
 
             if (databaseModel is null)
                 return null;
@@ -70,9 +74,11 @@ namespace iTechArt.Repository.Repositories
         /// Delete entity from database
         /// </summary>
         /// <param name="entity"></param>
-        public async Task DeleteAsync(IPolice entity)
+        public async Task DeleteAsync(long id)
         {
-            _dbContext.Set<Police>().Remove(_mapper.Map<Police>(entity));
+            var police = await _dbContext.Police.FirstOrDefaultAsync(d => d.Id == id);
+
+            _dbContext.Police.Remove(_mapper.Map<PoliceDb>(police));
 
             await _dbContext.SaveChangesAsync();
         }
