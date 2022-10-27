@@ -1,17 +1,31 @@
-﻿using iTechArt.Service.Interfaces;
+﻿using iTechArt.Domain.ModelInterfaces;
+using iTechArt.Domain.RepositoryInterfaces;
+using iTechArt.Domain.ServiceInterfaces;
 
 namespace iTechArt.Service.Services
 {
-    public class AirportService : IAirportsService
+    public sealed class AirportService : IAirportsService
     {
-        public async Task<List<string>> ExportAirportExcel()
+        private readonly IAirportRepository _airportRepository;
+
+        public AirportService(IAirportRepository airportRepository)
         {
-            return new List<string>();
+            _airportRepository = airportRepository;
         }
 
-        public async Task<List<string>> ImportAirportExcel()
+        /// <summary>
+        /// Exporting airport datas
+        /// </summary>
+        public IAirport[] ExportAirportExcel()
         {
-            return new List<string>();
+            return _airportRepository.GetAll();
+        }
+        /// <summary>
+        /// Importing airport datas
+        /// </summary>
+        public IAirport[] ImportAirportExcel()
+        {
+            return _airportRepository.GetAll();
         }
     }
 }

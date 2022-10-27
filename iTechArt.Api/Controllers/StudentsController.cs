@@ -1,7 +1,5 @@
-﻿using iTechArt.Service.Interfaces;
+﻿using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace iTechArt.Api.Controllers
 {
@@ -9,7 +7,7 @@ namespace iTechArt.Api.Controllers
     [ApiController]
     public sealed class StudentsController : ControllerBase
     {
-        private readonly string[] _allowedTypes = new string[] {"csv", "officedocument.spreadsheetml.sheet" };
+        private readonly string[] _allowedTypes = new string[] { "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" };
         private readonly IStudentsService _studentsService;
         public StudentsController(IStudentsService studentService)
         {
@@ -21,28 +19,26 @@ namespace iTechArt.Api.Controllers
         /// </summary>
         /// <param name="formFile"></param>
         /// <returns>if successful returns Status200OK, otherwise Status400BadRequest</returns>
-        [HttpPost("import")]
-        public async Task<IActionResult> Import(IFormFile formFile)
+        [HttpPost(ApiConstants.IMPORT)]
+        public IActionResult Import(IFormFile formFile)
         {
-            if (formFile != null && (_allowedTypes.Contains<string>(formFile.ContentType)))
+            if (formFile != null && _allowedTypes.Contains(formFile.ContentType))
             {
-                await _studentsService.ImportStudentsAsync(formFile);
-                return Ok();
+                return Ok(_studentsService.ImportStudentsAsync());
             }
             else
             {
-                return BadRequest("Invalid file format!");
+                return BadRequest("Invalid file type!");
             }
         }
 
         /// <summary>
         /// route: api/students/export. Returns Status200OK
         /// </summary>
-        /// <returns></returns>
-        [HttpGet("export")]
+        [HttpGet(ApiConstants.EXPORT)]
         public async Task<IActionResult> Export()
         {
-            return Ok(await _studentsService.ExportStudentsAsync());
+            return Ok(_studentsService.ExportStudentsAsync());
         }
     }
 }

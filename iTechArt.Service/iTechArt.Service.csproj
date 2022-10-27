@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\iTechArt.Data\iTechArt.Data.csproj" />
+    <ProjectReference Include="..\iTechArt.Repository\iTechArt.Repository.csproj" />
   </ItemGroup>
 
 </Project>

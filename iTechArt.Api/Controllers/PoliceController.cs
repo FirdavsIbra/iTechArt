@@ -1,4 +1,4 @@
-﻿using iTechArt.Service.Interfaces;
+﻿using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
@@ -8,18 +8,34 @@ namespace iTechArt.Api.Controllers
     public sealed class PoliceController : ControllerBase
     {
         private readonly IPoliceService _policeService;
+        private readonly string[] fileExtensions = new string[] { ".csv", ".xlsx", ".xls" };
+        private readonly string[] contentTypes = new string[] { "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" };
+
         public PoliceController(IPoliceService policeService)
         {
             _policeService = policeService;
         }
 
-        [HttpPost(StaticDetails.Import)]
+        /// <summary>
+        /// route: api/police/import. Takes csv or xlsx file
+        /// Uploads data about Police and saves in database
+        /// </summary>
+        /// <param name="formFile"></param>
+        [HttpPost(ApiConstants.IMPORT)]
         public IActionResult Import(IFormFile formFile)
         {
-            var fileExtensions = new string[] {".csv", ".xlsx", "officedocument.spreadsheetml.sheet", ".xls"};
-            if (formFile != null && fileExtensions.Contains<string>(formFile.ContentType))
+            string fileExtension = Path.GetExtension(formFile.FileName);
+
+            if (formFile != null)
             {
-                return Ok(_policeService.ImportPolice());
+                if (fileExtensions.Contains(fileExtension) || contentTypes.Contains(formFile.ContentType))
+                {
+                    return Ok(_policeService.ImportPoliceData());
+                }
+                else
+                {
+                    return BadRequest("Invalid file format!");
+                }
             }
             else
             {
@@ -27,10 +43,14 @@ namespace iTechArt.Api.Controllers
             }
         }
 
-        [HttpGet(StaticDetails.Export)]
+        /// <summary>
+        /// route: api/police/export
+        /// Gets all data about police from the database
+        /// </summary>
+        [HttpGet(ApiConstants.EXPORT)]
         public IActionResult Export()
         {
-            return Ok(_policeService.ExportPolice());
+            return Ok(_policeService.ExportPoliceData());
         }
     }
 }
