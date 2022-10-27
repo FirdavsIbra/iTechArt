@@ -24,7 +24,7 @@ export const UNITS: Record<UnitsEnum, UnitTypeInterface> = {
   },
   medStaff: {
     title: 'MedStaff',
-    icon: '../../assets/med.png',
+    icon: '../../assets/medStaff.png',
     path: 'med-staff',
   },
   grocery: {

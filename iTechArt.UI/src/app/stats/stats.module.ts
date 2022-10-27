@@ -9,7 +9,6 @@ import { PupilsModule } from './modules/pupils/pupils.module';
 import { StudentsModule } from './modules/students/students.module';
 
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
     AirportModule,
@@ -19,6 +18,5 @@ import { StudentsModule } from './modules/students/students.module';
     PupilsModule,
     StudentsModule,
   ],
-  exports: [],
 })
 export class StatsModule {}

@@ -1,8 +1,8 @@
 export interface UnitCountDashboardInterface {
-  airport: number,
-  medStaff: number,
-  pupils: number,
-  police: number,
-  students: number,
-  grocery: number,
+  airportCount: number;
+  doctorCount: number;
+  pupilCount: number;
+  policeCount: number;
+  studentCount: number;
+  groceryCount: number;
 }
