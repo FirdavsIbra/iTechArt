@@ -10,12 +10,12 @@
         /// <summary>
         /// Police Officers Firstname
         /// </summary>
-        public string FirstName { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Police Officers Lastname
         /// </summary>
-        public string LastName { get; set; }
+        public string Surname { get; set; }
 
         /// <summary>
         /// Police Officers email address
@@ -38,13 +38,8 @@
         public string JobTitle { get; set; }
 
         /// <summary>
-        /// Police Officers height in cm with 2 precision (like 170.24)
+        /// Police Officers salary
         /// </summary>
-        public double HeightInCm { get; set; }
-
-        /// <summary>
-        /// Police Officers weight in kg with 2 precision (like 75.34)
-        /// </summary>
-        public double WeightInKg { get; set; }
+        public double Salary { get; set; }
     }
 }

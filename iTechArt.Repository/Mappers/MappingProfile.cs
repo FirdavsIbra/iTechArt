@@ -31,9 +31,9 @@ namespace iTechArt.Repository.Mappers
             CreateMap<GroceryDb, BusinessModels.Grocery>();
 
 
-            // map from IPolice to PoliceDb
+            // mapping from IPolice to Police Database Model
             CreateMap<IPolice, PoliceDb>();
-            // map from PoliceDb to PoliceBm
+            // mapping from PoliceDb to Police Business Model
             CreateMap<PoliceDb, BusinessModels.Police>();
 
             // map from IPupil to PupilDb

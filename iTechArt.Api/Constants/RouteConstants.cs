@@ -3,5 +3,6 @@
     public static class RouteConstants
     {
         public const string PUPIL = "api/pupils";
+        public const string POLICE = "api/police";
     }
 }
