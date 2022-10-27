@@ -1,22 +1,32 @@
-﻿using iTechArt.Service.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using iTechArt.Domain.ModelInterfaces;
+using iTechArt.Domain.RepositoryInterfaces;
+using iTechArt.Domain.ServiceInterfaces;
 
 namespace iTechArt.Service.Services
 {
-    public class PoliceService : IPoliceService
+    public sealed class PoliceService : IPoliceService
     {
-        public List<string> ExportPolice()
+        private readonly IPoliceRepository _policeRepository;
+
+        public PoliceService(IPoliceRepository policeRepository)
         {
-            return new List<string>();
+            _policeRepository = policeRepository;
         }
 
-        public List<string> ImportPolice()
+        /// <summary>
+        /// Export data from the databse
+        /// </summary>
+        public IPolice[] ExportPoliceData()
         {
-            return new List<string>();
+            return _policeRepository.GetAll();
+        }
+
+        /// <summary>
+        /// Import data to the database
+        /// </summary>
+        public IPolice[] ImportPoliceData()
+        {
+            return _policeRepository.GetAll();
         }
     }
 }

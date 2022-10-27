@@ -1,7 +1,9 @@
-using iTechArt.Data.DbContexts;
-using iTechArt.Data.IRepositories;
-using iTechArt.Data.Repositories;
-using iTechArt.Service.Interfaces;
+using iTechArt.Database.DbContexts;
+using iTechArt.Domain.RepositoryInterfaces;
+using iTechArt.Domain.ServiceInterfaces;
+using iTechArt.Repository.Mappers;
+using iTechArt.Repository.Repositories;
+using iTechArt.Serivce.Services;
 using iTechArt.Service.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,19 +12,33 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddSingleton<IAirportsService, AirportService>();
-builder.Services.AddSingleton<IGroceryService, GroceryService>();
+builder.Services.AddScoped<IPupilRepository, PupilRepository>();
+builder.Services.AddScoped<IAirportRepository, AirportRepository>();
+builder.Services.AddScoped<IPoliceRepository, PoliceRepository>();
+builder.Services.AddScoped<IMedStaffRepository, MedStaffRepository>();
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<IGroceryRepository, GroceryRepository>();
 
-builder.Services.AddSingleton<IStudentService, StudentService>();
+builder.Services.AddScoped<ITotalStatisticsService, TotalStatisticsService>();
+builder.Services.AddScoped<IAirportsService, AirportService>();
+builder.Services.AddScoped<IStudentsService, StudentsService>();
+builder.Services.AddScoped<IGroceryService, GroceryService>();
+builder.Services.AddScoped<IMedStaffService, MedStaffService>();
+builder.Services.AddScoped<IPoliceService, PoliceService>();
+builder.Services.AddScoped<IPupilService, PupilService>();
 
-builder.Services.AddSingleton<IPupilService, PupilService>();
-builder.Services.AddSingleton<IMedStaffService, MedStaffService>();
-builder.Services.AddSingleton<IPoliceService, PoliceService>();
-builder.Services.AddScoped<IUnitofWork, UnitofWork>();
+builder.Services.AddCors(option =>
+{
+    option.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+    });
+});
 
 builder.Services.AddDbContext<AppDbContext>(option =>
-    option.UseSqlServer(builder.Configuration.GetConnectionString("iTechArtConnection")));
+    option.UseNpgsql(builder.Configuration.GetConnectionString("iTechArtConnection")));
 
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -31,13 +47,15 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthorization();
 

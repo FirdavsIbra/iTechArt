@@ -1,17 +1,59 @@
-﻿using iTechArt.Service.Interfaces;
+﻿using iTechArt.Domain.ModelInterfaces;
+using iTechArt.Domain.RepositoryInterfaces;
+using iTechArt.Domain.ServiceInterfaces;
 
 namespace iTechArt.Service.Services
 {
-    public class PupilService : IPupilService
+    public sealed class PupilService : IPupilService
     {
-        public IEnumerable<string> ExportPupilsFile()
+        private readonly IPupilRepository _pupilRepository;
+
+        public PupilService(IPupilRepository pupilRepository)
         {
-            return new List<string>();
+            _pupilRepository = pupilRepository;
         }
 
-        public IEnumerable<string> ImportPupilsFile()
+        /// <summary>
+        /// Get all pupils
+        /// </summary>
+        public IPupil[] GetAllAsync()
         {
-            return new List<string>();
+            return _pupilRepository.GetAll();
+        }
+
+        /// <summary>
+        /// Import pupil's file
+        /// </summary>
+        public IPupil[] ImportPupilsFile()
+        {
+            return _pupilRepository.GetAll();
+        }
+
+        /// <summary>
+        /// Get pupil by id
+        /// </summary>
+        /// <param name="id"></param>
+        public Task<IPupil> GetByIdAsync(long id) 
+        { 
+            return _pupilRepository.GetByIdAsync(id);
+        }
+
+        /// <summary>
+        /// Add pupil to database
+        /// </summary>
+        /// <param name="pupil"></param>
+        public async Task AddAsync(IPupil pupil)
+        {
+            await _pupilRepository.AddAsync(pupil);
+        }
+
+        /// <summary>
+        /// Delete pupil
+        /// </summary>
+        /// <param name="id"></param>
+        public async Task DeleteAsync(long id)
+        {
+            await _pupilRepository.DeleteAsync(id);
         }
     }
 }
