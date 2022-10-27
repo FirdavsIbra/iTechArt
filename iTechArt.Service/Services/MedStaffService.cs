@@ -4,7 +4,7 @@ using iTechArt.Domain.ServiceInterfaces;
 
 namespace iTechArt.Service.Services
 {
-    public class MedStaffService : IMedStaffService
+    public sealed class MedStaffService : IMedStaffService
     {
         private readonly IMedStaffRepository _medStaffRepository;
 
