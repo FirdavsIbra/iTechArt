@@ -12,7 +12,7 @@ namespace iTechArt.Service.Services
     {
         private readonly IAirportRepository _airportRepository;
         private readonly IMapper _mapper;
-        private readonly string[] fileExtensions = { ".xlsx", ".xls", ".csv", ".xml", "application/vnd.ms-excel", "officedocument.spreadsheetml.sheet"  };
+        private readonly string[] excelExtensions = { ".xlsx", ".xls", ".xlsm", ".xlsb", ".xltx", ".xltm", ".xlt", ".xlam", ".xla", ".xlw" };
 
         public AirportService(IAirportRepository airportRepository, IMapper mapper)
         {
@@ -23,7 +23,7 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Exporting airport datas
         /// </summary>
-        public IAirport[] ExportAirportExcel()
+        public Task<IAirport[]> ExportAirportExcel()
         {
             return _airportRepository.GetAll();
         }
@@ -36,7 +36,7 @@ namespace iTechArt.Service.Services
             {
                 var fileExtension = Path.GetExtension(file.FileName);
 
-                if (fileExtensions.Contains(fileExtension))
+                if (excelExtensions.Contains(fileExtension))
                 {
                     using (var stream = new MemoryStream())
                     {

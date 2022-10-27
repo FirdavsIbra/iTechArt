@@ -4,14 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
 {
-    [Route("api/airport")]
+    [Route(RouteConstants.AIRPORT)]
     [ApiController]
     public sealed class AirportController : ControllerBase
     {
         private readonly IAirportsService _airportsService;
         private readonly string[] excelExtensions = {".xlsx", ".xls", ".xlsm", ".xlsb", ".xltx", ".xltm", ".xlt", ".xlam", ".xla", ".xlw" };
-        private readonly string[] csvExtensions = { ".csv"};
-        private readonly string[] excelContentTypes = { "application/vnd.ms-excel", "officedocument.spreadsheetml.sheet", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" };
 
         public AirportController(IAirportsService airportsService)
         {
@@ -27,7 +25,8 @@ namespace iTechArt.Api.Controllers
         {
             var fileExtension = Path.GetExtension(file.FileName);
 
-            if (excelExtensions.Contains(fileExtension))
+            if (excelExtensions.Contains(fileExtension) && 
+                FileConstants.EXCEL.Contains(file.ContentType.ToLower()))
             {
                 return Ok(_airportsService.ImportAirportExcel(file));
             }

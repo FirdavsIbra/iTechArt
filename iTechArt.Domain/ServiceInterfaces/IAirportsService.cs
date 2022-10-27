@@ -13,6 +13,6 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// Interface of Exporting airport datas
         /// </summary>
-        public IAirport[] ExportAirportExcel();
+        public Task<IAirport[]> ExportAirportExcel();
     }
 }

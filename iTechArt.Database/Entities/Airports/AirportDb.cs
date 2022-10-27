@@ -12,7 +12,7 @@ namespace iTechArt.Database.Entities.Airports
         /// <summary>
         /// Airport Name
         /// </summary>
-        [MaxLength(16)]
+        [MaxLength(32)]
         public string AirportName { get; set; }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace iTechArt.Database.Entities.Airports
         /// <summary>
         ///  Address location of the airport
         /// </summary>
-        [MaxLength(16)]
+        [MaxLength(32)]
         public string Address { get; set; }
 
         /// <summary>
