@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace iTechArt.Domain.ModelInterfaces
+﻿namespace iTechArt.Domain.ModelInterfaces
 {
     public interface IAirport
     {
@@ -12,7 +10,6 @@ namespace iTechArt.Domain.ModelInterfaces
         /// <summary>
         /// Airport Name
         /// </summary>
-        [MaxLength(16)]
         public string AirportName { get; }
 
         /// <summary>

@@ -8,7 +8,7 @@ namespace iTechArt.Service.MappersServiceProfile
     {
         public MappersServiceProfile()
         {
-            // map from IAirport to AirportDb
+            // map from IAirport to AirportDTO
             CreateMap<IAirport, AirportDTO>();
         }
     }
