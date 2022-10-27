@@ -9,7 +9,7 @@ using iTechArt.Domain.ModelInterfaces;
 
 namespace iTechArt.Repository.Mappers
 {
-    public class MappingProfile : Profile
+    public sealed class MappingProfile : Profile
     {
         public MappingProfile()
         {

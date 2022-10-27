@@ -25,7 +25,7 @@ namespace iTechArt.Repository.Repositories
         /// <param name="entity"></param>   
         public async Task AddAsync(IPolice entity)
         {
-            var entry = await _dbContext.Set<Police>().AddAsync(_mapper.Map<Police>(entity));
+            var entry = await _dbContext.Set<PoliceDb>().AddAsync(_mapper.Map<PoliceDb>(entity));
 
             await _dbContext.SaveChangesAsync();
         }
@@ -65,7 +65,7 @@ namespace iTechArt.Repository.Repositories
         /// <param name="entity"></param>
         public async Task UpdateAsync(IPolice entity)
         {
-            var entry = _dbContext.Set<Police>().Update(_mapper.Map<Police>(entity));
+            var entry = _dbContext.Set<PoliceDb>().Update(_mapper.Map<PoliceDb>(entity));
 
             await _dbContext.SaveChangesAsync();
         }
@@ -88,7 +88,7 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public int GetCountOfPolice()
         {
-            return _dbContext.Set<Police>().Count();
+            return _dbContext.Set<PoliceDb>().Count();
         }
     }
 }
