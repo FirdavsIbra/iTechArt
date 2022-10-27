@@ -54,23 +54,5 @@ namespace iTechArt.Api.Controllers
         {
             return Ok(await _pupilService.GetByIdAsync(id));
         }
-        
-        /// <summary>
-        /// Delete pupil
-        /// </summary>
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteAsync(long id)
-        //{
-        //    await _pupilService.DeleteAsync(id);
-        //    return Ok();
-        //}
-
-        //[HttpPost]
-        //public async Task<IActionResult> AddAsync(IPupil pupil)
-        //{
-        //    await _pupilService.AddAsync(pupil);
-        //    return Ok();
-        //}
-
     }
 }
