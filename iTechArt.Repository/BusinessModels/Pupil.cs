@@ -3,7 +3,7 @@ using iTechArt.Domain.ModelInterfaces;
 
 namespace iTechArt.Repository.BusinessModels
 {
-    public sealed class Pupil : IPupil
+    internal sealed class Pupil : IPupil
     {
         /// <summary>
         /// Id of pupil

@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\iTechArt.Repository\iTechArt.Repository.csproj" />
+    <ProjectReference Include="..\iTechArt.Domain\iTechArt.Domain.csproj" />
   </ItemGroup>
 
 </Project>

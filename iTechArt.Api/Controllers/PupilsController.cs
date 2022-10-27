@@ -23,7 +23,7 @@ namespace iTechArt.Api.Controllers
         {
             if (formFile != null && (formFile.ContentType.Contains("application/vnd.ms-excel") || formFile.ContentType.Contains("officedocument.spreadsheetml.sheet")))
             {
-                return Ok(_pupilService.ImportPupilsFile());
+                return Ok();
             }
             else
             {
@@ -44,8 +44,8 @@ namespace iTechArt.Api.Controllers
         /// Get pupil by id
         /// </summary>
         /// <param name="id"></param>
-        [HttpGet("id")]
-        public async Task<IActionResult> GetByIdAsync([FromQuery] long id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetByIdAsync(long id)
         {
             return Ok(await _pupilService.GetByIdAsync(id));
         }

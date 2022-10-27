@@ -24,9 +24,9 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Import pupil's file
         /// </summary>
-        public IPupil[] ImportPupilsFile()
+        public void ImportPupilsFile()
         {
-            return _pupilRepository.GetAll();
+
         }
 
         /// <summary>

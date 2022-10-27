@@ -7,7 +7,7 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// Upload pupil's file
         /// </summary>
-        public IPupil[] ImportPupilsFile();
+        public void ImportPupilsFile();
 
         /// <summary>
         /// Get all pupils
