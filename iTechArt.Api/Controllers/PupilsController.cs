@@ -1,11 +1,11 @@
-﻿using iTechArt.Domain.ModelInterfaces;
+﻿using iTechArt.Api.Constants;
 using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
 {
     [ApiController]
-    [Route("api/pupils")]
+    [Route(RouteConstants.PUPIL)]
     public sealed class PupilsController : ControllerBase
     {
         private readonly IPupilService _pupilService;
@@ -17,13 +17,19 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// Upload pupil's file
         /// </summary>
-        /// <param name="formFile"></param>
-        [HttpPost("import")]
+        [HttpPost(ApiConstants.IMPORT)]
         public IActionResult Import(IFormFile formFile)
         {
-            if (formFile != null && (formFile.ContentType.Contains("application/vnd.ms-excel") || formFile.ContentType.Contains("officedocument.spreadsheetml.sheet")))
+            if (formFile != null)
             {
-                return Ok(_pupilService.ImportPupilsFile());
+                if (FileConstants.EXCEL.Contains(formFile.ContentType.ToLower()) || 
+                    FileConstants.CSV.Contains(formFile.ContentType.ToLower()) ||
+                    FileConstants.XML.Contains(formFile.ContentType.ToLower()))
+                {
+                    return Ok();
+                }
+
+                return BadRequest("Invalid file format!");
             }
             else
             {
@@ -37,36 +43,16 @@ namespace iTechArt.Api.Controllers
         [HttpGet("export")]
         public async Task<IActionResult> GetAllAsync()
         {
-            return Ok(_pupilService.GetAllAsync());
+            return Ok(await _pupilService.GetAllAsync());
         }
 
         /// <summary>
         /// Get pupil by id
         /// </summary>
-        /// <param name="id"></param>
-        [HttpGet("id")]
-        public async Task<IActionResult> GetByIdAsync([FromQuery] long id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetByIdAsync(long id)
         {
             return Ok(await _pupilService.GetByIdAsync(id));
         }
-        
-        /// <summary>
-        /// Delete pupil
-        /// </summary>
-        /// <param name="id"></param>
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteAsync(long id)
-        //{
-        //    await _pupilService.DeleteAsync(id);
-        //    return Ok();
-        //}
-
-        //[HttpPost]
-        //public async Task<IActionResult> AddAsync(IPupil pupil)
-        //{
-        //    await _pupilService.AddAsync(pupil);
-        //    return Ok();
-        //}
-
     }
 }

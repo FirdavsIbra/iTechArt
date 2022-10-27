@@ -34,9 +34,9 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get all doctors from database
         /// </summary>
-        public IMedStaff[] GetAll()
+        public async Task<IMedStaff[]> GetAll()
         {
-            var doctors = _dbContext.Staffs.ToArray();
+            var doctors = await _dbContext.Staffs.ToArrayAsync();
 
             IMedStaff[] result = new IMedStaff[_dbContext.Staffs.Count()];
 
