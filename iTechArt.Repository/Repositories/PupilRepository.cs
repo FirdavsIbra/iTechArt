@@ -82,7 +82,7 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public int GetCountOfPupils()
         {
-            return _dbContext.Set<PupilDb>().Count();
+            return _dbContext.Pupils.Count();
         }
     }
 }

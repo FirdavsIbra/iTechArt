@@ -84,7 +84,7 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public int GetCountOfAirport()
         {
-            return _dbContext.Set<AirportDb>().Count();
+            return _dbContext.Airports.Count();
         }
     }
 }
