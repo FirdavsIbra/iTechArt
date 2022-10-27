@@ -24,7 +24,7 @@ namespace iTechArt.Api.Controllers
         {
             if (formFile != null && (formFile.ContentType.Contains("application/vnd.ms-excel") || formFile.ContentType.Contains("officedocument.spreadsheetml.sheet")))
             {
-                return Ok(_medStaffService.ImportMedStaffFile());
+                return Ok(await _medStaffService.ImportMedStaffFile());
             }
             else
             {
@@ -38,7 +38,7 @@ namespace iTechArt.Api.Controllers
         [HttpGet("export")]
         public async Task<IActionResult> ExportAsync()
         {
-            return Ok(_medStaffService.ExportMedStaffFile());
+            return Ok(await _medStaffService.ExportMedStaffFile());
         }
     }
 }
