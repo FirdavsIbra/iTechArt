@@ -16,17 +16,17 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Takes filestream
         /// </summary>
-        public IMedStaff[] ExportMedStaffFile()
+        public async Task<IMedStaff[]> ExportMedStaffFile()
         {
-            return _medStaffRepository.GetAll();
+            return await _medStaffRepository.GetAll();
         }
 
         /// <summary>
         /// Takes no input so far
         /// </summary>
-        public IMedStaff[] ImportMedStaffFile()
+        public async Task<IMedStaff[]> ImportMedStaffFile()
         {
-            return _medStaffRepository.GetAll();
+            return await _medStaffRepository.GetAll();
         }
     }
 }

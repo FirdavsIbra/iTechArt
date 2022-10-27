@@ -1,0 +1,53 @@
+.block {
+  width: 10%;
+  padding: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  background-color: whitesmoke;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  cursor: pointer;
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    span {
+      font-size: 20px;
+    }
+  }
+  p {
+    font-size: 30px;
+    color: #3a5696;
+    font-weight: bold;
+  }
+}
+
+.dashboard-page {
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav-cursor {
+  cursor: pointer;
+}
+
+.app-description {
+  margin: 50px 0;
+  width: 100%;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  div {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: center;
+    h1 {
+      color: #3a5696;
+      align-self: center;
+    }
+    p {
+      letter-spacing: 1.5px;
+    }
+  }
+}

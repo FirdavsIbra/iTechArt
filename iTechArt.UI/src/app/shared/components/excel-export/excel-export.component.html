@@ -1,0 +1,37 @@
+<section class="excel-export">
+  <h3>You can send the file</h3>
+  <form
+    class="excel-export__form"
+    [formGroup]="exportForm"
+    (ngSubmit)="submit()"
+  >
+    <div>
+      <input
+        formControlName="file"
+        id="file"
+        type="file"
+        (change)="onFileChange($event)"
+      />
+    </div>
+    <button
+      class="button-main excel-export__form__button"
+      type="submit"
+      [disabled]="!isFormValid || isFormButtonDisabled"
+    >
+      Send
+    </button>
+  </form>
+  <div
+    *ngIf="isFormValid && fileName"
+    class="success-message excel-export__message"
+  >
+    File extension is correct. Press the button for sending this file
+  </div>
+  <div
+    *ngIf="!isFormValid && fileName"
+    class="error-message excel-export__message"
+  >
+    Unsupported media type. The field can only accept files with extensions:
+    xls, xlsx, csv, xml.
+  </div>
+</section>

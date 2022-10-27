@@ -21,10 +21,9 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Add pupil to database
         /// </summary>
-        /// <param name="pupil"></param>
         public async Task AddAsync(IPupil pupil)
         {
-            await _dbContext.Set<PupilDb>().AddAsync(_mapper.Map<PupilDb>(pupil));
+            await _dbContext.Pupils.AddAsync(_mapper.Map<PupilDb>(pupil));
 
             await _dbContext.SaveChangesAsync();
         }
@@ -32,24 +31,23 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get all pupils
         /// </summary>
-        public IPupil[] GetAll()
+        public async Task<IPupil[]> GetAllAsync()
         {
-            var pupils = _dbContext.Set<PupilDb>();
+            var pupils = await _dbContext.Pupils.ToArrayAsync();
 
-            List<IPupil> result = new List<IPupil>();
+            IPupil[] result = new IPupil[_dbContext.Pupils.Count()];
 
-            foreach (var pupil in pupils)
+            for (var i = 0; i < result.Length; i++)
             {
-                result.Add(_mapper.Map<Pupil>(pupil));
+                result[i] = _mapper.Map<IPupil>(pupils[i]);
             }
 
-            return result.ToArray();
+            return result;
         }
 
         /// <summary>
         /// Get pupil by id
         /// </summary>
-        /// <param name="id"></param>
         public async Task<IPupil> GetByIdAsync(long id)
         {
             var databaseModel = await _dbContext.Set<PupilDb>().FirstOrDefaultAsync(p => p.Id == id);
@@ -60,7 +58,6 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Update pupil
         /// </summary>
-        /// <param name="pupil"></param>
         public async Task UpdateAsync(IPupil pupil)
         {
             _dbContext.Set<PupilDb>().Update(_mapper.Map<PupilDb>(pupil));

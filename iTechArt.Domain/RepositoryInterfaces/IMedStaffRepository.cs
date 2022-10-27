@@ -8,7 +8,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// Get all doctors from database
         /// </summary>
         /// <returns> Array of Repository Model Interfaces </returns>
-        IMedStaff[] GetAll();
+        Task<IMedStaff[]> GetAll();
 
         /// <summary>
         /// Add doctor to database
