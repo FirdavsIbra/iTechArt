@@ -7,17 +7,16 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// Upload pupil's file
         /// </summary>
-        public void ImportPupilsFile();
+        public Task ImportPupilsFileAsync();
 
         /// <summary>
         /// Get all pupils
         /// </summary>
-        public IPupil[] GetAllAsync();
+        public Task<IPupil[]> GetAllAsync();
 
         /// <summary>
         /// Get pupil by id
         /// </summary>
-        /// <param name="id"></param>
         public Task<IPupil> GetByIdAsync(long id);
     }
 }

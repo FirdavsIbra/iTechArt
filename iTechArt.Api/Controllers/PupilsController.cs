@@ -43,7 +43,7 @@ namespace iTechArt.Api.Controllers
         [HttpGet("export")]
         public async Task<IActionResult> GetAllAsync()
         {
-            return Ok(_pupilService.GetAllAsync());
+            return Ok(await _pupilService.GetAllAsync());
         }
 
         /// <summary>
