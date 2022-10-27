@@ -1,0 +1,59 @@
+.header {
+  padding: 0 20px;
+  text-align: center;
+  background: #3A5696;
+  font-size: 15px;
+  margin-bottom: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+}
+
+p {
+  color: white;
+  letter-spacing: 0.5px;
+}
+
+nav {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline-block;
+  list-style: none;
+  margin: 15px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.logo-image {
+  width: 30px;
+}
+
+.header-element {
+  width: 20%;
+  display: flex;
+  align-items: center;
+}
+
+.button-container{
+  justify-content: flex-end
+}
+
+.logo-container{
+  justify-content: flex-start;
+  cursor:pointer
+}
+
+.nav-cursor{
+  cursor: pointer;
+}
