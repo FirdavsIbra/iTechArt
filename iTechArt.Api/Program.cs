@@ -27,13 +27,13 @@ builder.Services.AddScoped<IMedStaffService, MedStaffService>();
 builder.Services.AddScoped<IPoliceService, PoliceService>();
 builder.Services.AddScoped<IPupilService, PupilService>();
 
-//builder.Services.AddCors(option =>
-//{
-//    option.AddDefaultPolicy(builder =>
-//    {
-//        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials();
-//    });
-//});
+builder.Services.AddCors(option =>
+{
+    option.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+    });
+});
 
 builder.Services.AddDbContext<AppDbContext>(option =>
     option.UseNpgsql(builder.Configuration.GetConnectionString("iTechArtConnection")));
