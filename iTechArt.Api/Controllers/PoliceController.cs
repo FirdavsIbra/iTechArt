@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace iTechArt.Api.Controllers
 {
     [ApiController]
-    [Route("api/police")]
+    [Route(RouteConstants.POLICE)]
     public sealed class PoliceController : ControllerBase
     {
         private readonly IPoliceService _policeService;

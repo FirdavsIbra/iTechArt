@@ -16,17 +16,51 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Export data from the databse
         /// </summary>
-        public IPolice[] ExportPoliceData()
+        public async Task<IPolice[]> ExportPoliceData()
         {
-            return _policeRepository.GetAll();
+            return await _policeRepository.GetAllAsync();
         }
 
         /// <summary>
         /// Import data to the database
         /// </summary>
-        public IPolice[] ImportPoliceData()
+        public async Task<IPolice[]> ImportPoliceData()
         {
-            return _policeRepository.GetAll();
+            return await _policeRepository.GetAllAsync();
+        }
+
+
+        /// <summary>
+        /// Add or Update Police entity to/from database
+        /// </summary>
+        public async Task AddUpdatePolice(IPolice police)
+        {
+            await _policeRepository.AddUpdateAsync(police);
+        }
+
+        /// <summary>
+        /// Get all Police entities from database
+        /// </summary>
+        public async Task<IPolice[]> GetAllPolice()
+        {
+            return await _policeRepository.GetAllAsync();
+        }
+
+        /// <summary>
+        /// Delete Police entity from database
+        /// </summary>
+        public async Task DeletePolice(long id)
+        {
+            await _policeRepository.DeleteAsync(id);
+        }
+
+
+        /// <summary>
+        /// Function contains all file reading related logic
+        /// </summary>
+        public async Task ImportPoliceFile()
+        {
+            
         }
     }
 }
