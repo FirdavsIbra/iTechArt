@@ -1,33 +1,32 @@
-﻿using iTechArt.Database.Entities.MedicalStaff;
-using iTechArt.Domain.ModelInterfaces;
+﻿using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 
 namespace iTechArt.Service.Services
 {
-    public class MedStaffService : IMedStaffService
+    public sealed class MedStaffService : IMedStaffService
     {
-        private readonly IDoctorRepository _doctorRepository;
+        private readonly IMedStaffRepository _medStaffRepository;
 
-        public MedStaffService(IDoctorRepository doctorRepository)
+        public MedStaffService(IMedStaffRepository doctorRepository)
         {
-            _doctorRepository = doctorRepository;
+            _medStaffRepository = doctorRepository;
         }
 
         /// <summary>
         /// Takes filestream
         /// </summary>
-        public IDoctor[] ExportMedStaffFile()
+        public IMedStaff[] ExportMedStaffFile()
         {
-            return _doctorRepository.GetAll();
+            return _medStaffRepository.GetAll();
         }
 
         /// <summary>
         /// Takes no input so far
         /// </summary>
-        public IDoctor[] ImportMedStaffFile()
+        public IMedStaff[] ImportMedStaffFile()
         {
-            return _doctorRepository.GetAll();
+            return _medStaffRepository.GetAll();
         }
     }
 }

@@ -25,7 +25,7 @@ namespace iTechArt.Repository.Repositories
         public async Task AddAsync(IPupil pupil)
         {
             await _dbContext.Set<PupilDb>().AddAsync(_mapper.Map<PupilDb>(pupil));
-         
+
             await _dbContext.SaveChangesAsync();
         }
 

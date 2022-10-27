@@ -24,7 +24,7 @@ namespace iTechArt.Api.Controllers
         [HttpPost(ApiConstants.IMPORT)]
         public async Task<IActionResult> ImportAirportExcel(IFormFile file)
         {
-            var fileExtension = Path.GetExtension(file.FileName);   
+            var fileExtension = Path.GetExtension(file.FileName);
 
             if (excelExtensions.Contains(fileExtension))
             {

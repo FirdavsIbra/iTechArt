@@ -1,9 +1,8 @@
-﻿using iTechArt.Database.DbContexts;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace iTechArt.Database.Entities.Airports
 {
-    public sealed class AirportDb : IDbModel
+    public sealed class AirportDb
     {
         /// <summary>
         /// Id of airport

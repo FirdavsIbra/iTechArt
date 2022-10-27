@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace iTechArt.Repository.Repositories
 {
-    public class DoctorRepository : IDoctorRepository
+    public sealed class MedStaffRepository : IMedStaffRepository
     {
         private readonly AppDbContext _dbContext;
         private readonly IMapper _mapper;
-        public DoctorRepository(AppDbContext dbContext, IMapper mapper)
+        public MedStaffRepository(AppDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;
@@ -22,9 +22,11 @@ namespace iTechArt.Repository.Repositories
         /// Add doctor to database
         /// </summary>
         /// <param name="doctor"></param>   
-        public async Task AddAsync(IDoctor doctor)
+        public async Task AddAsync(IMedStaff doctor)
         {
-            await _dbContext.Set<DoctorDb>().AddAsync(_mapper.Map<DoctorDb>(doctor));
+            var mappedMedStaff = _mapper.Map<MedStaffDb>(doctor);
+
+            await _dbContext.Staffs.AddAsync(mappedMedStaff);
 
             await _dbContext.SaveChangesAsync();
         }
@@ -32,38 +34,40 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get all doctors from database
         /// </summary>
-        public IDoctor[] GetAll()
+        public IMedStaff[] GetAll()
         {
-            var doctors = _dbContext.Set<DoctorDb>();
+            var doctors = _dbContext.Staffs.ToArray();
 
-            List<IDoctor> result = new List<IDoctor>();
+            IMedStaff[] result = new IMedStaff[_dbContext.Staffs.Count()];
 
-            foreach (var doctor in doctors)
+            for(var i = 0; i < result.Length; i++)
             {
-                result.Add(_mapper.Map<Doctor>(doctor));
+                result[i] = _mapper.Map<IMedStaff>(doctors[i]);
             }
 
-            return result.ToArray();
+            return result;
         }
 
         /// <summary>
         /// Get doctor by id
         /// </summary>
         /// <param name="id"></param>
-        public async Task<IDoctor> GetByIdAsync(long id)
+        public async Task<IMedStaff> GetByIdAsync(long id)
         {
-            var doctorDb = await _dbContext.Set<DoctorDb>().FirstOrDefaultAsync(d => d.Id == id);
+            var doctorDb = await _dbContext.Staffs.FirstOrDefaultAsync(d => d.Id == id);
 
-            return _mapper.Map<Doctor>(doctorDb);
+            return _mapper.Map<MedStaff>(doctorDb);
         }
 
         /// <summary>
         /// Update doctor
         /// </summary>
         /// <param name="doctor"></param>
-        public async Task UpdateAsync(IDoctor doctor)
+        public async Task UpdateAsync(IMedStaff doctor)
         {
-            _dbContext.Set<DoctorDb>().Update(_mapper.Map<DoctorDb>(doctor));
+            var mappedMedStaff = _mapper.Map<MedStaffDb>(doctor);
+
+            _dbContext.Staffs.Update(mappedMedStaff);
 
             await _dbContext.SaveChangesAsync();
         }
@@ -73,9 +77,9 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public async Task DeleteAsync(long id)
         {
-            var doctor = await _dbContext.Set<DoctorDb>().FirstOrDefaultAsync(d => d.Id == id);
+            var doctor = await _dbContext.Staffs.FirstOrDefaultAsync(d => d.Id == id);
 
-            _dbContext.Set<DoctorDb>().Remove(_mapper.Map<DoctorDb>(doctor));
+            _dbContext.Staffs.Remove(_mapper.Map<MedStaffDb>(doctor));
 
             await _dbContext.SaveChangesAsync();
         }
@@ -85,7 +89,7 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public int GetCountOfDoctors()
         {
-            return _dbContext.Set<DoctorDb>().Count();
+            return _dbContext.Staffs.Count();
         }
     }
 }

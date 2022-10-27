@@ -30,7 +30,7 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Importing airport datas
         /// </summary>
-        public async IAirport[] ImportAirportExcel(IFormFile file)
+        public async Task ImportAirportExcel(IFormFile file)
         {
             try
             {
@@ -58,22 +58,20 @@ namespace iTechArt.Service.Services
                                     City = worksheet.Cells[row, 5].Value.ToString().Trim(),
                                     EmpoyeesCount = Convert.ToUInt16(worksheet.Cells[row, 6].Value),
                                     PassengersPerYear = Convert.ToInt64(worksheet.Cells[row, 7].Value),
-                                    FlightsPerYear = Convert.ToUInt16(worksheet.Cells[row, 8].Value),
+                                    FlightsPerYear = Convert.ToUInt32(worksheet.Cells[row, 8].Value),
                                     AverageTicketPrice = Convert.ToUInt16(worksheet.Cells[row, 9].Value)
                                 };
+                               
+                                IAirport airport = _mapper.Map<IAirport>(list);
+                                await _airportRepository.AddAsync(airport);
                             }
-
-
                         }
                     }
-                   
                 }
                 else
                 {
                     throw new Exception("Upload correct File!!!");
                 }
-
-                return _airportRepository.GetAll();
             }
             catch (Exception e)
             {

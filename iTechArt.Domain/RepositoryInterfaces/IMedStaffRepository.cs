@@ -2,32 +2,32 @@
 
 namespace iTechArt.Domain.RepositoryInterfaces
 {
-    public interface IDoctorRepository
+    public interface IMedStaffRepository
     {
         /// <summary>
         /// Get all doctors from database
         /// </summary>
         /// <returns> Array of Repository Model Interfaces </returns>
-        IDoctor[] GetAll();
+        IMedStaff[] GetAll();
 
         /// <summary>
         /// Add doctor to database
         /// </summary>
         /// <param name="doctor"></param>
-        Task AddAsync(IDoctor doctor);
+        Task AddAsync(IMedStaff doctor);
 
         /// <summary>
         /// Get doctor by id
         /// </summary>
         /// <param name="id"></param>
         /// <returns> Resopisitory model interface </returns>
-        Task<IDoctor> GetByIdAsync(long id);
+        Task<IMedStaff> GetByIdAsync(long id);
 
         /// <summary>
         /// Update doctor
         /// </summary>
         /// <param name="doctor"></param>
-        Task UpdateAsync(IDoctor doctor);
+        Task UpdateAsync(IMedStaff doctor);
 
         /// <summary>
         /// Delete doctor from database

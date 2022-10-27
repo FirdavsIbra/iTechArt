@@ -28,7 +28,7 @@ namespace iTechArt.Database.DbContexts
         /// <summary>
         /// Medicine staff tables
         /// </summary>
-        public virtual DbSet<DoctorDb> Staffs { get; set; }
+        public virtual DbSet<MedStaffDb> Staffs { get; set; }
 
         /// <summary>
         /// Pupil tables

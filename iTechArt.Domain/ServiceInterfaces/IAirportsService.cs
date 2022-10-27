@@ -8,7 +8,7 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// Interface of Importing airport datas
         /// </summary>
-        public IAirport[] ImportAirportExcel(IFormFile file);
+        public Task ImportAirportExcel(IFormFile file);
 
         /// <summary>
         /// Interface of Exporting airport datas
