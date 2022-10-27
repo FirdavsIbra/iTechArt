@@ -6,63 +6,63 @@ namespace iTechArt.Repository.BusinessModels
     internal sealed class MedStaff : IMedStaff
     {
         /// <summary>
-        /// Unical Id of a Doctor
+        /// gets && internal sets Unical Id of a Doctor
         /// </summary>
-        public long Id { get; set; }
+        public long Id { get; internal set; }
 
         /// <summary>
-        /// Firstname of a Doctor
+        /// gets && internal sets Firstname of a Doctor
         /// </summary>
         public string FirstName { get; internal set; }
 
         /// <summary>
-        /// Lastname of a Doctor
+        /// gets && internal sets Lastname of a Doctor
         /// </summary>
         public string LastName { get; internal set; }
 
         /// <summary>
-        /// Gender of a Doctor
+        /// gets && internal sets Gender of a Doctor
         /// </summary>
         public Gender Gender { get; internal set; }
 
         /// <summary>
-        /// Email address of a Doctor
+        /// gets && internal sets Email address of a Doctor
         /// </summary>
         public string Email { get; internal set; }
 
         /// <summary>
-        /// Phone number of a Doctor
+        /// gets && internal sets Phone number of a Doctor
         /// string
         /// </summary>
         public string PhoneNumber { get; internal set; }
 
         /// <summary>
-        /// Date of birth of a Doctor
+        /// gets && internal sets Date of birth of a Doctor
         /// </summary>
         public DateTime DateOfBirth { get; internal set; }
 
         /// <summary>
-        /// Address of a Doctor
+        /// gets && internal sets Address of a Doctor
         /// </summary>
         public string Address { get; internal set; }
 
         /// <summary>
-        /// Monthly salary of a Doctor
+        /// gets && internal sets Monthly salary of a Doctor
         /// </summary>
         public decimal Salary { get; internal set; }
 
         /// <summary>
-        /// Name of a hospital where the Doctor works
+        /// gets && internal sets Name of a hospital where the Doctor works
         /// </summary>
         public string HospitalName { get; internal set; }
 
         /// <summary>
-        /// Postal code of a city where the Doctor works
+        /// gets && internal sets Postal code of a city where the Doctor works
         /// </summary>
         public string PostalCode { get; internal set; }
 
         /// <summary>
-        /// Work shift of a Doctor
+        /// gets && internal sets Work shift of a Doctor
         /// </summary>
         public Shift Shift { get; internal set; }
     }

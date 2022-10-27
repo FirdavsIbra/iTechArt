@@ -15,7 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IPupilRepository, PupilRepository>();
 builder.Services.AddScoped<IAirportRepository, AirportRepository>();
 builder.Services.AddScoped<IPoliceRepository, PoliceRepository>();
-builder.Services.AddScoped<IMedStaffRepository, DoctorRepository>();
+builder.Services.AddScoped<IMedStaffRepository, MedStaffRepository>();
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<IGroceryRepository, GroceryRepository>();
 
