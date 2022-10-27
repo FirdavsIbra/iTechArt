@@ -8,7 +8,9 @@ namespace iTechArt.Api.Controllers
     public sealed class AirportController : ControllerBase
     {
         private readonly IAirportsService _airportsService;
-        private readonly string[] fileExtensions = {".xlsx", ".xls", ".csv", "application/vnd.ms-excel", "officedocument.spreadsheetml.sheet" };
+        private readonly string[] excelExtensions = {".xlsx", ".xls", ".xlsm", ".xlsb", ".xltx", ".xltm", ".xlt", ".xlam", ".xla", ".xlw" };
+        private readonly string[] csvExtensions = { ".csv"};
+        private readonly string[] excelContentTypes = { "application/vnd.ms-excel", "officedocument.spreadsheetml.sheet", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" };
 
         public AirportController(IAirportsService airportsService)
         {
@@ -24,9 +26,9 @@ namespace iTechArt.Api.Controllers
         {
             var fileExtension = Path.GetExtension(file.FileName);   
 
-            if (fileExtensions.Contains(fileExtension))
+            if (excelExtensions.Contains(fileExtension))
             {
-                return Ok(_airportsService.ImportAirportExcel());
+                return Ok(_airportsService.ImportAirportExcel(file));
             }
             else
             {

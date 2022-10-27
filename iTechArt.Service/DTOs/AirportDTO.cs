@@ -1,15 +1,14 @@
-﻿using iTechArt.Database.DbContexts;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace iTechArt.Database.Entities.Airports
+namespace iTechArt.Service.DTOs
 {
-    public sealed class AirportDb : IDbModel
+    internal sealed class AirportDTO
     {
-        /// <summary>
-        /// Id of airport
-        /// </summary>
-        public long Id { get; set; }
-
         /// <summary>
         /// Airport Name
         /// </summary>
