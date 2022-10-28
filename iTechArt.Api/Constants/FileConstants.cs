@@ -3,6 +3,11 @@
     public static class FileConstants
     {
         /// <summary>
+        /// types of extensions
+        /// </summary>
+        public static readonly string[] Extensions = { ".xlsx", ".xls", ".csv", ".xml"};
+        
+        /// <summary>
         /// Content types of CSV files
         /// </summary>
         public static readonly string[] CSV =

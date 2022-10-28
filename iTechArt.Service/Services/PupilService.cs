@@ -31,9 +31,9 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Get pupil by id
         /// </summary>
-        public Task<IPupil> GetByIdAsync(long id) 
+        public async Task<IPupil> GetByIdAsync(long id) 
         { 
-            return _pupilRepository.GetByIdAsync(id);
+            return await _pupilRepository.GetByIdAsync(id);
         }
 
         /// <summary>
