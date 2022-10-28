@@ -22,9 +22,9 @@ namespace iTechArt.Api.Controllers
         {
             if (formFile != null)
             {
-                if (FileConstants.EXCEL.Contains(formFile.ContentType.ToLower()) || 
-                    FileConstants.CSV.Contains(formFile.ContentType.ToLower()) ||
-                    FileConstants.XML.Contains(formFile.ContentType.ToLower()))
+                var fileExtension = Path.GetExtension(formFile.FileName);
+
+                if (FileConstants.Extensions.Contains(fileExtension))
                 {
                     return Ok();
                 }

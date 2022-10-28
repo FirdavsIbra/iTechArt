@@ -87,7 +87,7 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public int GetCountOfGrocery()
         {
-            return _dbContext.Set<GroceryDb>().Count();
+            return _dbContext.Groceries.Count();
         }
     }
 }

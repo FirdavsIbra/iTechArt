@@ -1,16 +1,11 @@
 ﻿using iTechArt.Domain.Enums;
 
-namespace iTechArt.Database.Entities.Pupils
+namespace iTechArt.Service.DTOs
 {
-    public sealed class PupilDb
+    public sealed class PupilForCreationDto
     {
         /// <summary>
-        /// Gets or sets id if pupil
-        /// </summary>
-        public long Id { get; set; }
-
-        /// <summary>
-        /// Gets or sets name of pupil
+        /// Gets and sets the name of pupil
         /// </summary>
         public string FirstName { get; set; }
 
@@ -45,12 +40,12 @@ namespace iTechArt.Database.Entities.Pupils
         public string City { get; set; }
 
         /// <summary>
-        /// Gets or sets a name of school, where pupil study
+        /// Gets or sets the name of school, where pupil study
         /// </summary>
         public string SchoolName { get; set; }
 
         /// <summary>
-        /// Gets or sets grade of study of pupil
+        /// Gets or sets the grade of study of pupil
         /// </summary>
         public byte Grade { get; set; }
 

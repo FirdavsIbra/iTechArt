@@ -20,67 +20,66 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Add entity to database
+        /// Add or Update Police entity to/from database
         /// </summary>
         /// <param name="entity"></param>   
-        public async Task AddAsync(IPolice entity)
+        public async Task AddUpdateAsync(IPolice entity)
         {
-            var entry = await _dbContext.Set<PoliceDb>().AddAsync(_mapper.Map<PoliceDb>(entity));
-
+            PoliceDb police = _mapper.Map<PoliceDb>(entity);
+            if (entity != null)
+            {
+                if (entity.Id > 0)
+                {
+                    _dbContext.Police.Update(police);
+                }
+                else
+                {
+                    _dbContext.Police.Add(police);
+                }
+            }
             await _dbContext.SaveChangesAsync();
         }
 
         /// <summary>
-        /// Get all entities from database
+        /// Get all Police data from database
         /// </summary>
-        public IPolice[] GetAll()
+        public async Task<IPolice[]> GetAllAsync()
         {
-            var models = _dbContext.Police;
-
-            List<IPolice> result = new List<IPolice>();
-
-            foreach (var i in models)
-                result.Add(_mapper.Map<IPolice>(i));
-
-            return result.ToArray();
+            IEnumerable<IPolice> polices = _dbContext.Police.Select(c => _mapper.Map<IPolice>(c));
+            return polices.ToArray();
         }
 
         /// <summary>
-        /// Get entity by id
+        /// Get Police by id
         /// </summary>
         /// <param name="id"></param>
         public async Task<IPolice> GetByIdAsync(long id)
         {
-            var databaseModel = await _dbContext.Set<PoliceDb>().FirstOrDefaultAsync(p => p.Id == id);
+            var entityFromDb = await _dbContext.Police.FirstOrDefaultAsync(c => c.Id == id);
 
-            if (databaseModel is null)
+            if (entityFromDb != null)
+            {
+                var ipolice = _mapper.Map<IPolice>(entityFromDb);
+                return ipolice;
+            }
+            else
+            {
                 return null;
-
-            return _mapper.Map<IPolice>(databaseModel);
+            }
         }
 
         /// <summary>
-        /// Update entity
-        /// </summary>
-        /// <param name="entity"></param>
-        public async Task UpdateAsync(IPolice entity)
-        {
-            var entry = _dbContext.Set<PoliceDb>().Update(_mapper.Map<PoliceDb>(entity));
-
-            await _dbContext.SaveChangesAsync();
-        }
-
-        /// <summary>
-        /// Delete entity from database
+        /// Delete Police from database
         /// </summary>
         /// <param name="entity"></param>
         public async Task DeleteAsync(long id)
         {
-            var police = await _dbContext.Police.FirstOrDefaultAsync(d => d.Id == id);
-
-            _dbContext.Police.Remove(_mapper.Map<PoliceDb>(police));
-
-            await _dbContext.SaveChangesAsync();
+            var police = await _dbContext.Police.FirstOrDefaultAsync(c => c.Id == id);
+            if (police != null)
+            {
+                _dbContext.Police.Remove(police);
+                await _dbContext.SaveChangesAsync();
+            }
         }
 
         /// <summary>
@@ -88,7 +87,18 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public int GetCountOfPolice()
         {
-            return _dbContext.Set<PoliceDb>().Count();
+            return _dbContext.Police.Count();
         }
+
+        ///// <summary>
+        ///// Update entity
+        ///// </summary>
+        ///// <param name="entity"></param>
+        //public async Task UpdateAsync(IPolice entity)
+        //{
+        //    var entry = _dbContext.Set<PoliceDb>().Update(_mapper.Map<PoliceDb>(entity));
+
+        //    await _dbContext.SaveChangesAsync();
+        //}
     }
 }

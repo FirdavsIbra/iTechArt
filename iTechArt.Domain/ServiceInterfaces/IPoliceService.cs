@@ -5,13 +5,13 @@ namespace iTechArt.Domain.ServiceInterfaces
     public interface IPoliceService
     {
         /// <summary>
-        /// function to imports data to the database
+        /// function to import data to the database
         /// </summary>
-        public IPolice[] ImportPoliceData();
+        public Task<IPolice[]> ImportPoliceData();
 
         /// <summary>
-        /// function to exports data from the database
+        /// function to export data from the database
         /// </summary>
-        public IPolice[] ExportPoliceData();
+        public Task<IPolice[]> ExportPoliceData();
     }
 }

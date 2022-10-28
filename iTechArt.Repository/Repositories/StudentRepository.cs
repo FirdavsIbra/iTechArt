@@ -90,7 +90,7 @@ namespace iTechArt.Repository.Repositories
         /// <returns></returns>
         public int GetCountOfStudents()
         {
-            return _dbContext.Set<StudentDb>().Count();
+            return _dbContext.Students.Count();
         }
     }
 }
