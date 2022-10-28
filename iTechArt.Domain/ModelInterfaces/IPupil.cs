@@ -5,62 +5,62 @@ namespace iTechArt.Domain.ModelInterfaces
     public interface IPupil
     {
         /// <summary>
-        /// Id if pupil
+        /// Gets id if pupil
         /// </summary>
         public long Id { get; }
 
         /// <summary>
-        /// Name of pupil
+        /// Gets name of pupil
         /// </summary>
         public string FirstName { get; }
 
         /// <summary>
-        /// Surname of pupil
+        /// Gets surname of pupil
         /// </summary>
         public string LastName { get; }
 
         /// <summary>
-        /// Birthdate of pupil
+        /// Gets birthdate of pupil
         /// </summary>
         public DateTime DateOfBirth { get; }
 
         /// <summary>
-        /// Gender of pupil
+        /// Gets gender of pupil
         /// </summary>
         public Gender Gender { get; }
 
         /// <summary>
-        /// Phone number of pupil
+        /// Gets phone number of pupil
         /// </summary>
         public string PhoneNumber { get; }
 
         /// <summary>
-        /// Address of pupil
+        /// Gets address of pupil
         /// </summary>
         public string Address { get; }
 
         /// <summary>
-        /// The city, where pupil lives
+        /// Gets a city, where pupil lives
         /// </summary>
         public string City { get; }
 
         /// <summary>
-        /// The name of school, where pupil study
+        /// Gets name of school, where pupil study
         /// </summary>
         public string SchoolName { get; }
 
         /// <summary>
-        /// The grade of study of pupil
+        /// Gets grade of study of pupil
         /// </summary>
         public byte Grade { get; }
 
         /// <summary>
-        /// The language of education
+        /// Gets a language of education
         /// </summary>
         public CourseLanguage CourseLanguage { get; }
 
         /// <summary>
-        /// The shift of study
+        /// Gets a shift of study
         /// </summary>
         public Shift Shift { get; }
     }
