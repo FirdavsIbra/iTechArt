@@ -1,4 +1,6 @@
-﻿namespace iTechArt.Database.Entities.Airports
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace iTechArt.Database.Entities.Airports
 {
     public sealed class AirportDb
     {
@@ -10,6 +12,7 @@
         /// <summary>
         /// Airport Name
         /// </summary>
+        [MaxLength(32)]
         public string AirportName { get; set; }
 
         /// <summary>
@@ -25,11 +28,13 @@
         /// <summary>
         ///  Address location of the airport
         /// </summary>
+        [MaxLength(32)]
         public string Address { get; set; }
 
         /// <summary>
         /// City location of the airport
         /// </summary>
+        [MaxLength(16)]
         public string City { get; set; }
 
         /// <summary>
