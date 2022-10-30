@@ -28,13 +28,13 @@ namespace iTechArt.Database.Entities.Airports
         /// <summary>
         ///  Address location of the airport
         /// </summary>
-        [MaxLength(32)]
+        [MaxLength(64)]
         public string Address { get; set; }
 
         /// <summary>
         /// City location of the airport
         /// </summary>
-        [MaxLength(16)]
+        [MaxLength(64)]
         public string City { get; set; }
 
         /// <summary>

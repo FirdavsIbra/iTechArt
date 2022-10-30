@@ -118,8 +118,7 @@ namespace iTechArt.Service.Services
                             AverageTicketPrice = Convert.ToUInt16(rowData[8])
                         };
 
-                        IAirport airport = _mapper.Map<IAirport>(list);
-                        await _airportRepository.AddAsync(airport);
+                        await _airportRepository.AddAsync(list);
                     }
                 }
                 else
