@@ -9,13 +9,13 @@ namespace iTechArt.Api.Controllers
     public sealed class PoliceController : ControllerBase
     {
         private readonly IPoliceService _policeService;
-        private readonly string[] fileExtensions = new string[] { ".csv", ".xlsx", ".xls" };
-        private readonly string[] contentTypes = new string[] { "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" };
 
         public PoliceController(IPoliceService policeService)
         {
             _policeService = policeService;
         }
+
+
 
         /// <summary>
         /// route: api/police/import. Takes csv or xlsx file
@@ -29,9 +29,10 @@ namespace iTechArt.Api.Controllers
 
             if (formFile != null)
             {
-                if (fileExtensions.Contains(fileExtension) || contentTypes.Contains(formFile.ContentType))
+                if (FileConstants.Extensions.Contains(fileExtension) || FileConstants.EXCEL.Contains(formFile.ContentType)
+                    || FileConstants.CSV.Contains(formFile.ContentType) || FileConstants.XML.Contains(formFile.ContentType))
                 {
-                    return Ok(_policeService.ImportPoliceData());
+                    return Ok(_policeService.ImportPoliceData(formFile));
                 }
                 else
                 {

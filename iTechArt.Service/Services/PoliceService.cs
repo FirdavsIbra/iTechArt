@@ -1,6 +1,8 @@
 ﻿using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
+using iTechArt.Service.Constants;
+using Microsoft.AspNetCore.Http;
 
 namespace iTechArt.Service.Services
 {
@@ -24,9 +26,25 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Import data to the database
         /// </summary>
-        public async Task<IPolice[]> ImportPoliceData()
+        public async Task ImportPoliceData(IFormFile formFile)
         {
-            return await _policeRepository.GetAllAsync();
+            string fileExtension = Path.GetExtension(formFile.FileName);
+            
+            // .xlsx type
+            if (fileExtension == FileConstants.Extensions[0] || FileConstants.EXCEL.Contains(formFile.ContentType))
+            {
+                await _policeRepository.ReadExcelAsync(formFile);
+            }
+            // .csv type
+            else if(fileExtension == FileConstants.Extensions[2] || FileConstants.CSV.Contains(formFile.ContentType))
+            {
+                await _policeRepository.ReadCSVAsync(formFile);
+            }
+            // .xml type
+            else if(fileExtension == FileConstants.Extensions[3] || FileConstants.XML.Contains(formFile.ContentType))
+            {
+                await _policeRepository.ReadXMLAsync(formFile);
+            }
         }
 
 
@@ -52,15 +70,6 @@ namespace iTechArt.Service.Services
         public async Task DeletePolice(long id)
         {
             await _policeRepository.DeleteAsync(id);
-        }
-
-
-        /// <summary>
-        /// Function contains all file reading related logic
-        /// </summary>
-        public async Task ImportPoliceFile()
-        {
-            
         }
     }
 }

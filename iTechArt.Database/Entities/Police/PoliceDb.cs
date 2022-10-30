@@ -1,4 +1,6 @@
-﻿namespace iTechArt.Database.Entities.Police
+﻿using iTechArt.Domain.Enums;
+
+namespace iTechArt.Database.Entities.Police
 {
     public sealed class PoliceDb
     {
@@ -25,7 +27,7 @@
         /// <summary>
         /// Police Officers gender
         /// </summary>
-        public string Gender { get; set; }
+        public Gender Gender { get; set; }
 
         /// <summary>
         /// Police Officers address
@@ -38,7 +40,7 @@
         public string JobTitle { get; set; }
 
         /// <summary>
-        /// Police Officers salary
+        /// Police Officers salary in US dollars with 2 double precision
         /// </summary>
         public double Salary { get; set; }
     }

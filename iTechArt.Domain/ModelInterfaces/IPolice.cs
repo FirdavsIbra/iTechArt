@@ -40,7 +40,7 @@ namespace iTechArt.Domain.ModelInterfaces
         public string JobTitle { get; }
 
         /// <summary>
-        /// Police Officers salary
+        /// Police Officers salary in US dollars with 2 double precision
         /// </summary>
         public double Salary { get; }
     }
