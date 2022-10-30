@@ -20,7 +20,7 @@
         /// <summary>
         /// A number of people can be in at the same time at the airport
         /// </summary>
-        public short Capacity { get; }
+        public ushort Capacity { get; }
 
         /// <summary>
         ///  Address location of the airport
@@ -35,7 +35,7 @@
         /// <summary>
         /// A number of employees
         /// </summary>
-        public short EmpoyeesCount { get; }
+        public ushort EmpoyeesCount { get; }
 
         /// <summary>
         /// The number of passengers who fly from a particular airport
@@ -45,11 +45,11 @@
         /// <summary>
         /// The number of flights from a particular airport in a year
         /// </summary>
-        public int FlightsPerYear { get; }
+        public uint FlightsPerYear { get; }
 
         /// <summary>
         /// The average price of tickets
         /// </summary>
-        public short AverageTicketPrice { get; }
+        public ushort AverageTicketPrice { get; }
     }
 }

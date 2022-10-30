@@ -1,9 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using iTechArt.Domain.ModelInterfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace iTechArt.Service.DTOs
 {
-    internal sealed class AirportDTO
+    internal sealed class AirportDTO : IAirport
     {
+
+        /// <summary>
+        /// Id of airport
+        /// </summary>
+        public long Id { get; }
+
         /// <summary>
         /// Airport Name
         /// </summary>

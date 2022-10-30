@@ -25,8 +25,7 @@ namespace iTechArt.Api.Controllers
         {
             var fileExtension = Path.GetExtension(file.FileName);
 
-            if (excelExtensions.Contains(fileExtension) && 
-                FileConstants.EXCEL.Contains(file.ContentType.ToLower()))
+            if (excelExtensions.Contains(fileExtension))
             {
                 return Ok(_airportsService.ImportAirportExcel(file));
             }
