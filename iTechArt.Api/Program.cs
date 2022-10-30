@@ -4,13 +4,13 @@ using iTechArt.Domain.ServiceInterfaces;
 using iTechArt.Repository.Mappers;
 using iTechArt.Repository.Repositories;
 using iTechArt.Serivce.Services;
+using iTechArt.Service.Helpers;
 using iTechArt.Service.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 builder.Services.AddScoped<IPupilRepository, PupilRepository>();
 builder.Services.AddScoped<IAirportRepository, AirportRepository>();
@@ -56,6 +56,8 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 }
 
 app.UseHttpsRedirection();
+
+EnvironmentHelper.WebRootPath = app.Services.GetService<IWebHostEnvironment>().WebRootPath;
 
 app.UseCors();
 

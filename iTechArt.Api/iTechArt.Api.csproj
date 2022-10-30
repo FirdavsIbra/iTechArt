@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
@@ -26,6 +26,10 @@
     <ProjectReference Include="..\iTechArt.Domain\iTechArt.Domain.csproj" />
     <ProjectReference Include="..\iTechArt.Repository\iTechArt.Repository.csproj" />
     <ProjectReference Include="..\iTechArt.Service\iTechArt.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\files\" />
   </ItemGroup>
 
 </Project>

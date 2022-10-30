@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace iTechArt.Service.DTOs
 {
-    internal sealed class PupilForCreationDto : IPupil
+    public sealed class PupilForCreationDto : IPupil
     {
         /// <summary>
         /// Gets or sets id of pupil
