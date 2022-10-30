@@ -28,7 +28,7 @@ namespace iTechArt.Service.Services
             return _airportRepository.GetAll();
         }
         /// <summary>
-        /// Importing airport datas
+        /// Importing airport datas from excel file
         /// </summary>
         public async Task ImportAirportExcel(IFormFile file)
         {
@@ -40,13 +40,13 @@ namespace iTechArt.Service.Services
                 {
                     using (var stream = new MemoryStream())
                     {
-                        file.CopyTo(stream);
+                        await file.CopyToAsync(stream);
                         using (var package = new ExcelPackage(stream))
                         {
                             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
                             ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
                             var rowCount = worksheet.Dimension.Rows;
-                            
+
                             for (int row = 2; row <= rowCount; row++)
                             {
                                 var list = new AirportDTO
@@ -61,11 +61,65 @@ namespace iTechArt.Service.Services
                                     FlightsPerYear = Convert.ToUInt32(worksheet.Cells[row, 8].Value),
                                     AverageTicketPrice = Convert.ToUInt16(worksheet.Cells[row, 9].Value)
                                 };
-                               
-                                IAirport airport = _mapper.Map<IAirport>(list);
-                                await _airportRepository.AddAsync(airport);
+
+                                await _airportRepository.AddAsync(list);
                             }
                         }
+                    }
+                }
+                else
+                {
+                    throw new Exception("Upload correct File!!!");
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException(nameof(e));
+            }
+        }
+
+        public async Task ImportAirportCSV(IFormFile file)
+        {
+            try
+            {
+                if (file.FileName.Contains(".csv"))
+                {
+                    var fileName = DateTime.Now.Ticks + ".csv"; //Create a new Name for the file due to security reasons.
+                    var pathBuilt = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+
+                    if (!Directory.Exists(pathBuilt))
+                    {
+                        Directory.CreateDirectory(pathBuilt);
+                    }
+
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", fileName);
+
+                    using (var stream = new FileStream(path, FileMode.Open))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+
+                    var csvLines = File.ReadAllLines(path);
+
+                    for (int i = 1; i < csvLines.Length; i++)
+                    {
+                        var rowData = csvLines[i].Split(',');
+
+                        var list = new AirportDTO
+                        {
+                            AirportName = rowData[0].ToString().Trim(),
+                            BuiltDate = Convert.ToDateTime(rowData[1]),
+                            Capacity = Convert.ToUInt16(rowData[2]),
+                            Address = rowData[3].ToString().Trim(),
+                            City = rowData[4].ToString().Trim(),
+                            EmpoyeesCount = Convert.ToUInt16(rowData[5]),
+                            PassengersPerYear = Convert.ToInt64(rowData[6]),
+                            FlightsPerYear = Convert.ToUInt32(rowData[7]),
+                            AverageTicketPrice = Convert.ToUInt16(rowData[8])
+                        };
+
+                        IAirport airport = _mapper.Map<IAirport>(list);
+                        await _airportRepository.AddAsync(airport);
                     }
                 }
                 else
