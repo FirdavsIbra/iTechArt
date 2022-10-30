@@ -1,62 +1,75 @@
 ﻿using iTechArt.Domain.Enums;
+using iTechArt.Domain.ModelInterfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace iTechArt.Service.DTOs
 {
-    public sealed class PupilForCreationDto
+    internal sealed class PupilForCreationDto : IPupil
     {
         /// <summary>
-        /// Gets and sets the name of pupil
+        /// Gets or sets id of pupil
         /// </summary>
-        public string FirstName { get; set; }
+        public long Id { get; internal set; }
+
+        /// <summary>
+        /// Gets or sets the name of pupil
+        /// </summary>
+        [MaxLength(64)]
+        public string FirstName { get; internal set; }
 
         /// <summary>
         /// Gets or sets surname of pupil
         /// </summary>
-        public string LastName { get; set; }
+        [MaxLength(64)]
+        public string LastName { get; internal set; }
 
         /// <summary>
         /// Gets or sets birthdate of pupil
         /// </summary>
-        public DateTime DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; internal set; }
 
         /// <summary>
         /// Gets or sets gender of pupil
         /// </summary>
-        public Gender Gender { get; set; }
+        public Gender Gender { get; internal set; }
 
         /// <summary>
         /// Gets or sets phone number of pupil
         /// </summary>
-        public string PhoneNumber { get; set; }
+        [MaxLength(32)]
+        public string PhoneNumber { get; internal set; }
 
         /// <summary>
         /// Gets or sets address of pupil
         /// </summary>
-        public string Address { get; set; }
+        [MaxLength(64)]
+        public string Address { get; internal set; }
 
         /// <summary>
         /// Gets or sets the city, where pupil lives
         /// </summary>
-        public string City { get; set; }
+        [MaxLength(32)]
+        public string City { get; internal set; }
 
         /// <summary>
         /// Gets or sets the name of school, where pupil study
         /// </summary>
-        public string SchoolName { get; set; }
+        [MaxLength(32)]
+        public string SchoolName { get; internal set; }
 
         /// <summary>
         /// Gets or sets the grade of study of pupil
         /// </summary>
-        public byte Grade { get; set; }
+        public byte Grade { get; internal set; }
 
         /// <summary>
         /// Gets or sets the language of education
         /// </summary>
-        public CourseLanguage CourseLanguage { get; set; }
+        public CourseLanguage CourseLanguage { get; internal set; }
 
         /// <summary>
-        /// Gets or sets the shift of study
+        /// Gets or sets shift of study
         /// </summary>
-        public Shift Shift { get; set; }
+        public Shift Shift { get; internal set; }
     }
 }

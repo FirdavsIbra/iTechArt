@@ -41,7 +41,7 @@ namespace iTechArt.Repository.BusinessModels
         public string JobTitle { get; internal set; }
 
         /// <summary>
-        /// Police Officers salary
+        /// Police Officers salary in US dollars with 2 double precision
         /// </summary>
         public double Salary { get; internal set; }
     }

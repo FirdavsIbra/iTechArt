@@ -1,11 +1,19 @@
 ﻿using AutoMapper;
+using CsvHelper;
 using iTechArt.Database.DbContexts;
 using iTechArt.Database.Entities.MedicalStaff;
 using iTechArt.Database.Entities.Police;
+using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Repository.BusinessModels;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using OfficeOpenXml;
+using System.Globalization;
+using System.Xml;
 
 namespace iTechArt.Repository.Repositories
 {
@@ -13,10 +21,15 @@ namespace iTechArt.Repository.Repositories
     {
         private readonly AppDbContext _dbContext;
         private readonly IMapper _mapper;
-        public PoliceRepository(AppDbContext dbContext, IMapper mapper)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public PoliceRepository(AppDbContext dbContext, 
+            IMapper mapper,
+            IWebHostEnvironment webHostEnvironment)
         {
             _dbContext = dbContext;
             _mapper = mapper;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         /// <summary>
@@ -89,6 +102,139 @@ namespace iTechArt.Repository.Repositories
         {
             return _dbContext.Police.Count();
         }
+
+        /// <summary>
+        /// Parse XLSX file and save to database
+        /// </summary>
+        /// <param name="file"></param>
+        public async Task ReadExcelAsync(IFormFile file)
+        {
+            using (var fileStream = new MemoryStream())
+            {
+                await file.CopyToAsync(fileStream);
+                using (var package = new ExcelPackage(fileStream))
+                {
+                    ExcelPackage.LicenseContext = LicenseContext.Commercial;
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
+                    var rowCount = worksheet.Dimension.Rows;
+                    for (int row = 2; row <= rowCount; row++)
+                    {
+                        try
+                        {
+                            PoliceDb policeDb = new PoliceDb
+                            {
+                                Name = worksheet.Cells[row, 2].Value.ToString().Trim(),
+                                Surname = worksheet.Cells[row, 3].Value.ToString().Trim(),
+                                Email = worksheet.Cells[row, 4].Value.ToString().Trim(),
+                                Gender = (Gender)(worksheet.Cells[row, 5].Value),
+                                Address = worksheet.Cells[row, 6].Value.ToString().Trim(),
+                                JobTitle = worksheet.Cells[row, 6].Value.ToString().Trim(),
+                                Salary = Convert.ToDouble(worksheet.Cells[row, 6].Value)
+                            };
+                            _dbContext.Police.Add(policeDb);
+                            await _dbContext.SaveChangesAsync();
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message.ToString());
+                        }
+                    }
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Parse XML file and save to database
+        /// </summary>
+        /// <param name="file"></param>
+        public async Task ReadXMLAsync(IFormFile file)
+        {
+            var filePath = Path.Combine(_webHostEnvironment.ContentRootPath, "temp", file.FileName);
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.Load(filePath);
+            foreach (XmlNode node in xmlDocument.SelectNodes("/dataset/record"))
+            {
+                try
+                {
+                    PoliceDb policeDb = new PoliceDb
+                    {
+                        Name = node["name"].InnerText,
+                        Surname = node["job"].InnerText,
+                        Email = node["email"].InnerText,
+                        Gender = (Gender)Enum.Parse(typeof(Gender),node["phone"].InnerText),
+                        Address = node["movie"].InnerText,
+                        JobTitle = node["phone"].InnerText,
+                        Salary = Convert.ToDouble(node["movie"].InnerText)
+                    };
+
+                    _dbContext.Police.Add(policeDb);
+                    await _dbContext.SaveChangesAsync();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message.ToString());
+                }
+            }
+            // Delete the created file
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+        }
+
+
+        /// <summary>
+        /// Parse CSV file and save to database
+        /// </summary>
+        /// <param name="file"></param>
+        public async Task ReadCSVAsync(IFormFile file)
+        {
+            var filePath = Path.Combine(_webHostEnvironment.ContentRootPath, "temp", file.FileName);
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+            using (var csvReader = new StreamReader(filePath))
+            {
+                using (var csv = new CsvReader(csvReader, CultureInfo.InvariantCulture))
+                {
+                    try
+                    {
+                        var records = csv.GetRecords<PoliceDb>();
+                        foreach (var record in records)
+                        {
+                            PoliceDb policeDb = new PoliceDb
+                            {
+                                Name = record.Name,
+                                Surname = record.Surname,
+                                Email = record.Email,
+                                Gender = record.Gender,
+                                Address = record.Address,
+                                JobTitle = record.JobTitle,
+                                Salary = record.Salary
+                            };
+                            _dbContext.Police.Add(policeDb);
+                            await _dbContext.SaveChangesAsync();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message.ToString());
+                    }
+                }
+            }
+            // Delete the created file
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+        }
+
 
         ///// <summary>
         ///// Update entity

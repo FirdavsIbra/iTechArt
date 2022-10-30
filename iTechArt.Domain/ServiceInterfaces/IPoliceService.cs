@@ -1,4 +1,5 @@
 ﻿using iTechArt.Domain.ModelInterfaces;
+using Microsoft.AspNetCore.Http;
 
 namespace iTechArt.Domain.ServiceInterfaces
 {
@@ -7,7 +8,8 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// function to import data to the database
         /// </summary>
-        public Task<IPolice[]> ImportPoliceData();
+        /// <param name="formFile"></param>
+        public Task ImportPoliceData(IFormFile formFile);
 
         /// <summary>
         /// function to export data from the database

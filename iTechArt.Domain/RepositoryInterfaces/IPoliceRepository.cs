@@ -1,4 +1,5 @@
 ﻿using iTechArt.Domain.ModelInterfaces;
+using Microsoft.AspNetCore.Http;
 
 namespace iTechArt.Domain.RepositoryInterfaces
 {
@@ -32,5 +33,20 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// Get count of polices
         /// </summary>
         public int GetCountOfPolice();
+
+        /// <summary>
+        /// Parse and saves XLSX file into database
+        /// </summary>
+        public Task ReadExcelAsync(IFormFile file);
+
+        /// <summary>
+        /// Parse and saves XML file into database
+        /// </summary>
+        public Task ReadXMLAsync(IFormFile file);
+
+        /// <summary>
+        /// Parse and saves CSV file into database
+        /// </summary>
+        public Task ReadCSVAsync(IFormFile file);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using iTechArt.Domain.ModelInterfaces;
+using Microsoft.AspNetCore.Http;
 
 namespace iTechArt.Domain.ServiceInterfaces
 {
@@ -7,12 +8,12 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// Upload pupil's file
         /// </summary>
-        public Task ImportPupilsFileAsync();
+        public Task ImportPupilsFileAsync(IFormFile file);
 
         /// <summary>
         /// Get all pupils
         /// </summary>
-        public Task<IPupil[]> GetAllAsync();
+        public IPupil[] GetAllAsync();
 
         /// <summary>
         /// Get pupil by id
