@@ -27,7 +27,8 @@ namespace iTechArt.Api.Controllers
 
             if (excelExtensions.Contains(fileExtension))
             {
-                return Ok(_airportsService.ImportAirportExcel(file));
+                await _airportsService.ImportAirportExcel(file);
+                return Ok();
             }
             else
             {
