@@ -4,5 +4,6 @@
     {
         public const string PUPIL = "api/pupils";
         public const string POLICE = "api/police";
+        public const string AIRPORT = "api/airport";
     }
 }
