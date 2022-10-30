@@ -37,7 +37,7 @@ namespace iTechArt.Database.Entities.MedicalStaff
         /// gets && sets Phone number of a Doctor
         /// string
         /// </summary>
-        [MaxLength(14)]
+        [MaxLength(16)]
         public string PhoneNumber { get; set; }
 
         /// <summary>

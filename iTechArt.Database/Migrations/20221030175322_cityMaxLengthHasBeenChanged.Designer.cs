@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using iTechArt.Database.DbContexts;
@@ -11,9 +12,10 @@ using iTechArt.Database.DbContexts;
 namespace iTechArt.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221030175322_cityMaxLengthHasBeenChanged")]
+    partial class cityMaxLengthHasBeenChanged
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -202,8 +204,8 @@ namespace iTechArt.Database.Migrations
                         .HasColumnType("character varying(64)");
 
                     b.Property<string>("City")
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)");
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
 
                     b.Property<byte>("CourseLanguage")
                         .HasColumnType("smallint");
@@ -230,8 +232,8 @@ namespace iTechArt.Database.Migrations
                         .HasColumnType("character varying(32)");
 
                     b.Property<string>("SchoolName")
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)");
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
 
                     b.Property<byte>("Shift")
                         .HasColumnType("smallint");

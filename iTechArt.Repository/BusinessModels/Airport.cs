@@ -14,7 +14,7 @@ namespace iTechArt.Repository.BusinessModels
         /// Airport Name
         /// </summary>
         
-        [MaxLength(32)]
+        [MaxLength(64)]
         public string AirportName { get; internal set; }
 
         /// <summary>
@@ -33,14 +33,14 @@ namespace iTechArt.Repository.BusinessModels
         ///  Address location of the airport
         /// </summary>
         
-        [MaxLength(32)]
+        [MaxLength(64)]
         public string Address { get; internal set; }
 
         /// <summary>
         /// City location of the airport
         /// </summary>
        
-        [MaxLength(16)]
+        [MaxLength(32)]
         public string City { get; internal set; }
 
         /// <summary>

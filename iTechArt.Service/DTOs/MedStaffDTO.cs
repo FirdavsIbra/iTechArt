@@ -2,9 +2,9 @@
 using iTechArt.Domain.ModelInterfaces;
 using System.ComponentModel.DataAnnotations;
 
-namespace iTechArt.Repository.BusinessModels
+namespace iTechArt.Service.DTOs
 {
-    internal sealed class MedStaff : IMedStaff
+    internal class MedStaffDTO : IMedStaff
     {
         /// <summary>
         /// gets && internal sets Unical Id of a Doctor
