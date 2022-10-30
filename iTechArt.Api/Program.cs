@@ -40,7 +40,6 @@ builder.Services.AddDbContext<AppDbContext>(option =>
     option.UseNpgsql(builder.Configuration.GetConnectionString("iTechArtConnection")));
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
-//builder.Services.AddAutoMapper(typeof(MappersServiceProfile));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

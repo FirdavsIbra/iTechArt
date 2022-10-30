@@ -30,10 +30,18 @@ namespace iTechArt.Service.Services
         /// </summary>
         public async Task ImportMedStaffFile(IFormFile file)
         {
+            var fileExtension = Path.GetExtension(file.FileName);
+
+            if (fileExtension == ".xlsx")
+            {
+                await ExcelParser(file);
+            }
+        }
+
+        private async Task ExcelParser(IFormFile file)
+        {
             try
             {
-                var fileExtension = Path.GetExtension(file.FileName);
-
                 using (var stream = new MemoryStream())
                 {
                     file.CopyTo(stream);
@@ -56,7 +64,7 @@ namespace iTechArt.Service.Services
                                 Address = worksheet.Cells[row, 7].Value.ToString(),
                                 Salary = Convert.ToDecimal(worksheet.Cells[row, 8].Value),
                                 HospitalName = worksheet.Cells[row, 9].Value.ToString(),
-                                PostalCode = worksheet.Cells[row, 10].Value.ToString().Trim(),
+                                PostalCode = worksheet.Cells[row, 10].Value is null? string.Empty : worksheet.Cells[row, 10].Value.ToString().Trim(),
                                 Shift = (Shift)Convert.ToByte(worksheet.Cells[row, 11].Value)
                             };
 
@@ -65,9 +73,9 @@ namespace iTechArt.Service.Services
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw new ArgumentException(nameof(e));
+                throw new ArgumentException(nameof(ex));
             }
         }
     }

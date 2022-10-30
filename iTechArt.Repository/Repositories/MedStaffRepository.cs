@@ -42,7 +42,7 @@ namespace iTechArt.Repository.Repositories
 
             for(var i = 0; i < result.Length; i++)
             {
-                result[i] = _mapper.Map<IMedStaff>(doctors[i]);
+                result[i] = _mapper.Map<MedStaff>(doctors[i]);
             }
 
             return result;
