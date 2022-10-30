@@ -92,9 +92,9 @@ namespace iTechArt.Service.Services
                         Directory.CreateDirectory(pathBuilt);
                     }
 
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", fileName);
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", file.FileName);
 
-                    using (var stream = new FileStream(path, FileMode.Open))
+                    using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await file.CopyToAsync(stream);
                     }
@@ -119,6 +119,13 @@ namespace iTechArt.Service.Services
                         };
 
                         await _airportRepository.AddAsync(list);
+                    }
+
+
+                    //Deleting after having used the created path
+                    if (File.Exists(path))
+                    {
+                        File.Delete(path);
                     }
                 }
                 else

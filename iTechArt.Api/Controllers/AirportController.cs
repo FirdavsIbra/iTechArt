@@ -36,6 +36,20 @@ namespace iTechArt.Api.Controllers
             }
         }
 
+        [HttpPost("csv")]
+        public async Task<IActionResult> CSVParser(IFormFile file)
+        {
+            if (file.FileName.Contains(".csv"))
+            {
+                await _airportsService.ImportAirportCSV(file);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
         /// <summary>
         /// Controller of Exporting airport data
         /// </summary>
