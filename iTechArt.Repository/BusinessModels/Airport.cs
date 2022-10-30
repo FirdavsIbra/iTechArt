@@ -27,7 +27,7 @@ namespace iTechArt.Repository.BusinessModels
         /// A number of people can be in at the same time at the airport
         /// </summary>
        
-        public short Capacity { get; internal set; }
+        public ushort Capacity { get; internal set; }
 
         /// <summary>
         ///  Address location of the airport
@@ -47,7 +47,7 @@ namespace iTechArt.Repository.BusinessModels
         /// A number of employees
         /// </summary>
        
-        public short EmpoyeesCount { get; internal set; }
+        public ushort EmpoyeesCount { get; internal set; }
 
         /// <summary>
         /// The number of passengers who fly from a particular airport
@@ -59,11 +59,11 @@ namespace iTechArt.Repository.BusinessModels
         /// The number of flights from a particular airport in a year
         /// </summary>
         
-        public int FlightsPerYear { get; internal set; }
+        public uint FlightsPerYear { get; internal set; }
 
         /// <summary>
         /// The average price of tickets
         /// </summary>
-        public short AverageTicketPrice { get; internal set; }
+        public ushort AverageTicketPrice { get; internal set; }
     }
 }

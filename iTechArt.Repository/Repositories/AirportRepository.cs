@@ -24,7 +24,7 @@ namespace iTechArt.Repository.Repositories
         /// <param name="airport"></param>   
         public async Task AddAsync(IAirport airport)
         {
-            var entry = await _dbContext.Set<AirportDb>().AddAsync(_mapper.Map<AirportDb>(airport));
+            await _dbContext.Airports.AddAsync(_mapper.Map<AirportDb>(airport));
 
             await _dbContext.SaveChangesAsync();
         }

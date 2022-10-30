@@ -4,7 +4,6 @@ using iTechArt.Domain.ServiceInterfaces;
 using iTechArt.Repository.Mappers;
 using iTechArt.Repository.Repositories;
 using iTechArt.Serivce.Services;
-using iTechArt.Service.MappersServiceProfile;
 using iTechArt.Service.Services;
 using Microsoft.EntityFrameworkCore;
 

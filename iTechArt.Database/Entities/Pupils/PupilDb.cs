@@ -47,13 +47,13 @@ namespace iTechArt.Database.Entities.Pupils
         /// <summary>
         /// Gets or sets the city, where pupil lives
         /// </summary>
-        [MaxLength(32)]
+        [MaxLength(64)]
         public string City { get; set; }
 
         /// <summary>
         /// Gets or sets a name of school, where pupil study
         /// </summary>
-        [MaxLength(32)]
+        [MaxLength(64)]
         public string SchoolName { get; set; }
 
         /// <summary>
