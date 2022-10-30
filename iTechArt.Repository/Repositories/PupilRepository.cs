@@ -31,18 +31,18 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get all pupils
         /// </summary>
-        public async Task<IPupil[]> GetAllAsync()
+        public IPupil[] GetAllAsync()
         {
-            var pupils = await _dbContext.Pupils.ToArrayAsync();
+            var pupils = _dbContext.Pupils;
 
-            IPupil[] result = new IPupil[_dbContext.Pupils.Count()];
+            List<IPupil> result = new List<IPupil>();
 
-            for (var i = 0; i < result.Length; i++)
+            foreach (var pupil in pupils)
             {
-                result[i] = _mapper.Map<IPupil>(pupils[i]);
+                result.Add(_mapper.Map<Pupil>(pupil));
             }
 
-            return result;
+            return result.ToArray();
         }
 
         /// <summary>
@@ -50,9 +50,11 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public async Task<IPupil> GetByIdAsync(long id)
         {
-            var databaseModel = await _dbContext.Set<PupilDb>().FirstOrDefaultAsync(p => p.Id == id);
+            var pupils = _dbContext.Pupils;
 
-            return _mapper.Map<Pupil>(databaseModel);
+            var pupilDb = await pupils.FirstOrDefaultAsync(p => p.Id == id);
+
+            return _mapper.Map<Pupil>(pupilDb);
         }
 
         /// <summary>
@@ -60,7 +62,7 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public async Task UpdateAsync(IPupil pupil)
         {
-            _dbContext.Set<PupilDb>().Update(_mapper.Map<PupilDb>(pupil));
+            _dbContext.Pupils.Update(_mapper.Map<PupilDb>(pupil));
 
             await _dbContext.SaveChangesAsync();
         }
@@ -70,9 +72,11 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public async Task DeleteAsync(long id)
         {
-            var pupil = await _dbContext.Set<PupilDb>().FirstOrDefaultAsync(p => p.Id == id);
+            var pupils = _dbContext.Pupils;
 
-            _dbContext.Set<PupilDb>().Remove(_mapper.Map<PupilDb>(pupil));
+            var pupil = await pupils.FirstOrDefaultAsync(p => p.Id == id);
+
+            _dbContext.Pupils.Remove(_mapper.Map<PupilDb>(pupil));
 
             await _dbContext.SaveChangesAsync();
         }
