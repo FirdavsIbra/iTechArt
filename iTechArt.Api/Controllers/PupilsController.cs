@@ -18,7 +18,7 @@ namespace iTechArt.Api.Controllers
         /// Upload pupil's file
         /// </summary>
         [HttpPost(ApiConstants.IMPORT)]
-        public IActionResult Import(IFormFile formFile)
+        public async Task<IActionResult> Import(IFormFile formFile)
         {
             if (formFile != null)
             {
@@ -26,7 +26,8 @@ namespace iTechArt.Api.Controllers
 
                 if (FileConstants.Extensions.Contains(fileExtension))
                 {
-                    return Ok();
+                    await _pupilService.ImportPupilsFileAsync(formFile);
+                    return Ok("Success");
                 }
 
                 return BadRequest("Invalid file format!");
@@ -41,9 +42,9 @@ namespace iTechArt.Api.Controllers
         /// Get all pupils
         /// </summary>
         [HttpGet("export")]
-        public async Task<IActionResult> GetAllAsync()
+        public IActionResult GetAllAsync()
         {
-            return Ok(await _pupilService.GetAllAsync());
+            return Ok(_pupilService.GetAllAsync());
         }
 
         /// <summary>
