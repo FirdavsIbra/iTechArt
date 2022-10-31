@@ -2,6 +2,7 @@
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
+using iTechArt.Service.Constants;
 using iTechArt.Service.DTOs;
 using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;
@@ -12,7 +13,6 @@ namespace iTechArt.Service.Services
     {
         private readonly IAirportRepository _airportRepository;
         private readonly IMapper _mapper;
-        private readonly string[] excelExtensions = { ".xlsx", ".xls", ".xlsm", ".xlsb", ".xltx", ".xltm", ".xlt", ".xlam", ".xla", ".xlw" };
 
         public AirportService(IAirportRepository airportRepository, IMapper mapper)
         {
@@ -27,16 +27,42 @@ namespace iTechArt.Service.Services
         {
             return _airportRepository.GetAll();
         }
+
+        /// <summary>
+        /// Import airport's file
+        /// </summary>
+        public async Task ImportAirportFile(IFormFile file)
+        {
+            var fileExtension = Path.GetExtension(file.FileName);
+
+            if (FileConstants.excelExtensions.Contains(fileExtension))
+            {
+                await AirportExcelParser(file);
+            }
+            else if (FileConstants.csvExtensions.Contains(fileExtension))
+            {
+                await AirportCSVParser(file);
+            }
+            else if (FileConstants.xmlExtensions.Contains(fileExtension))
+            {
+                await AirportXMLParser(file);
+            }
+            else
+            {
+                throw new ArgumentException("Invalid file format");
+            }
+        }
+
         /// <summary>
         /// Importing airport datas from excel file
         /// </summary>
-        public async Task ImportAirportExcel(IFormFile file)
+        private async Task AirportExcelParser(IFormFile file)
         {
             try
             {
                 var fileExtension = Path.GetExtension(file.FileName);
 
-                if (excelExtensions.Contains(fileExtension))
+                if (FileConstants.excelExtensions.Contains(fileExtension))
                 {
                     using (var stream = new MemoryStream())
                     {
@@ -78,11 +104,16 @@ namespace iTechArt.Service.Services
             }
         }
 
-        public async Task ImportAirportCSV(IFormFile file)
+        /// <summary>
+        /// Importing airport datas from csv file
+        /// </summary>
+        private async Task AirportCSVParser(IFormFile file)
         {
             try
             {
-                if (file.FileName.Contains(".csv"))
+                var fileExtension = Path.GetExtension(file.FileName);
+
+                if (FileConstants.csvExtensions.Contains(fileExtension))
                 {
                     var fileName = DateTime.Now.Ticks + ".csv"; //Create a new Name for the file due to security reasons.
                     var pathBuilt = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
@@ -132,6 +163,21 @@ namespace iTechArt.Service.Services
                 {
                     throw new Exception("Upload correct File!!!");
                 }
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException(nameof(e));
+            }
+        }
+
+        /// <summary>
+        /// Importing airport datas from xml file
+        /// </summary>
+        private async Task AirportXMLParser(IFormFile file)
+        {
+            try
+            {
+
             }
             catch (Exception e)
             {

@@ -14,6 +14,22 @@ namespace iTechArt.Service.Constants
         public static readonly string[] Extensions = { ".xlsx", ".xls", ".csv", ".xml" };
 
         /// <summary>
+        /// excel extensions
+        /// </summary>
+        public static readonly string[] excelExtensions = { ".xlsx", ".xls", ".xlsm", ".xlsb", ".xltx", ".xltm", ".xlt", ".xlam", ".xla", ".xlw" };
+        
+        /// <summary>
+        /// csv extensions
+        /// </summary>
+        public static readonly string[] csvExtensions = { ".csv" };
+
+
+        /// <summary>
+        /// xml extensions
+        /// </summary>
+        public static readonly string[] xmlExtensions = { ".xml" };
+
+        /// <summary>
         /// Content types of CSV files
         /// </summary>
         public static readonly string[] CSV =
