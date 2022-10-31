@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace iTechArt.Service.DTOs
 {
-    internal sealed class StudentsDTO:IStudents
+    public sealed class StudentsDTO:IStudents
     {
         /// <summary>
         /// Gets/Sets Id of business model entities

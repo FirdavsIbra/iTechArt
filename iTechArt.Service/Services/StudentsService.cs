@@ -60,6 +60,9 @@ namespace iTechArt.Service.Services
             {
                 var xmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(StudentsDTO));
                 var streamReader = new StreamReader(formFile.OpenReadStream());
+                StudentsDTO studentsDTO = (StudentsDTO)xmlSerializer.Deserialize(streamReader);
+                streamReader.Close();
+                Console.WriteLine(studentsDTO.ToString());
             }
             catch (Exception)
             {
