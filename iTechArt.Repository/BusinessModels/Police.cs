@@ -1,4 +1,5 @@
-﻿using iTechArt.Domain.ModelInterfaces;
+﻿using iTechArt.Domain.Enums;
+using iTechArt.Domain.ModelInterfaces;
 
 namespace iTechArt.Repository.BusinessModels
 {
@@ -12,12 +13,12 @@ namespace iTechArt.Repository.BusinessModels
         /// <summary>
         /// Police Officers Firstname
         /// </summary>
-        public string FirstName { get; internal set; }
+        public string Name { get; internal set; }
 
         /// <summary>
         /// Police Officers Lastname
         /// </summary>
-        public string LastName { get; internal set; }
+        public string Surname { get; internal set; }
 
         /// <summary>
         /// Police Officers email address
@@ -27,7 +28,7 @@ namespace iTechArt.Repository.BusinessModels
         /// <summary>
         /// Police Officers gender
         /// </summary>
-        public string Gender { get; internal set; }
+        public Gender Gender { get; internal set; }
 
         /// <summary>
         /// Police Officers address
@@ -40,13 +41,8 @@ namespace iTechArt.Repository.BusinessModels
         public string JobTitle { get; internal set; }
 
         /// <summary>
-        /// Police Officers height in cm with 2 precision (like 170.24)
+        /// Police Officers salary in US dollars with 2 double precision
         /// </summary>
-        public double HeightInCm { get; internal set; }
-
-        /// <summary>
-        /// Police Officers weight in kg with 2 precision (like 75.34)
-        /// </summary>
-        public double WeightInKg { get; internal set; }
+        public double Salary { get; internal set; }
     }
 }

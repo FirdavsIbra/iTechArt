@@ -1,4 +1,5 @@
-﻿using iTechArt.Domain.ServiceInterfaces;
+﻿using iTechArt.Api.Constants;
+using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
@@ -8,7 +9,7 @@ namespace iTechArt.Api.Controllers
     public sealed class GroceryController : Controller
     {
         private readonly IGroceryService _groceryService;
-        private readonly string[] fileExtensions = { ".xlsx", ".xls", ".csv", "application/vnd.ms-excel", "officedocument.spreadsheetml.sheet" };
+        private readonly string[] fileExtensions = { "xlsx", "xls", "csv", "application/vnd.ms-excel", "officedocument.spreadsheetml.sheet" };
 
         public GroceryController(IGroceryService groceryService)
         {
@@ -19,16 +20,19 @@ namespace iTechArt.Api.Controllers
         /// will allow to upload the data from file to db 
         /// </summary>
         [HttpPost(ApiConstants.IMPORT)]
-        public IActionResult Import(IFormFile formFile)
+        public async Task<IActionResult> Import(IFormFile formFile)
         {
-            if (formFile != null && (fileExtensions.Any(fileExtensions => !formFile.ContentType.Contains(fileExtensions))))
+
+            if(formFile != null && formFile.ContentType.Contains("csv")) 
             {
-                return Ok(_groceryService.ImportGrocery());
+                return Ok(await _groceryService.RecordCsvToDatabase(formFile));
+            }
+            else if (formFile != null && formFile.ContentType.Contains("officedocument.spreadsheetml.sheet")) 
+            {
+                return Ok(await _groceryService.RecordXlsxToDatabase(formFile));
             }
             else
-            {
                 return BadRequest("Invalid file format!");
-            }
         }
         /// <summary>
         /// api route which allows to get all info from db and parse it to the following format
@@ -37,6 +41,14 @@ namespace iTechArt.Api.Controllers
         public IActionResult Export()
         {
             return Ok(_groceryService.ExportGrocery());
+        }
+        /// <summary>
+        /// Get count of grocery not implemented yet
+        /// </summary>
+        [HttpGet(ApiConstants.GETCOUNTOFGROCERY)]
+        public IActionResult GetCountOfGrocery()
+        {
+            return Ok(_groceryService.GetCountOfGrocery());
         }
     }
 }

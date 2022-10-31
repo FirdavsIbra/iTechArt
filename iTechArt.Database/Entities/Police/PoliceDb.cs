@@ -1,4 +1,6 @@
-﻿namespace iTechArt.Database.Entities.Police
+﻿using iTechArt.Domain.Enums;
+
+namespace iTechArt.Database.Entities.Police
 {
     public sealed class PoliceDb
     {
@@ -10,12 +12,12 @@
         /// <summary>
         /// Police Officers Firstname
         /// </summary>
-        public string FirstName { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Police Officers Lastname
         /// </summary>
-        public string LastName { get; set; }
+        public string Surname { get; set; }
 
         /// <summary>
         /// Police Officers email address
@@ -25,7 +27,7 @@
         /// <summary>
         /// Police Officers gender
         /// </summary>
-        public string Gender { get; set; }
+        public Gender Gender { get; set; }
 
         /// <summary>
         /// Police Officers address
@@ -38,13 +40,8 @@
         public string JobTitle { get; set; }
 
         /// <summary>
-        /// Police Officers height in cm with 2 precision (like 170.24)
+        /// Police Officers salary in US dollars with 2 double precision
         /// </summary>
-        public double HeightInCm { get; set; }
-
-        /// <summary>
-        /// Police Officers weight in kg with 2 precision (like 75.34)
-        /// </summary>
-        public double WeightInKg { get; set; }
+        public double Salary { get; set; }
     }
 }

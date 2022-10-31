@@ -1,4 +1,5 @@
 ﻿using iTechArt.Domain.ModelInterfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace iTechArt.Repository.BusinessModels
 {
@@ -12,46 +13,57 @@ namespace iTechArt.Repository.BusinessModels
         /// <summary>
         /// Airport Name
         /// </summary>
+        
+        [MaxLength(64)]
         public string AirportName { get; internal set; }
 
         /// <summary>
         /// The built date of airport
         /// </summary>
+       
         public DateTime BuiltDate { get; internal set; }
 
         /// <summary>
         /// A number of people can be in at the same time at the airport
         /// </summary>
-        public short Capacity { get; internal set; }
+       
+        public ushort Capacity { get; internal set; }
 
         /// <summary>
         ///  Address location of the airport
         /// </summary>
+        
+        [MaxLength(64)]
         public string Address { get; internal set; }
 
         /// <summary>
         /// City location of the airport
         /// </summary>
+       
+        [MaxLength(32)]
         public string City { get; internal set; }
 
         /// <summary>
         /// A number of employees
         /// </summary>
-        public short EmpoyeesCount { get; internal set; }
+       
+        public ushort EmpoyeesCount { get; internal set; }
 
         /// <summary>
         /// The number of passengers who fly from a particular airport
         /// </summary>
+        
         public long PassengersPerYear { get; internal set; }
 
         /// <summary>
         /// The number of flights from a particular airport in a year
         /// </summary>
-        public int FlightsPerYear { get; internal set; }
+        
+        public uint FlightsPerYear { get; internal set; }
 
         /// <summary>
         /// The average price of tickets
         /// </summary>
-        public short AverageTicketPrice { get; internal set; }
+        public ushort AverageTicketPrice { get; internal set; }
     }
 }

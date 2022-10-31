@@ -8,7 +8,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// Get all airports from database
         /// </summary>
         /// <returns> Array of Repository Model Interfaces </returns>
-        IAirport[] GetAll();
+        Task<IAirport[]> GetAll();
 
         /// <summary>
         /// Add airport to database

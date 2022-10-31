@@ -1,14 +1,14 @@
-﻿using iTechArt.Domain.ServiceInterfaces;
+﻿using iTechArt.Api.Constants;
+using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
 {
-    [Route("api/airport")]
+    [Route(RouteConstants.AIRPORT)]
     [ApiController]
     public sealed class AirportController : ControllerBase
     {
         private readonly IAirportsService _airportsService;
-        private readonly string[] fileExtensions = { ".xlsx", ".xls", ".csv", "application/vnd.ms-excel", "officedocument.spreadsheetml.sheet" };
 
         public AirportController(IAirportsService airportsService)
         {
@@ -22,15 +22,21 @@ namespace iTechArt.Api.Controllers
         [HttpPost(ApiConstants.IMPORT)]
         public async Task<IActionResult> ImportAirportExcel(IFormFile file)
         {
-            var fileExtension = Path.GetExtension(file.FileName);
-
-            if (fileExtensions.Contains(fileExtension))
+            if (file != null)
             {
-                return Ok(_airportsService.ImportAirportExcel());
+                var fileExtension = Path.GetExtension(file.FileName);
+
+                if (FileConstants.Extensions.Contains(fileExtension))
+                {
+                    await _airportsService.ImportAirportFile(file);
+                    return Ok("Success");
+                }
+
+                return BadRequest("Invalid file format!");
             }
             else
             {
-                return BadRequest();
+                return BadRequest("Invalid file format!");
             }
         }
 
@@ -40,7 +46,7 @@ namespace iTechArt.Api.Controllers
         [HttpGet(ApiConstants.EXPORT)]
         public async Task<IActionResult> ExportAirportExcel()
         {
-            return Ok(_airportsService.ExportAirportExcel());
+            return Ok( await _airportsService.ExportAirportExcel());
         }
     }
 }

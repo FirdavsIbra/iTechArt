@@ -1,7 +1,7 @@
 ﻿using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
-using iTechArt.Repository.BusinessModels;
+using iTechArt.Service.Models;
 
 namespace iTechArt.Service.Services
 {

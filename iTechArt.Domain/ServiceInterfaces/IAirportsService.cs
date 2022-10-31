@@ -1,4 +1,5 @@
 ﻿using iTechArt.Domain.ModelInterfaces;
+using Microsoft.AspNetCore.Http;
 
 namespace iTechArt.Domain.ServiceInterfaces
 {
@@ -7,11 +8,12 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// Interface of Importing airport datas
         /// </summary>
-        public IAirport[] ImportAirportExcel();
-
+        
+        public Task ImportAirportFile(IFormFile file);
+      
         /// <summary>
         /// Interface of Exporting airport datas
         /// </summary>
-        public IAirport[] ExportAirportExcel();
+        public Task<IAirport[]> ExportAirportExcel();
     }
 }

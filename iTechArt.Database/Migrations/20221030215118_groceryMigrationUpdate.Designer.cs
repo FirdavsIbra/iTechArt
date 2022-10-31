@@ -12,8 +12,8 @@ using iTechArt.Database.DbContexts;
 namespace iTechArt.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221019080902_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20221030215118_groceryMigrationUpdate")]
+    partial class groceryMigrationUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -75,22 +75,22 @@ namespace iTechArt.Database.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("DepartmentRetail")
+                    b.Property<string>("Department_Retail")
                         .HasColumnType("text");
 
                     b.Property<string>("Email")
                         .HasColumnType("text");
 
-                    b.Property<string>("FirstName")
+                    b.Property<string>("First_Name")
                         .HasColumnType("text");
 
                     b.Property<byte>("Gender")
                         .HasColumnType("smallint");
 
-                    b.Property<string>("JobTitle")
+                    b.Property<string>("Job_Title")
                         .HasColumnType("text");
 
-                    b.Property<string>("LastName")
+                    b.Property<string>("Last_Name")
                         .HasColumnType("text");
 
                     b.Property<double>("Salary")
@@ -161,16 +161,13 @@ namespace iTechArt.Database.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("FirstName")
                         .HasColumnType("text");
 
                     b.Property<string>("Gender")
                         .HasColumnType("text");
 
-                    b.Property<double>("Height")
+                    b.Property<double>("HeightInCm")
                         .HasColumnType("double precision");
 
                     b.Property<string>("JobTitle")
@@ -179,10 +176,7 @@ namespace iTechArt.Database.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<double>("Weight")
+                    b.Property<double>("WeightInKg")
                         .HasColumnType("double precision");
 
                     b.HasKey("Id");
@@ -225,7 +219,7 @@ namespace iTechArt.Database.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("text");
 
-                    b.Property<string>("SchoolNumber")
+                    b.Property<string>("SchoolName")
                         .HasColumnType("text");
 
                     b.Property<byte>("Shift")

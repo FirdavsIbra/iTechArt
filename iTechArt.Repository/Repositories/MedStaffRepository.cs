@@ -34,7 +34,7 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get all doctors from database
         /// </summary>
-        public async Task<IMedStaff[]> GetAll()
+        public async Task<IMedStaff[]> GetAllAsync()
         {
             var doctors = await _dbContext.Staffs.ToArrayAsync();
 
@@ -42,7 +42,7 @@ namespace iTechArt.Repository.Repositories
 
             for(var i = 0; i < result.Length; i++)
             {
-                result[i] = _mapper.Map<IMedStaff>(doctors[i]);
+                result[i] = _mapper.Map<MedStaff>(doctors[i]);
             }
 
             return result;

@@ -4,10 +4,11 @@ using iTechArt.Database.Entities.Airports;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Repository.BusinessModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace iTechArt.Repository.Repositories
 {
-    public class AirportRepository : IAirportRepository
+    public sealed class AirportRepository : IAirportRepository
     {
         private readonly AppDbContext _dbContext;
         private readonly IMapper _mapper;
@@ -18,33 +19,35 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Add entity to database
+        /// Add airport to database
         /// </summary>
-        /// <param name="entity"></param>   
-        public async Task AddAsync(IAirport entity)
+        /// <param name="airport"></param>   
+        public async Task AddAsync(IAirport airport)
         {
-            var entry = await _dbContext.Set<AirportDb>().AddAsync(_mapper.Map<AirportDb>(entity));
+            await _dbContext.Airports.AddAsync(_mapper.Map<AirportDb>(airport));
 
             await _dbContext.SaveChangesAsync();
         }
 
         /// <summary>
-        /// Get all entities from database
+        /// Get all airports from database
         /// </summary>
-        public IAirport[] GetAll()
+        public async Task<IAirport[]> GetAll()
         {
-            var models = _dbContext.Set<AirportDb>();
+            var airports = await _dbContext.Airports.ToArrayAsync();
 
-            List<IAirport> result = new List<IAirport>();
+            IAirport[] result = new IAirport[_dbContext.Airports.Count()];
 
-            foreach (var i in models)
-                result.Add(_mapper.Map<IAirport>(i));
+            for (var i = 0; i < result.Length; i++)
+            {
+                result[i] = _mapper.Map<Airport>(airports[i]);
+            }
 
-            return result.ToArray();
+            return result;
         }
 
         /// <summary>
-        /// Get entity by id
+        /// Get airport by id
         /// </summary>
         /// <param name="id"></param>
         public async Task<IAirport> GetByIdAsync(long id)
@@ -58,23 +61,23 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Update entity
+        /// Update airport
         /// </summary>
-        /// <param name="entity"></param>
-        public async Task UpdateAsync(IAirport entity)
+        /// <param name="airport"></param>
+        public async Task UpdateAsync(IAirport airport)
         {
-            var entry = _dbContext.Set<AirportDb>().Update(_mapper.Map<AirportDb>(entity));
+            var entry = _dbContext.Set<AirportDb>().Update(_mapper.Map<AirportDb>(airport));
 
             await _dbContext.SaveChangesAsync();
         }
 
         /// <summary>
-        /// Delete entity from database
+        /// Delete airport from database
         /// </summary>
-        /// <param name="entity"></param>
-        public async Task DeleteAsync(IAirport entity)
+        /// <param name="airport"></param>
+        public async Task DeleteAsync(IAirport airport)
         {
-            _dbContext.Set<AirportDb>().Remove(_mapper.Map<AirportDb>(entity));
+            _dbContext.Set<AirportDb>().Remove(_mapper.Map<AirportDb>(airport));
 
             await _dbContext.SaveChangesAsync();
         }
@@ -84,7 +87,7 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public int GetCountOfAirport()
         {
-            return _dbContext.Set<AirportDb>().Count();
+            return _dbContext.Airports.Count();
         }
     }
 }

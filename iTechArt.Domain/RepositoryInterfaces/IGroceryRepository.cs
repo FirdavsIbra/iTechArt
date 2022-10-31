@@ -1,4 +1,5 @@
 ﻿using iTechArt.Domain.ModelInterfaces;
+using iTechArt.Domain.ModelInterfaces.HelperModelInterfaces;
 
 namespace iTechArt.Domain.RepositoryInterfaces
 {
@@ -21,7 +22,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// </summary>
         /// <param name="id"></param>
         /// <returns> Resopisitory model interface </returns>
-        Task<IGrocery> GetByIdAsync(long id);
+        //Task<IGrocery> GetByIdAsync(long id);
 
         /// <summary>
         /// Update grocery
@@ -38,5 +39,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// Get count of groceries
         /// </summary>
         public int GetCountOfGrocery();
+
+        public Task<IDbResult> AddGroceriesAsync(List<IGrocery> groceries);
     }
 }

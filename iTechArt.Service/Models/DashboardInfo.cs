@@ -1,8 +1,8 @@
 ﻿using iTechArt.Domain.ModelInterfaces;
 
-namespace iTechArt.Repository.BusinessModels
+namespace iTechArt.Service.Models
 {
-    public class DashboardInfo : IDashboardInfo
+    internal sealed class DashboardInfo : IDashboardInfo
     {
         /// <summary>
         /// Count of pupils
