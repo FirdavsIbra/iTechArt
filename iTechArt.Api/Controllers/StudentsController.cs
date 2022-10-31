@@ -28,7 +28,7 @@ namespace iTechArt.Api.Controllers
             var allowedTypes = FileConstants.Extensions;
             if (formFile != null && allowedTypes.Contains(Path.GetExtension(formFile.FileName)))
             {
-                await _studentsService.ImportStudentsAsync();
+                await _studentsService.ImportStudentsAsync(formFile);
                 return Ok();
             }
             else

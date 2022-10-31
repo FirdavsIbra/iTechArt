@@ -2,7 +2,7 @@
 
 namespace iTechArt.Domain.ModelInterfaces
 {
-    public interface IStudent
+    public interface IStudents
     {
         /// <summary>
         /// Gets Id of business model entities

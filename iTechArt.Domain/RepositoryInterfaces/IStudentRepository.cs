@@ -8,26 +8,26 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// Get all students from database
         /// </summary>
         /// <returns> Array of Repository Model Interfaces </returns>
-        public IStudent[] GetAll();
+        public IStudents[] GetAll();
 
         /// <summary>
         /// Add student to database
         /// </summary>
         /// <param name="student"></param>
-        public Task AddAsync(IStudent student);
+        public Task AddAsync(IStudents student);
 
         /// <summary>
         /// Get student by id
         /// </summary>
         /// <param name="id"></param>
         /// <returns> Resopisitory model interface </returns>
-        public Task<IStudent> GetByIdAsync(long id);
+        public Task<IStudents> GetByIdAsync(long id);
 
         /// <summary>
         /// Update student
         /// </summary>
         /// <param name="student"></param>
-        public Task UpdateAsync(IStudent student);
+        public Task UpdateAsync(IStudents student);
 
         /// <summary>
         /// Delete student from database

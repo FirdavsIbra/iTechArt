@@ -27,7 +27,7 @@ namespace iTechArt.Repository.Repositories
         /// Add entity to database
         /// </summary>
         /// <param name="entity"></param>   
-        public async Task AddAsync(IStudent entity)
+        public async Task AddAsync(IStudents entity)
         {
             var entry = await _dbContext.Set<StudentDb>().AddAsync(_mapper.Map<StudentDb>(entity));
 
@@ -37,14 +37,14 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get all entities from database
         /// </summary>
-        public IStudent[] GetAll()
+        public IStudents[] GetAll()
         {
             var models = _dbContext.Set<StudentDb>();
 
-            List<IStudent> result = new List<IStudent>();
+            List<IStudents> result = new List<IStudents>();
 
             foreach (var i in models)
-                result.Add(_mapper.Map<IStudent>(i));
+                result.Add(_mapper.Map<IStudents>(i));
 
             return result.ToArray();
         }
@@ -53,18 +53,18 @@ namespace iTechArt.Repository.Repositories
         /// Get entity by id
         /// </summary>
         /// <param name="id"></param>
-        public async Task<IStudent> GetByIdAsync(long id)
+        public async Task<IStudents> GetByIdAsync(long id)
         {
             var databaseModel = await _dbContext.Set<StudentDb>().FirstOrDefaultAsync(s => s.Id == id);
 
-            return _mapper.Map<IStudent>(databaseModel);
+            return _mapper.Map<IStudents>(databaseModel);
         }
 
         /// <summary>
         /// Update entity
         /// </summary>
         /// <param name="entity"></param>
-        public async Task UpdateAsync(IStudent entity)
+        public async Task UpdateAsync(IStudents entity)
         {
             var entry = _dbContext.Set<StudentDb>().Update(_mapper.Map<StudentDb>(entity));
 
