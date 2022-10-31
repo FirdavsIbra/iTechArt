@@ -8,7 +8,6 @@ using iTechArt.Service.DTOs;
 using iTechArt.Service.Helpers;
 using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;
-using System.Globalization;
 using System.Xml;
 
 namespace iTechArt.Service.Services
@@ -37,7 +36,7 @@ namespace iTechArt.Service.Services
         {
             var fileExtension = Path.GetExtension(file.FileName);
 
-            if (fileExtension == ".xlsx")
+            if (fileExtension == ".xlsx" || fileExtension == ".xls")
             {
                 await ExcelParser(file);
             }
