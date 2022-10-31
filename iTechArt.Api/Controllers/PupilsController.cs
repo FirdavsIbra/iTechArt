@@ -18,15 +18,15 @@ namespace iTechArt.Api.Controllers
         /// Upload pupil's file
         /// </summary>
         [HttpPost(ApiConstants.IMPORT)]
-        public async Task<IActionResult> Import(IFormFile formFile)
+        public async Task<IActionResult> Import(IFormFile file)
         {
-            if (formFile != null)
+            if (file != null)
             {
-                var fileExtension = Path.GetExtension(formFile.FileName);
+                var fileExtension = Path.GetExtension(file.FileName);
 
                 if (FileConstants.Extensions.Contains(fileExtension))
                 {
-                    await _pupilService.ImportPupilsFileAsync(formFile);
+                    await _pupilService.ImportPupilsFileAsync(file);
                     return Ok("Success");
                 }
 
