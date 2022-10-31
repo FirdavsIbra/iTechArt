@@ -1,4 +1,5 @@
 ﻿using iTechArt.Domain.ModelInterfaces;
+using iTechArt.Domain.ModelInterfaces.HelperModelInterfaces;
 
 namespace iTechArt.Domain.RepositoryInterfaces
 {
@@ -38,5 +39,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// Get count of groceries
         /// </summary>
         public int GetCountOfGrocery();
+
+        public Task<IDbResult> AddGroceriesAsync(List<IGrocery> groceries);
     }
 }

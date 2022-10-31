@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using iTechArt.Database.DbContexts;
@@ -11,9 +12,10 @@ using iTechArt.Database.DbContexts;
 namespace iTechArt.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221030215118_groceryMigrationUpdate")]
+    partial class groceryMigrationUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +24,7 @@ namespace iTechArt.Database.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("iTechArt.Database.Entities.Airports.AirportDb", b =>
+            modelBuilder.Entity("iTechArt.Database.Entities.Airports.Airport", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -31,12 +33,10 @@ namespace iTechArt.Database.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Address")
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)");
+                        .HasColumnType("text");
 
                     b.Property<string>("AirportName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
+                        .HasColumnType("text");
 
                     b.Property<int>("AverageTicketPrice")
                         .HasColumnType("integer");
@@ -48,8 +48,7 @@ namespace iTechArt.Database.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("City")
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)");
+                        .HasColumnType("text");
 
                     b.Property<int>("EmpoyeesCount")
                         .HasColumnType("integer");
@@ -65,7 +64,7 @@ namespace iTechArt.Database.Migrations
                     b.ToTable("Airports");
                 });
 
-            modelBuilder.Entity("iTechArt.Database.Entities.Groceries.GroceryDb", b =>
+            modelBuilder.Entity("iTechArt.Database.Entities.Groceries.Grocery", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -102,7 +101,7 @@ namespace iTechArt.Database.Migrations
                     b.ToTable("Groceries");
                 });
 
-            modelBuilder.Entity("iTechArt.Database.Entities.MedicalStaff.MedStaffDb", b =>
+            modelBuilder.Entity("iTechArt.Database.Entities.MedicalStaff.Doctor", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -111,38 +110,31 @@ namespace iTechArt.Database.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Address")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
+                        .HasColumnType("text");
 
                     b.Property<string>("FirstName")
-                        .HasMaxLength(24)
-                        .HasColumnType("character varying(24)");
+                        .HasColumnType("text");
 
                     b.Property<byte>("Gender")
                         .HasColumnType("smallint");
 
                     b.Property<string>("HospitalName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
+                        .HasColumnType("text");
 
                     b.Property<string>("LastName")
-                        .HasMaxLength(24)
-                        .HasColumnType("character varying(24)");
+                        .HasColumnType("text");
 
                     b.Property<string>("PhoneNumber")
-                        .HasMaxLength(16)
-                        .HasColumnType("character varying(16)");
+                        .HasColumnType("text");
 
                     b.Property<string>("PostalCode")
-                        .HasMaxLength(16)
-                        .HasColumnType("character varying(16)");
+                        .HasColumnType("text");
 
                     b.Property<decimal>("Salary")
                         .HasColumnType("numeric");
@@ -155,7 +147,7 @@ namespace iTechArt.Database.Migrations
                     b.ToTable("Staffs");
                 });
 
-            modelBuilder.Entity("iTechArt.Database.Entities.Police.PoliceDb", b =>
+            modelBuilder.Entity("iTechArt.Database.Entities.Police.Police", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -169,27 +161,30 @@ namespace iTechArt.Database.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("text");
 
-                    b.Property<byte>("Gender")
-                        .HasColumnType("smallint");
+                    b.Property<string>("FirstName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("text");
+
+                    b.Property<double>("HeightInCm")
+                        .HasColumnType("double precision");
 
                     b.Property<string>("JobTitle")
                         .HasColumnType("text");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("LastName")
                         .HasColumnType("text");
 
-                    b.Property<double>("Salary")
+                    b.Property<double>("WeightInKg")
                         .HasColumnType("double precision");
-
-                    b.Property<string>("Surname")
-                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
                     b.ToTable("Police");
                 });
 
-            modelBuilder.Entity("iTechArt.Database.Entities.Pupils.PupilDb", b =>
+            modelBuilder.Entity("iTechArt.Database.Entities.Pupils.Pupil", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -198,12 +193,10 @@ namespace iTechArt.Database.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Address")
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)");
+                        .HasColumnType("text");
 
                     b.Property<string>("City")
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)");
+                        .HasColumnType("text");
 
                     b.Property<byte>("CourseLanguage")
                         .HasColumnType("smallint");
@@ -212,8 +205,7 @@ namespace iTechArt.Database.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("FirstName")
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)");
+                        .HasColumnType("text");
 
                     b.Property<byte>("Gender")
                         .HasColumnType("smallint");
@@ -222,16 +214,13 @@ namespace iTechArt.Database.Migrations
                         .HasColumnType("smallint");
 
                     b.Property<string>("LastName")
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)");
+                        .HasColumnType("text");
 
                     b.Property<string>("PhoneNumber")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
+                        .HasColumnType("text");
 
                     b.Property<string>("SchoolName")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
+                        .HasColumnType("text");
 
                     b.Property<byte>("Shift")
                         .HasColumnType("smallint");
@@ -241,7 +230,7 @@ namespace iTechArt.Database.Migrations
                     b.ToTable("Pupils");
                 });
 
-            modelBuilder.Entity("iTechArt.Database.Entities.Students.StudentDb", b =>
+            modelBuilder.Entity("iTechArt.Database.Entities.Students.Students", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()

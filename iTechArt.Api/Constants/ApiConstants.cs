@@ -5,5 +5,7 @@
         public const string IMPORT = "import";
 
         public const string EXPORT = "export";
+
+        public const string GETCOUNTOFGROCERY = "getCountOfGrocery"; 
     }
 }
