@@ -100,39 +100,31 @@ namespace iTechArt.Service.Services
             {
                 await file.CopyToAsync(fileStream);
             }
-            var configuration = new CsvConfiguration(CultureInfo.InvariantCulture)
-            {
-                Delimiter = ",",
-                HasHeaderRecord = true
-            };
 
-            using (StreamReader csvReader = new StreamReader(filePath))
-            {
-                using CsvReader csv = new(csvReader, configuration);
-                
-                var records = csv.GetRecords<MedStaffDTO>().ToList();
+            var csvLines = File.ReadAllLines(filePath);
 
-                foreach (var record in records)
+            for (int i = 1; i < csvLines.Length; i++)
+            {
+                string[] rowData = csvLines[i].Split(',');
+
+                MedStaffDTO medStaff = new MedStaffDTO()
                 {
-                    MedStaffDTO medStaff = new MedStaffDTO
-                    {
-                        FirstName = record.FirstName,
-                        LastName = record.LastName,
-                        Gender = record.Gender,
-                        Email = record.Email,
-                        PhoneNumber = record.PhoneNumber,
-                        DateOfBirth = record.DateOfBirth,
-                        Address = record.Address,
-                        Salary = record.Salary,
-                        HospitalName = record.HospitalName,
-                        PostalCode = record.PostalCode,
-                        Shift = record.Shift
-                    };
+                    FirstName = rowData[0].ToString().Trim(),
+                    LastName = rowData[1].ToString().Trim(),
+                    Gender = (Gender)Convert.ToByte(rowData[2]),
+                    Email = rowData[3].ToString().Trim(),
+                    PhoneNumber = rowData[4].ToString().Trim(),
+                    DateOfBirth = Convert.ToDateTime(rowData[5]),
+                    Address = rowData[6],
+                    Salary = Convert.ToDecimal(rowData[7]),
+                    HospitalName = rowData[8],
+                    PostalCode = rowData[9] is null? String.Empty: rowData[9],
+                    Shift = (Shift)Convert.ToByte(rowData[10])
+                };
 
-                    await _medStaffRepository.AddAsync(medStaff);
-                }
+                await _medStaffRepository.AddAsync(medStaff);
             }
-            
+
             if (File.Exists(filePath))
             {
                 File.Delete(filePath);
