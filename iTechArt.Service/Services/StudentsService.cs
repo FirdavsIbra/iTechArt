@@ -2,7 +2,13 @@
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using iTechArt.Service.Constants;
+using iTechArt.Service.DTOs;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.FileIO;
+using System.Drawing;
+using System;
+using System.Globalization;
 
 namespace iTechArt.Service.Services
 {
@@ -50,12 +56,66 @@ namespace iTechArt.Service.Services
 
         private async Task XmlImporter(IFormFile formFile)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var xmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(StudentsDTO));
+                var streamReader = new StreamReader(formFile.OpenReadStream());
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         private async Task CsvImporter(IFormFile formFile)
         {
-            throw new NotImplementedException();
+            using (var parser = new TextFieldParser(formFile.OpenReadStream()))
+            {
+                var lines = new List<string>();
+                while (!parser.EndOfData)
+                {
+                    //Processing row
+                    lines.Add(parser.ReadLine());
+                }
+                foreach (var line in lines)
+                {
+                    string[] fields = line.Split(",");
+
+                    var obj = new StudentsDTO();
+                    // parse Id
+                    if (long.TryParse(fields[0], out var parsedId))
+                    {
+                        obj.Id = parsedId;
+                    }
+                    obj.FirstName = fields[1];
+                    obj.LastName = fields[2];
+                    // parse Gender
+                    if (byte.TryParse(fields[3], out var parsedGender))
+                    {
+                        obj.Gender = (Domain.Enums.Gender)parsedGender;
+                    }
+                    // parse birthday
+                    try
+                    {
+                        obj.DateOfBirth = DateTime.ParseExact(fields[4], "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                    }
+                    catch (Exception)
+                    {
+
+                        throw new Exception("bad date format");
+                    }
+                    // parse email
+                    obj.Email = fields[5];
+                    // parse password
+                    obj.Password = fields[6];
+                    // parse university
+                    obj.University = fields[7];
+                    // parse majority
+                    obj.Majority = fields[8];
+                    await _studentRepository.AddAsync(obj);
+                }
+            }
         }
 
         private async Task ExcelImporter(IFormFile formFile)
