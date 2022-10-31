@@ -1,0 +1,54 @@
+<section class="app-description">
+  <div>
+    <h1>GOVERNMENT'S STATISTICS</h1>
+    <p>
+      This site is designed to import, export various data, as well as to
+      collect statistical data and generate reports based on them.
+    </p>
+  </div>
+</section>
+
+<section class="dashboard-page">
+  <div class="block" routerLink="{{ units.police.path }}">
+    <div class="block__title">
+      <span>{{ units.police.title }}</span>
+      <img style="width: 20px" src="{{ units.police.icon }}" alt="" />
+    </div>
+    <p>{{ unitCountsInfo?.policeCount }}</p>
+  </div>
+  <div class="block" routerLink="{{ units.pupils.path }}">
+    <div class="block__title">
+      <span>{{ units.pupils.title }}</span>
+      <img style="width: 20px" src="{{ units.pupils.icon }}" alt="" />
+    </div>
+    <p>{{ unitCountsInfo?.pupilCount }}</p>
+  </div>
+  <div class="block" routerLink="{{ units.students.path }}">
+    <div class="block__title">
+      <span>{{ units.students.title }}</span>
+      <img style="width: 20px" src="{{ units.students.icon }}" alt="" />
+    </div>
+    <p>{{ unitCountsInfo?.studentCount }}</p>
+  </div>
+  <div class="block" routerLink="{{ units.airport.path }}">
+    <div class="block__title">
+      <span>{{ units.airport.title }}</span>
+      <img style="width: 20px" src="{{ units.airport.icon }}" alt="" />
+    </div>
+    <p>{{ unitCountsInfo?.airportCount }}</p>
+  </div>
+  <div class="block" routerLink="{{ units.grocery.path }}">
+    <div class="block__title">
+      <span>{{ units.grocery.title }}</span>
+      <img style="width: 20px" src="{{ units.grocery.icon }}" alt="" />
+    </div>
+    <p>{{ unitCountsInfo?.groceryCount }}</p>
+  </div>
+  <div class="block" routerLink="{{ units.medStaff.path }}">
+    <div class="block__title">
+      <span>{{ units.medStaff.title }}</span>
+      <img style="width: 20px" src="{{ units.medStaff.icon }}" alt="" />
+    </div>
+    <p>{{ unitCountsInfo?.doctorCount }}</p>
+  </div>
+</section>

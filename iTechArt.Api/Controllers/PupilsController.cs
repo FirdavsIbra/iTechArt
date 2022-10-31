@@ -1,10 +1,11 @@
-﻿using iTechArt.Domain.ServiceInterfaces;
+﻿using iTechArt.Api.Constants;
+using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
 {
     [ApiController]
-    [Route("api/pupils")]
+    [Route(RouteConstants.PUPIL)]
     public sealed class PupilsController : ControllerBase
     {
         private readonly IPupilService _pupilService;
@@ -16,13 +17,20 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// Upload pupil's file
         /// </summary>
-        /// <param name="formFile"></param>
-        [HttpPost("import")]
-        public IActionResult Import(IFormFile formFile)
+        [HttpPost(ApiConstants.IMPORT)]
+        public async Task<IActionResult> Import(IFormFile formFile)
         {
-            if (formFile != null && (formFile.ContentType.Contains("application/vnd.ms-excel") || formFile.ContentType.Contains("officedocument.spreadsheetml.sheet")))
+            if (formFile != null)
             {
-                return Ok(_pupilService.ImportPupilsFile());
+                var fileExtension = Path.GetExtension(formFile.FileName);
+
+                if (FileConstants.Extensions.Contains(fileExtension))
+                {
+                    await _pupilService.ImportPupilsFileAsync(formFile);
+                    return Ok("Success");
+                }
+
+                return BadRequest("Invalid file format!");
             }
             else
             {
@@ -36,10 +44,16 @@ namespace iTechArt.Api.Controllers
         [HttpGet("export")]
         public async Task<IActionResult> GetAllAsync()
         {
-            return Ok(_pupilService.GetAllAsync());
+            return Ok(await _pupilService.GetAllAsync());
         }
 
-        //[HttpGet("id")]
-        //public async Task<IActionResult> Get([FromQuery] long id) => Ok(await _pupilService.GetByIdAsync(id));
+        /// <summary>
+        /// Get pupil by id
+        /// </summary>
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetByIdAsync(long id)
+        {
+            return Ok(await _pupilService.GetByIdAsync(id));
+        }
     }
 }

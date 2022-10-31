@@ -4,18 +4,18 @@ using iTechArt.Domain.ServiceInterfaces;
 using iTechArt.Repository.Mappers;
 using iTechArt.Repository.Repositories;
 using iTechArt.Serivce.Services;
+using iTechArt.Service.Helpers;
 using iTechArt.Service.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 builder.Services.AddScoped<IPupilRepository, PupilRepository>();
 builder.Services.AddScoped<IAirportRepository, AirportRepository>();
 builder.Services.AddScoped<IPoliceRepository, PoliceRepository>();
-builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
+builder.Services.AddScoped<IMedStaffRepository, MedStaffRepository>();
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<IGroceryRepository, GroceryRepository>();
 
@@ -46,6 +46,8 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
@@ -54,6 +56,8 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 }
 
 app.UseHttpsRedirection();
+
+EnvironmentHelper.WebRootPath = app.Services.GetService<IWebHostEnvironment>().WebRootPath;
 
 app.UseCors();
 

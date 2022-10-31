@@ -22,32 +22,32 @@ namespace iTechArt.Database.DbContexts
         /// <summary>
         /// Airport tables
         /// </summary>
-        public virtual DbSet<Airport> Airports { get; set; }
+        public virtual DbSet<AirportDb> Airports { get; set; }
 
 
         /// <summary>
         /// Medicine staff tables
         /// </summary>
-        public virtual DbSet<Doctor> Staffs { get; set; }
+        public virtual DbSet<MedStaffDb> Staffs { get; set; }
 
         /// <summary>
         /// Pupil tables
         /// </summary>
-        public virtual DbSet<Pupil> Pupils { get; set; }
+        public virtual DbSet<PupilDb> Pupils { get; set; }
 
         /// <summary>
         /// Student tables
         /// </summary>
-        public virtual DbSet<Students> Students { get; set; }
+        public virtual DbSet<StudentDb> Students { get; set; }
 
         /// <summary>
         /// Police tables
         /// </summary>
-        public virtual DbSet<Police> Police { get; set; }
+        public virtual DbSet<PoliceDb> Police { get; set; }
 
         /// <summary>
         /// Grocery tables
         /// </summary>
-        public virtual DbSet<Grocery> Groceries { get; set; }
+        public virtual DbSet<GroceryDb> Groceries { get; set; }
     }
 }

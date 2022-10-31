@@ -9,21 +9,43 @@ using iTechArt.Domain.ModelInterfaces;
 
 namespace iTechArt.Repository.Mappers
 {
-    public class MappingProfile : Profile
+    public sealed class MappingProfile : Profile
     {
         public MappingProfile()
         {
-            CreateMap<IAirport, Airport>().ReverseMap();
+            // map from IAirport to AirportDb
+            CreateMap<IAirport, AirportDb>();
+            // map from AirportDb to AirportBm
+            CreateMap<AirportDb, BusinessModels.Airport>();
 
-            CreateMap<IDoctor, Doctor>().ReverseMap();
 
-            CreateMap<IGrocery, Grocery>();
+            // map from IMedStaff to MedStaffDb
+            CreateMap<IMedStaff, MedStaffDb>();
+            // map from MedStaffDb to MedStaffBm
+            CreateMap<MedStaffDb, BusinessModels.MedStaff>();
 
-            CreateMap<IPolice, Police>().ReverseMap();
 
-            CreateMap<IPupil, Pupil>().ReverseMap();
+            // map from IGrocery to GroceryDb
+            CreateMap<IGrocery, GroceryDb>();
+            // map from GroceryDb to GroceryBm
+            CreateMap<GroceryDb, BusinessModels.Grocery>();
 
-            CreateMap<IStudent, Students>().ReverseMap();
+
+            // mapping from IPolice to Police Database Model
+            CreateMap<IPolice, PoliceDb>();
+            // mapping from PoliceDb to Police Business Model
+            CreateMap<PoliceDb, BusinessModels.Police>();
+
+            // map from IPupil to PupilDb
+            CreateMap<IPupil, PupilDb>();
+            // map from PupilDb to PupilBm
+            CreateMap<PupilDb, BusinessModels.Pupil>();
+
+
+            // map from IStudent to StudentDb
+            CreateMap<IStudent, StudentDb>();
+            // map from StudentDb to StudentBm
+            CreateMap<StudentDb, BusinessModels.Student>();
         }
     }
 }

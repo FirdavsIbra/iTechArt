@@ -1,21 +1,23 @@
-﻿namespace iTechArt.Domain.ModelInterfaces
+﻿using iTechArt.Domain.Enums;
+
+namespace iTechArt.Domain.ModelInterfaces
 {
     public interface IPolice
     {
         /// <summary>
         /// Police Officers Id
         /// </summary>
-        public long Id { get;}
+        public long Id { get; }
 
         /// <summary>
         /// Police Officers Firstname
         /// </summary>
-        public string FirstName { get; }
+        public string Name { get; }
 
         /// <summary>
         /// Police Officers Lastname
         /// </summary>
-        public string LastName { get; }
+        public string Surname { get; }
 
         /// <summary>
         /// Police Officers email address
@@ -25,7 +27,7 @@
         /// <summary>
         /// Police Officers gender
         /// </summary>
-        public string Gender { get; }
+        public Gender Gender { get; }
 
         /// <summary>
         /// Police Officers address
@@ -38,13 +40,8 @@
         public string JobTitle { get; }
 
         /// <summary>
-        /// Police Officers height in cm with 2 precision (like 170.24)
+        /// Police Officers salary in US dollars with 2 double precision
         /// </summary>
-        public double HeightInCm { get; }
-
-        /// <summary>
-        /// Police Officers weight in kg with 2 precision (like 75.34)
-        /// </summary>
-        public double WeightInKg { get; }
+        public double Salary { get; }
     }
 }

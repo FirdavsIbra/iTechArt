@@ -1,4 +1,5 @@
-﻿using iTechArt.Domain.ServiceInterfaces;
+﻿using iTechArt.Api.Constants;
+using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
@@ -7,7 +8,7 @@ namespace iTechArt.Api.Controllers
     [ApiController]
     public sealed class StudentsController : ControllerBase
     {
-        private readonly string[] _allowedTypes = new string[] { "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"};
+        private readonly string[] _allowedTypes = new string[] { "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" };
         private readonly IStudentsService _studentsService;
         public StudentsController(IStudentsService studentService)
         {

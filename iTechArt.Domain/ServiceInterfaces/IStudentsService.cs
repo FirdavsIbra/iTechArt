@@ -5,12 +5,12 @@ namespace iTechArt.Domain.ServiceInterfaces
     public interface IStudentsService
     {
         /// <summary>
-        /// Imports entities into DB from file
+        /// Imports students into DB from file
         /// </summary>
         public IStudent[] ImportStudentsAsync();
 
         /// <summary>
-        /// Exports entities from DB
+        /// Exports students from DB
         /// </summary>
         public IStudent[] ExportStudentsAsync();
     }

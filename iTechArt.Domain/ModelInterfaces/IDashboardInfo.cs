@@ -20,7 +20,7 @@
         /// <summary>
         /// Count of polices
         /// </summary>
-        public int PoliceCount { get;  }
+        public int PoliceCount { get; }
 
         /// <summary>
         /// Count of doctors

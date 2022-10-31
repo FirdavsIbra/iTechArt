@@ -1,10 +1,9 @@
-﻿using iTechArt.Database.Enums;
+﻿using iTechArt.Domain.Enums;
 
 namespace iTechArt.Domain.ModelInterfaces
 {
     public interface IStudent
     {
-
         /// <summary>
         /// Gets Id of business model entities
         /// </summary>
