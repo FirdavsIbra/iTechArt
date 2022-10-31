@@ -17,7 +17,7 @@ namespace iTechArt.Repository.Mappers
 
             CreateMap<IDoctor, Doctor>().ReverseMap();
 
-            CreateMap<IGrocery, Grocery>().ReverseMap();
+            CreateMap<IGrocery, Grocery>();
 
             CreateMap<IPolice, Police>().ReverseMap();
 

@@ -1,53 +1,60 @@
 ﻿using iTechArt.Database.DbContexts;
 using iTechArt.Database.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace iTechArt.Database.Entities.Groceries
 {
     public sealed class Grocery : IDbModel
     {
         /// <summary>
-        /// ID of grocery employee
+        /// get or sets ID of grocery employee
         /// </summary>
-        public long Id { get; set; }
+        public long id { get; set; }
 
         /// <summary>
-        /// Fist Name of grocery employee
+        /// get or sets Fist Name of grocery employee
         /// </summary>
-        public string FirstName { get; set; }
+        [MaxLength(32)]
+        public string first_Name { get; set; }
 
         /// <summary>
-        /// Surname of grocery employee
+        /// get or sets Surname of grocery employee
         /// </summary>
-        public string LastName { get; set; }
+        [MaxLength(32)]
+        public string last_Name { get; set; }
 
         /// <summary>
-        /// Birthdate of grocery employee
+        /// get or sets Birthdate of grocery employee
         /// </summary>
-        public DateTime DateOfBirth { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        public DateTime birthday { get; set; }
 
         /// <summary>
-        /// Gender of grocery employee
+        /// get or sets Gender of grocery employee
         /// </summary>
-        public Gender Gender { get; set; }
+        public Gender gender { get; set; }
 
         /// <summary>
-        /// Email of grocery employee
+        /// get or sets Email of grocery employee
         /// </summary>
-        public string Email { get; set; }
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
+        public string email { get; set; }
 
         /// <summary>
-        /// Job position of grocery employee
+        /// get or sets Job position of grocery employee
         /// </summary>
-        public string JobTitle { get; set; }
+        public string job_title { get; set; }
 
         /// <summary>
-        /// Current department of grocery employee
+        /// get or sets Current department of grocery employee
         /// </summary>
-        public string DepartmentRetail { get; set; }
+        public string department_retail { get; set; }
 
         /// <summary>
-        /// Salary of each grocery employee
+        /// get or sets Salary of each grocery employee
         /// </summary>
-        public double Salary { get; set; }
+        public double salary { get; set; }
     }
 }

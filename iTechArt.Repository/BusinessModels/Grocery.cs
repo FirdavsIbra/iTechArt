@@ -8,7 +8,7 @@ namespace iTechArt.Repository.BusinessModels
         /// <summary>
         /// Id of grocery
         /// </summary>
-        public long Id { get;internal set; }
+        public Guid Id { get;internal set; }
         /// <summary>
         /// First name of grocery employee
         /// </summary>
