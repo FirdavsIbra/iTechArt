@@ -29,19 +29,19 @@ namespace iTechArt.Service.Services
         public async Task ImportPoliceData(IFormFile formFile)
         {
             string fileExtension = Path.GetExtension(formFile.FileName);
-            
+
             // .xlsx type
             if (fileExtension == FileConstants.Extensions[0] || FileConstants.EXCEL.Contains(formFile.ContentType))
             {
                 await _policeRepository.ReadExcelAsync(formFile);
             }
             // .csv type
-            else if(fileExtension == FileConstants.Extensions[2] || FileConstants.CSV.Contains(formFile.ContentType))
+            else if (fileExtension == FileConstants.Extensions[2] || FileConstants.CSV.Contains(formFile.ContentType))
             {
                 await _policeRepository.ReadCSVAsync(formFile);
             }
             // .xml type
-            else if(fileExtension == FileConstants.Extensions[3] || FileConstants.XML.Contains(formFile.ContentType))
+            else if (fileExtension == FileConstants.Extensions[3] || FileConstants.XML.Contains(formFile.ContentType))
             {
                 await _policeRepository.ReadXMLAsync(formFile);
             }
