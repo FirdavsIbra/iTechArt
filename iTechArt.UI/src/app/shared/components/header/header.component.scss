@@ -60,9 +60,8 @@ a {
 
 .hamburger {
   display: none;
+  cursor: pointer;
 }
-
-
 
 .checkbox {
   position: absolute;
@@ -91,7 +90,7 @@ a {
 .menu input[type="checkbox"]:checked ~ .hamburger.line3 {
   transform: rotate(-45deg);
 }
-@media screen and (max-width: 660px) {
+@media screen and (max-width: 1030px) {
   .menu {
     display: flex;
     flex-direction: column;
@@ -105,6 +104,7 @@ a {
     padding: 20px 15px;
     background-color: rgba(58, 86, 151, 0.7);
     transition: all 0.3s;
+    cursor: pointer;
   }
 
   .menu_active {
@@ -128,6 +128,7 @@ a {
     top: 45px;
     transform: translateY(-50%);
     width: 26px;
+    cursor: pointer;
   }
 
   .hamburger span {

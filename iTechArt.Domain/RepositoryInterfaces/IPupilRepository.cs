@@ -20,6 +20,11 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// </summary>
         /// <param name="id"></param>
         public Task<IPupil> GetByIdAsync(long id);
+        
+        /// <summary>
+        /// Add pupil array
+        /// </summary>
+        public Task AddRangeAsync(IPupil[] pupils);
 
         /// <summary>
         /// Update pupil

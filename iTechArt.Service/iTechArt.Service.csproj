@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="linq2db" Version="4.3.0" />
+    <PackageReference Include="AutoMapper" Version="12.0.0" />
     <PackageReference Include="CsvHelper" Version="29.0.0" />
     <PackageReference Include="EPPlus" Version="6.0.8" />
     <PackageReference Include="LinqToCsv" Version="1.5.0" />
@@ -16,11 +18,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.Collections" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\iTechArt.Domain\iTechArt.Domain.csproj" />
+    <ProjectReference Include="..\iTechArt.Repository\iTechArt.Repository.csproj" />
   </ItemGroup>
 
   <ItemGroup>

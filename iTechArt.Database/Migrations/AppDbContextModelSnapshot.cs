@@ -76,22 +76,22 @@ namespace iTechArt.Database.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("DepartmentRetail")
+                    b.Property<string>("Department_Retail")
                         .HasColumnType("text");
 
                     b.Property<string>("Email")
                         .HasColumnType("text");
 
-                    b.Property<string>("FirstName")
+                    b.Property<string>("First_Name")
                         .HasColumnType("text");
 
                     b.Property<byte>("Gender")
                         .HasColumnType("smallint");
 
-                    b.Property<string>("JobTitle")
+                    b.Property<string>("Job_Title")
                         .HasColumnType("text");
 
-                    b.Property<string>("LastName")
+                    b.Property<string>("Last_Name")
                         .HasColumnType("text");
 
                     b.Property<double>("Salary")

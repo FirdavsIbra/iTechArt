@@ -15,6 +15,10 @@
       font-size: 20px;
     }
   }
+  &:hover{
+    background-color: whitesmoke;
+    scale: 105%;
+  }
   p {
     font-size: 30px;
     color: #3a5696;
@@ -49,5 +53,25 @@
     p {
       letter-spacing: 1.5px;
     }
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .dashboard-page {
+    display: inline-block;
+    align-self: center;
+    justify-content: center;
+  }
+  .app-description {
+    margin: 50px 0;
+    width: 100%;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+  }
+  .block {
+    width: 40%;
+    display: inline-block;
+    margin: 10px;
   }
 }

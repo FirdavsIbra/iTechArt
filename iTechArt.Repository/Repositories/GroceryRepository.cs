@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
 using iTechArt.Database.DbContexts;
 using iTechArt.Database.Entities.Groceries;
-using iTechArt.Database.Entities.MedicalStaff;
 using iTechArt.Domain.ModelInterfaces;
+using iTechArt.Domain.ModelInterfaces.HelperModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
+using iTechArt.Repository.BusinessModels.HelperModels;
 using iTechArt.Repository.BusinessModels;
 using Microsoft.EntityFrameworkCore;
 
@@ -51,12 +52,12 @@ namespace iTechArt.Repository.Repositories
         /// Get grocery by id
         /// </summary>
         /// <param name="id"></param>
-        public async Task<IGrocery> GetByIdAsync(long id)
-        {
-            var groceryDb = await _dbContext.Set<GroceryDb>().FirstOrDefaultAsync(g => g.Id == id);
+        //public async Task<IGrocery> GetByIdAsync(long id)
+        //{
+        //    var groceryDb = await _dbContext.Set<GroceryDb>().FirstOrDefaultAsync(g => g.Id == id);
 
-            return _mapper.Map<Grocery>(groceryDb);
-        }
+        //    return _mapper.Map<Grocery>(groceryDb);
+        //}
 
         /// <summary>
         /// Update grocery
@@ -75,13 +76,26 @@ namespace iTechArt.Repository.Repositories
         /// <param name="grocery"></param>
         public async Task DeleteAsync(long id)
         {
-            var grocery = await _dbContext.Set<MedStaffDb>().FirstOrDefaultAsync(g => g.Id == id);
-
-            _dbContext.Set<IGrocery>().Remove(_mapper.Map<IGrocery>(grocery));
-
-            await _dbContext.SaveChangesAsync();
         }
+        public async Task<IDbResult> AddGroceriesAsync(List<IGrocery> groceries)
+        {
+            try
+            {
+                await _dbContext.AddRangeAsync(groceries);
+                return new DbResult
+                {
+                    IsSuccess = true
+                };
+            }
+            catch (Exception ex)
+            {
 
+               return new DbResult {
+                    IsSuccess = false,
+                    Exception = ex
+                };
+            }
+        }
         /// <summary>
         /// Get total count of groceries
         /// </summary>
