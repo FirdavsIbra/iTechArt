@@ -1,10 +1,15 @@
-﻿using iTechArt.Domain.Enums;
+﻿using CsvHelper.Configuration;
+using CsvHelper;
+using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using iTechArt.Service.DTOs;
+using iTechArt.Service.Helpers;
 using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;
+using System.Globalization;
+using System.Xml;
 
 namespace iTechArt.Service.Services
 {
@@ -35,6 +40,14 @@ namespace iTechArt.Service.Services
             if (fileExtension == ".xlsx")
             {
                 await ExcelParser(file);
+            }
+            else if (fileExtension == ".csv")
+            {
+                await CsvParser(file);
+            }
+            else if (fileExtension == ".xml")
+            {
+                await XmlParser(file);
             }
         }
 
@@ -76,6 +89,83 @@ namespace iTechArt.Service.Services
             catch (Exception ex)
             {
                 throw new ArgumentException(nameof(ex));
+            }
+        }
+
+        private async Task CsvParser(IFormFile file)
+        {
+            var filePath = Path.Combine(EnvironmentHelper.AttachmentPath, file.FileName);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+
+            var csvLines = File.ReadAllLines(filePath);
+
+            for (int i = 1; i < csvLines.Length; i++)
+            {
+                string[] rowData = csvLines[i].Split(',');
+
+                MedStaffDTO medStaff = new MedStaffDTO()
+                {
+                    FirstName = rowData[0].ToString().Trim(),
+                    LastName = rowData[1].ToString().Trim(),
+                    Gender = (Gender)Convert.ToByte(rowData[2]),
+                    Email = rowData[3].ToString().Trim(),
+                    PhoneNumber = rowData[4].ToString().Trim(),
+                    DateOfBirth = Convert.ToDateTime(rowData[5]),
+                    Address = rowData[6],
+                    Salary = Convert.ToDecimal(rowData[7]),
+                    HospitalName = rowData[8],
+                    PostalCode = rowData[9] is null? String.Empty: rowData[9],
+                    Shift = (Shift)Convert.ToByte(rowData[10])
+                };
+
+                await _medStaffRepository.AddAsync(medStaff);
+            }
+
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+        }
+
+        private async Task XmlParser(IFormFile file)
+        {
+            var filePath = Path.Combine(EnvironmentHelper.AttachmentPath, file.FileName);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.Load(filePath);
+            
+            foreach (XmlNode node in xmlDocument.SelectNodes("/dataset/record"))
+            {
+                MedStaffDTO medStaff = new MedStaffDTO
+                {
+                    FirstName = node["FirstName"].InnerText,
+                    LastName = node["LastName"].InnerText,
+                    Gender = (Gender)Convert.ToByte(node["Gender"].InnerText),
+                    Email = node["Email"].InnerText,
+                    PhoneNumber = node["PhoneNumber"].InnerText,
+                    DateOfBirth = Convert.ToDateTime(node["DateOfBirth"].InnerText),
+                    Address = node["Address"].InnerText,
+                    Salary = Convert.ToDecimal(node["Salary"].InnerText),
+                    HospitalName = node["HospitalName"].InnerText,
+                    PostalCode = node["PostalCode"] is null? String.Empty: node["PostalCode"].InnerText,
+                    Shift = (Shift)Convert.ToByte(node["Shift"].InnerText)
+                };
+
+                await _medStaffRepository.AddAsync(medStaff);
+            }
+            
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
             }
         }
     }
