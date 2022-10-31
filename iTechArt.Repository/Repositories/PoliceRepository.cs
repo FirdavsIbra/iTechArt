@@ -5,6 +5,7 @@ using iTechArt.Database.Entities.Police;
 using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
+using iTechArt.Repository.BusinessModels;
 using iTechArt.Repository.Dtos;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -56,8 +57,11 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public async Task<IPolice[]> GetAllAsync()
         {
-            IEnumerable<IPolice> polices = _dbContext.Police.Select(c => _mapper.Map<IPolice>(c));
-            return polices.ToArray();
+            // _dbContext.Police.Select(c => _mapper.Map<IPolice>(c));
+            var policesDb = await _dbContext.Police.ToListAsync();
+            List<Police> policeList = policesDb.Select(police => _mapper.Map<Police>(police)).ToList();
+
+            return policeList.ToArray();
         }
 
         /// <summary>

@@ -53,7 +53,7 @@ namespace iTechArt.Database.Entities.Pupils
         /// <summary>
         /// Gets or sets a name of school, where pupil study
         /// </summary>
-        [MaxLength(64)]
+        [MaxLength(128)]
         public string SchoolName { get; set; }
 
         /// <summary>

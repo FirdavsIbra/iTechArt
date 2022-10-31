@@ -31,18 +31,18 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get all pupils
         /// </summary>
-        public IPupil[] GetAllAsync()
+        public async Task<IPupil[]> GetAllAsync()
         {
-            var pupils = _dbContext.Pupils;
+            var pupils = await _dbContext.Pupils.ToArrayAsync();
 
-            List<IPupil> result = new List<IPupil>();
+            IPupil[] result = new IPupil[_dbContext.Pupils.Count()];
 
-            foreach (var pupil in pupils)
+            for (var i = 0; i < result.Length; i++)
             {
-                result.Add(_mapper.Map<Pupil>(pupil));
+                result[i] = _mapper.Map<Pupil>(pupils[i]);
             }
 
-            return result.ToArray();
+            return result;
         }
 
         /// <summary>

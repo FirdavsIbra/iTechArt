@@ -1,6 +1,4 @@
-﻿using CsvHelper;
-using CsvHelper.Configuration;
-using iTechArt.Domain.Enums;
+﻿using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
@@ -8,7 +6,6 @@ using iTechArt.Service.DTOs;
 using iTechArt.Service.Helpers;
 using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;
-using System.Globalization;
 using System.Xml;
 
 namespace iTechArt.Service.Services
@@ -24,9 +21,9 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Get all pupils
         /// </summary>
-        public IPupil[] GetAllAsync()
+        public async Task<IPupil[]> GetAllAsync()
         {
-            return _pupilRepository.GetAllAsync();
+            return await _pupilRepository.GetAllAsync();
         }
 
         /// <summary>
@@ -121,37 +118,29 @@ namespace iTechArt.Service.Services
             {
                 await file.CopyToAsync(fileStream);
             }
-            var configuration = new CsvConfiguration(CultureInfo.InvariantCulture)
-            {
-                Delimiter = ",",
-                HasHeaderRecord = true
-            };
+            var csvLines = File.ReadAllLines(filePath);
 
-            using (StreamReader csvReader = new StreamReader(filePath))
+            for (int i = 1; i < csvLines.Length; i++)
             {
-                using CsvReader csv = new(csvReader, configuration);
-                //csv.Context.RegisterClassMap<PupilMap>();
-                var records = csv.GetRecords<PupilForCreationDto>().ToList();
+                var rowData = csvLines[i].Split(',');
 
-                foreach (var record in records)
+                var pupil = new PupilForCreationDto
                 {
-                    PupilForCreationDto pupil = new PupilForCreationDto
-                    {
-                        FirstName = record.FirstName,
-                        LastName = record.LastName,
-                        DateOfBirth = record.DateOfBirth,
-                        Gender = record.Gender,
-                        PhoneNumber = record.PhoneNumber,
-                        Address = record.Address,
-                        City = record.City,
-                        SchoolName = record.SchoolName,
-                        Grade = record.Grade,
-                        CourseLanguage = record.CourseLanguage,
-                        Shift = record.Shift
-                    };
-                    await _pupilRepository.AddAsync(pupil);
-                }
+                    FirstName = rowData[0].ToString().Trim(),
+                    LastName = rowData[1].ToString().Trim(),
+                    DateOfBirth = Convert.ToDateTime(rowData[2]),
+                    Gender = (Gender)Convert.ToByte(rowData[3]),
+                    PhoneNumber = rowData[4].ToString().Trim(),
+                    Address = rowData[5].ToString().Trim(),
+                    City = rowData[6].ToString().Trim(),
+                    SchoolName = rowData[7].ToString().Trim(),
+                    Grade = Convert.ToByte(rowData[8]),
+                    CourseLanguage = (CourseLanguage)Convert.ToByte(rowData[9]),
+                    Shift = (Shift)Convert.ToByte(rowData[10])
+                };
+                await _pupilRepository.AddAsync(pupil);
             }
+
             // Delete the created file
             if (File.Exists(filePath))
             {
@@ -197,21 +186,4 @@ namespace iTechArt.Service.Services
             }
         }
     }
-    //public class PupilMap : ClassMap<PupilForCreationDto>
-    //{
-    //    public PupilMap()
-    //    {
-    //        Map(p => p.FirstName).Index(0);
-    //        Map(p => p.LastName).Index(1);
-    //        Map(p => p.DateOfBirth).Index(2);
-    //        Map(p => p.Gender).Index(3);
-    //        Map(p => p.PhoneNumber).Index(4);
-    //        Map(p => p.Address).Index(5);
-    //        Map(p => p.City).Index(6);
-    //        Map(p => p.SchoolName).Index(7);
-    //        Map(p => p.Grade).Index(8);
-    //        Map(p => p.CourseLanguage).Index(9);
-    //        Map(p => p.Shift).Index(10);
-    //    }
-    //}
 }
