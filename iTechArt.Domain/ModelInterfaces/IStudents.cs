@@ -2,7 +2,7 @@
 
 namespace iTechArt.Domain.ModelInterfaces
 {
-    public interface IStudent
+    public interface IStudents
     {
         /// <summary>
         /// Gets Id of business model entities
@@ -35,7 +35,7 @@ namespace iTechArt.Domain.ModelInterfaces
         public string Majority { get; }
 
         /// <summary>
-        /// Gets Gender entity of student
+        /// Gets boolean Gender entity of student
         /// </summary>
         public Gender Gender { get; }
 

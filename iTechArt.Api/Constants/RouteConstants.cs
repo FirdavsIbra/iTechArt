@@ -5,5 +5,6 @@
         public const string PUPIL = "api/pupils";
         public const string POLICE = "api/police";
         public const string AIRPORT = "api/airport";
+        public const string STUDENTS = "api/students";
     }
 }

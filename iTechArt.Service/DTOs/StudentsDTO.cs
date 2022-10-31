@@ -1,9 +1,14 @@
 ﻿using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace iTechArt.Repository.BusinessModels
+namespace iTechArt.Service.DTOs
 {
-    internal sealed class Student : IStudents
+    internal sealed class StudentsDTO:IStudents
     {
         /// <summary>
         /// Gets/Sets Id of business model entities
@@ -36,7 +41,7 @@ namespace iTechArt.Repository.BusinessModels
         public string Majority { get; internal set; }
 
         /// <summary>
-        /// Gets/Sets Gender entity of student
+        /// Gets/Sets boolean Gender entity of student
         /// </summary>
         public Gender Gender { get; internal set; }
 

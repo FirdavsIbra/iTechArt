@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
 {
-    [Route("api/students")]
+    /// <summary>
+    /// route: "api/students"
+    /// </summary>
+    [Route(RouteConstants.STUDENTS)]
     [ApiController]
     public sealed class StudentsController : ControllerBase
     {
-        private readonly string[] _allowedTypes = new string[] { "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" };
         private readonly IStudentsService _studentsService;
         public StudentsController(IStudentsService studentService)
         {
@@ -21,11 +23,13 @@ namespace iTechArt.Api.Controllers
         /// <param name="formFile"></param>
         /// <returns>if successful returns Status200OK, otherwise Status400BadRequest</returns>
         [HttpPost(ApiConstants.IMPORT)]
-        public IActionResult Import(IFormFile formFile)
+        public async Task<IActionResult> Import(IFormFile formFile)
         {
-            if (formFile != null && _allowedTypes.Contains(formFile.ContentType))
+            var allowedTypes = FileConstants.Extensions;
+            if (formFile != null && allowedTypes.Contains(Path.GetExtension(formFile.FileName)))
             {
-                return Ok(_studentsService.ImportStudentsAsync());
+                await _studentsService.ImportStudentsAsync(formFile);
+                return Ok();
             }
             else
             {
@@ -39,7 +43,7 @@ namespace iTechArt.Api.Controllers
         [HttpGet(ApiConstants.EXPORT)]
         public async Task<IActionResult> Export()
         {
-            return Ok(_studentsService.ExportStudentsAsync());
+            return Ok(await _studentsService.ExportStudentsAsync());
         }
     }
 }
