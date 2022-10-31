@@ -1,23 +1,21 @@
-﻿using AutoMapper;
-using iTechArt.Domain.ModelInterfaces;
+﻿using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using iTechArt.Service.Constants;
 using iTechArt.Service.DTOs;
 using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;
+using System.Xml;
 
 namespace iTechArt.Service.Services
 {
     public sealed class AirportService : IAirportsService
     {
         private readonly IAirportRepository _airportRepository;
-        private readonly IMapper _mapper;
 
-        public AirportService(IAirportRepository airportRepository, IMapper mapper)
+        public AirportService(IAirportRepository airportRepository)
         {
             _airportRepository = airportRepository;
-            _mapper = mapper;
         }
 
         /// <summary>
@@ -177,7 +175,56 @@ namespace iTechArt.Service.Services
         {
             try
             {
+                var fileExtension = Path.GetExtension(file.FileName);
+                
+                if (FileConstants.xmlExtensions.Contains(fileExtension))
+                {
+                    var fileName = DateTime.Now.Ticks + ".xml"; //Create a new Name for the file due to security reasons.
+                    var pathBuilt = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
 
+                    if (!Directory.Exists(pathBuilt))
+                    {
+                        Directory.CreateDirectory(pathBuilt);
+                    }
+
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", file.FileName);
+
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        await file.CopyToAsync(fileStream);
+                    }
+
+                    XmlDocument xmlDocument = new XmlDocument();
+                    xmlDocument.Load(path);
+
+                    foreach (XmlNode node in xmlDocument.SelectNodes("/dataset/record"))
+                    {
+                        var airport = new AirportDTO
+                        {
+                            AirportName = node["AirportName"].InnerText,
+                            BuiltDate = Convert.ToDateTime(node["BuiltDate"].InnerText),
+                            Capacity = Convert.ToUInt16(node["Capacity"].InnerText),
+                            Address = node["Address"].InnerText,
+                            City = node["City"].InnerText,
+                            EmpoyeesCount = Convert.ToUInt16(node["EmployeesCount"].InnerText),
+                            PassengersPerYear = Convert.ToInt64(node["PassengersPerYear"].InnerText),
+                            FlightsPerYear = Convert.ToUInt32(node["FlightsPerYear"].InnerText),
+                            AverageTicketPrice = Convert.ToUInt16(node["AverageTicketPrice"].InnerText),
+                        };
+
+                        await _airportRepository.AddAsync(airport);
+                    }
+
+                    //Deleting after having used the created path
+                    if (File.Exists(path))
+                    {
+                        File.Delete(path);
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException("Invalid file format");
+                }
             }
             catch (Exception e)
             {
