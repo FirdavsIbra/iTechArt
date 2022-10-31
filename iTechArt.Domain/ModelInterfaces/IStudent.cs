@@ -35,7 +35,7 @@ namespace iTechArt.Domain.ModelInterfaces
         public string Majority { get; }
 
         /// <summary>
-        /// Gets Gender entity of student
+        /// Gets boolean Gender entity of student
         /// </summary>
         public Gender Gender { get; }
 

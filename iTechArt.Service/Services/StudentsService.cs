@@ -16,7 +16,7 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Async method takes no parameters and returns serialized entities as file
         /// </summary>
-        public IStudent[] ExportStudentsAsync()
+        public async Task<IStudent[]> ExportStudentsAsync()
         {
             return _studentRepository.GetAll();
         }
@@ -24,7 +24,7 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Async method that saves entities into DB
         /// </summary>
-        public IStudent[] ImportStudentsAsync()
+        public async Task<IStudent[]> ImportStudentsAsync()
         {
             return _studentRepository.GetAll();
         }

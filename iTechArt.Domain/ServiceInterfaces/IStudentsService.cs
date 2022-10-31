@@ -7,11 +7,11 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// Imports students into DB from file
         /// </summary>
-        public IStudent[] ImportStudentsAsync();
+        public Task<IStudent[]> ImportStudentsAsync();
 
         /// <summary>
         /// Exports students from DB
         /// </summary>
-        public IStudent[] ExportStudentsAsync();
+        public Task<IStudent[]> ExportStudentsAsync();
     }
 }
