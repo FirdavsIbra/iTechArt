@@ -8,7 +8,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// Get all students from database
         /// </summary>
         /// <returns> Array of Repository Model Interfaces </returns>
-        public IStudents[] GetAll();
+        public Task<IStudents[]> GetAll();
 
         /// <summary>
         /// Add student to database

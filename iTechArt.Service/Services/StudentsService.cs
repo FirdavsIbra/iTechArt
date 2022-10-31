@@ -26,7 +26,7 @@ namespace iTechArt.Service.Services
         /// </summary>
         public async Task<IStudents[]> ExportStudentsAsync()
         {
-            return _studentRepository.GetAll();
+            return await _studentRepository.GetAll();
         }
 
         /// <summary>

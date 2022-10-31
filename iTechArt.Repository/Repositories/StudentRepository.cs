@@ -36,8 +36,9 @@ namespace iTechArt.Repository.Repositories
 
         /// <summary>
         /// Get all entities from database
+        /// should be remade
         /// </summary>
-        public IStudents[] GetAll()
+        public async Task<IStudents[]> GetAll()
         {
             var models = _dbContext.Set<StudentDb>();
 
