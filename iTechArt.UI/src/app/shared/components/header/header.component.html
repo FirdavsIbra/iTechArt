@@ -6,7 +6,10 @@
         <p style="margin: 0">GOVERNMENT'S STATISTICS</p>
       </div>
     </div>
-    <ul>
+
+
+    <ul class="menu" [ngClass]="{ 'menu_active': menuIsActive } ">
+
       <li>
         <p class="nav-cursor" routerLink="{{ units.police.path }}">
           {{ unitsTitles.police.toString().toUpperCase() }}
@@ -38,6 +41,14 @@
         </p>
       </li>
     </ul>
+
+    <div class="hamburger"
+         (click)="toggleMenu()"
+         [ngClass]="{ 'hamburger_active': menuIsActive } ">
+      <span class="line line1"></span>
+      <span class="line line2"></span>
+      <span class="line line3"></span>
+    </div>
     <div class="button-container header-element">
       <button class="button-secondary">Log Out</button>
     </div>
