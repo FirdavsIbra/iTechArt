@@ -1,6 +1,5 @@
-﻿using iTechArt.Database.Enums;
+﻿using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
-using iTechArt.Domain.ServiceInterfaces;
 using OfficeOpenXml;
 using System.Globalization;
 

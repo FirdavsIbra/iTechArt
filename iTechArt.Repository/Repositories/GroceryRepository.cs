@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using iTechArt.Database.DbContexts;
 using iTechArt.Database.Entities.Groceries;
-using iTechArt.Database.Entities.MedicalStaff;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ModelInterfaces.HelperModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
@@ -53,12 +52,12 @@ namespace iTechArt.Repository.Repositories
         /// Get grocery by id
         /// </summary>
         /// <param name="id"></param>
-        public async Task<IGrocery> GetByIdAsync(long id)
-        {
-            var groceryDb = await _dbContext.Set<GroceryDb>().FirstOrDefaultAsync(g => g.Id == id);
+        //public async Task<IGrocery> GetByIdAsync(long id)
+        //{
+        //    var groceryDb = await _dbContext.Set<GroceryDb>().FirstOrDefaultAsync(g => g.Id == id);
 
-            return _mapper.Map<Grocery>(groceryDb);
-        }
+        //    return _mapper.Map<Grocery>(groceryDb);
+        //}
 
         /// <summary>
         /// Update grocery
