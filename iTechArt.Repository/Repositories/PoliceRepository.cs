@@ -1,16 +1,15 @@
 ﻿using AutoMapper;
 using CsvHelper;
 using iTechArt.Database.DbContexts;
-using iTechArt.Database.Entities.MedicalStaff;
 using iTechArt.Database.Entities.Police;
 using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Repository.BusinessModels;
+using iTechArt.Repository.Dtos;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using OfficeOpenXml;
 using System.Globalization;
 using System.Xml;
@@ -23,7 +22,7 @@ namespace iTechArt.Repository.Repositories
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public PoliceRepository(AppDbContext dbContext, 
+        public PoliceRepository(AppDbContext dbContext,
             IMapper mapper,
             IWebHostEnvironment webHostEnvironment)
         {
@@ -58,8 +57,11 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public async Task<IPolice[]> GetAllAsync()
         {
-            IEnumerable<IPolice> polices = _dbContext.Police.Select(c => _mapper.Map<IPolice>(c));
-            return polices.ToArray();
+            // _dbContext.Police.Select(c => _mapper.Map<IPolice>(c));
+            var policesDb = await _dbContext.Police.ToListAsync();
+            List<Police> policeList = policesDb.Select(police => _mapper.Map<Police>(police)).ToList();
+
+            return policeList.ToArray();
         }
 
         /// <summary>
@@ -126,10 +128,10 @@ namespace iTechArt.Repository.Repositories
                                 Name = worksheet.Cells[row, 2].Value.ToString().Trim(),
                                 Surname = worksheet.Cells[row, 3].Value.ToString().Trim(),
                                 Email = worksheet.Cells[row, 4].Value.ToString().Trim(),
-                                Gender = (Gender)(worksheet.Cells[row, 5].Value),
+                                Gender = (Gender)Convert.ToByte(worksheet.Cells[row, 5].Value),
                                 Address = worksheet.Cells[row, 6].Value.ToString().Trim(),
-                                JobTitle = worksheet.Cells[row, 6].Value.ToString().Trim(),
-                                Salary = Convert.ToDouble(worksheet.Cells[row, 6].Value)
+                                JobTitle = worksheet.Cells[row, 7].Value.ToString().Trim(),
+                                Salary = Convert.ToDouble(worksheet.Cells[row, 8].Value)
                             };
                             _dbContext.Police.Add(policeDb);
                             await _dbContext.SaveChangesAsync();
@@ -163,17 +165,17 @@ namespace iTechArt.Repository.Repositories
                 {
                     PoliceDb policeDb = new PoliceDb
                     {
-                        Name = node["name"].InnerText,
-                        Surname = node["job"].InnerText,
-                        Email = node["email"].InnerText,
-                        Gender = (Gender)Enum.Parse(typeof(Gender),node["phone"].InnerText),
-                        Address = node["movie"].InnerText,
-                        JobTitle = node["phone"].InnerText,
-                        Salary = Convert.ToDouble(node["movie"].InnerText)
+                        Name = node["Name"].InnerText,
+                        Surname = node["Surname"].InnerText,
+                        Email = node["Email"].InnerText,
+                        Gender = (Gender)Enum.Parse(typeof(Gender), node["Gender"].InnerText),
+                        Address = node["Address"].InnerText,
+                        JobTitle = node["JobTitle"].InnerText,
+                        Salary = Convert.ToDouble(node["Salary"].InnerText)
                     };
 
-                    _dbContext.Police.Add(policeDb);
-                    await _dbContext.SaveChangesAsync();
+                    //_dbContext.Police.Add(policeDb);
+                    //await _dbContext.SaveChangesAsync();
                 }
                 catch (Exception ex)
                 {
@@ -199,27 +201,29 @@ namespace iTechArt.Repository.Repositories
             {
                 await file.CopyToAsync(fileStream);
             }
-            using (var csvReader = new StreamReader(filePath))
+            using (TextReader csvReader = new StreamReader(filePath))
             {
                 using (var csv = new CsvReader(csvReader, CultureInfo.InvariantCulture))
                 {
                     try
                     {
-                        var records = csv.GetRecords<PoliceDb>();
+                        var records = csv.GetRecords<PoliceDto>();
                         foreach (var record in records)
                         {
                             PoliceDb policeDb = new PoliceDb
                             {
-                                Name = record.Name,
-                                Surname = record.Surname,
-                                Email = record.Email,
-                                Gender = record.Gender,
-                                Address = record.Address,
-                                JobTitle = record.JobTitle,
-                                Salary = record.Salary
+                                Name = record.Name.ToString(),
+                                Surname = record.Surname.ToString(),
+                                Email = record.Email.ToString(),
+                                Gender = (Gender)Enum.Parse(typeof(Gender), record.Gender.ToString()),
+                                Address = record.Address.ToString(),
+                                JobTitle = record.JobTitle.ToString(),
+                                Salary = Convert.ToDouble(record.Salary)
                             };
-                            _dbContext.Police.Add(policeDb);
+                            await _dbContext.Police.AddAsync(policeDb);
                             await _dbContext.SaveChangesAsync();
+                            //var x = await _dbContext.Police.FirstOrDefaultAsync(c => c.Name == "Maybelle");
+                            //if(x != null) Console.WriteLine(x.Address);
                         }
                     }
                     catch (Exception ex)

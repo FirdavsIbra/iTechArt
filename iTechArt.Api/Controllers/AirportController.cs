@@ -9,7 +9,6 @@ namespace iTechArt.Api.Controllers
     public sealed class AirportController : ControllerBase
     {
         private readonly IAirportsService _airportsService;
-        private readonly string[] excelExtensions = {".xlsx", ".xls", ".xlsm", ".xlsb", ".xltx", ".xltm", ".xlt", ".xlam", ".xla", ".xlw" };
 
         public AirportController(IAirportsService airportsService)
         {
@@ -23,30 +22,21 @@ namespace iTechArt.Api.Controllers
         [HttpPost(ApiConstants.IMPORT)]
         public async Task<IActionResult> ImportAirportExcel(IFormFile file)
         {
-            var fileExtension = Path.GetExtension(file.FileName);
-
-            if (excelExtensions.Contains(fileExtension))
+            if (file != null)
             {
-                await _airportsService.ImportAirportExcel(file);
-                return Ok();
+                var fileExtension = Path.GetExtension(file.FileName);
+
+                if (FileConstants.Extensions.Contains(fileExtension))
+                {
+                    await _airportsService.ImportAirportFile(file);
+                    return Ok("Success");
+                }
+
+                return BadRequest("Invalid file format!");
             }
             else
             {
-                return BadRequest();
-            }
-        }
-
-        [HttpPost("csv")]
-        public async Task<IActionResult> CSVParser(IFormFile file)
-        {
-            if (file.FileName.Contains(".csv"))
-            {
-                await _airportsService.ImportAirportCSV(file);
-                return Ok();
-            }
-            else
-            {
-                return BadRequest();
+                return BadRequest("Invalid file format!");
             }
         }
 
@@ -56,7 +46,7 @@ namespace iTechArt.Api.Controllers
         [HttpGet(ApiConstants.EXPORT)]
         public async Task<IActionResult> ExportAirportExcel()
         {
-            return Ok(_airportsService.ExportAirportExcel());
+            return Ok( await _airportsService.ExportAirportExcel());
         }
     }
 }

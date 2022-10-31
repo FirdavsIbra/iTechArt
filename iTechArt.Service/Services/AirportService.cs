@@ -1,42 +1,66 @@
-﻿using AutoMapper;
-using iTechArt.Domain.ModelInterfaces;
+﻿using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
+using iTechArt.Service.Constants;
 using iTechArt.Service.DTOs;
 using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;
+using System.Xml;
 
 namespace iTechArt.Service.Services
 {
     public sealed class AirportService : IAirportsService
     {
         private readonly IAirportRepository _airportRepository;
-        private readonly IMapper _mapper;
-        private readonly string[] excelExtensions = { ".xlsx", ".xls", ".xlsm", ".xlsb", ".xltx", ".xltm", ".xlt", ".xlam", ".xla", ".xlw" };
 
-        public AirportService(IAirportRepository airportRepository, IMapper mapper)
+        public AirportService(IAirportRepository airportRepository)
         {
             _airportRepository = airportRepository;
-            _mapper = mapper;
         }
 
         /// <summary>
         /// Exporting airport datas
         /// </summary>
-        public Task<IAirport[]> ExportAirportExcel()
+        public async Task<IAirport[]> ExportAirportExcel()
         {
-            return _airportRepository.GetAll();
+            return await _airportRepository.GetAll();
         }
+
+        /// <summary>
+        /// Import airport's file
+        /// </summary>
+        public async Task ImportAirportFile(IFormFile file)
+        {
+            var fileExtension = Path.GetExtension(file.FileName);
+
+            if (FileConstants.excelExtensions.Contains(fileExtension))
+            {
+                await AirportExcelParser(file);
+            }
+            else if (FileConstants.csvExtensions.Contains(fileExtension))
+            {
+                await AirportCSVParser(file);
+            }
+            else if (FileConstants.xmlExtensions.Contains(fileExtension))
+            {
+                await AirportXMLParser(file);
+            }
+            else
+            {
+                throw new ArgumentException("Invalid file format");
+            }
+        }
+
         /// <summary>
         /// Importing airport datas from excel file
         /// </summary>
-        public async Task ImportAirportExcel(IFormFile file)
+        private async Task AirportExcelParser(IFormFile file)
         {
             try
             {
                 var fileExtension = Path.GetExtension(file.FileName);
 
-                if (excelExtensions.Contains(fileExtension))
+                if (FileConstants.excelExtensions.Contains(fileExtension))
                 {
                     using (var stream = new MemoryStream())
                     {
@@ -78,11 +102,16 @@ namespace iTechArt.Service.Services
             }
         }
 
-        public async Task ImportAirportCSV(IFormFile file)
+        /// <summary>
+        /// Importing airport datas from csv file
+        /// </summary>
+        private async Task AirportCSVParser(IFormFile file)
         {
             try
             {
-                if (file.FileName.Contains(".csv"))
+                var fileExtension = Path.GetExtension(file.FileName);
+
+                if (FileConstants.csvExtensions.Contains(fileExtension))
                 {
                     var fileName = DateTime.Now.Ticks + ".csv"; //Create a new Name for the file due to security reasons.
                     var pathBuilt = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
@@ -131,6 +160,70 @@ namespace iTechArt.Service.Services
                 else
                 {
                     throw new Exception("Upload correct File!!!");
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException(nameof(e));
+            }
+        }
+
+        /// <summary>
+        /// Importing airport datas from xml file
+        /// </summary>
+        private async Task AirportXMLParser(IFormFile file)
+        {
+            try
+            {
+                var fileExtension = Path.GetExtension(file.FileName);
+                
+                if (FileConstants.xmlExtensions.Contains(fileExtension))
+                {
+                    var fileName = DateTime.Now.Ticks + ".xml"; //Create a new Name for the file due to security reasons.
+                    var pathBuilt = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+
+                    if (!Directory.Exists(pathBuilt))
+                    {
+                        Directory.CreateDirectory(pathBuilt);
+                    }
+
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", file.FileName);
+
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        await file.CopyToAsync(fileStream);
+                    }
+
+                    XmlDocument xmlDocument = new XmlDocument();
+                    xmlDocument.Load(path);
+
+                    foreach (XmlNode node in xmlDocument.SelectNodes("/dataset/record"))
+                    {
+                        var airport = new AirportDTO
+                        {
+                            AirportName = node["AirportName"].InnerText,
+                            BuiltDate = Convert.ToDateTime(node["BuiltDate"].InnerText),
+                            Capacity = Convert.ToUInt16(node["Capacity"].InnerText),
+                            Address = node["Address"].InnerText,
+                            City = node["City"].InnerText,
+                            EmpoyeesCount = Convert.ToUInt16(node["EmployeesCount"].InnerText),
+                            PassengersPerYear = Convert.ToInt64(node["PassengersPerYear"].InnerText),
+                            FlightsPerYear = Convert.ToUInt32(node["FlightsPerYear"].InnerText),
+                            AverageTicketPrice = Convert.ToUInt16(node["AverageTicketPrice"].InnerText),
+                        };
+
+                        await _airportRepository.AddAsync(airport);
+                    }
+
+                    //Deleting after having used the created path
+                    if (File.Exists(path))
+                    {
+                        File.Delete(path);
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException("Invalid file format");
                 }
             }
             catch (Exception e)

@@ -23,7 +23,7 @@ namespace iTechArt.Api.Controllers
         /// </summary>
         /// <param name="formFile"></param>
         [HttpPost(ApiConstants.IMPORT)]
-        public IActionResult Import(IFormFile formFile)
+        public async Task<IActionResult> Import(IFormFile formFile)
         {
             string fileExtension = Path.GetExtension(formFile.FileName);
 
@@ -32,7 +32,8 @@ namespace iTechArt.Api.Controllers
                 if (FileConstants.Extensions.Contains(fileExtension) || FileConstants.EXCEL.Contains(formFile.ContentType)
                     || FileConstants.CSV.Contains(formFile.ContentType) || FileConstants.XML.Contains(formFile.ContentType))
                 {
-                    return Ok(_policeService.ImportPoliceData(formFile));
+                    await _policeService.ImportPoliceData(formFile);
+                    return Ok();
                 }
                 else
                 {
