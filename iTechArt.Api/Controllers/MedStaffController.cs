@@ -13,20 +13,16 @@ namespace iTechArt.Api.Controllers
         /// <param name="formFile"></param>
         /// <returns> An Array of Repository Models </returns>
         [HttpPost("import")]
-        public async ValueTask<IActionResult> Import(IFormFile formFile)
+        public async ValueTask<IActionResult> Import([FromServices] IMedStaffService _medStaffService, IFormFile formFile)
         {
             if (formFile != null)
             {
-                if (FileConstants.CSV.Contains(formFile.ContentType.ToLower()))
+                string fileExtension = Path.GetExtension(formFile.FileName);
+
+                if (FileConstants.Extensions.Contains(fileExtension))
                 {
-                    return Ok();
-                }
-                else if (FileConstants.XML.Contains(formFile.ContentType.ToLower()))
-                {
-                    return Ok();
-                }
-                else if (FileConstants.EXCEL.Contains(formFile.ContentType.ToLower()))
-                {
+                    await _medStaffService.ImportMedStaffFile(formFile);
+
                     return Ok();
                 }
             }
