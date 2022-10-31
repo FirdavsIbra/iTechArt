@@ -9,6 +9,10 @@ using Microsoft.VisualBasic.FileIO;
 using System.Drawing;
 using System;
 using System.Globalization;
+using System.IdentityModel.Tokens.Jwt;
+using System.Xml.Serialization;
+using System.Xml;
+using iTechArt.Service.Helpers;
 
 namespace iTechArt.Service.Services
 {
@@ -58,11 +62,26 @@ namespace iTechArt.Service.Services
         {
             try
             {
-                var xmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(StudentsDTO));
-                var streamReader = new StreamReader(formFile.OpenReadStream());
-                StudentsDTO studentsDTO = (StudentsDTO)xmlSerializer.Deserialize(streamReader);
-                streamReader.Close();
-                Console.WriteLine(studentsDTO.ToString());
+                var xmlDocument = new XmlDocument();
+                xmlDocument.LoadXml(formFile.FileName);
+                XmlNodeList nodes = xmlDocument.DocumentElement.SelectNodes("/dataset/record");
+
+                foreach (XmlNode node in nodes)
+                {
+                    StudentsDTO studentsDTO = new StudentsDTO()
+                    {
+                        FirstName = node["FirstName"].InnerText,
+                        LastName = node["LastName"].InnerText,
+                        Email = node["Email"].InnerText,
+                        Password = node["Password"].InnerText,
+                        Majority = node["Majority"].InnerText,
+                        Gender = (Domain.Enums.Gender)byte.Parse(node["Gender"].InnerText),
+                        DateOfBirth = DateTime.ParseExact(node["DateOfBirth"].InnerText, "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                        University = node["University"].InnerText
+                    };
+                    await _studentRepository.AddAsync(studentsDTO);
+                }
+                
             }
             catch (Exception)
             {
