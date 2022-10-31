@@ -88,5 +88,22 @@ namespace iTechArt.Repository.Repositories
         {
             return _dbContext.Pupils.Count();
         }
+
+        /// <summary>
+        /// Add pupil array
+        /// </summary>
+        public async Task AddRangeAsync(IPupil[] pupils)
+        {
+            PupilDb[] result = new PupilDb[pupils.Length];
+
+            for (var i = 0; i < result.Length; i++)
+            {
+                result[i] = _mapper.Map<PupilDb>(pupils[i]);
+            }
+
+            await _dbContext.Pupils.AddRangeAsync(result);
+
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

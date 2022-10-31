@@ -84,6 +84,7 @@ namespace iTechArt.Service.Services
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
                 ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
                 var rowCount = worksheet.Dimension.Rows;
+                PupilForCreationDto[] pupils = new PupilForCreationDto[rowCount - 1];
 
                 for (int row = 2; row <= rowCount; row++)
                 {
@@ -101,8 +102,9 @@ namespace iTechArt.Service.Services
                         CourseLanguage = (CourseLanguage)Convert.ToByte(worksheet.Cells[row, 10].Value),
                         Shift = (Shift)Convert.ToByte(worksheet.Cells[row, 11].Value),
                     };
-                    await _pupilRepository.AddAsync(pupil);
+                    pupils[row - 2] = pupil;
                 }
+                await _pupilRepository.AddRangeAsync(pupils);
             }
             
         }
@@ -119,6 +121,8 @@ namespace iTechArt.Service.Services
                 await file.CopyToAsync(fileStream);
             }
             var csvLines = File.ReadAllLines(filePath);
+
+            PupilForCreationDto[] pupils = new PupilForCreationDto[csvLines.Length - 1];
 
             for (int i = 1; i < csvLines.Length; i++)
             {
@@ -138,8 +142,9 @@ namespace iTechArt.Service.Services
                     CourseLanguage = (CourseLanguage)Convert.ToByte(rowData[9]),
                     Shift = (Shift)Convert.ToByte(rowData[10])
                 };
-                await _pupilRepository.AddAsync(pupil);
+                pupils[i - 1] = pupil;
             }
+            await _pupilRepository.AddRangeAsync(pupils);
 
             // Delete the created file
             if (File.Exists(filePath))
@@ -161,24 +166,31 @@ namespace iTechArt.Service.Services
             }
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.Load(filePath);
-            foreach (XmlNode node in xmlDocument.SelectNodes("/pupils/pupil"))
+
+            PupilForCreationDto[] pupils = new PupilForCreationDto[xmlDocument.SelectNodes("/pupils/pupil").Count];
+
+            var nodes = xmlDocument.SelectNodes("/pupils/pupil");
+
+            for (int i = 0; i < nodes.Count; i++)
             {
                 PupilForCreationDto pupil = new PupilForCreationDto
                 {
-                    FirstName = node["FirstName"].InnerText,
-                    LastName = node["LastName"].InnerText,
-                    DateOfBirth = Convert.ToDateTime(node["DateOfBirth"].InnerText),
-                    Gender = (Gender)Convert.ToByte(node["Gender"].InnerText),
-                    PhoneNumber = node["PhoneNumber"].InnerText,
-                    Address = node["Address"].InnerText,
-                    City = node["City"].InnerText,
-                    SchoolName = node["SchoolName"].InnerText,
-                    Grade = Convert.ToByte(node["Grade"].InnerText),
-                    CourseLanguage = (CourseLanguage)Convert.ToByte(node["CourseLanguage"].InnerText),
-                    Shift = (Shift)Convert.ToByte(node["Shift"].InnerText)
+                    FirstName = nodes[i]["FirstName"].InnerText,
+                    LastName = nodes[i]["LastName"].InnerText,
+                    DateOfBirth = Convert.ToDateTime(nodes[i]["DateOfBirth"].InnerText),
+                    Gender = (Gender)Convert.ToByte(nodes[i]["Gender"].InnerText),
+                    PhoneNumber = nodes[i]["PhoneNumber"].InnerText,
+                    Address = nodes[i]["Address"].InnerText,
+                    City = nodes[i]["City"].InnerText,
+                    SchoolName = nodes[i]["SchoolName"].InnerText,
+                    Grade = Convert.ToByte(nodes[i]["Grade"].InnerText),
+                    CourseLanguage = (CourseLanguage)Convert.ToByte(nodes[i]["CourseLanguage"].InnerText),
+                    Shift = (Shift)Convert.ToByte(nodes[i]["Shift"].InnerText)
                 };
-                await _pupilRepository.AddAsync(pupil);
+                pupils[i] = pupil;
             }
+            await _pupilRepository.AddRangeAsync(pupils);
+
             // Delete the created file
             if (File.Exists(filePath))
             {
