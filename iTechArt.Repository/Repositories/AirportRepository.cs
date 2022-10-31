@@ -40,7 +40,7 @@ namespace iTechArt.Repository.Repositories
 
             for (var i = 0; i < result.Length; i++)
             {
-                result[i] = _mapper.Map<IAirport>(airports[i]);
+                result[i] = _mapper.Map<Airport>(airports[i]);
             }
 
             return result;
