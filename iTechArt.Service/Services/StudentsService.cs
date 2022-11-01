@@ -9,6 +9,10 @@ using Microsoft.VisualBasic.FileIO;
 using System.Drawing;
 using System;
 using System.Globalization;
+using System.IdentityModel.Tokens.Jwt;
+using System.Xml.Serialization;
+using System.Xml;
+using iTechArt.Service.Helpers;
 
 namespace iTechArt.Service.Services
 {
@@ -26,7 +30,7 @@ namespace iTechArt.Service.Services
         /// </summary>
         public async Task<IStudents[]> ExportStudentsAsync()
         {
-            return await _studentRepository.GetAll();
+            return _studentRepository.GetAll();
         }
 
         /// <summary>
@@ -58,8 +62,26 @@ namespace iTechArt.Service.Services
         {
             try
             {
-                var xmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(StudentsDTO));
-                var streamReader = new StreamReader(formFile.OpenReadStream());
+                var xmlDocument = new XmlDocument();
+                xmlDocument.LoadXml(formFile.FileName);
+                XmlNodeList nodes = xmlDocument.DocumentElement.SelectNodes("/dataset/record");
+
+                foreach (XmlNode node in nodes)
+                {
+                    StudentsDTO studentsDTO = new StudentsDTO()
+                    {
+                        FirstName = node["FirstName"].InnerText,
+                        LastName = node["LastName"].InnerText,
+                        Email = node["Email"].InnerText,
+                        Password = node["Password"].InnerText,
+                        Majority = node["Majority"].InnerText,
+                        Gender = (Domain.Enums.Gender)byte.Parse(node["Gender"].InnerText),
+                        DateOfBirth = DateTime.ParseExact(node["DateOfBirth"].InnerText, "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                        University = node["University"].InnerText
+                    };
+                    await _studentRepository.AddAsync(studentsDTO);
+                }
+                
             }
             catch (Exception)
             {
@@ -78,41 +100,37 @@ namespace iTechArt.Service.Services
                     //Processing row
                     lines.Add(parser.ReadLine());
                 }
-                foreach (var line in lines)
+                foreach (var line in lines.Skip(1))
                 {
                     string[] fields = line.Split(",");
 
                     var obj = new StudentsDTO();
                     // parse Id
-                    if (long.TryParse(fields[0], out var parsedId))
-                    {
-                        obj.Id = parsedId;
-                    }
-                    obj.FirstName = fields[1];
-                    obj.LastName = fields[2];
+                    obj.FirstName = fields[0];
+                    obj.LastName = fields[1];
                     // parse Gender
-                    if (byte.TryParse(fields[3], out var parsedGender))
+                    if (byte.TryParse(fields[5], out var parsedGender))
                     {
                         obj.Gender = (Domain.Enums.Gender)parsedGender;
                     }
                     // parse birthday
                     try
                     {
-                        obj.DateOfBirth = DateTime.ParseExact(fields[4], "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                        obj.DateOfBirth = DateTime.ParseExact(fields[6], "dd/MM/yyyy", CultureInfo.InvariantCulture);
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
 
-                        throw new Exception("bad date format");
+                        throw new Exception(e.Message);
                     }
                     // parse email
-                    obj.Email = fields[5];
+                    obj.Email = fields[2];
                     // parse password
-                    obj.Password = fields[6];
+                    obj.Password = fields[3];
                     // parse university
                     obj.University = fields[7];
                     // parse majority
-                    obj.Majority = fields[8];
+                    obj.Majority = fields[4];
                     await _studentRepository.AddAsync(obj);
                 }
             }
