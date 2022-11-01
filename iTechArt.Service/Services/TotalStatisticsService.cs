@@ -13,9 +13,8 @@ namespace iTechArt.Service.Services
         private readonly IStudentRepository _studentRepository;
         private readonly IGroceryRepository _groceryRepository;
         private readonly IPoliceRepository _policeRepository;
-        public TotalStatisticsService(
-            IPupilRepository pupilRepository,
-            IAirportRepository airportRepository,
+        public TotalStatisticsService(IPupilRepository pupilRepository,
+                                      IAirportRepository airportRepository,
             IMedStaffRepository doctorRepository,
             IStudentRepository studentRepository,
             IGroceryRepository groceryRepository,

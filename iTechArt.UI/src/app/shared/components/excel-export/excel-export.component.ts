@@ -72,11 +72,22 @@ export class ExcelExportComponent implements OnInit {
 
     //const headers = new HttpHeaders().set('content-type', fileContentType!);
 
-    this.http
-      .post(`${this.url}${this.api}`, formData)
-      .subscribe(() => {
+    // this.http.post(`${this.url}${this.api}`, formData).subscribe(() => {
+    //   alert('Uploaded Successfully.');
+    //   this.isFormButtonDisabled = false;
+    // });
+
+    this.http.post<any>(`${this.url}${this.api}`, formData).subscribe({
+      next: (data: string) => {
         alert('Uploaded Successfully.');
+        console.log(data)
         this.isFormButtonDisabled = false;
-      }, () => alert('Bad things happened ☹'));
+      },
+      error: (error: string) => {
+        alert(`There was an error! ${error}`);
+        console.log(error);
+        this.isFormButtonDisabled = false;
+      }
+    })
   }
 }
