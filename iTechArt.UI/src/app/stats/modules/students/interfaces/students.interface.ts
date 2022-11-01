@@ -7,5 +7,5 @@ export interface IStudents {
   majority: string;
   university: string;
   email: string;
-  password:string;
+  password: string;
 }

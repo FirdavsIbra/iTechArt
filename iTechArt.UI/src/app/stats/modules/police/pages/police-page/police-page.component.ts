@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 
 import { UnitsEnum } from '../../../../../shared/enums/units.enum';
-import { IPolice } from "../../../../../shared/interfaces/police.interface";
-import { PoliceService } from "../../../../../shared/services/police.service";
+import { IPolice } from "../../interfaces/police.interface";
+import { PoliceService } from "../../police.service";
 
 
 @Component({

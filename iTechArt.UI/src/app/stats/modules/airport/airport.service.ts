@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IAirport } from '../interfaces/airport.interface';
-import { APIS } from '../constants/APIS';
+import { IAirport } from './interfaces/airport.interface';
+import { APIS } from '../../../shared/constants/APIS';
 
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',

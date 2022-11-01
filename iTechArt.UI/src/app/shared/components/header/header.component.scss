@@ -102,7 +102,7 @@ a {
     width: 50%;
     height: 100vh;
     padding: 20px 15px;
-    background-color: rgba(58, 86, 151, 0.7);
+    background-color: rgba(58, 86, 151, 1);
     transition: all 0.3s;
     cursor: pointer;
   }
@@ -123,9 +123,7 @@ a {
 
   .hamburger {
     display: block;
-    position: absolute;
-    right: 95px;
-    top: 45px;
+
     transform: translateY(-50%);
     width: 26px;
     cursor: pointer;

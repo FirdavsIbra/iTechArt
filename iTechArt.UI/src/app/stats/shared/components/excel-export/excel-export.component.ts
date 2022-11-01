@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
-import { UnitsEnum } from '../../enums/units.enum';
-import { environment } from '../../../../environments/environment';
-import { ApiService } from '../../services/api.service';
-import { ContentTypeService } from '../../services/content-type.service';
-import { ExtensionsEnum } from '../../enums/extensions.enum';
+import { UnitsEnum } from '../../../../shared/enums/units.enum';
+import { environment } from '../../../../../environments/environment';
+import { ApiService } from '../../../../shared/services/api.service';
+import { ContentTypeService } from '../../../../shared/services/content-type.service';
+import { ExtensionsEnum } from '../../../../shared/enums/extensions.enum';
 
 @Component({
   selector: 'app-excel-export',
@@ -64,18 +64,8 @@ export class ExcelExportComponent implements OnInit {
   public submit(): void {
     this.isFormButtonDisabled = true;
     const file = this.exportForm.get('fileSource')!.value;
-    // const fileContentType = this.contentTypeService.getContentType(
-    //   this.fileName
-    // );
     const formData = new FormData();
     formData.append('file', file!);
-
-    //const headers = new HttpHeaders().set('content-type', fileContentType!);
-
-    // this.http.post(`${this.url}${this.api}`, formData).subscribe(() => {
-    //   alert('Uploaded Successfully.');
-    //   this.isFormButtonDisabled = false;
-    // });
 
     this.http.post<any>(`${this.url}${this.api}`, formData).subscribe({
       next: (data: string) => {

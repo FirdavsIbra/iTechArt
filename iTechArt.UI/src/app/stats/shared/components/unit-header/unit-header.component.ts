@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { UnitsEnum } from '../../enums/units.enum';
+import { UnitsEnum } from '../../../../shared/enums/units.enum';
 
 @Component({
   selector: 'app-unit-header',

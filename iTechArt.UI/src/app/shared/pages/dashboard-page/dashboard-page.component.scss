@@ -1,5 +1,5 @@
 .block {
-  width: 10%;
+  width: 130px;
   padding: 15px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   background-color: whitesmoke;
@@ -56,11 +56,15 @@
   }
 }
 
-@media screen and (max-width: 660px) {
+
+
+
+@media screen and (max-width: 1030px) {
   .dashboard-page {
+    width: 100%;
     display: inline-block;
-    align-self: center;
-    justify-content: center;
+    align-items: center;
+    justify-content: stretch;
   }
   .app-description {
     margin: 50px 0;
@@ -70,8 +74,8 @@
     justify-content: center;
   }
   .block {
-    width: 40%;
     display: inline-block;
-    margin: 10px;
+    margin: 15px;
+    min-width: 130px;
   }
 }
