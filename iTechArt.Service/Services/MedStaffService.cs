@@ -63,6 +63,8 @@ namespace iTechArt.Service.Services
                         ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
                         var rowCount = worksheet.Dimension.Rows;
 
+                        IList<IMedStaff> medStaffs = new List<IMedStaff>(rowCount-2);
+
                         for (int row = 2; row <= rowCount; row++)
                         {
                             var medStaff = new MedStaffDTO()
@@ -80,8 +82,10 @@ namespace iTechArt.Service.Services
                                 Shift = (Shift)Convert.ToByte(worksheet.Cells[row, 11].Value)
                             };
 
-                            await _medStaffRepository.AddAsync(medStaff);
+                            medStaffs.Add(medStaff);
                         }
+                        
+                        await _medStaffRepository.AddRangeAsync(medStaffs);
                     }
                 }
             }
@@ -102,6 +106,8 @@ namespace iTechArt.Service.Services
 
             var csvLines = File.ReadAllLines(filePath);
 
+            IList<IMedStaff> medStaffs = new List<IMedStaff>(csvLines.Length - 1);
+
             for (int i = 1; i < csvLines.Length; i++)
             {
                 string[] rowData = csvLines[i].Split(',');
@@ -121,8 +127,10 @@ namespace iTechArt.Service.Services
                     Shift = (Shift)Convert.ToByte(rowData[10])
                 };
 
-                await _medStaffRepository.AddAsync(medStaff);
+                medStaffs.Add(medStaff);
             }
+            
+            await _medStaffRepository.AddRangeAsync(medStaffs);
 
             if (File.Exists(filePath))
             {
@@ -141,8 +149,12 @@ namespace iTechArt.Service.Services
 
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.Load(filePath);
+
+            var nodes = xmlDocument.SelectNodes("/dataset/record");
+
+            IList<IMedStaff> medStaffs = new List<IMedStaff>(nodes.Count);
             
-            foreach (XmlNode node in xmlDocument.SelectNodes("/dataset/record"))
+            foreach (XmlNode node in nodes)
             {
                 MedStaffDTO medStaff = new MedStaffDTO
                 {
@@ -159,8 +171,10 @@ namespace iTechArt.Service.Services
                     Shift = (Shift)Convert.ToByte(node["Shift"].InnerText)
                 };
 
-                await _medStaffRepository.AddAsync(medStaff);
+                medStaffs.Add(medStaff);
             }
+            
+            await _medStaffRepository.AddRangeAsync(medStaffs);
             
             if (File.Exists(filePath))
             {

@@ -21,7 +21,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// </summary>
         /// <param name="doctors"></param>
         /// <returns></returns>
-        Task AddRangeAsync(IMedStaff[] doctors);
+        Task AddRangeAsync(IList<IMedStaff> doctors);
 
         /// <summary>
         /// Get doctor by id
