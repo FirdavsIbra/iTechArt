@@ -117,7 +117,7 @@ namespace iTechArt.Service.Services
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine(ex.Message.ToString());
+                            Console.WriteLine("Exception occured with a message: " + ex.Message.ToString());
                         }
                     }
                     await _policeRepository.AddRangeAsync(polices);
@@ -159,7 +159,7 @@ namespace iTechArt.Service.Services
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message.ToString());
+                    Console.WriteLine("Exception occured with a message: " + ex.Message.ToString());
                 }
             }
             await _policeRepository.AddRangeAsync(polices);
@@ -186,6 +186,7 @@ namespace iTechArt.Service.Services
                 {
                     try
                     {
+                        csv.Context.RegisterClassMap<PoliceMap>();
                         var records = csv.GetRecords<PoliceDto>().ToArray();
                         foreach (var record in records)
                         {
@@ -204,7 +205,7 @@ namespace iTechArt.Service.Services
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex.Message.ToString());
+                        Console.WriteLine("Exception occured with a message: "+ex.Message.ToString());
                     }
                 }
             }

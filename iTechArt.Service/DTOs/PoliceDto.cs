@@ -3,6 +3,7 @@ using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,48 +15,41 @@ namespace iTechArt.Service.DTOs
         /// <summary>
         /// Police Officers Id
         /// </summary>
-        public long Id { get; internal set; }
+        public long Id { get; set; } 
 
         /// <summary>
         /// Police Officers Firstname
         /// </summary>
-        [Index(0)]
-        public string Name { get; internal set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Police Officers Lastname
         /// </summary>
-        [Index(1)]
-        public string Surname { get; internal set; }
+        public string Surname { get; set; }
 
         /// <summary>
         /// Police Officers email address
         /// </summary>
-        [Index(2)]
-        public string Email { get; internal set; }
+        public string Email { get; set; }
 
         /// <summary>
         /// Police Officers gender
         /// </summary>
-        [Index(3)]
-        public Gender Gender { get; internal set; }
+        public Gender Gender { get; set; }
 
         /// <summary>
         /// Police Officers address
         /// </summary>
-        [Index(4)]
-        public string Address { get; internal set; }
+        public string Address { get; set; }
 
         /// <summary>
         /// Police Officers job title
         /// </summary> 
-        [Index(5)]
-        public string JobTitle { get; internal set; }
+        public string JobTitle { get; set; }
 
         /// <summary>
         /// Police Officers salary in US dollars with 2 double precision
         /// </summary>
-        [Index(6)]
-        public double Salary { get; internal set; }
+        public double Salary { get; set; }
     }
 }

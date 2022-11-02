@@ -116,8 +116,23 @@ namespace iTechArt.Repository.Repositories
         /// <returns></returns>
         public async Task AddRangeAsync(List<IPolice> polices)
         {
+            var entityFromDb = _dbContext.Police.OrderByDescending(c => c.Id).FirstOrDefault();
             PoliceDb[] policesArray = polices.Select(c => _mapper.Map<PoliceDb>(c)).ToArray();
-            await _dbContext.Police.AddRangeAsync(policesArray);
+            if (entityFromDb != null)
+            {
+                long id = entityFromDb.Id;
+                foreach (var police in policesArray)
+                {
+                    police.Id = id += 1;
+                    id += 1;
+                }
+                await _dbContext.AddRangeAsync(policesArray);
+            }
+            else
+            {
+                await _dbContext.Police.AddRangeAsync(policesArray);
+            }
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
