@@ -15,7 +15,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// Add police to database
         /// </summary>
         /// <param name="police"></param>
-        public Task AddUpdateAsync(IPolice police);
+        public Task AddAsync(IPolice police);
 
         /// <summary>
         /// Get police by id
@@ -34,19 +34,19 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// </summary>
         public int GetCountOfPolice();
 
-        /// <summary>
-        /// Parse and saves XLSX file into database
-        /// </summary>
-        public Task ReadExcelAsync(IFormFile file);
 
         /// <summary>
-        /// Parse and saves XML file into database
+        /// Updates entity in the database
         /// </summary>
-        public Task ReadXMLAsync(IFormFile file);
+        /// <param name="police"></param>
+        /// <returns></returns>
+        public Task UpdateAsync(IPolice police);
 
         /// <summary>
-        /// Parse and saves CSV file into database
+        /// Adds collection of entities to the database
         /// </summary>
-        public Task ReadCSVAsync(IFormFile file);
+        /// <param name="police"></param>
+        /// <returns></returns>
+        public Task AddRangeAsync(List<IPolice> police);
     }
 }
