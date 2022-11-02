@@ -21,18 +21,18 @@ namespace iTechArt.Api.Controllers
         /// route: api/police/import. Takes csv or xlsx file
         /// Uploads data about Police and saves in database
         /// </summary>
-        /// <param name="formFile"></param>
+        /// <param name="file"></param>
         [HttpPost(ApiConstants.IMPORT)]
-        public async Task<IActionResult> Import(IFormFile formFile)
+        public async Task<IActionResult> Import(IFormFile file)
         {
-            string fileExtension = Path.GetExtension(formFile.FileName);
+            string fileExtension = Path.GetExtension(file.FileName);
 
-            if (formFile != null)
+            if (file != null)
             {
-                if (FileConstants.Extensions.Contains(fileExtension) || FileConstants.EXCEL.Contains(formFile.ContentType)
-                    || FileConstants.CSV.Contains(formFile.ContentType) || FileConstants.XML.Contains(formFile.ContentType))
+                if (FileConstants.Extensions.Contains(fileExtension) || FileConstants.EXCEL.Contains(file.ContentType)
+                    || FileConstants.CSV.Contains(file.ContentType) || FileConstants.XML.Contains(file.ContentType))
                 {
-                    await _policeService.ImportPoliceData(formFile);
+                    await _policeService.ImportPoliceData(file);
                     return Ok();
                 }
                 else

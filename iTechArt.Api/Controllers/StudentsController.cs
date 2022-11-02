@@ -20,15 +20,15 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// route: api/students/import. Takes csv or xlsx file and injects into IStudentService.ImportStudentAsync(IFormFile) 
         /// </summary>
-        /// <param name="formFile"></param>
+        /// <param name="file"></param>
         /// <returns>if successful returns Status200OK, otherwise Status400BadRequest</returns>
         [HttpPost(ApiConstants.IMPORT)]
-        public async Task<IActionResult> Import(IFormFile formFile)
+        public async Task<IActionResult> Import(IFormFile file)
         {
             var allowedTypes = FileConstants.Extensions;
-            if (formFile != null && allowedTypes.Contains(Path.GetExtension(formFile.FileName)))
+            if (file != null && allowedTypes.Contains(Path.GetExtension(file.FileName)))
             {
-                await _studentsService.ImportStudentsAsync(formFile);
+                await _studentsService.ImportStudentsAsync(file);
                 return Ok();
             }
             else

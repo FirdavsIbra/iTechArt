@@ -6,7 +6,6 @@ using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Repository.BusinessModels;
-using iTechArt.Repository.Dtos;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -111,12 +110,14 @@ namespace iTechArt.Repository.Repositories
         /// <param name="file"></param>
         public async Task ReadExcelAsync(IFormFile file)
         {
+            List<PoliceDb> policeList = new List<PoliceDb>();
+
             using (var fileStream = new MemoryStream())
             {
                 await file.CopyToAsync(fileStream);
                 using (var package = new ExcelPackage(fileStream))
                 {
-                    ExcelPackage.LicenseContext = LicenseContext.Commercial;
+                    ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
                     ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
                     var rowCount = worksheet.Dimension.Rows;
                     for (int row = 2; row <= rowCount; row++)
@@ -133,14 +134,15 @@ namespace iTechArt.Repository.Repositories
                                 JobTitle = worksheet.Cells[row, 7].Value.ToString().Trim(),
                                 Salary = Convert.ToDouble(worksheet.Cells[row, 8].Value)
                             };
-                            _dbContext.Police.Add(policeDb);
-                            await _dbContext.SaveChangesAsync();
+                            policeList.Add(policeDb);
                         }
                         catch (Exception ex)
                         {
                             Console.WriteLine(ex.Message.ToString());
                         }
                     }
+                    await _dbContext.Police.AddRangeAsync(policeList);
+                    await _dbContext.SaveChangesAsync();
                 }
             }
         }
@@ -152,7 +154,9 @@ namespace iTechArt.Repository.Repositories
         /// <param name="file"></param>
         public async Task ReadXMLAsync(IFormFile file)
         {
-            var filePath = Path.Combine(_webHostEnvironment.ContentRootPath, "temp", file.FileName);
+            List<PoliceDb> policeList = new List<PoliceDb>();
+
+            var filePath = Path.Combine(_webHostEnvironment.WebRootPath, file.FileName);
             using (var fileStream = new FileStream(filePath, FileMode.Create))
             {
                 await file.CopyToAsync(fileStream);
@@ -173,15 +177,15 @@ namespace iTechArt.Repository.Repositories
                         JobTitle = node["JobTitle"].InnerText,
                         Salary = Convert.ToDouble(node["Salary"].InnerText)
                     };
-
-                    //_dbContext.Police.Add(policeDb);
-                    //await _dbContext.SaveChangesAsync();
+                    policeList.Add(policeDb);
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message.ToString());
                 }
             }
+            await _dbContext.Police.AddRangeAsync(policeList);
+            await _dbContext.SaveChangesAsync();
             // Delete the created file
             if (File.Exists(filePath))
             {
@@ -196,7 +200,9 @@ namespace iTechArt.Repository.Repositories
         /// <param name="file"></param>
         public async Task ReadCSVAsync(IFormFile file)
         {
-            var filePath = Path.Combine(_webHostEnvironment.ContentRootPath, "temp", file.FileName);
+            List<PoliceDb> policeList = new List<PoliceDb>();
+
+            var filePath = Path.Combine(_webHostEnvironment.WebRootPath, file.FileName);
             using (var fileStream = new FileStream(filePath, FileMode.Create))
             {
                 await file.CopyToAsync(fileStream);
@@ -207,11 +213,12 @@ namespace iTechArt.Repository.Repositories
                 {
                     try
                     {
-                        var records = csv.GetRecords<PoliceDto>();
+                        var records = csv.GetRecords<PoliceDb>();
                         foreach (var record in records)
                         {
                             PoliceDb policeDb = new PoliceDb
                             {
+                                Id = (long)(record.Id),
                                 Name = record.Name.ToString(),
                                 Surname = record.Surname.ToString(),
                                 Email = record.Email.ToString(),
@@ -220,10 +227,7 @@ namespace iTechArt.Repository.Repositories
                                 JobTitle = record.JobTitle.ToString(),
                                 Salary = Convert.ToDouble(record.Salary)
                             };
-                            await _dbContext.Police.AddAsync(policeDb);
-                            await _dbContext.SaveChangesAsync();
-                            //var x = await _dbContext.Police.FirstOrDefaultAsync(c => c.Name == "Maybelle");
-                            //if(x != null) Console.WriteLine(x.Address);
+                            policeList.Add(policeDb);
                         }
                     }
                     catch (Exception ex)
@@ -232,6 +236,8 @@ namespace iTechArt.Repository.Repositories
                     }
                 }
             }
+            await _dbContext.Police.AddRangeAsync(policeList);
+            await _dbContext.SaveChangesAsync();
             // Delete the created file
             if (File.Exists(filePath))
             {

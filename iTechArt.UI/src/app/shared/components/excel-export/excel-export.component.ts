@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { UnitsEnum } from '../../enums/units.enum';
 import { environment } from '../../../../environments/environment';
@@ -64,21 +64,30 @@ export class ExcelExportComponent implements OnInit {
   public submit(): void {
     this.isFormButtonDisabled = true;
     const file = this.exportForm.get('fileSource')!.value;
-    const fileContentType = this.contentTypeService.getContentType(
-      this.fileName
-    );
+    // const fileContentType = this.contentTypeService.getContentType(
+    //   this.fileName
+    // );
     const formData = new FormData();
-    formData.append('file', file || '');
+    formData.append('file', file!);
 
-    const headers = new HttpHeaders().set('content-type', fileContentType!);
+    //const headers = new HttpHeaders().set('content-type', fileContentType!);
 
-    console.log(fileContentType);
+    // this.http.post(`${this.url}${this.api}`, formData).subscribe(() => {
+    //   alert('Uploaded Successfully.');
+    //   this.isFormButtonDisabled = false;
+    // });
 
-    this.http
-      .post(`${this.url}${this.api}`, formData, { headers: headers })
-      .subscribe(() => {
+    this.http.post<any>(`${this.url}${this.api}`, formData).subscribe({
+      next: (data: string) => {
         alert('Uploaded Successfully.');
+        console.log(data)
         this.isFormButtonDisabled = false;
-      });
+      },
+      error: (error: string) => {
+        alert(`There was an error! ${error}`);
+        console.log(error);
+        this.isFormButtonDisabled = false;
+      }
+    })
   }
 }

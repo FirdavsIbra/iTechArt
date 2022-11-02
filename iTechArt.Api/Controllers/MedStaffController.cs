@@ -10,18 +10,18 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// Uploads file and saves in database
         /// </summary>
-        /// <param name="formFile"></param>
+        /// <param name="file"></param>
         /// <returns> An Array of Repository Models </returns>
         [HttpPost("import")]
-        public async ValueTask<IActionResult> Import([FromServices] IMedStaffService _medStaffService, IFormFile formFile)
+        public async ValueTask<IActionResult> Import([FromServices] IMedStaffService _medStaffService, IFormFile file)
         {
-            if (formFile != null)
+            if (file != null)
             {
-                string fileExtension = Path.GetExtension(formFile.FileName);
+                string fileExtension = Path.GetExtension(file.FileName);
 
                 if (FileConstants.Extensions.Contains(fileExtension))
                 {
-                    await _medStaffService.ImportMedStaffFile(formFile);
+                    await _medStaffService.ImportMedStaffFile(file);
 
                     return Ok();
                 }
