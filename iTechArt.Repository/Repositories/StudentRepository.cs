@@ -4,6 +4,7 @@ using iTechArt.Database.Entities.MedicalStaff;
 using iTechArt.Database.Entities.Students;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
+using iTechArt.Repository.BusinessModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace iTechArt.Repository.Repositories
@@ -38,14 +39,14 @@ namespace iTechArt.Repository.Repositories
         /// Get all entities from database
         /// should be remade
         /// </summary>
-        public async Task<IStudents[]> GetAll()
+        public IStudents[] GetAll()
         {
             var models = _dbContext.Set<StudentDb>();
 
             List<IStudents> result = new List<IStudents>();
 
             foreach (var i in models)
-                result.Add(_mapper.Map<IStudents>(i));
+                result.Add(_mapper.Map<Student>(i));
 
             return result.ToArray();
         }
