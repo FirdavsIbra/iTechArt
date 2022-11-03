@@ -20,16 +20,16 @@ namespace iTechArt.Api.Controllers
         /// will allow to upload the data from file to db 
         /// </summary>
         [HttpPost(ApiConstants.IMPORT)]
-        public async Task<IActionResult> Import(IFormFile formFile)
+        public async Task<IActionResult> Import(IFormFile file)
         {
 
-            if(formFile != null && formFile.ContentType.Contains("csv")) 
+            if(file != null && file.ContentType.Contains("csv")) 
             {
-                return Ok(await _groceryService.RecordCsvToDatabase(formFile));
+                return Ok(await _groceryService.RecordCsvToDatabase(file));
             }
-            else if (formFile != null && formFile.ContentType.Contains("officedocument.spreadsheetml.sheet")) 
+            else if (file != null && file.ContentType.Contains("officedocument.spreadsheetml.sheet")) 
             {
-                return Ok(await _groceryService.RecordXlsxToDatabase(formFile));
+                return Ok(await _groceryService.RecordXlsxToDatabase(file));
             }
             else
                 return BadRequest("Invalid file format!");

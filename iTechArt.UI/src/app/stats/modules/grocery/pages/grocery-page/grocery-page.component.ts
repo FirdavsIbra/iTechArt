@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 
 import { UnitsEnum } from "../../../../../shared/enums/units.enum";
-import { IGrocery } from "../../../../../shared/interfaces/grocery.interface";
-import { GroceryService } from "../../../../../shared/services/grocery.service";
+import { IGrocery } from "../../interfaces/grocery.interface";
+import { GroceryService } from "../../grocery.service";
 
 @Component({
   selector: 'app-grocery-page',

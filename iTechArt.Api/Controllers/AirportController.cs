@@ -29,7 +29,7 @@ namespace iTechArt.Api.Controllers
                 if (FileConstants.Extensions.Contains(fileExtension))
                 {
                     await _airportsService.ImportAirportFile(file);
-                    return Ok("Success");
+                    return Ok();
                 }
 
                 return BadRequest("Invalid file format!");

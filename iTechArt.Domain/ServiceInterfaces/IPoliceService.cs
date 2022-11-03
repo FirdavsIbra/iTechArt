@@ -15,5 +15,20 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// function to export data from the database
         /// </summary>
         public Task<IPolice[]> ExportPoliceData();
+
+        /// <summary>
+        /// Parse and saves XLSX file into database
+        /// </summary>
+        public Task ReadExcelAsync(IFormFile file);
+
+        /// <summary>
+        /// Parse and saves XML file into database
+        /// </summary>
+        public Task ReadXMLAsync(IFormFile file);
+
+        /// <summary>
+        /// Parse and saves CSV file into database
+        /// </summary>
+        public Task ReadCSVAsync(IFormFile file);
     }
 }

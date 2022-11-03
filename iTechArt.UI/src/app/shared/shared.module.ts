@@ -5,19 +5,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { HeaderComponent } from './components/header/header.component';
 import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
-import { ExcelExportComponent } from './components/excel-export/excel-export.component';
-import { UnitHeaderComponent } from './components/unit-header/unit-header.component';
-import { DataTableComponent } from './components/data-table/data-table.component';
 
 @NgModule({
   declarations: [
     DashboardPageComponent,
-    HeaderComponent,
-    ExcelExportComponent,
-    UnitHeaderComponent,
-    DataTableComponent,
+    HeaderComponent
   ],
-  exports: [HeaderComponent, ExcelExportComponent, UnitHeaderComponent, DataTableComponent],
+  exports: [HeaderComponent],
   imports: [CommonModule, RouterLink, ReactiveFormsModule],
 })
 export class SharedModule {}

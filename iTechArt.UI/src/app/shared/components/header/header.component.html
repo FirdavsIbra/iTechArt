@@ -7,9 +7,15 @@
       </div>
     </div>
 
+    <div class="hamburger nav-cursor"
+         (click)="toggleMenu()"
+         [ngClass]="{ 'hamburger_active': menuIsActive } ">
+      <span class="line line1 nav-cursor "></span>
+      <span class="line line2 nav-cursor"></span>
+      <span class="line line3 nav-cursor"></span>
+    </div>
 
     <ul class="menu" [ngClass]="{ 'menu_active': menuIsActive } ">
-
       <li>
         <p class="nav-cursor" routerLink="{{ units.police.path }}">
           {{ unitsTitles.police.toString().toUpperCase() }}
@@ -42,13 +48,6 @@
       </li>
     </ul>
 
-    <div class="hamburger nav-cursor"
-         (click)="toggleMenu()"
-         [ngClass]="{ 'hamburger_active': menuIsActive } ">
-      <span class="line line1 nav-cursor "></span>
-      <span class="line line2 nav-cursor"></span>
-      <span class="line line3 nav-cursor"></span>
-    </div>
     <div class="button-container header-element">
       <button class="button-secondary">Log Out</button>
     </div>

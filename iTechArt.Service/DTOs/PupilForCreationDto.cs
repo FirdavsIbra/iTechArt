@@ -36,7 +36,7 @@ namespace iTechArt.Service.DTOs
         /// <summary>
         /// Gets or sets phone number of pupil
         /// </summary>
-        [MaxLength(32)]
+        [MaxLength(64)]
         public string PhoneNumber { get; internal set; }
 
         /// <summary>
@@ -48,13 +48,13 @@ namespace iTechArt.Service.DTOs
         /// <summary>
         /// Gets or sets the city, where pupil lives
         /// </summary>
-        [MaxLength(32)]
+        [MaxLength(64)]
         public string City { get; internal set; }
 
         /// <summary>
         /// Gets or sets the name of school, where pupil study
         /// </summary>
-        [MaxLength(32)]
+        [MaxLength(256)]
         public string SchoolName { get; internal set; }
 
         /// <summary>

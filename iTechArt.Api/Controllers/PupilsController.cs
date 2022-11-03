@@ -27,7 +27,7 @@ namespace iTechArt.Api.Controllers
                 if (FileConstants.Extensions.Contains(fileExtension))
                 {
                     await _pupilService.ImportPupilsFileAsync(file);
-                    return Ok("Success");
+                    return Ok();
                 }
 
                 return BadRequest("Invalid file format!");
