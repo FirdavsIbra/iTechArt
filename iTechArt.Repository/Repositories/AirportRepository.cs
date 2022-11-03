@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using iTechArt.Database.DbContexts;
 using iTechArt.Database.Entities.Airports;
+using iTechArt.Database.Entities.MedicalStaff;
 using iTechArt.Database.Entities.Pupils;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
@@ -94,16 +95,16 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Add airport array
         /// </summary>
-        public async Task AddRangeAsync(IAirport[] airports)
+        public async Task AddRangeAsync(IList<IAirport> airports) 
         {
-            AirportDb[] result = new AirportDb[airports.Length];
+            AirportDb[] airport = new AirportDb[airports.Count];
 
-            for (var i = 0; i < result.Length; i++)
+            for (int i = 0; i < airports.Count; i++)
             {
-                result[i] = _mapper.Map<AirportDb>(airports[i]);
+                airport[i] = _mapper.Map<AirportDb>(airports[i]);
             }
 
-            await _dbContext.Airports.AddRangeAsync(result);
+            await _dbContext.AddRangeAsync(airport);
 
             await _dbContext.SaveChangesAsync();
         }
