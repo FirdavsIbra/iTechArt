@@ -32,6 +32,25 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
+        /// Add list of doctors to database
+        /// </summary>
+        /// <param name="doctors"></param>
+        /// <returns></returns>
+        public async Task AddRangeAsync(IList<IMedStaff> doctors)
+        {
+            MedStaffDb[] mappedMedStaffs = new MedStaffDb[doctors.Count];
+
+            for(int i = 0; i < doctors.Count; i++)
+            {
+                mappedMedStaffs[i] = _mapper.Map<MedStaffDb>(doctors[i]);
+            }
+
+            await _dbContext.AddRangeAsync(mappedMedStaffs);
+
+            await _dbContext.SaveChangesAsync();
+        }
+
+        /// <summary>
         /// Get all doctors from database
         /// </summary>
         public async Task<IMedStaff[]> GetAllAsync()
