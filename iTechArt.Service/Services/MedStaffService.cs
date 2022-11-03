@@ -1,6 +1,4 @@
-﻿using CsvHelper.Configuration;
-using CsvHelper;
-using iTechArt.Domain.Enums;
+﻿using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
