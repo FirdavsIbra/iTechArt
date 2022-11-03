@@ -3,32 +3,33 @@
     public interface IDashboardInfo
     {
         /// <summary>
-        /// Count of pupils
+        /// Gets count of pupils
         /// </summary>
+        
         public int PupilCount { get; }
 
         /// <summary>
-        /// Count of students
+        /// Gets count of students
         /// </summary>
         public int StudentCount { get; }
 
         /// <summary>
-        /// Count of groceries
+        /// Gets count of groceries
         /// </summary>
         public int GroceryCount { get; }
 
         /// <summary>
-        /// Count of polices
+        /// Gets count of polices
         /// </summary>
         public int PoliceCount { get; }
 
         /// <summary>
-        /// Count of doctors
+        /// Gets count of doctors
         /// </summary>
         public int DoctorCount { get; }
 
         /// <summary>
-        /// Count of airports
+        /// Gets count of airports
         /// </summary>
         public int AirportCount { get; }
     }

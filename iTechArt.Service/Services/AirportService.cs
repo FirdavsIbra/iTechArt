@@ -80,7 +80,7 @@ namespace iTechArt.Service.Services
                                     Capacity = Convert.ToUInt16(worksheet.Cells[row, 3].Value),
                                     Address = worksheet.Cells[row, 4].Value.ToString().Trim(),
                                     City = worksheet.Cells[row, 5].Value.ToString().Trim(),
-                                    EmpoyeesCount = Convert.ToUInt16(worksheet.Cells[row, 6].Value),
+                                    EmployeesCount = Convert.ToUInt16(worksheet.Cells[row, 6].Value),
                                     PassengersPerYear = Convert.ToInt64(worksheet.Cells[row, 7].Value),
                                     FlightsPerYear = Convert.ToUInt32(worksheet.Cells[row, 8].Value),
                                     AverageTicketPrice = Convert.ToUInt16(worksheet.Cells[row, 9].Value)
@@ -141,7 +141,7 @@ namespace iTechArt.Service.Services
                             Capacity = Convert.ToUInt16(rowData[2]),
                             Address = rowData[3].ToString().Trim(),
                             City = rowData[4].ToString().Trim(),
-                            EmpoyeesCount = Convert.ToUInt16(rowData[5]),
+                            EmployeesCount = Convert.ToUInt16(rowData[5]),
                             PassengersPerYear = Convert.ToInt64(rowData[6]),
                             FlightsPerYear = Convert.ToUInt32(rowData[7]),
                             AverageTicketPrice = Convert.ToUInt16(rowData[8])
@@ -206,7 +206,7 @@ namespace iTechArt.Service.Services
                             Capacity = Convert.ToUInt16(node["Capacity"].InnerText),
                             Address = node["Address"].InnerText,
                             City = node["City"].InnerText,
-                            EmpoyeesCount = Convert.ToUInt16(node["EmployeesCount"].InnerText),
+                            EmployeesCount = Convert.ToUInt16(node["EmployeesCount"].InnerText),
                             PassengersPerYear = Convert.ToInt64(node["PassengersPerYear"].InnerText),
                             FlightsPerYear = Convert.ToUInt32(node["FlightsPerYear"].InnerText),
                             AverageTicketPrice = Convert.ToUInt16(node["AverageTicketPrice"].InnerText),
