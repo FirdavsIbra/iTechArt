@@ -1,6 +1,9 @@
-﻿using iTechArt.Domain.ModelInterfaces;
+﻿using iTechArt.Database.Entities.Airports;
+using iTechArt.Database.Entities.MedicalStaff;
+using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
+using iTechArt.Repository.Repositories;
 using iTechArt.Service.Constants;
 using iTechArt.Service.DTOs;
 using Microsoft.AspNetCore.Http;
@@ -71,9 +74,11 @@ namespace iTechArt.Service.Services
                             ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
                             var rowCount = worksheet.Dimension.Rows;
 
+                            IList<IAirport> airports = new List<IAirport>(rowCount - 2);
+
                             for (int row = 2; row <= rowCount; row++)
                             {
-                                var list = new AirportDTO
+                                var airport = new AirportDTO
                                 {
                                     AirportName = worksheet.Cells[row, 1].Value.ToString().Trim(),
                                     BuiltDate = Convert.ToDateTime(worksheet.Cells[row, 2].Value),
@@ -86,8 +91,9 @@ namespace iTechArt.Service.Services
                                     AverageTicketPrice = Convert.ToUInt16(worksheet.Cells[row, 9].Value)
                                 };
 
-                                await _airportRepository.AddAsync(list);
+                                airports.Add(airport);
                             }
+                            await _airportRepository.AddRangeAsync(airports);
                         }
                     }
                 }
@@ -130,11 +136,13 @@ namespace iTechArt.Service.Services
 
                     var csvLines = File.ReadAllLines(path);
 
+                    IList<IAirport> airports = new List<IAirport>(csvLines.Length - 1);
+
                     for (int i = 1; i < csvLines.Length; i++)
                     {
                         var rowData = csvLines[i].Split(',');
 
-                        var list = new AirportDTO
+                        var airport = new AirportDTO
                         {
                             AirportName = rowData[0].ToString().Trim(),
                             BuiltDate = Convert.ToDateTime(rowData[1]),
@@ -146,9 +154,9 @@ namespace iTechArt.Service.Services
                             FlightsPerYear = Convert.ToUInt32(rowData[7]),
                             AverageTicketPrice = Convert.ToUInt16(rowData[8])
                         };
-
-                        await _airportRepository.AddAsync(list);
+                        airports.Add(airport);
                     }
+                    await _airportRepository.AddRangeAsync(airports);
 
 
                     //Deleting after having used the created path
@@ -197,7 +205,9 @@ namespace iTechArt.Service.Services
                     XmlDocument xmlDocument = new XmlDocument();
                     xmlDocument.Load(path);
 
-                    foreach (XmlNode node in xmlDocument.SelectNodes("/dataset/record"))
+                    IList<IAirport> airports = new List<IAirport>(xmlDocument.SelectNodes("/airports/airport").Count);
+
+                    foreach (XmlNode node in xmlDocument.SelectNodes("/airports/airport"))
                     {
                         var airport = new AirportDTO
                         {
@@ -211,9 +221,9 @@ namespace iTechArt.Service.Services
                             FlightsPerYear = Convert.ToUInt32(node["FlightsPerYear"].InnerText),
                             AverageTicketPrice = Convert.ToUInt16(node["AverageTicketPrice"].InnerText),
                         };
-
-                        await _airportRepository.AddAsync(airport);
+                        airports.Add(airport);
                     }
+                    await _airportRepository.AddRangeAsync(airports);
 
                     //Deleting after having used the created path
                     if (File.Exists(path))
