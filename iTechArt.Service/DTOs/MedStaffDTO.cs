@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace iTechArt.Service.DTOs
 {
-    internal class MedStaffDTO : IMedStaff
+    internal sealed class MedStaffDTO : IMedStaff
     {
         /// <summary>
         /// gets && internal sets Unical Id of a Doctor
