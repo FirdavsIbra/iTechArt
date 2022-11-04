@@ -9,7 +9,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// Get all groceries from database
         /// </summary>
         /// <returns> Array of Repository Model Interfaces </returns>
-        IGrocery[] GetAll();
+        Task<IGrocery[]> GetAll();
 
         /// <summary>
         /// Add grocery to database
