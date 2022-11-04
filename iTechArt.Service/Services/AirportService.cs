@@ -146,7 +146,6 @@ namespace iTechArt.Service.Services
                             FlightsPerYear = Convert.ToUInt32(rowData[7]),
                             AverageTicketPrice = Convert.ToUInt16(rowData[8])
                         };
-
                         await _airportRepository.AddAsync(list);
                     }
 

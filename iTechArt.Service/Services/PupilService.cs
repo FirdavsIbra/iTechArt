@@ -33,7 +33,7 @@ namespace iTechArt.Service.Services
         {
             var fileExtension = Path.GetExtension(file.FileName);
 
-            if (fileExtension == ".xlsx")
+            if (fileExtension == ".xlsx" || fileExtension == ".xls")
             {
                 await ExcelParser(file);
             }
