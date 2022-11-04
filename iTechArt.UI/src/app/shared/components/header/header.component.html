@@ -15,7 +15,11 @@
       <span class="line line3 nav-cursor"></span>
     </div>
 
+
+    <div class="overlay" *ngIf="menuIsActive" (click)="toggleMenu()"></div>
+
     <ul class="menu" [ngClass]="{ 'menu_active': menuIsActive } ">
+
       <li>
         <p class="nav-cursor" routerLink="{{ units.police.path }}">
           {{ unitsTitles.police.toString().toUpperCase() }}

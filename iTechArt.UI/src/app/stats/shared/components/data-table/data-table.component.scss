@@ -1,9 +1,12 @@
 .grid {
   border-collapse: collapse;
+  margin: 20px;
+
 }
 
 .grid th, td {
   border: 1px solid black;
   padding: 0.5em;
-  background-color: #fff;
+  background-color: #3a5696;
+  color:white;
 }
