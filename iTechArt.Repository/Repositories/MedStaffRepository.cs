@@ -19,9 +19,8 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Add doctor to database
-        /// </summary>
-        /// <param name="doctor"></param>   
+        /// Add medStaff to database
+        /// </summary>  
         public async Task AddAsync(IMedStaff doctor)
         {
             var mappedMedStaff = _mapper.Map<MedStaffDb>(doctor);
@@ -32,18 +31,11 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Add list of doctors to database
+        /// Add list of medStaffs to database
         /// </summary>
-        /// <param name="doctors"></param>
-        /// <returns></returns>
-        public async Task AddRangeAsync(IList<IMedStaff> doctors)
+        public async Task AddRangeAsync(IEnumerable<IMedStaff> medStaffs)
         {
-            MedStaffDb[] mappedMedStaffs = new MedStaffDb[doctors.Count];
-
-            for(int i = 0; i < doctors.Count; i++)
-            {
-                mappedMedStaffs[i] = _mapper.Map<MedStaffDb>(doctors[i]);
-            }
+            MedStaffDb[] mappedMedStaffs = medStaffs.Select(m => _mapper.Map<MedStaffDb>(m)).ToArray();
 
             await _dbContext.AddRangeAsync(mappedMedStaffs);
 
@@ -51,7 +43,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Get all doctors from database
+        /// Get all medStaffs from database
         /// </summary>
         public async Task<IMedStaff[]> GetAllAsync()
         {
@@ -68,9 +60,8 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Get doctor by id
+        /// Get medStaff by id
         /// </summary>
-        /// <param name="id"></param>
         public async Task<IMedStaff> GetByIdAsync(long id)
         {
             var doctorDb = await _dbContext.Staffs.FirstOrDefaultAsync(d => d.Id == id);
@@ -79,9 +70,8 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Update doctor
+        /// Update medStaff
         /// </summary>
-        /// <param name="doctor"></param>
         public async Task UpdateAsync(IMedStaff doctor)
         {
             var mappedMedStaff = _mapper.Map<MedStaffDb>(doctor);
@@ -92,7 +82,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Delete doctor from database
+        /// Delete medStaff from database
         /// </summary>
         public async Task DeleteAsync(long id)
         {
@@ -104,11 +94,11 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Get total count of doctors
+        /// Get total count of medStaff
         /// </summary>
-        public int GetCountOfDoctors()
+        public async Task<int> GetCountOfDoctors()
         {
-            return _dbContext.Staffs.Count();
+            return await _dbContext.Staffs.CountAsync();
         }
     }
 }

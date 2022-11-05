@@ -5,35 +5,30 @@ namespace iTechArt.Domain.RepositoryInterfaces
     public interface IMedStaffRepository
     {
         /// <summary>
-        /// Get all doctors from database
+        /// Get all medStaff from database
         /// </summary>
         /// <returns> Array of Repository Model Interfaces </returns>
         Task<IMedStaff[]> GetAllAsync();
 
         /// <summary>
-        /// Add doctor to database
+        /// Add medStaff to database
         /// </summary>
-        /// <param name="doctor"></param>
-        Task AddAsync(IMedStaff doctor);
+        Task AddAsync(IMedStaff medStaff);
 
         /// <summary>
-        /// Add array of doctors
+        /// Add array of medStaff
         /// </summary>
-        /// <param name="doctors"></param>
-        /// <returns></returns>
-        Task AddRangeAsync(IList<IMedStaff> doctors);
+        Task AddRangeAsync(IEnumerable<IMedStaff> medStaffs);
 
         /// <summary>
-        /// Get doctor by id
+        /// Get medStaff by id
         /// </summary>
-        /// <param name="id"></param>
         /// <returns> Resopisitory model interface </returns>
         Task<IMedStaff> GetByIdAsync(long id);
 
         /// <summary>
-        /// Update doctor
+        /// Update medStaff
         /// </summary>
-        /// <param name="doctor"></param>
         Task UpdateAsync(IMedStaff doctor);
 
         /// <summary>
@@ -42,8 +37,8 @@ namespace iTechArt.Domain.RepositoryInterfaces
         Task DeleteAsync(long id);
 
         /// </summary>
-        /// Get count of doctors
+        /// Get count of medStaff
         /// </summary>
-        public int GetCountOfDoctors();
+        public Task<int> GetCountOfDoctors();
     }
 }
