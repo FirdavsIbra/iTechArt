@@ -26,7 +26,7 @@ namespace iTechArt.Repository.Mappers
 
 
             // map from IGrocery to GroceryDb
-            CreateMap<IGrocery, GroceryDb>();
+            CreateMap<List<IGrocery>, GroceryDb>();
             // map from GroceryDb to GroceryBm
             CreateMap<GroceryDb, BusinessModels.Grocery>();
 

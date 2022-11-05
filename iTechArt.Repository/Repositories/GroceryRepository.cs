@@ -34,18 +34,18 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get all entities from database
         /// </summary>
-        public IGrocery[] GetAll()
+        public async Task<IGrocery[]> GetAll()
         {
-            var groceries = _dbContext.Set<GroceryDb>();
+            var groceries = await _dbContext.Groceries.ToArrayAsync();
 
-            List<IGrocery> result = new List<IGrocery>();
+            IGrocery[] result = new IGrocery[_dbContext.Groceries.Count()];
 
-            foreach (var grocery in groceries)
+            for (var i = 0; i < result.Length; i++)
             {
-                result.Add(_mapper.Map<Grocery>(grocery));
+                result[i] = _mapper.Map<Grocery>(groceries[i]);
             }
 
-            return result.ToArray();
+            return result;
         }
 
         /// <summary>
@@ -81,7 +81,8 @@ namespace iTechArt.Repository.Repositories
         {
             try
             {
-                await _dbContext.AddRangeAsync(groceries);
+                await _dbContext.AddRangeAsync(_mapper.Map<GroceryDb>(groceries));
+                await _dbContext.SaveChangesAsync();
                 return new DbResult
                 {
                     IsSuccess = true

@@ -1,14 +1,16 @@
 ﻿using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
+using System.ComponentModel.DataAnnotations;
 
-namespace iTechArt.Repository.BusinessModels
+namespace iTechArt.Service.DTOs
 {
-    internal sealed class Grocery : IGrocery
+    internal sealed class GroceryDTO : IGrocery
     {
+
         /// <summary>
         /// gets or internal sets Id of grocery
         /// </summary>
-        public Guid Id { get;internal set; }
+        public Guid Id { get; internal set; }
         /// <summary>
         /// gets or internal sets First name of grocery employee
         /// </summary>

@@ -1,14 +1,15 @@
-﻿using iTechArt.Domain.ModelInterfaces;
+﻿using iTechArt.Domain.Enums;
+using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ModelInterfaces.HelperModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using iTechArt.Repository.BusinessModels.HelperModels;
 using iTechArt.Repository.Mappers;
+using iTechArt.Service.DTOs;
 using LinqToDB;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using OfficeOpenXml;
-using System.Xml;
 using System.Xml.Linq;
 
 namespace iTechArt.Serivce.Services
@@ -25,7 +26,7 @@ namespace iTechArt.Serivce.Services
         /// <summary>
         /// Export grocery data
         /// </summary>
-        public IGrocery[] ExportGrocery()
+        public Task<IGrocery[]> ExportGrocery()
         {
             return _groceryRepository.GetAll();
         }
@@ -33,7 +34,7 @@ namespace iTechArt.Serivce.Services
         /// <summary>
         /// Import grocery data
         /// </summary>
-        public IGrocery[] ImportGrocery()
+        public Task ImportGrocery()
         {
             return _groceryRepository.GetAll();
         }
@@ -65,8 +66,6 @@ namespace iTechArt.Serivce.Services
                             initial = false;
                             continue;
                         }
-
-                        Console.WriteLine(items.Count() - 1);
                         try
                         {
                             _grocery.Add(GroceryMapper.CsvMapper(items));
@@ -162,13 +161,29 @@ namespace iTechArt.Serivce.Services
         /// <summary>
         /// Parse the xml data to businessModel to record to db
         /// </summary>
-        public Task<IServiceResult> RecordXmlToDatabase(IFormFile formFile)
+        public async Task<IServiceResult> RecordXmlToDatabase(IFormFile formFile)
         {
-            XDocument doc = XDocument.Load((XmlReader)formFile);
-            DataContext bt = new DataContext();
+            XDocument xm = new XDocument();
+            var reader = new StreamReader(formFile.OpenReadStream());
+            var xdoc = XDocument.Load(reader);
+            reader.ReadToEnd();
+                var items = from item in xdoc.Descendants("dataset").Elements("record").AsEnumerable()
+                            select new GroceryDTO
+                            {
+                                Id = Guid.Parse(item.Element("id").Value),
+                                FirstName = item.Element("first_name").Value,
+                                LastName = item.Element("last_name").Value,
+                                Email = item.Element("email").Value,
+                                Gender = (Gender)Enum.Parse(typeof(Gender),item.Element("gender").Value),
+                                Birthday = (DateTime)item.Element("birthday"),
+                                JobTitle = item.Element("Job_Title").Value,
+                                DepartmentRetail = item.Element("department_retail").Value,
+                                Salary = (double)item.Element("salary")
 
-            //var serializer = new XmlSerializer(typeof(IGrocery));
-            //var productLinesExtentionResult = serializer.Deserialize(formFile.OpenReadStream());
+                            };
+
+            List<IGrocery> groceryList = items.ToList<IGrocery>();
+            await _groceryRepository.AddGroceriesAsync(groceryList); 
             return null;
         }
     }

@@ -69,36 +69,44 @@ namespace iTechArt.Database.Migrations
                 {
                     b.Property<long>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("id"));
 
-                    b.Property<DateTime>("birthday")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateTime>("Birthday")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("birthday");
 
-                    b.Property<string>("department_retail")
-                        .HasColumnType("text");
+                    b.Property<string>("Department_retail")
+                        .HasColumnType("text")
+                        .HasColumnName("department_retail");
 
-                    b.Property<string>("email")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<string>("Email")
+                        .HasColumnType("text")
+                        .HasColumnName("email");
 
-                    b.Property<string>("first_Name")
+                    b.Property<string>("First_Name")
                         .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
+                        .HasColumnType("character varying(32)")
+                        .HasColumnName("first_Name");
 
-                    b.Property<byte>("gender")
-                        .HasColumnType("smallint");
+                    b.Property<byte>("Gender")
+                        .HasColumnType("smallint")
+                        .HasColumnName("gender");
 
-                    b.Property<string>("job_title")
-                        .HasColumnType("text");
+                    b.Property<string>("Job_title")
+                        .HasColumnType("text")
+                        .HasColumnName("job_title");
 
-                    b.Property<string>("last_Name")
+                    b.Property<string>("Last_Name")
                         .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
+                        .HasColumnType("character varying(32)")
+                        .HasColumnName("last_Name");
 
-                    b.Property<double>("salary")
-                        .HasColumnType("double precision");
+                    b.Property<double>("Salary")
+                        .HasColumnType("double precision")
+                        .HasColumnName("salary");
 
                     b.HasKey("id");
 

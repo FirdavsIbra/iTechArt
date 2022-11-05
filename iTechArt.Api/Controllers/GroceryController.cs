@@ -5,11 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace iTechArt.Api.Controllers
 {
     [ApiController]
-    [Route("api/grocery")]
+    [Route(RouteConstants.GROCERIES)]
     public sealed class GroceryController : Controller
     {
         private readonly IGroceryService _groceryService;
-        private readonly string[] fileExtensions = { "xlsx", "xls", "csv", "application/vnd.ms-excel", "officedocument.spreadsheetml.sheet" };
+        private string CSV = "csv";
+        private string Excel = "officedocument.spreadsheetml.sheet";
+        private string XML = "xml";
 
         public GroceryController(IGroceryService groceryService)
         {
@@ -23,13 +25,17 @@ namespace iTechArt.Api.Controllers
         public async Task<IActionResult> Import(IFormFile file)
         {
 
-            if(file != null && file.ContentType.Contains("csv")) 
+            if(file != null && file.ContentType.Contains(CSV)) 
             {
                 return Ok(await _groceryService.RecordCsvToDatabase(file));
             }
-            else if (file != null && file.ContentType.Contains("officedocument.spreadsheetml.sheet")) 
+            else if (file != null && file.ContentType.Contains(Excel)) 
             {
                 return Ok(await _groceryService.RecordXlsxToDatabase(file));
+            }
+            else if (file != null && file.ContentType.Contains(XML))
+            {
+                return Ok(await _groceryService.RecordXmlToDatabase(file));
             }
             else
                 return BadRequest("Invalid file format!");
@@ -45,10 +51,11 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// Get count of grocery not implemented yet
         /// </summary>
-        [HttpGet(ApiConstants.GETCOUNTOFGROCERY)]
-        public IActionResult GetCountOfGrocery()
-        {
-            return Ok(_groceryService.GetCountOfGrocery());
-        }
+        
+        //[HttpGet(ApiConstants.GETCOUNTOFGROCERY)]
+        //public IActionResult GetCountOfGrocery()
+        //{
+        //    return Ok(_groceryService.GetCountOfGrocery());
+        //}
     }
 }
