@@ -67,12 +67,12 @@ namespace iTechArt.Database.Migrations
 
             modelBuilder.Entity("iTechArt.Database.Entities.Groceries.GroceryDb", b =>
                 {
-                    b.Property<long>("id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("timestamp with time zone")
@@ -108,7 +108,7 @@ namespace iTechArt.Database.Migrations
                         .HasColumnType("double precision")
                         .HasColumnName("salary");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Groceries");
                 });

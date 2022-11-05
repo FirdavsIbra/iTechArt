@@ -72,18 +72,18 @@ namespace iTechArt.Repository.Mappers
         /// </summary>
         public static IGrocery XlsxMapper(ExcelWorksheet sheet, int index)
         {
-            var salary = DoubleGuard(sheet.Cells[index, 0].Value?.ToString());
-            var dateOfBirth = DateTimeGuard(sheet.Cells[index, 5].Value?.ToString());
+            var salary = DoubleGuard(sheet.Cells[index, 9].Value?.ToString());
+            var dateOfBirth = DateTimeGuard(sheet.Cells[index, 6].Value?.ToString());
             var gender = EnumGuard(sheet.Cells[index, 5].Value?.ToString());
 
             return new BusinessModels.Grocery
             {
-                Id = Guid.Parse(sheet.Cells[index, 0].Value?.ToString()),
-                FirstName = sheet.Cells[index, 1].Value?.ToString(),
-                LastName = sheet.Cells[index, 2].Value?.ToString(),
+                Id = Guid.Parse(sheet.Cells[index, 1].Value?.ToString()),
+                FirstName = sheet.Cells[index, 2].Value?.ToString(),
+                LastName = sheet.Cells[index, 3].Value?.ToString(),
                 Birthday = dateOfBirth,
                 Gender = gender,
-                Email = sheet.Cells[index, 6].Value?.ToString(),
+                Email = sheet.Cells[index, 4].Value?.ToString(),
                 JobTitle = sheet.Cells[index, 7].Value?.ToString(),
                 DepartmentRetail = sheet.Cells[index, 8].Value?.ToString(),
                 Salary = salary,
