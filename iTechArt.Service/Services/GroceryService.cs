@@ -76,7 +76,6 @@ namespace iTechArt.Serivce.Services
                             throw ex;
                         }
                     }
-
                     var result = await _groceryRepository.AddGroceriesAsync(_grocery);
 
                     if (result.IsSuccess)
@@ -167,6 +166,8 @@ namespace iTechArt.Serivce.Services
             var reader = new StreamReader(formFile.OpenReadStream());
             var xdoc = XDocument.Load(reader);
             reader.ReadToEnd();
+            try
+            {
                 var items = from item in xdoc.Descendants("dataset").Elements("record").AsEnumerable()
                             select new GroceryDTO
                             {
@@ -174,7 +175,7 @@ namespace iTechArt.Serivce.Services
                                 FirstName = item.Element("first_name").Value,
                                 LastName = item.Element("last_name").Value,
                                 Email = item.Element("email").Value,
-                                Gender = (Gender)Enum.Parse(typeof(Gender),item.Element("gender").Value),
+                                Gender = (Gender)Enum.Parse(typeof(Gender), item.Element("gender").Value),
                                 Birthday = (DateTime)item.Element("birthday"),
                                 JobTitle = item.Element("Job_Title").Value,
                                 DepartmentRetail = item.Element("department_retail").Value,
@@ -182,9 +183,31 @@ namespace iTechArt.Serivce.Services
 
                             };
 
-            List<IGrocery> groceryList = items.ToList<IGrocery>();
-            await _groceryRepository.AddGroceriesAsync(groceryList); 
-            return null;
+                List<IGrocery> groceryList = items.ToList<IGrocery>();
+                var result = await _groceryRepository.AddGroceriesAsync(groceryList);
+                if (result.IsSuccess)
+                {
+                    return new ServiceResult
+                    {
+                        IsSuccess = true,
+                        Message = JsonConvert.SerializeObject(groceryList, Newtonsoft.Json.Formatting.Indented)
+                    };
+                }
+                return new ServiceResult
+                {
+                    IsSuccess = false,
+                    Message = result.Exception.Message,
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ServiceResult
+                {
+                    IsSuccess = false,
+                    Message = ex.Message,
+                };
+            }
+                
         }
     }
 }

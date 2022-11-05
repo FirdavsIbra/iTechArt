@@ -19,18 +19,6 @@ namespace iTechArt.Repository.Repositories
             _dbContext = dbContext;
             _mapper = mapper;
         }
-
-        /// <summary>
-        /// Add grocery to database
-        /// </summary>
-        /// <param name="grocery"></param>   
-        public async Task AddAsync(IGrocery grocery)
-        {
-            await _dbContext.Set<GroceryDb>().AddAsync(_mapper.Map<GroceryDb>(grocery));
-
-            await _dbContext.SaveChangesAsync();
-        }
-
         /// <summary>
         /// Get all entities from database
         /// </summary>

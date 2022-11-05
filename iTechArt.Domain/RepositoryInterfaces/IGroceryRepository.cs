@@ -9,25 +9,17 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// Get all groceries from database
         /// </summary>
         /// <returns> Array of Repository Model Interfaces </returns>
-        Task<IGrocery[]> GetAll();
-
-        /// <summary>
-        /// Add grocery to database
-        /// </summary>
-        /// <param name="grocery"></param>
-        Task AddAsync(IGrocery grocery);
+        Task<IGrocery[]> GetAllAsync();
 
         /// <summary>
         /// Get grocery by id
         /// </summary>
-        /// <param name="id"></param>
         /// <returns> Resopisitory model interface </returns>
         //Task<IGrocery> GetByIdAsync(long id);
 
         /// <summary>
         /// Update grocery
         /// </summary>
-        /// <param name="grocery"></param>
         Task UpdateAsync(IGrocery grocery);
 
         /// <summary>
@@ -40,6 +32,9 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// </summary>
         public int GetCountOfGrocery();
 
-        public Task<IDbResult> AddGroceriesAsync(List<IGrocery> groceries);
+        /// <summary>
+        /// Add groceries to database
+        /// </summary>
+        public Task<IDbResult> AddGroceriesAsync(IEnumerable<IGrocery> groceries);
     }
 }
