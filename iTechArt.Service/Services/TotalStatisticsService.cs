@@ -37,7 +37,7 @@ namespace iTechArt.Service.Services
             {
                 StudentCount = await _studentRepository.GetCountOfStudentsAsync(),
                 AirportCount = _airportRepository.GetCountOfAirport(),
-                DoctorCount = _medStaffRepository.GetCountOfDoctors(),
+                DoctorCount = await _medStaffRepository.GetCountOfDoctors(),
                 PoliceCount = _policeRepository.GetCountOfPolice(),
                 PupilCount = await _pupilRepository.GetCountOfPupilsAsync(),
                 GroceryCount = _groceryRepository.GetCountOfGrocery(),
