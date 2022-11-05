@@ -6,7 +6,14 @@
         /// types of extensions
         /// </summary>
         public static readonly string[] Extensions = { ".csv", ".xml",".xlsx", ".xls", ".xlsm", ".xlsb", ".xltx", ".xltm", ".xlt", ".xlam", ".xla", ".xlw" };
-        
+
+        /// <summary>
+        /// constant file extension strings
+        /// </summary>
+        public static readonly string csv = ".csv";
+        public static readonly string xml = ".xml";
+        public static readonly string xlsx = ".xlsx";
+
         /// <summary>
         /// Content types of CSV files
         /// </summary>
