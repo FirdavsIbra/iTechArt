@@ -28,7 +28,7 @@ namespace iTechArt.Serivce.Services
         /// </summary>
         public Task<IGrocery[]> ExportGrocery()
         {
-            return _groceryRepository.GetAll();
+            return _groceryRepository.GetAllAsync();
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace iTechArt.Serivce.Services
         /// </summary>
         public Task ImportGrocery()
         {
-            return _groceryRepository.GetAll();
+            return _groceryRepository.GetAllAsync();
         }
         /// <summary>
         /// No implementation yet
