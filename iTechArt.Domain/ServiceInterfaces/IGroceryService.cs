@@ -9,12 +9,12 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// Import data for grocery
         /// </summary>
-        public IGrocery[] ImportGrocery();
+        public Task ImportGrocery();
 
         /// <summary>
         /// Export data for grocery
         /// </summary>
-        public IGrocery[] ExportGrocery();
+        public Task<IGrocery[]> ExportGrocery();
 
         /// <summary>
         /// Count of grocery not implemented yet

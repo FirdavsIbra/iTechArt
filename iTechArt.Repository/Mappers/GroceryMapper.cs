@@ -7,7 +7,7 @@ namespace iTechArt.Repository.Mappers
 {
     public static class GroceryMapper
     {
-        private const string DATETIMEFORMAT = "%M/dd/yyyy";
+        private const string DATETIMEFORMAT = "MM/dd/yyyy";
         private const string INVALID_DOUBLE_MESSAGE = "Could not conver string to double: ";
         private const string INVALID_DATETIME_MESSAGE = "Could not convert string to DateTime: ";
         private const string INVALID_ENUM_MESSAGE = "Could not convert string to Enum: ";
@@ -59,14 +59,14 @@ namespace iTechArt.Repository.Mappers
                 Id = Guid.Parse(mappingItems[0]),
                 FirstName = mappingItems[1].ToString(),
                 LastName = mappingItems[2].ToString(),
-                DateOfBirth = dateOfBirth,
+                Birthday = dateOfBirth,
                 Gender = gender,
                 Email = mappingItems[3].ToString(),
                 JobTitle = mappingItems[6].ToString(),
                 DepartmentRetail = mappingItems[7].ToString(),
                 Salary = salary,
             };
-        }
+       }
         /// <summary>
         /// Xlsx mappers converting the Xlsx items to business model
         /// </summary>
@@ -81,7 +81,7 @@ namespace iTechArt.Repository.Mappers
                 Id = Guid.Parse(sheet.Cells[index, 0].Value?.ToString()),
                 FirstName = sheet.Cells[index, 1].Value?.ToString(),
                 LastName = sheet.Cells[index, 2].Value?.ToString(),
-                DateOfBirth = dateOfBirth,
+                Birthday = dateOfBirth,
                 Gender = gender,
                 Email = sheet.Cells[index, 6].Value?.ToString(),
                 JobTitle = sheet.Cells[index, 7].Value?.ToString(),
