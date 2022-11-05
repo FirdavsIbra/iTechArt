@@ -1,59 +1,54 @@
 ﻿using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace iTechArt.Service.DTOs
 {
     [XmlRoot("record")]
-    public sealed class StudentsDTO:IStudents
+    public sealed class StudentsDTO: IStudents
     {
         /// <summary>
-        /// Gets/Sets Id of business model entities
+        /// Gets or sets id of student
         /// </summary>
-        public long Id { get;  set; }
-
+        public long Id { get; set; }
+        
         /// <summary>
-        /// Gets/Sets First name of student
+        /// Gets or sets name of student
         /// </summary>
         public string FirstName { get;  set; }
 
         /// <summary>
-        /// Gets/Sets Last name of student
+        /// Gets or sets last name of student
         /// </summary>
         public string LastName { get;  set; }
 
         /// <summary>
-        /// Gets/Sets Email of student
+        /// Gets or sets email of student
         /// </summary>
         public string Email { get;  set; }
 
         /// <summary>
-        /// Gets/Sets Password of student
+        /// Gets or sets password of student
         /// </summary>
         public string Password { get;  set; }
 
         /// <summary>
-        /// Gets/Sets String value majority, field of study
+        /// Gets or sets string value majority, field of study
         /// </summary>
         public string Majority { get;  set; }
 
         /// <summary>
-        /// Gets/Sets boolean Gender entity of student
+        /// Gets or sets gender of student
         /// </summary>
         public Gender Gender { get;  set; }
 
         /// <summary>
-        /// Gets/Sets Birthday of student
+        /// Gets or sets birth date of student
         /// </summary>
         public DateTime DateOfBirth { get;  set; }
 
         /// <summary>
-        /// Gets/Sets Name of university of student
+        /// Gets or sets name of university of student
         /// </summary>
         public string University { get;  set; }
     }

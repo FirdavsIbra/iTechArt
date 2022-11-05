@@ -33,16 +33,8 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public async Task<IPupil[]> GetAllAsync()
         {
-            var pupils = await _dbContext.Pupils.ToArrayAsync();
-
-            IPupil[] result = new IPupil[_dbContext.Pupils.Count()];
-
-            for (var i = 0; i < result.Length; i++)
-            {
-                result[i] = _mapper.Map<Pupil>(pupils[i]);
-            }
-
-            return result;
+            return await _dbContext.Pupils.Select(p => _mapper.Map<Pupil>(p))
+                                          .ToArrayAsync();
         }
 
         /// <summary>
@@ -50,11 +42,8 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public async Task<IPupil> GetByIdAsync(long id)
         {
-            var pupils = _dbContext.Pupils;
-
-            var pupilDb = await pupils.FirstOrDefaultAsync(p => p.Id == id);
-
-            return _mapper.Map<Pupil>(pupilDb);
+            return await _dbContext.Pupils.Select(p => _mapper.Map<Pupil>(p))
+                                          .FirstOrDefaultAsync();
         }
 
         /// <summary>
@@ -72,21 +61,21 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public async Task DeleteAsync(long id)
         {
-            var pupils = _dbContext.Pupils;
+            var pupil = _dbContext.Pupils.FirstOrDefaultAsync(p => p.Id == id);
 
-            var pupil = await pupils.FirstOrDefaultAsync(p => p.Id == id);
-
-            _dbContext.Pupils.Remove(_mapper.Map<PupilDb>(pupil));
-
-            await _dbContext.SaveChangesAsync();
+            if (pupil is not null)
+            {
+                _dbContext.Pupils.Remove(_mapper.Map<PupilDb>(pupil));
+                await _dbContext.SaveChangesAsync();
+            }
         }
 
         /// <summary>
         /// Get total count of pupils
         /// </summary>
-        public int GetCountOfPupils()
+        public async Task<int> GetCountOfPupilsAsync()
         {
-            return _dbContext.Pupils.Count();
+            return await _dbContext.Pupils.CountAsync();
         }
 
         /// <summary>

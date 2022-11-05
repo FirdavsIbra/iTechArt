@@ -7,7 +7,6 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// <summary>
         /// Add pupil to database
         /// </summary>
-        /// <param name="pupil"></param>
         public Task AddAsync(IPupil pupil);
 
         /// <summary>
@@ -18,7 +17,6 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// <summary>
         /// Get pupil by id
         /// </summary>
-        /// <param name="id"></param>
         public Task<IPupil> GetByIdAsync(long id);
         
         /// <summary>
@@ -29,18 +27,16 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// <summary>
         /// Update pupil
         /// </summary>
-        /// <param name="pupil"></param>
         public Task UpdateAsync(IPupil pupil);
 
         /// <summary>
         /// Delete pupil from database
         /// </summary>
-        /// <param name="pupil"></param>
         public Task DeleteAsync(long id);
 
         /// </summary>
         /// Get count of pupils
         /// </summary>
-        public int GetCountOfPupils();
+        public Task<int> GetCountOfPupilsAsync();
     }
 }

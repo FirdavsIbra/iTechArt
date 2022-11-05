@@ -31,8 +31,7 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Get total counts of users
         /// </summary>
-        /// <returns></returns>
-        public IDashboardInfo GetCountOfUsers()
+        public async Task<IDashboardInfo> GetCountOfUsers()
         {
             return new DashboardInfo()
             {
@@ -40,7 +39,7 @@ namespace iTechArt.Service.Services
                 AirportCount = _airportRepository.GetCountOfAirport(),
                 DoctorCount = _medStaffRepository.GetCountOfDoctors(),
                 PoliceCount = _policeRepository.GetCountOfPolice(),
-                PupilCount = _pupilRepository.GetCountOfPupils(),
+                PupilCount = await _pupilRepository.GetCountOfPupilsAsync(),
                 GroceryCount = _groceryRepository.GetCountOfGrocery(),
             };
         }
