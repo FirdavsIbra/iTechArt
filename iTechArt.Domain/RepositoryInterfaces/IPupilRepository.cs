@@ -22,7 +22,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// <summary>
         /// Add pupil array
         /// </summary>
-        public Task AddRangeAsync(IPupil[] pupils);
+        public Task AddRangeAsync(IEnumerable<IPupil> pupils);
 
         /// <summary>
         /// Update pupil

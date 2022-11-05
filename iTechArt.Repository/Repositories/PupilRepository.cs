@@ -81,16 +81,9 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Add pupil array
         /// </summary>
-        public async Task AddRangeAsync(IPupil[] pupils)
+        public async Task AddRangeAsync(IEnumerable<IPupil> pupils)
         {
-            PupilDb[] result = new PupilDb[pupils.Length];
-
-            for (var i = 0; i < result.Length; i++)
-            {
-                result[i] = _mapper.Map<PupilDb>(pupils[i]);
-            }
-
-            await _dbContext.Pupils.AddRangeAsync(result);
+            await _dbContext.Pupils.AddRangeAsync(pupils.Select(_mapper.Map<PupilDb>));
 
             await _dbContext.SaveChangesAsync();
         }
