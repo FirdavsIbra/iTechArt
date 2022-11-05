@@ -44,9 +44,9 @@ namespace iTechArt.Api.Controllers
         /// api route which allows to get all info from db and parse it to the following format
         /// </summary>
         [HttpGet(ApiConstants.EXPORT)]
-        public IActionResult Export()
+        public async Task<IActionResult> Export()
         {
-            return Ok(_groceryService.ExportGrocery());
+            return Ok(await _groceryService.ExportGrocery());
         }
         /// <summary>
         /// Get count of grocery not implemented yet

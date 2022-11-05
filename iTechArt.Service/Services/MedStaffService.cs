@@ -14,9 +14,9 @@ namespace iTechArt.Service.Services
     {
         private readonly IMedStaffRepository _medStaffRepository;
 
-        public MedStaffService(IMedStaffRepository doctorRepository)
+        public MedStaffService(IMedStaffRepository medStaffRepository)
         {
-            _medStaffRepository = doctorRepository;
+            _medStaffRepository = medStaffRepository;
         }
 
         /// <summary>
