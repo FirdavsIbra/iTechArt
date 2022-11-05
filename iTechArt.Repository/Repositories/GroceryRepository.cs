@@ -22,7 +22,7 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get all entities from database
         /// </summary>
-        public async Task<IGrocery[]> GetAll()
+        public async Task<IGrocery[]> GetAllAsync()
         {
             var groceries = await _dbContext.Groceries.ToArrayAsync();
 
@@ -65,7 +65,7 @@ namespace iTechArt.Repository.Repositories
         public async Task DeleteAsync(long id)
         {
         }
-        public async Task<IDbResult> AddGroceriesAsync(List<IGrocery> groceries)
+        public async Task<IDbResult> AddGroceriesAsync(IEnumerable<IGrocery> groceries)
         {
             try
             {
