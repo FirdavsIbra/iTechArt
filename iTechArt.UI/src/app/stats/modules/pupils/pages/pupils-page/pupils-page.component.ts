@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { UnitsEnum } from '../../../../../shared/enums/units.enum';
-import { PupilsService } from "../../../../../shared/services/pupils.service";
-import { IPupil } from "../../../../../shared/interfaces/pupil.interface";
+import { PupilsService } from "../../pupils.service";
+import { IPupil } from "../../interfaces/pupil.interface";
 
 @Component({
   selector: 'app-pupils-page',

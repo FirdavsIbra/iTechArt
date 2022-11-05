@@ -7,6 +7,7 @@ import { MedStaffModule } from './modules/medStaff/med-staff.module';
 import { PoliceModule } from './modules/police/police.module';
 import { PupilsModule } from './modules/pupils/pupils.module';
 import { StudentsModule } from './modules/students/students.module';
+import { SharedStatsModule } from './shared/shared-stats.module';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { StudentsModule } from './modules/students/students.module';
     PoliceModule,
     PupilsModule,
     StudentsModule,
+    SharedStatsModule,
   ],
 })
 export class StatsModule {}

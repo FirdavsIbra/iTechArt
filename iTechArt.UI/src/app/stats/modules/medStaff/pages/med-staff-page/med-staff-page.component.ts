@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 
 import { UnitsEnum } from '../../../../../shared/enums/units.enum';
-import { ImedStaff } from "../../../../../shared/interfaces/medStaff.interface";
-import { MedStaffService } from "../../../../../shared/services/medStaff.service";
+import { ImedStaff } from "../../interfaces/medStaff.interface";
+import { MedStaffService } from "../../medStaff.service";
 
 @Component({
   selector: 'app-med-staff-page',

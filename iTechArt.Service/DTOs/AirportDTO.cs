@@ -42,7 +42,7 @@ namespace iTechArt.Service.DTOs
         /// <summary>
         /// gets or internal sets A number of employees
         /// </summary>
-        public ushort EmpoyeesCount { get; internal set; }
+        public ushort EmployeesCount { get; internal set; }
 
         /// <summary>
         /// gets or internal sets The number of passengers who fly from a particular airport

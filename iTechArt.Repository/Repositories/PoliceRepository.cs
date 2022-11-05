@@ -34,21 +34,14 @@ namespace iTechArt.Repository.Repositories
         /// Add or Update Police entity to/from database
         /// </summary>
         /// <param name="entity"></param>   
-        public async Task AddUpdateAsync(IPolice entity)
+        public async Task AddAsync(IPolice entity)
         {
             PoliceDb police = _mapper.Map<PoliceDb>(entity);
             if (entity != null)
             {
-                if (entity.Id > 0)
-                {
-                    _dbContext.Police.Update(police);
-                }
-                else
-                {
-                    _dbContext.Police.Add(police);
-                }
+                _dbContext.Police.Add(police);
+                await _dbContext.SaveChangesAsync();
             }
-            await _dbContext.SaveChangesAsync();
         }
 
         /// <summary>
@@ -56,11 +49,8 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public async Task<IPolice[]> GetAllAsync()
         {
-            // _dbContext.Police.Select(c => _mapper.Map<IPolice>(c));
-            var policesDb = await _dbContext.Police.ToListAsync();
-            List<Police> policeList = policesDb.Select(police => _mapper.Map<Police>(police)).ToList();
-
-            return policeList.ToArray();
+            IPolice[] policeArray = _dbContext.Police.Select(police => _mapper.Map<Police>(police)).ToArray();
+            return policeArray;
         }
 
         /// <summary>
@@ -104,157 +94,45 @@ namespace iTechArt.Repository.Repositories
             return _dbContext.Police.Count();
         }
 
-        /// <summary>
-        /// Parse XLSX file and save to database
-        /// </summary>
-        /// <param name="file"></param>
-        public async Task ReadExcelAsync(IFormFile file)
-        {
-            List<PoliceDb> policeList = new List<PoliceDb>();
-
-            using (var fileStream = new MemoryStream())
-            {
-                await file.CopyToAsync(fileStream);
-                using (var package = new ExcelPackage(fileStream))
-                {
-                    ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-                    ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
-                    var rowCount = worksheet.Dimension.Rows;
-                    for (int row = 2; row <= rowCount; row++)
-                    {
-                        try
-                        {
-                            PoliceDb policeDb = new PoliceDb
-                            {
-                                Name = worksheet.Cells[row, 2].Value.ToString().Trim(),
-                                Surname = worksheet.Cells[row, 3].Value.ToString().Trim(),
-                                Email = worksheet.Cells[row, 4].Value.ToString().Trim(),
-                                Gender = (Gender)Convert.ToByte(worksheet.Cells[row, 5].Value),
-                                Address = worksheet.Cells[row, 6].Value.ToString().Trim(),
-                                JobTitle = worksheet.Cells[row, 7].Value.ToString().Trim(),
-                                Salary = Convert.ToDouble(worksheet.Cells[row, 8].Value)
-                            };
-                            policeList.Add(policeDb);
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(ex.Message.ToString());
-                        }
-                    }
-                    await _dbContext.Police.AddRangeAsync(policeList);
-                    await _dbContext.SaveChangesAsync();
-                }
-            }
-        }
-
-
-        /// <summary>
-        /// Parse XML file and save to database
-        /// </summary>
-        /// <param name="file"></param>
-        public async Task ReadXMLAsync(IFormFile file)
-        {
-            List<PoliceDb> policeList = new List<PoliceDb>();
-
-            var filePath = Path.Combine(_webHostEnvironment.WebRootPath, file.FileName);
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                await file.CopyToAsync(fileStream);
-            }
-            XmlDocument xmlDocument = new XmlDocument();
-            xmlDocument.Load(filePath);
-            foreach (XmlNode node in xmlDocument.SelectNodes("/dataset/record"))
-            {
-                try
-                {
-                    PoliceDb policeDb = new PoliceDb
-                    {
-                        Name = node["Name"].InnerText,
-                        Surname = node["Surname"].InnerText,
-                        Email = node["Email"].InnerText,
-                        Gender = (Gender)Enum.Parse(typeof(Gender), node["Gender"].InnerText),
-                        Address = node["Address"].InnerText,
-                        JobTitle = node["JobTitle"].InnerText,
-                        Salary = Convert.ToDouble(node["Salary"].InnerText)
-                    };
-                    policeList.Add(policeDb);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message.ToString());
-                }
-            }
-            await _dbContext.Police.AddRangeAsync(policeList);
-            await _dbContext.SaveChangesAsync();
-            // Delete the created file
-            if (File.Exists(filePath))
-            {
-                File.Delete(filePath);
-            }
-        }
-
-
-        /// <summary>
-        /// Parse CSV file and save to database
-        /// </summary>
-        /// <param name="file"></param>
-        public async Task ReadCSVAsync(IFormFile file)
-        {
-            List<PoliceDb> policeList = new List<PoliceDb>();
-
-            var filePath = Path.Combine(_webHostEnvironment.WebRootPath, file.FileName);
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                await file.CopyToAsync(fileStream);
-            }
-            using (TextReader csvReader = new StreamReader(filePath))
-            {
-                using (var csv = new CsvReader(csvReader, CultureInfo.InvariantCulture))
-                {
-                    try
-                    {
-                        var records = csv.GetRecords<PoliceDb>();
-                        foreach (var record in records)
-                        {
-                            PoliceDb policeDb = new PoliceDb
-                            {
-                                Id = (long)(record.Id),
-                                Name = record.Name.ToString(),
-                                Surname = record.Surname.ToString(),
-                                Email = record.Email.ToString(),
-                                Gender = (Gender)Enum.Parse(typeof(Gender), record.Gender.ToString()),
-                                Address = record.Address.ToString(),
-                                JobTitle = record.JobTitle.ToString(),
-                                Salary = Convert.ToDouble(record.Salary)
-                            };
-                            policeList.Add(policeDb);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message.ToString());
-                    }
-                }
-            }
-            await _dbContext.Police.AddRangeAsync(policeList);
-            await _dbContext.SaveChangesAsync();
-            // Delete the created file
-            if (File.Exists(filePath))
-            {
-                File.Delete(filePath);
-            }
-        }
-
 
         ///// <summary>
         ///// Update entity
         ///// </summary>
         ///// <param name="entity"></param>
-        //public async Task UpdateAsync(IPolice entity)
-        //{
-        //    var entry = _dbContext.Set<PoliceDb>().Update(_mapper.Map<PoliceDb>(entity));
+        public async Task UpdateAsync(IPolice entity)
+        {
+            var policeFromDb = await _dbContext.Police.FirstOrDefaultAsync(c => c.Id == entity.Id);
+            if (policeFromDb != null)
+            {
+                _dbContext.Police.Update(_mapper.Map<PoliceDb>(entity));
+                await _dbContext.SaveChangesAsync();
+            }
+        }
 
-        //    await _dbContext.SaveChangesAsync();
-        //}
+        /// <summary>
+        /// Adds collection of entities to the database
+        /// </summary>
+        /// <param name="police"></param>
+        /// <returns></returns>
+        public async Task AddRangeAsync(List<IPolice> polices)
+        {
+            var entityFromDb = _dbContext.Police.OrderByDescending(c => c.Id).FirstOrDefault();
+            PoliceDb[] policesArray = polices.Select(c => _mapper.Map<PoliceDb>(c)).ToArray();
+            if (entityFromDb != null)
+            {
+                long id = entityFromDb.Id;
+                foreach (var police in policesArray)
+                {
+                    police.Id = id += 1;
+                    id += 1;
+                }
+                await _dbContext.AddRangeAsync(policesArray);
+            }
+            else
+            {
+                await _dbContext.Police.AddRangeAsync(policesArray);
+            }
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

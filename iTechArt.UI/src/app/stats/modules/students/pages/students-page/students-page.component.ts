@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 
 import { UnitsEnum } from '../../../../../shared/enums/units.enum';
-import { IStudents } from '../../../../../shared/interfaces/students.interface';
-import { StudentsService } from '../../../../../shared/services/students.service';
+import { IStudents } from '../../interfaces/students.interface';
+import { StudentsService } from '../../students.service';
 
 @Component({
   selector: 'app-students-page',

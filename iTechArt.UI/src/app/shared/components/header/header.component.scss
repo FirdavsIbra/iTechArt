@@ -90,6 +90,16 @@ a {
 .menu input[type="checkbox"]:checked ~ .hamburger.line3 {
   transform: rotate(-45deg);
 }
+
+.overlay {
+  position: fixed;
+  top: 89px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+}
+
 @media screen and (max-width: 1030px) {
   .menu {
     display: flex;
@@ -97,12 +107,12 @@ a {
     justify-content: center;
     align-items: center;
     position: fixed;
-    top: 0;
+    top: 89px;
     left: -100%;
     width: 50%;
     height: 100vh;
     padding: 20px 15px;
-    background-color: rgba(58, 86, 151, 0.7);
+    background-color: rgba(58, 86, 151, 1);
     transition: all 0.3s;
     cursor: pointer;
   }
@@ -123,9 +133,7 @@ a {
 
   .hamburger {
     display: block;
-    position: absolute;
-    right: 95px;
-    top: 45px;
+
     transform: translateY(-50%);
     width: 26px;
     cursor: pointer;
@@ -169,6 +177,16 @@ a {
     transform-origin: 0 100%;
     transition: transform 0.4s ease-in-out;
   }
+}
+@media screen and (max-width: 350px){
+  p{
+    display: none;
+  }
+}
 
-
+@media screen and (max-width: 500px){
+  .menu {
+    width: 100%;
+    top: 89px;
+  }
 }

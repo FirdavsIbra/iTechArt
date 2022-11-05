@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using iTechArt.Database.DbContexts;
 using iTechArt.Database.Entities.Airports;
+using iTechArt.Database.Entities.MedicalStaff;
+using iTechArt.Database.Entities.Pupils;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Repository.BusinessModels;
@@ -89,5 +91,23 @@ namespace iTechArt.Repository.Repositories
         {
             return _dbContext.Airports.Count();
         }
+
+        /// <summary>
+        /// Add airport array
+        /// </summary>
+        public async Task AddRangeAsync(IList<IAirport> airports) 
+        {
+            AirportDb[] airport = new AirportDb[airports.Count];
+
+            for (int i = 0; i < airports.Count; i++)
+            {
+                airport[i] = _mapper.Map<AirportDb>(airports[i]);
+            }
+
+            await _dbContext.AddRangeAsync(airport);
+
+            await _dbContext.SaveChangesAsync();
+        }
     }
+
 }

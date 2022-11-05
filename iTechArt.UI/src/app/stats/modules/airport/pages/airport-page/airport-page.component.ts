@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { UnitsEnum } from '../../../../../shared/enums/units.enum';
-import { AirportService } from '../../../../../shared/services/airport.service';
-import { IAirport } from '../../../../../shared/interfaces/airport.interface';
+import { AirportService } from '../../airport.service';
+import { IAirport } from '../../interfaces/airport.interface';
 
 @Component({
   selector: 'app-airport-page',
@@ -12,7 +12,7 @@ import { IAirport } from '../../../../../shared/interfaces/airport.interface';
 export class AirportPageComponent implements OnInit {
   public unit: UnitsEnum = UnitsEnum.airport;
   public data: IAirport[] | undefined;
-  public propsNames = [
+  public props = [
     'id',
     'name',
     'builtDate',
@@ -23,7 +23,7 @@ export class AirportPageComponent implements OnInit {
     'flightsPerYear',
     'averageTicketPrice',
   ];
-  public columnNames = [
+  public columns = [
     'Id',
     'Name',
     'Built Date',

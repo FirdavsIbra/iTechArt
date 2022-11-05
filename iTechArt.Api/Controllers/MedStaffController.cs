@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
 {
-    [ApiController, Route("api/medStaff")]
+    [ApiController, Route(RouteConstants.MEDSTAFF)]
     public sealed class MedStaffController : ControllerBase
     {
         /// <summary>
@@ -12,7 +12,7 @@ namespace iTechArt.Api.Controllers
         /// </summary>
         /// <param name="file"></param>
         /// <returns> An Array of Repository Models </returns>
-        [HttpPost("import")]
+        [HttpPost(ApiConstants.IMPORT)]
         public async ValueTask<IActionResult> Import([FromServices] IMedStaffService _medStaffService, IFormFile file)
         {
             if (file != null)
@@ -33,7 +33,7 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// Gets all data from database
         /// </summary>
-        [HttpGet("export")]
+        [HttpGet(ApiConstants.EXPORT)]
         public async Task<IActionResult> ExportAsync([FromServices] IMedStaffService _medStaffService)
         {
             return Ok(await _medStaffService.ExportMedStaffFile());
