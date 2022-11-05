@@ -10,7 +10,6 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// Uploads file and saves in database
         /// </summary>
-        /// <param name="file"></param>
         /// <returns> An Array of Repository Models </returns>
         [HttpPost(ApiConstants.IMPORT)]
         public async ValueTask<IActionResult> Import([FromServices] IMedStaffService _medStaffService, IFormFile file)

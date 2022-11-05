@@ -21,9 +21,9 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Add medStaff to database
         /// </summary>  
-        public async Task AddAsync(IMedStaff doctor)
+        public async Task AddAsync(IMedStaff medStaff)
         {
-            var mappedMedStaff = _mapper.Map<MedStaffDb>(doctor);
+            var mappedMedStaff = _mapper.Map<MedStaffDb>(medStaff);
 
             await _dbContext.Staffs.AddAsync(mappedMedStaff);
 
@@ -35,9 +35,7 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public async Task AddRangeAsync(IEnumerable<IMedStaff> medStaffs)
         {
-            MedStaffDb[] mappedMedStaffs = medStaffs.Select(m => _mapper.Map<MedStaffDb>(m)).ToArray();
-
-            await _dbContext.AddRangeAsync(mappedMedStaffs);
+            await _dbContext.AddRangeAsync(medStaffs.Select(_mapper.Map<MedStaffDb>));
 
             await _dbContext.SaveChangesAsync();
         }
@@ -47,16 +45,9 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public async Task<IMedStaff[]> GetAllAsync()
         {
-            var doctors = await _dbContext.Staffs.ToArrayAsync();
+            var medStaffs = await _dbContext.Staffs.ToArrayAsync();
 
-            IMedStaff[] result = new IMedStaff[_dbContext.Staffs.Count()];
-
-            for(var i = 0; i < result.Length; i++)
-            {
-                result[i] = _mapper.Map<MedStaff>(doctors[i]);
-            }
-
-            return result;
+            return medStaffs.Select(_mapper.Map<MedStaff>).ToArray();
         }
 
         /// <summary>
@@ -64,9 +55,8 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public async Task<IMedStaff> GetByIdAsync(long id)
         {
-            var doctorDb = await _dbContext.Staffs.FirstOrDefaultAsync(d => d.Id == id);
-
-            return _mapper.Map<MedStaff>(doctorDb);
+            return (await GetAllAsync()).Select(_mapper.Map<MedStaff>)
+                                        .FirstOrDefault(d => d.Id == id);
         }
 
         /// <summary>
@@ -86,9 +76,9 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public async Task DeleteAsync(long id)
         {
-            var doctor = await _dbContext.Staffs.FirstOrDefaultAsync(d => d.Id == id);
+            var medStaff = (await GetAllAsync()).FirstOrDefault(d => d.Id == id);
 
-            _dbContext.Staffs.Remove(_mapper.Map<MedStaffDb>(doctor));
+            _dbContext.Staffs.Remove(_mapper.Map<MedStaffDb>(medStaff));
 
             await _dbContext.SaveChangesAsync();
         }
