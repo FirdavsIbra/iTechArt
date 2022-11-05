@@ -9,9 +9,9 @@ namespace iTechArt.Api.Controllers
     public sealed class GroceryController : Controller
     {
         private readonly IGroceryService _groceryService;
-        private string CSV = "csv";
-        private string Excel = "officedocument.spreadsheetml.sheet";
-        private string XML = "xml";
+        private const string CSV = "csv";
+        private const string Excel = "officedocument.spreadsheetml.sheet";
+        private const string XML = "xml";
 
         public GroceryController(IGroceryService groceryService)
         {
@@ -51,11 +51,11 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// Get count of grocery not implemented yet
         /// </summary>
-        
-        //[HttpGet(ApiConstants.GETCOUNTOFGROCERY)]
-        //public IActionResult GetCountOfGrocery()
-        //{
-        //    return Ok(_groceryService.GetCountOfGrocery());
-        //}
+
+        [HttpGet(ApiConstants.GETCOUNTOFGROCERY)]
+        public IActionResult GetCountOfGrocery()
+        {
+            return Ok(_groceryService.GetCountOfGrocery());
+        }
     }
 }

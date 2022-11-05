@@ -19,22 +19,10 @@ namespace iTechArt.Repository.Repositories
             _dbContext = dbContext;
             _mapper = mapper;
         }
-
-        /// <summary>
-        /// Add grocery to database
-        /// </summary>
-        /// <param name="grocery"></param>   
-        public async Task AddAsync(IGrocery grocery)
-        {
-            await _dbContext.Set<GroceryDb>().AddAsync(_mapper.Map<GroceryDb>(grocery));
-
-            await _dbContext.SaveChangesAsync();
-        }
-
         /// <summary>
         /// Get all entities from database
         /// </summary>
-        public async Task<IGrocery[]> GetAll()
+        public async Task<IGrocery[]> GetAllAsync()
         {
             var groceries = await _dbContext.Groceries.ToArrayAsync();
 
@@ -77,7 +65,7 @@ namespace iTechArt.Repository.Repositories
         public async Task DeleteAsync(long id)
         {
         }
-        public async Task<IDbResult> AddGroceriesAsync(List<IGrocery> groceries)
+        public async Task<IDbResult> AddGroceriesAsync(IEnumerable<IGrocery> groceries)
         {
             try
             {
