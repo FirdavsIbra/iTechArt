@@ -32,13 +32,13 @@ namespace iTechArt.Service.Services
         /// Get total counts of users
         /// </summary>
         /// <returns></returns>
-        public IDashboardInfo GetCountOfUsers()
+        public async Task<IDashboardInfo> GetCountOfUsers()
         {
             return new DashboardInfo()
             {
                 StudentCount = _studentRepository.GetCountOfStudents(),
                 AirportCount = _airportRepository.GetCountOfAirport(),
-                DoctorCount = _medStaffRepository.GetCountOfDoctors(),
+                DoctorCount = await _medStaffRepository.GetCountOfDoctors(),
                 PoliceCount = _policeRepository.GetCountOfPolice(),
                 PupilCount = _pupilRepository.GetCountOfPupils(),
                 GroceryCount = _groceryRepository.GetCountOfGrocery(),
