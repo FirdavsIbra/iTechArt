@@ -35,7 +35,7 @@ namespace iTechArt.Service.Services
         {
             return new DashboardInfo()
             {
-                StudentCount = _studentRepository.GetCountOfStudents(),
+                StudentCount = await _studentRepository.GetCountOfStudentsAsync(),
                 AirportCount = _airportRepository.GetCountOfAirport(),
                 DoctorCount = _medStaffRepository.GetCountOfDoctors(),
                 PoliceCount = _policeRepository.GetCountOfPolice(),

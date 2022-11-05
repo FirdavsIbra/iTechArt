@@ -61,7 +61,7 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public async Task DeleteAsync(long id)
         {
-            var pupil = _dbContext.Pupils.FirstOrDefaultAsync(p => p.Id == id);
+            var pupil = await _dbContext.Pupils.FirstOrDefaultAsync(p => p.Id == id);
 
             if (pupil is not null)
             {

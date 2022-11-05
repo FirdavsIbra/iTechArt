@@ -43,7 +43,7 @@ namespace iTechArt.Repository.Mappers
 
 
             // map from IStudent to StudentDb
-            CreateMap<IStudents, StudentDb>();
+            CreateMap<IStudent, StudentDb>();
             // map from StudentDb to StudentBm
             CreateMap<StudentDb, BusinessModels.Student>();
         }

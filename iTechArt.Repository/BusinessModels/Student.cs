@@ -3,7 +3,7 @@ using iTechArt.Domain.ModelInterfaces;
 
 namespace iTechArt.Repository.BusinessModels
 {
-    internal sealed class Student : IStudents
+    internal sealed class Student : IStudent
     {
         /// <summary>
         /// Gets/Sets Id of business model entities
