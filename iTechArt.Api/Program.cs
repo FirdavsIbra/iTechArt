@@ -1,10 +1,12 @@
 using iTechArt.Database.DbContexts;
+using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using iTechArt.Repository.Mappers;
 using iTechArt.Repository.Repositories;
 using iTechArt.Serivce.Services;
 using iTechArt.Service.Helpers;
+using iTechArt.Service.Parsers.PoliceParser;
 using iTechArt.Service.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,6 +28,11 @@ builder.Services.AddScoped<IGroceryService, GroceryService>();
 builder.Services.AddScoped<IMedStaffService, MedStaffService>();
 builder.Services.AddScoped<IPoliceService, PoliceService>();
 builder.Services.AddScoped<IPupilService, PupilService>();
+
+// Parser Services
+builder.Services.AddScoped<IExcelParser, ExcelParser>();
+builder.Services.AddScoped<IXmlParser, XmlParser>();
+builder.Services.AddScoped<ICsvParser, CsvParser>();
 
 builder.Services.AddCors(option =>
 {
