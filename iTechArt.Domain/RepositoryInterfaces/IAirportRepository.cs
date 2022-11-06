@@ -7,12 +7,12 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// <summary>
         /// Get all airports from database
         /// </summary>
-        Task<IAirport[]> GetAll();
+        Task<IAirport[]> GetAllAsync();
 
         /// <summary>
         /// Add array of airport
         /// </summary>
-        Task AddRangeAsync(IList<IAirport> airports);
+        Task AddRangeAsync(IEnumerable<IAirport> airports);
 
         /// <summary>
         /// Add airport to database
@@ -32,11 +32,11 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// <summary>
         /// Delete airport from database
         /// </summary>
-        Task DeleteAsync(IAirport airport);
+        Task DeleteAsync(long id);
 
         /// </summary>
         /// Get count of airports
         /// </summary>
-        public int GetCountOfAirport();
+        public Task<int> GetCountOfAirportAsync();
     }
 }
