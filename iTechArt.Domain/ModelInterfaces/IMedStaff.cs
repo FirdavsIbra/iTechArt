@@ -37,7 +37,7 @@ namespace iTechArt.Domain.ModelInterfaces
         /// <summary>
         /// gets Date of birth of a doctor
         /// </summary>
-        public DateTime DateOfBirth { get; }
+        public DateOnly DateOfBirth { get; }
 
         /// <summary>
         /// gets Address of a doctor

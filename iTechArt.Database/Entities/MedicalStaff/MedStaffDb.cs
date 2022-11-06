@@ -43,7 +43,7 @@ namespace iTechArt.Database.Entities.MedicalStaff
         /// <summary>
         /// gets && sets Date of birth of a Doctor
         /// </summary>
-        public DateTime DateOfBirth { get; set; }
+        public DateOnly DateOfBirth { get; set; }
 
         /// <summary>
         /// gets && sets Address of a Doctor

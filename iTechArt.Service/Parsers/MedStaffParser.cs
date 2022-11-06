@@ -50,9 +50,9 @@ namespace iTechArt.Service.Parsers
                         Gender = Enum.Parse<Gender>(rowData[2]),
                         Email = rowData[3].ToString().Trim(),
                         PhoneNumber = rowData[4].ToString().Trim(),
-                        DateOfBirth = Convert.ToDateTime(rowData[5]),
+                        DateOfBirth = DateOnly.Parse(rowData[5]),
                         Address = rowData[6],
-                        Salary = Convert.ToDecimal(rowData[7]),
+                        Salary = Decimal.Parse(rowData[7]),
                         HospitalName = rowData[8],
                         PostalCode = rowData[9] is null ? String.Empty : rowData[9],
                         Shift = Enum.Parse<Shift>(rowData[10])
@@ -101,7 +101,7 @@ namespace iTechArt.Service.Parsers
                                     Gender = Enum.Parse<Gender>(worksheet.Cells[row, 3].Value.ToString()),
                                     Email = worksheet.Cells[row, 4].Value.ToString().Trim(),
                                     PhoneNumber = worksheet.Cells[row, 5].Value.ToString().Trim(),
-                                    DateOfBirth = Convert.ToDateTime(worksheet.Cells[row, 6].Value),
+                                    DateOfBirth = DateOnly.Parse(worksheet.Cells[row, 6].Value.ToString()),
                                     Address = worksheet.Cells[row, 7].Value.ToString(),
                                     Salary = Convert.ToDecimal(worksheet.Cells[row, 8].Value),
                                     HospitalName = worksheet.Cells[row, 9].Value.ToString(),
@@ -150,17 +150,19 @@ namespace iTechArt.Service.Parsers
                 {
                     MedStaffDTO medStaff = new MedStaffDTO
                     {
-                        FirstName = node["FirstName"].InnerText,
-                        LastName = node["LastName"].InnerText,
-                        Gender = Enum.Parse<Gender>(node["Gender"].InnerText),
-                        Email = node["Email"].InnerText,
-                        PhoneNumber = node["PhoneNumber"].InnerText,
-                        DateOfBirth = Convert.ToDateTime(node["DateOfBirth"].InnerText),
-                        Address = node["Address"].InnerText,
-                        Salary = Convert.ToDecimal(node["Salary"].InnerText),
-                        HospitalName = node["HospitalName"].InnerText,
-                        PostalCode = node["PostalCode"] is null ? String.Empty : node["PostalCode"].InnerText,
-                        Shift = Enum.Parse<Shift>(node["Shift"].InnerText)
+                        FirstName = node[nameof(medStaff.FirstName)].InnerText,
+                        LastName = node[nameof(medStaff.LastName)].InnerText,
+                        Gender = Enum.Parse<Gender>(node[nameof(medStaff.Gender)].InnerText),
+                        Email = node[nameof(medStaff.Email)].InnerText,
+                        PhoneNumber = node[nameof(medStaff.PhoneNumber)].InnerText,
+                        DateOfBirth = DateOnly.Parse(node[nameof(medStaff.DateOfBirth)].InnerText),
+                        Address = node[nameof(medStaff.Address)].InnerText,
+                        Salary = Decimal.Parse(node[nameof(medStaff.Salary)].InnerText),
+                        HospitalName = node[nameof(medStaff.HospitalName)].InnerText,
+                        PostalCode = node[nameof(medStaff.PostalCode)]
+                                            is null ? String.Empty 
+                                                    : node[nameof(medStaff.PostalCode)].InnerText,
+                        Shift = Enum.Parse<Shift>(node[nameof(medStaff.Shift)].InnerText)
                     };
 
                     medStaffs.Add(medStaff);
