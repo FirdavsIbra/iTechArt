@@ -12,8 +12,8 @@ using iTechArt.Database.DbContexts;
 namespace iTechArt.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221103105047_MaxLengthOfSchoolName2")]
-    partial class MaxLengthOfSchoolName2
+    [Migration("20221106145122_ProblemsMigration")]
+    partial class ProblemsMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -69,40 +69,48 @@ namespace iTechArt.Database.Migrations
 
             modelBuilder.Entity("iTechArt.Database.Entities.Groceries.GroceryDb", b =>
                 {
-                    b.Property<long>("id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTime>("birthday")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateTime>("Birthday")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("birthday");
 
-                    b.Property<string>("department_retail")
-                        .HasColumnType("text");
+                    b.Property<string>("Department_retail")
+                        .HasColumnType("text")
+                        .HasColumnName("department_retail");
 
-                    b.Property<string>("email")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<string>("Email")
+                        .HasColumnType("text")
+                        .HasColumnName("email");
 
-                    b.Property<string>("first_Name")
+                    b.Property<string>("First_Name")
                         .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
+                        .HasColumnType("character varying(32)")
+                        .HasColumnName("first_Name");
 
-                    b.Property<byte>("gender")
-                        .HasColumnType("smallint");
+                    b.Property<byte>("Gender")
+                        .HasColumnType("smallint")
+                        .HasColumnName("gender");
 
-                    b.Property<string>("job_title")
-                        .HasColumnType("text");
+                    b.Property<string>("Job_title")
+                        .HasColumnType("text")
+                        .HasColumnName("job_title");
 
-                    b.Property<string>("last_Name")
+                    b.Property<string>("Last_Name")
                         .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
+                        .HasColumnType("character varying(32)")
+                        .HasColumnName("last_Name");
 
-                    b.Property<double>("salary")
-                        .HasColumnType("double precision");
+                    b.Property<double>("Salary")
+                        .HasColumnType("double precision")
+                        .HasColumnName("salary");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Groceries");
                 });
@@ -203,8 +211,8 @@ namespace iTechArt.Database.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Address")
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)");
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
 
                     b.Property<string>("City")
                         .HasMaxLength(64)
@@ -217,8 +225,8 @@ namespace iTechArt.Database.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("FirstName")
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)");
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
 
                     b.Property<byte>("Gender")
                         .HasColumnType("smallint");
@@ -227,8 +235,8 @@ namespace iTechArt.Database.Migrations
                         .HasColumnType("smallint");
 
                     b.Property<string>("LastName")
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)");
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
 
                     b.Property<string>("PhoneNumber")
                         .HasMaxLength(64)
