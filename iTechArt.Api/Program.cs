@@ -6,6 +6,7 @@ using iTechArt.Repository.Mappers;
 using iTechArt.Repository.Repositories;
 using iTechArt.Serivce.Services;
 using iTechArt.Service.Helpers;
+using iTechArt.Service.Parsers;
 using iTechArt.Service.Parsers.PoliceParser;
 using iTechArt.Service.Services;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +34,7 @@ builder.Services.AddScoped<IPupilService, PupilService>();
 builder.Services.AddScoped<IExcelParser, ExcelParser>();
 builder.Services.AddScoped<IXmlParser, XmlParser>();
 builder.Services.AddScoped<ICsvParser, CsvParser>();
+builder.Services.AddScoped<IMedStaffParser, MedStaffParser>();
 
 builder.Services.AddCors(option =>
 {
