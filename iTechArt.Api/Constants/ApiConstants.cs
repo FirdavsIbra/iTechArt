@@ -13,5 +13,11 @@
         public const string importExcel = "import_xlsx";
 
         public const string importXml = "import_xml";
+
+        public const string IMPORTAIRPORTEXCEL = "import-airport-excel";
+
+        public const string IMPORTAIRPORTCSV = "import-airport-csv";
+
+        public const string IMPORTAIRPORTXML = "import-airport-xml";
     }
 }
