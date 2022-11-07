@@ -6,6 +6,8 @@ using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Service.Constants;
 using iTechArt.Service.DTOs;
+using iTechArt.Service.Helpers;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;
 using System.Globalization;
@@ -30,18 +32,16 @@ namespace iTechArt.Service.Parsers
 
             if (fileExtension == ".csv")
             {
-                IList<PupilForCreationDto> pupils = new List<PupilForCreationDto>();
-
                 using var fileStream = new MemoryStream();
 
                 await file.CopyToAsync(fileStream);
                 fileStream.Position = 0;
-                using (StreamReader csvReader = new StreamReader(fileStream))
+                using (TextReader csvReader = new StreamReader(fileStream))
                 {
                     using (var csv = new CsvReader(csvReader, CultureInfo.InvariantCulture))
                     {
                         csv.Context.RegisterClassMap<PupilMap>();
-                        var records = csv.GetRecords<PupilForCreationDto>();
+                        var records = csv.GetRecords<PupilForCreationDto>().ToArray();
                        
                         await _pupilRepository.AddRangeAsync(records);
                     }
@@ -134,24 +134,15 @@ namespace iTechArt.Service.Parsers
             }
         }
     }
-
-    public sealed class DateOnlyConverter : DefaultTypeConverter
-    {
-        public override object ConvertFromString(string text, IReaderRow row, MemberMapData memberMapData)
-        {
-            return new DateOnly(2000, 12, 12);
-        }
-    }
     internal sealed class PupilMap : ClassMap<PupilForCreationDto>
     {
-         
         public PupilMap()
         {
-            var tmpCOnverter = new DateOnlyConverter();
+            var tmpConverter = new DateOnlyHelper();
 
             Map(p => p.FirstName).Name("FirstName");
             Map(p => p.LastName).Name("LastName");
-            Map(p => p.DateOfBirth).Name("DateOfBirth").TypeConverter(tmpCOnverter);
+            Map(p => p.DateOfBirth).Name("DateOfBirth").TypeConverter(tmpConverter);
             Map(p => p.Gender).Name("Gender");
             Map(p => p.PhoneNumber).Name("PhoneNumber");
             Map(p => p.Address).Name("Address");

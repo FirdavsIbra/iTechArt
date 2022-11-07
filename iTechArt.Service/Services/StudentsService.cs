@@ -3,6 +3,7 @@ using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Service.Services
 {
@@ -19,6 +20,7 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Async method takes no parameters and returns serialized entities as file
         /// </summary>
+        [HttpGet()]
         public async Task<IStudent[]> ExportStudentsAsync()
         {
             return await _studentRepository.GetAllAsync();
@@ -31,7 +33,7 @@ namespace iTechArt.Service.Services
         {
             var fileExtension = Path.GetExtension(formFile.FileName);
 
-            if (fileExtension == ".xlsx")
+            if (fileExtension == ".xlsx" || fileExtension == ".xls")
             {
                 await ExcelImportAsync(formFile);
             }
@@ -45,23 +47,32 @@ namespace iTechArt.Service.Services
             }
             else
             {
-                throw new Exception("wrong file extention");
+                throw new Exception("wrong file extension");
             }
         }
 
+        /// <summary>
+        /// Parse student's file from xml
+        /// </summary>
         public async Task XmlImportAsync(IFormFile formFile)
         {
             await _studentParsers.XmlParseAsync(formFile);
         }
 
+        /// <summary>
+        /// Parse student's file from csv
+        /// </summary>
         public async Task CsvImportAsync(IFormFile formFile)
         {
             await _studentParsers.CsvParseAsync(formFile);
         }
 
+        /// <summary>
+        /// Parse student's file from excel
+        /// </summary>
         public async Task ExcelImportAsync(IFormFile formFile)
         {
-            await _studentParsers.XmlParseAsync(formFile);
+            await _studentParsers.ExcelParseAsync(formFile);
         }
     }
 }

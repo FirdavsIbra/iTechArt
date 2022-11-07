@@ -1,6 +1,7 @@
 ﻿using iTechArt.Api.Constants;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
+using iTechArt.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
@@ -22,17 +23,23 @@ namespace iTechArt.Api.Controllers
         /// Takes csv or xlsx file
         /// </summary>
         [HttpPost(ApiConstants.IMPORT)]
-        public async Task<IActionResult> Import(IFormFile file)
+        public async Task<ActionResult> ImportAsync(IFormFile file)
         {
-            var allowedTypes = FileConstants.Extensions;
-            if (file != null && allowedTypes.Contains(Path.GetExtension(file.FileName)))
+            if (file != null)
             {
-                await _studentsService.ImportStudentsAsync(file);
-                return Ok();
+                var fileExtension = Path.GetExtension(file.FileName);
+
+                if (FileConstants.Extensions.Contains(fileExtension))
+                {
+                    await _studentsService.ImportStudentsAsync(file);
+                    return Ok();
+                }
+
+                return BadRequest("Invalid file format!");
             }
             else
             {
-                return BadRequest("Invalid file type!");
+                return BadRequest("Invalid file format!");
             }
         }
 
@@ -49,7 +56,7 @@ namespace iTechArt.Api.Controllers
         /// Parse student's file from excel
         /// </summary>
         [HttpPost(ApiConstants.IMPORTEXCEL)]
-        public async Task<IActionResult> ImportExcelFileAsync(IFormFile file)
+        public async Task<ActionResult> ImportExcelFileAsync(IFormFile file)
         {
             if (file is not null)
             {
@@ -63,7 +70,7 @@ namespace iTechArt.Api.Controllers
         /// Parse student's file from csv
         /// </summary>
         [HttpPost(ApiConstants.IMPORTCSV)]
-        public async Task<IActionResult> ImportCsvFileAsync(IFormFile file)
+        public async Task<ActionResult> ImportCsvFileAsync(IFormFile file)
         {
             if (file is not null)
             {
@@ -77,7 +84,7 @@ namespace iTechArt.Api.Controllers
         /// Parse student's file from xml
         /// </summary>
         [HttpPost(ApiConstants.IMPORTXML)]
-        public async Task<IActionResult> ImportXmlFileAsync(IFormFile file)
+        public async Task<ActionResult> ImportXmlFileAsync(IFormFile file)
         {
             if (file is not null)
             {

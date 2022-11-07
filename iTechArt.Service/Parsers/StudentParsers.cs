@@ -1,9 +1,13 @@
-﻿using iTechArt.Domain.Enums;
+﻿using CsvHelper;
+using CsvHelper.Configuration;
+using iTechArt.Domain.Enums;
 using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Service.DTOs;
+using iTechArt.Service.Helpers;
 using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;
+using System.Globalization;
 using System.Xml;
 
 namespace iTechArt.Service.Parsers
@@ -19,9 +23,27 @@ namespace iTechArt.Service.Parsers
         /// <summary>
         /// Parse student's file from csv
         /// </summary>
-        public Task CsvParseAsync(IFormFile file)
+        public async Task CsvParseAsync(IFormFile file)
         {
-            throw new NotImplementedException();
+            var fileExtension = Path.GetExtension(file.FileName);
+
+            if (fileExtension == ".csv")
+            {
+                using var fileStream = new MemoryStream();
+
+                await file.CopyToAsync(fileStream);
+                fileStream.Position = 0;
+                using (TextReader csvReader = new StreamReader(fileStream))
+                {
+                    using (var csv = new CsvReader(csvReader, CultureInfo.InvariantCulture))
+                    {
+                        csv.Context.RegisterClassMap<StudentMap>();
+                        var records = csv.GetRecords<StudentsDTO>().ToArray();
+
+                        await _studentRepository.AddRangeAsync(records);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -101,6 +123,23 @@ namespace iTechArt.Service.Parsers
                 }
                 await _studentRepository.AddRangeAsync(students);
             }
+        }
+    }
+
+    internal sealed class StudentMap : ClassMap<StudentsDTO>
+    {
+        public StudentMap()
+        {
+            var tmpConverter = new DateOnlyHelper();
+
+            Map(s => s.FirstName).Name("FirstName");
+            Map(s => s.LastName).Name("LastName");
+            Map(s => s.Email).Name("Email");
+            Map(s => s.Password).Name("Password");
+            Map(s => s.Majority).Name("Majority");
+            Map(s => s.Gender).Name("Gender");
+            Map(s => s.DateOfBirth).Name("DateOfBirth").TypeConverter(tmpConverter);
+            Map(s => s.University).Name("University");
         }
     }
 }
