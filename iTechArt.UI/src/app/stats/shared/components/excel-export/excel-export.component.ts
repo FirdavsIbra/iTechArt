@@ -21,6 +21,7 @@ export class ExcelExportComponent implements OnInit {
   public fileName: string | undefined;
   public isFormValid = false;
   public isFormButtonDisabled = false;
+  public fileExtension: ExtensionsEnum | string | undefined;
 
   public exportForm = new FormGroup({
     file: new FormControl('', [Validators.required]),
@@ -34,7 +35,7 @@ export class ExcelExportComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.api = this.apiService.defineApiForUnitImport(this.unit);
+    this.api = this.apiService.defineApiForUnitImport(this.unit, this.fileExtension);
   }
 
   public onFileChange(event: any): void {
@@ -44,7 +45,10 @@ export class ExcelExportComponent implements OnInit {
       this.fileName = file.name;
       const fileExtension = this.contentTypeService.getFileExtension(
         this.fileName
-      );
+      ); //refactor
+
+      this.fileExtension = fileExtension;
+
       if (
         fileExtension === ExtensionsEnum.csv ||
         fileExtension === ExtensionsEnum.xls ||

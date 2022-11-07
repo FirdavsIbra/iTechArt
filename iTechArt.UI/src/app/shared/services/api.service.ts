@@ -2,12 +2,19 @@ import { Injectable } from '@angular/core';
 
 import { UnitsEnum } from '../enums/units.enum';
 import { APIS } from '../constants/APIS';
+import { ExtensionsEnum } from '../enums/extensions.enum';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  public defineApiForUnitImport(unit: UnitsEnum | undefined): string | undefined {
+  public defineApiForUnitImport(
+    unit: UnitsEnum | undefined,
+    extension: ExtensionsEnum | string | undefined
+  ): string | undefined {
+
+    console.log(extension) //delete
+
     switch (unit) {
       case UnitsEnum.airport:
         return APIS.airport.import;
