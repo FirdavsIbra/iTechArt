@@ -38,7 +38,7 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// Uploads excel file and saves in database
         /// </summary>
-        [HttpPost(ApiConstants.importExcel)]
+        [HttpPost(ApiConstants.IMPORTEXCEL)]
         public async Task<IActionResult> ImportExcel(IFormFile file)
         {
             if (file != null)
@@ -59,7 +59,7 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// Uploads csv file and saves in database
         /// </summary>
-        [HttpPost(ApiConstants.importCsv)]
+        [HttpPost(ApiConstants.IMPORTCSV)]
         public async Task<IActionResult> ImportCSV(IFormFile file)
         {
             if (file != null)
@@ -80,7 +80,7 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// Uploads xml file and saves in database
         /// </summary>
-        [HttpPost(ApiConstants.importXml)]
+        [HttpPost(ApiConstants.IMPORTXML)]
         public async Task<IActionResult> ImportXML(IFormFile file)
         {
             if (file != null)

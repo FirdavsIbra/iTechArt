@@ -13,12 +13,5 @@
         public const string IMPORTEXCEL = "import_xlsx";
 
         public const string IMPORTXML = "import_xml";
-
-        
-        public const string IMPORTEXCEL = "import-excel";
-
-        public const string IMPORTCSV = "import-csv";
-
-        public const string IMPORTXML = "import-xml";
     }
 }
