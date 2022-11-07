@@ -34,24 +34,17 @@ namespace iTechArt.Service.Parsers.PoliceParser
                     var rowCount = worksheet.Dimension.Rows;
                     for (int row = 2; row <= rowCount; row++)
                     {
-                        try
+                        var policeDto = new PoliceDto
                         {
-                            var policeDto = new PoliceDto
-                            {
-                                Name = worksheet.Cells[row, 1].Value.ToString().Trim(),
-                                Surname = worksheet.Cells[row, 2].Value.ToString().Trim(),
-                                Email = worksheet.Cells[row, 3].Value.ToString().Trim(),
-                                Gender = (Gender)Convert.ToByte(worksheet.Cells[row, 4].Value),
-                                Address = worksheet.Cells[row, 5].Value.ToString().Trim(),
-                                JobTitle = worksheet.Cells[row, 6].Value.ToString().Trim(),
-                                Salary = Convert.ToDouble(worksheet.Cells[row, 7].Value)
-                            };
-                            polices.Add(policeDto);
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine("Exception occured with a message: " + ex.Message.ToString());
-                        }
+                            Name = worksheet.Cells[row, 1].Value.ToString().Trim(),
+                            Surname = worksheet.Cells[row, 2].Value.ToString().Trim(),
+                            Email = worksheet.Cells[row, 3].Value.ToString().Trim(),
+                            Gender = Enum.Parse<Gender>(worksheet.Cells[row, 4].Value.ToString()),
+                            Address = worksheet.Cells[row, 5].Value.ToString().Trim(),
+                            JobTitle = worksheet.Cells[row, 6].Value.ToString().Trim(),
+                            Salary = Convert.ToDouble(worksheet.Cells[row, 7].Value)
+                        };
+                        polices.Add(policeDto);
                     }
                     await _policeRepository.AddRangeAsync(polices.ToArray());
                 }

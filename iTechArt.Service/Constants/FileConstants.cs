@@ -17,6 +17,13 @@
         /// </summary>
         public static readonly string[] csvExtensions = { ".csv" };
 
+        /// <summary>
+        /// Constant extensions for file
+        /// </summary>
+        public static string xlsxExt = ".xlsx";
+        public static string csvExt = ".csv";
+        public static string xmlExt = ".xml";
+
 
         /// <summary>
         /// xml extensions
