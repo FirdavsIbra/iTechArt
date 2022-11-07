@@ -1,6 +1,6 @@
 ﻿using iTechArt.Domain.Enums;
+using iTechArt.Domain.Helpers;
 using iTechArt.Domain.ModelInterfaces;
-using iTechArt.Service.Parsers;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
@@ -46,7 +46,7 @@ namespace iTechArt.Service.DTOs
         /// <summary>
         /// gets && internal sets Date of birth of a medStaff
         /// </summary>
-        //[JsonConverter(typeof(DateFormatConverter), "yyyy-MM-dd")]
+        [JsonConverter(typeof(DateOnlyJsonConverter))]
         public DateOnly DateOfBirth { get; internal set; }
 
         /// <summary>

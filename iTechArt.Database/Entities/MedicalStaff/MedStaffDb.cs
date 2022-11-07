@@ -1,5 +1,7 @@
 ﻿using iTechArt.Domain.Enums;
+using iTechArt.Domain.Helpers;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace iTechArt.Database.Entities.MedicalStaff
 {
@@ -43,6 +45,7 @@ namespace iTechArt.Database.Entities.MedicalStaff
         /// <summary>
         /// gets && sets Date of birth of a medStaff
         /// </summary>
+        [JsonConverter(typeof(DateOnlyJsonConverter))]
         public DateOnly DateOfBirth { get; set; }
 
         /// <summary>
