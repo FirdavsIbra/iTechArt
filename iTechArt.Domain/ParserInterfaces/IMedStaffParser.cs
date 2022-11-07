@@ -7,16 +7,16 @@ namespace iTechArt.Domain.ParserInterfaces
         /// <summary>
         /// Parse excel file file 
         /// </summary>
-        Task ParseExcel(IFormFile file);
+        Task ParseExcelAsync(IFormFile file);
 
         /// <summary>
         /// Parse CSV file
         /// </summary>
-        Task ParseCSV(IFormFile file);
+        Task ParseCSVAsync(IFormFile file);
 
         /// <summary>
         /// Parse XML file
         /// </summary>
-        Task ParseXML(IFormFile file);
+        Task ParseXMLAsync(IFormFile file);
     }
 }
