@@ -1,14 +1,8 @@
-﻿using iTechArt.Domain.Enums;
-using iTechArt.Domain.ModelInterfaces;
+﻿using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
-using iTechArt.Service.DTOs;
-using iTechArt.Service.Helpers;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using OfficeOpenXml;
-using System.Xml;
 
 namespace iTechArt.Service.Services
 {
@@ -29,6 +23,57 @@ namespace iTechArt.Service.Services
         public async Task<IMedStaff[]> ExportMedStaffFile()
         {
             return await _medStaffRepository.GetAllAsync();
+        }
+
+        /// <summary>
+        /// Parse iformfile into IMedStaff interface
+        /// </summary>
+        public async Task CSVParse(IFormFile file)
+        {
+            var fileExtension = Path.GetExtension(file.FileName);
+
+            if (fileExtension == ".csv")
+            {
+                await _medStaffParser.ParseCSV(file);
+            }
+            else
+            {
+                throw new ArgumentException("Invalid file format");
+            }
+        }
+
+        /// <summary>
+        /// Parse iformfile into IMedStaff interface
+        /// </summary>
+        public async Task ExcelParse(IFormFile file)
+        {
+            var fileExtension = Path.GetExtension(file.FileName);
+
+            if (fileExtension == ".xlsx" || fileExtension == ".xls")
+            {
+                await _medStaffParser.ParseExcel(file);
+            }
+            else
+            {
+                throw new ArgumentException("Invalid file format");
+            }
+        }
+
+        /// <summary>
+        /// Parse iformfile into IMedStaff interface
+        /// </summary>
+        public async Task XMLParse(IFormFile file)
+        {
+            var fileExtension = Path.GetExtension(file.FileName);
+
+            if (fileExtension == ".xml")
+            {
+                await _medStaffParser.ParseXML(file);
+            }
+            else
+            {
+                throw new ArgumentException("Invalid file format");
+            }
         }
 
         /// <summary>
