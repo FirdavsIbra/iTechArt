@@ -1,7 +1,6 @@
 ﻿using iTechArt.Api.Constants;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
-using iTechArt.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
@@ -49,7 +48,7 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// Parse student's file from excel
         /// </summary>
-        [HttpPost(ApiConstants.IMPORTSTUDENTEXCEL)]
+        [HttpPost(ApiConstants.IMPORTEXCEL)]
         public async Task<IActionResult> ImportExcelFileAsync(IFormFile file)
         {
             if (file is not null)
@@ -63,7 +62,7 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// Parse student's file from csv
         /// </summary>
-        [HttpPost(ApiConstants.IMPORTSTUDENTCSV)]
+        [HttpPost(ApiConstants.IMPORTCSV)]
         public async Task<IActionResult> ImportCsvFileAsync(IFormFile file)
         {
             if (file is not null)
@@ -77,7 +76,7 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// Parse student's file from xml
         /// </summary>
-        [HttpPost(ApiConstants.IMPORTSTUDENTXML)]
+        [HttpPost(ApiConstants.IMPORTXML)]
         public async Task<IActionResult> ImportXmlFileAsync(IFormFile file)
         {
             if (file is not null)

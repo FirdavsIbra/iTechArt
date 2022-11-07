@@ -1,5 +1,6 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
+using CsvHelper.TypeConversion;
 using iTechArt.Domain.Enums;
 using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
@@ -34,35 +35,17 @@ namespace iTechArt.Service.Parsers
                 using var fileStream = new MemoryStream();
 
                 await file.CopyToAsync(fileStream);
-
+                fileStream.Position = 0;
                 using (StreamReader csvReader = new StreamReader(fileStream))
                 {
                     using (var csv = new CsvReader(csvReader, CultureInfo.InvariantCulture))
                     {
                         csv.Context.RegisterClassMap<PupilMap>();
                         var records = csv.GetRecords<PupilForCreationDto>();
- 
-                        foreach (var record in records)
-                        {
-                            PupilForCreationDto pupil = new PupilForCreationDto
-                            {
-                                FirstName = record.FirstName.ToString().Trim(),
-                                LastName = record.LastName.ToString().Trim(),
-                                DateOfBirth = DateOnly.Parse(record.DateOfBirth.ToString().Trim()),
-                                Gender = Enum.Parse<Gender>(record.Gender.ToString().Trim()),
-                                PhoneNumber = record.PhoneNumber.ToString().Trim(),
-                                Address = record.Address.ToString().Trim(),
-                                City = record.City.ToString().Trim(),
-                                SchoolName = record.SchoolName.ToString().Trim(),
-                                Grade = Byte.Parse(record.Grade.ToString().Trim()),
-                                CourseLanguage = Enum.Parse<CourseLanguage>(record.CourseLanguage.ToString().Trim()),
-                                Shift = Enum.Parse<Shift>(record.Shift.ToString().Trim())
-                            };
-                            pupils.Add(pupil);
-                        }
+                       
+                        await _pupilRepository.AddRangeAsync(records);
                     }
                 }
-                await _pupilRepository.AddRangeAsync(pupils);
             }
         }
 
@@ -152,13 +135,23 @@ namespace iTechArt.Service.Parsers
         }
     }
 
+    public sealed class DateOnlyConverter : DefaultTypeConverter
+    {
+        public override object ConvertFromString(string text, IReaderRow row, MemberMapData memberMapData)
+        {
+            return new DateOnly(2000, 12, 12);
+        }
+    }
     internal sealed class PupilMap : ClassMap<PupilForCreationDto>
     {
+         
         public PupilMap()
         {
+            var tmpCOnverter = new DateOnlyConverter();
+
             Map(p => p.FirstName).Name("FirstName");
             Map(p => p.LastName).Name("LastName");
-            Map(p => p.DateOfBirth).Name("DateOfBirth");
+            Map(p => p.DateOfBirth).Name("DateOfBirth").TypeConverter(tmpCOnverter);
             Map(p => p.Gender).Name("Gender");
             Map(p => p.PhoneNumber).Name("PhoneNumber");
             Map(p => p.Address).Name("Address");

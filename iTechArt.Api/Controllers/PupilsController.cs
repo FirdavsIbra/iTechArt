@@ -60,7 +60,7 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// Parse pupil's file from excel
         /// </summary>
-        [HttpPost(ApiConstants.IMPORTPUPILEXCEL)]
+        [HttpPost(ApiConstants.IMPORTEXCEL)]
         public async Task<ActionResult> ImportExcelFileAsync(IFormFile file)
         {
             if (file is not null)
@@ -74,7 +74,7 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// Parse pupil's file from csv
         /// </summary>
-        [HttpPost(ApiConstants.IMPORTPUPILCSV)]
+        [HttpPost(ApiConstants.IMPORTCSV)]
         public async Task<ActionResult> ImportCsvFileAsync(IFormFile file)
         {
             if (file is not null)
@@ -88,7 +88,7 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// Parse pupil's file from xml
         /// </summary>
-        [HttpPost(ApiConstants.IMPORTPUPILXML)]
+        [HttpPost(ApiConstants.IMPORTXML)]
         public async Task<ActionResult> ImportXmlFileAsync(IFormFile file)
         {
             if (file is not null)
