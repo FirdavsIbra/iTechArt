@@ -1,4 +1,6 @@
 ﻿using iTechArt.Domain.Enums;
+using iTechArt.Domain.Helpers;
+using System.Text.Json.Serialization;
 
 namespace iTechArt.Domain.ModelInterfaces
 {
@@ -22,7 +24,8 @@ namespace iTechArt.Domain.ModelInterfaces
         /// <summary>
         /// Gets birthdate of pupil
         /// </summary>
-        public DateTime DateOfBirth { get; }
+        [JsonConverter(typeof(DateOnlyJsonConverter))]
+        public DateOnly DateOfBirth { get; }
 
         /// <summary>
         /// Gets gender of pupil

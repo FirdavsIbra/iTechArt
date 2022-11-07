@@ -1,5 +1,7 @@
 ﻿using iTechArt.Domain.Enums;
+using iTechArt.Domain.Helpers;
 using iTechArt.Domain.ModelInterfaces;
+using System.Text.Json.Serialization;
 
 namespace iTechArt.Repository.BusinessModels
 {
@@ -23,7 +25,8 @@ namespace iTechArt.Repository.BusinessModels
         /// <summary>
         /// Gets or sets birthdate of pupil
         /// </summary>
-        public DateTime DateOfBirth { get; internal set; }
+        [JsonConverter(typeof(DateOnlyJsonConverter))]
+        public DateOnly DateOfBirth { get; internal set; }
 
         /// <summary>
         /// Gets or sets gender of pupil

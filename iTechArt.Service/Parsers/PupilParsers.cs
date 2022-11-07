@@ -1,7 +1,9 @@
 ﻿using CsvHelper;
+using CsvHelper.Configuration;
 using iTechArt.Domain.Enums;
 using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
+using iTechArt.Service.Constants;
 using iTechArt.Service.DTOs;
 using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;
@@ -37,14 +39,16 @@ namespace iTechArt.Service.Parsers
                 {
                     using (var csv = new CsvReader(csvReader, CultureInfo.InvariantCulture))
                     {
+                        csv.Context.RegisterClassMap<PupilMap>();
                         var records = csv.GetRecords<PupilForCreationDto>();
+ 
                         foreach (var record in records)
                         {
                             PupilForCreationDto pupil = new PupilForCreationDto
                             {
                                 FirstName = record.FirstName.ToString().Trim(),
                                 LastName = record.LastName.ToString().Trim(),
-                                DateOfBirth = Convert.ToDateTime(record.DateOfBirth.ToString().Trim()),
+                                DateOfBirth = DateOnly.Parse(record.DateOfBirth.ToString().Trim()),
                                 Gender = Enum.Parse<Gender>(record.Gender.ToString().Trim()),
                                 PhoneNumber = record.PhoneNumber.ToString().Trim(),
                                 Address = record.Address.ToString().Trim(),
@@ -85,17 +89,17 @@ namespace iTechArt.Service.Parsers
                     {
                         PupilForCreationDto pupil = new PupilForCreationDto
                         {
-                            FirstName = worksheet.Cells[row, 1].Value.ToString().Trim(),
-                            LastName = worksheet.Cells[row, 2].Value.ToString().Trim(),
-                            DateOfBirth = Convert.ToDateTime(worksheet.Cells[row, 3].Value),
-                            Gender = (Gender)Convert.ToByte(worksheet.Cells[row, 4].Value),
-                            PhoneNumber = worksheet.Cells[row, 5].Value.ToString().Trim(),
-                            Address = worksheet.Cells[row, 6].Value.ToString().Trim(),
-                            City = worksheet.Cells[row, 7].Value.ToString().Trim(),
-                            SchoolName = worksheet.Cells[row, 8].Value.ToString().Trim(),
-                            Grade = Convert.ToByte(worksheet.Cells[row, 9].Value),
-                            CourseLanguage = (CourseLanguage)Convert.ToByte(worksheet.Cells[row, 10].Value),
-                            Shift = (Shift)Convert.ToByte(worksheet.Cells[row, 11].Value)
+                            FirstName = worksheet.Cells[row, PupilIndexConstants.FIRSTNAME].Value.ToString().Trim(),
+                            LastName = worksheet.Cells[row, PupilIndexConstants.LASTNAME].Value.ToString().Trim(),
+                            DateOfBirth = DateOnly.Parse(worksheet.Cells[row, PupilIndexConstants.DATEOFBIRTH].Value.ToString().Trim()),
+                            Gender = Enum.Parse<Gender>(worksheet.Cells[row, PupilIndexConstants.GENDER].Value.ToString().Trim()),
+                            PhoneNumber = worksheet.Cells[row, PupilIndexConstants.PHONENUMBER].Value.ToString().Trim(),
+                            Address = worksheet.Cells[row, PupilIndexConstants.ADDRESS].Value.ToString().Trim(),
+                            City = worksheet.Cells[row, PupilIndexConstants.CITY].Value.ToString().Trim(),
+                            SchoolName = worksheet.Cells[row, PupilIndexConstants.SCHOOLNAME].Value.ToString().Trim(),
+                            Grade = Convert.ToByte(worksheet.Cells[row, PupilIndexConstants.GRADE].Value),
+                            CourseLanguage = Enum.Parse<CourseLanguage>(worksheet.Cells[row, PupilIndexConstants.COURSELANGUAGE].Value.ToString().Trim()),
+                            Shift = Enum.Parse<Shift>(worksheet.Cells[row, PupilIndexConstants.SHIFT].Value.ToString().Trim())
                         };
                         pupils.Add(pupil);
                     }
@@ -118,32 +122,53 @@ namespace iTechArt.Service.Parsers
 
                 XmlDocument xmlDocument = new XmlDocument();
                 xmlDocument.Load(fileStream);
-
-                var nodes = xmlDocument.SelectNodes("/pupils/pupil");
-
-                IList<PupilForCreationDto> pupils = new List<PupilForCreationDto>(nodes.Count);
-
-                for (int i = 0; i < nodes.Count; i++)
+                XmlReader xmlReader = XmlReader.Create(fileStream);
+                while (xmlReader.Read())
                 {
-                    PupilForCreationDto pupil = new PupilForCreationDto
+                    var nodes = xmlDocument.SelectNodes("/pupils/pupil");
+
+                    IList<PupilForCreationDto> pupils = new List<PupilForCreationDto>(nodes.Count);
+
+                    for (int node = 0; node < nodes.Count; node++)
                     {
-                        FirstName = nodes[i]["FirstName"].InnerText,
-                        LastName = nodes[i]["LastName"].InnerText,
-                        DateOfBirth = Convert.ToDateTime(nodes[i]["DateOfBirth"].InnerText),
-                        Gender = Enum.Parse<Gender>(nodes[i]["Gender"].InnerText),
-                        PhoneNumber = nodes[i]["PhoneNumber"].InnerText,
-                        Address = nodes[i]["Address"].InnerText,
-                        City = nodes[i]["City"].InnerText,
-                        SchoolName = nodes[i]["SchoolName"].InnerText,
-                        Grade = Convert.ToByte(nodes[i]["Grade"].InnerText),
-                        CourseLanguage = Enum.Parse<CourseLanguage>(nodes[i]["CourseLanguage"].InnerText),
-                        Shift = Enum.Parse<Shift>(nodes[i]["Shift"].InnerText)
-                    };
-                    pupils.Add(pupil);
+                        PupilForCreationDto pupil = new PupilForCreationDto
+                        {
+                            FirstName = nodes[node]["FirstName"].InnerText,
+                            LastName = nodes[node]["LastName"].InnerText,
+                            DateOfBirth = DateOnly.Parse(nodes[node]["DateOfBirth"].InnerText),
+                            Gender = Enum.Parse<Gender>(nodes[node]["Gender"].InnerText),
+                            PhoneNumber = nodes[node]["PhoneNumber"].InnerText,
+                            Address = nodes[node]["Address"].InnerText,
+                            City = nodes[node]["City"].InnerText,
+                            SchoolName = nodes[node]["SchoolName"].InnerText,
+                            Grade = Convert.ToByte(nodes[node]["Grade"].InnerText),
+                            CourseLanguage = Enum.Parse<CourseLanguage>(nodes[node]["CourseLanguage"].InnerText),
+                            Shift = Enum.Parse<Shift>(nodes[node]["Shift"].InnerText)
+                        };
+                        pupils.Add(pupil);
+                    }
+                    await _pupilRepository.AddRangeAsync(pupils);
                 }
-                await _pupilRepository.AddRangeAsync(pupils);
+                xmlReader.Close();
             }
-            
+        }
+    }
+
+    internal sealed class PupilMap : ClassMap<PupilForCreationDto>
+    {
+        public PupilMap()
+        {
+            Map(p => p.FirstName).Name("FirstName");
+            Map(p => p.LastName).Name("LastName");
+            Map(p => p.DateOfBirth).Name("DateOfBirth");
+            Map(p => p.Gender).Name("Gender");
+            Map(p => p.PhoneNumber).Name("PhoneNumber");
+            Map(p => p.Address).Name("Address");
+            Map(p => p.City).Name("City");
+            Map(p => p.SchoolName).Name("SchoolName");
+            Map(p => p.Grade).Name("Grade");
+            Map(p => p.CourseLanguage).Name("CourseLanguage");
+            Map(p => p.Shift).Name("Shift");
         }
     }
 }

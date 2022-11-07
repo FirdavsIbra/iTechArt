@@ -19,5 +19,11 @@
         public const string IMPORTAIRPORTCSV = "import-airport-csv";
 
         public const string IMPORTAIRPORTXML = "import-airport-xml";
+
+        public const string IMPORTPUPILEXCEL = "import-pupil-excel";
+        
+        public const string IMPORTPUPILCSV = "import-pupil-csv";
+        
+        public const string IMPORTPUPILXML = "import-pupil-xml";
     }
 }
