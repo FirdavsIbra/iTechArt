@@ -35,9 +35,32 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// </summary>
         public Task<IPolice[]> GetAllPolice();
 
+
+        ////////////////////////////////////////////////////////////////////////
+        /// OLD API FUNCTIONS
+        ///////////////////////////////////////////////////////////////////////
         /// <summary>
-        /// Delete Police entity from database
+        /// function to import data to the database
         /// </summary>
-        public Task DeletePolice(long id);
+        [Obsolete]
+        public Task ImportPoliceData(IFormFile formFile);
+
+        /// <summary>
+        /// Parse and saves XLSX file into database
+        /// </summary>
+        [Obsolete]
+        public Task ReadExcelAsync(IFormFile file);
+
+        /// <summary>
+        /// Parse and saves XML file into database
+        /// </summary>
+        [Obsolete]
+        public Task ReadXMLAsync(IFormFile file);
+
+        /// <summary>
+        /// Parse and saves CSV file into database
+        /// </summary>
+        [Obsolete]
+        public Task ReadCSVAsync(IFormFile file);
     }
 }
