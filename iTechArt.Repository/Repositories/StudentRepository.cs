@@ -77,5 +77,15 @@ namespace iTechArt.Repository.Repositories
         {
             return await _dbContext.Students.CountAsync();
         }
+
+        /// <summary>
+        /// Add student array
+        /// </summary>
+        public async Task AddRangeAsync(IEnumerable<IStudent> pupils)
+        {
+            await _dbContext.Students.AddRangeAsync(pupils.Select(_mapper.Map<StudentDb>));
+
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

@@ -42,7 +42,7 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// Get all pupils
         /// </summary>
-        [HttpGet("export")]
+        [HttpGet()]
         public async Task<ActionResult<IPupil[]>> GetAllAsync()
         {
             return Ok(await _pupilService.GetAllAsync());

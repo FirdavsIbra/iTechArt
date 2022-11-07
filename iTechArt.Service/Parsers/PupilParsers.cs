@@ -23,7 +23,7 @@ namespace iTechArt.Service.Parsers
         /// <summary>
         /// Parse pupil's file from csv
         /// </summary>
-        public async Task CsvParser(IFormFile file)
+        public async Task CsvParseAsync(IFormFile file)
         {
             var fileExtension = Path.GetExtension(file.FileName);
 
@@ -69,7 +69,7 @@ namespace iTechArt.Service.Parsers
         /// <summary>
         /// Parse pupil's file from excel
         /// </summary>
-        public async Task ExcelParser(IFormFile file)
+        public async Task ExcelParseAsync(IFormFile file)
         {
             var fileExtension = Path.GetExtension(file.FileName);
 
@@ -111,7 +111,7 @@ namespace iTechArt.Service.Parsers
         /// <summary>
         /// Parse pupil's file from xml
         /// </summary>
-        public async Task XmlParser(IFormFile file)
+        public async Task XmlParseAsync(IFormFile file)
         {
             var fileExtension = Path.GetExtension(file.FileName);
             if (fileExtension == ".xml")

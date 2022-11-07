@@ -1,5 +1,7 @@
 ﻿using iTechArt.Api.Constants;
+using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
+using iTechArt.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
@@ -18,10 +20,8 @@ namespace iTechArt.Api.Controllers
         }
 
         /// <summary>
-        /// route: api/students/import. Takes csv or xlsx file and injects into IStudentService.ImportStudentAsync(IFormFile) 
+        /// Takes csv or xlsx file
         /// </summary>
-        /// <param name="file"></param>
-        /// <returns>if successful returns Status200OK, otherwise Status400BadRequest</returns>
         [HttpPost(ApiConstants.IMPORT)]
         public async Task<IActionResult> Import(IFormFile file)
         {
@@ -38,12 +38,54 @@ namespace iTechArt.Api.Controllers
         }
 
         /// <summary>
-        /// route: api/students/export. Returns Status200OK
+        /// Get all students
         /// </summary>
-        [HttpGet(ApiConstants.EXPORT)]
-        public async Task<IActionResult> Export()
+        [HttpGet()]
+        public async Task<ActionResult<IStudent[]>> GetAllAsync()
         {
             return Ok(await _studentsService.ExportStudentsAsync());
+        }
+
+        /// <summary>
+        /// Parse student's file from excel
+        /// </summary>
+        [HttpPost(ApiConstants.IMPORTSTUDENTEXCEL)]
+        public async Task<IActionResult> ImportExcelFileAsync(IFormFile file)
+        {
+            if (file is not null)
+            {
+                await _studentsService.ExcelImportAsync(file);
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+        /// <summary>
+        /// Parse student's file from csv
+        /// </summary>
+        [HttpPost(ApiConstants.IMPORTSTUDENTCSV)]
+        public async Task<IActionResult> ImportCsvFileAsync(IFormFile file)
+        {
+            if (file is not null)
+            {
+                await _studentsService.CsvImportAsync(file);
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+        /// <summary>
+        /// Parse student's file from xml
+        /// </summary>
+        [HttpPost(ApiConstants.IMPORTSTUDENTXML)]
+        public async Task<IActionResult> ImportXmlFileAsync(IFormFile file)
+        {
+            if (file is not null)
+            {
+                await _studentsService.XmlImportAsync(file);
+                return Ok();
+            }
+            return BadRequest();
         }
     }
 }

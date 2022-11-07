@@ -1,5 +1,7 @@
 ﻿using iTechArt.Domain.Enums;
+using iTechArt.Domain.Helpers;
 using iTechArt.Domain.ModelInterfaces;
+using System.Text.Json.Serialization;
 using System.Xml.Serialization;
 
 namespace iTechArt.Service.DTOs
@@ -45,7 +47,8 @@ namespace iTechArt.Service.DTOs
         /// <summary>
         /// Gets or sets birth date of student
         /// </summary>
-        public DateTime DateOfBirth { get; set; }
+        [JsonConverter(typeof(DateOnlyJsonConverter))]
+        public DateOnly DateOfBirth { get; set; }
 
         /// <summary>
         /// Gets or sets name of university of student

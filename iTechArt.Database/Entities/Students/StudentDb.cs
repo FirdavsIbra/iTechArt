@@ -1,4 +1,6 @@
 ﻿using iTechArt.Domain.Enums;
+using iTechArt.Domain.Helpers;
+using System.Text.Json.Serialization;
 
 namespace iTechArt.Database.Entities.Students
 {
@@ -43,7 +45,8 @@ namespace iTechArt.Database.Entities.Students
         /// <summary>
         /// Gets/Sets Birthday of study
         /// </summary>
-        public DateTime DateOfBirth { get; set; }
+        [JsonConverter(typeof(DateOnlyJsonConverter))]
+        public DateOnly DateOfBirth { get; set; }
 
         /// <summary>
         /// Gets/Sets String value of University

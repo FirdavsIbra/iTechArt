@@ -2,20 +2,20 @@
 
 namespace iTechArt.Domain.ParserInterfaces
 {
-    public interface IPupilParsers
+    public interface IStudentParsers
     {
         /// <summary>
-        /// Parse pupil's file from excel
+        /// Parse student's file from excel
         /// </summary>
         public Task ExcelParseAsync(IFormFile file);
 
         /// <summary>
-        /// Parse pupil's file from csv
+        /// Parse student's file from csv
         /// </summary>
         public Task CsvParseAsync(IFormFile file);
 
         /// <summary>
-        /// Parse pupil's file from xml
+        /// Parse student's file from xml
         /// </summary>
         public Task XmlParseAsync(IFormFile file);
     }

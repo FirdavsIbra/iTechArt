@@ -74,7 +74,7 @@ namespace iTechArt.Service.Services
         /// </summary>
         public async Task ImportExcelAsync(IFormFile file)
         {
-            await _pupilParsers.ExcelParser(file);
+            await _pupilParsers.ExcelParseAsync(file);
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace iTechArt.Service.Services
         /// </summary>
         public async Task ImportCsvAsync(IFormFile file)
         {
-            await _pupilParsers.CsvParser(file);
+            await _pupilParsers.CsvParseAsync(file);
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace iTechArt.Service.Services
         /// </summary>
         public async Task ImportXmlAsync(IFormFile file)
         {
-            await _pupilParsers.XmlParser(file);
+            await _pupilParsers.XmlParseAsync(file);
         }
     }
 }

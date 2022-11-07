@@ -37,6 +37,7 @@ builder.Services.AddScoped<ICsvParser, CsvParser>();
 builder.Services.AddScoped<IMedStaffParser, MedStaffParser>();
 builder.Services.AddScoped<IAirportParsers, AirportParser>();
 builder.Services.AddScoped<IPupilParsers, PupilParsers>();
+builder.Services.AddScoped<IStudentParsers, StudentParsers>();
 
 builder.Services.AddCors(option =>
 {

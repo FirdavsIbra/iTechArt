@@ -33,5 +33,11 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// Get count of students
         /// </summary>
         public Task<int> GetCountOfStudentsAsync();
+
+        /// <summary>
+        /// Add student array
+        /// </summary>
+        public Task AddRangeAsync(IEnumerable<IStudent> pupils);
+
     }
 }
