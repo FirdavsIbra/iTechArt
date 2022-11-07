@@ -8,10 +8,10 @@
 
         public const string GETCOUNTOFGROCERY = "getCountOfGrocery";
 
-        public const string importCsv = "import_csv";
+        public const string IMPORTCSV = "import_csv";
 
-        public const string importExcel = "import_xlsx";
+        public const string IMPORTEXCEL = "import_xlsx";
 
-        public const string importXml = "import_xml";
+        public const string IMPORTXML = "import_xml";
     }
 }

@@ -7,9 +7,17 @@ namespace iTechArt.Domain.ServiceInterfaces
     public interface IGroceryService
     {
         /// <summary>
-        /// Import data for grocery
+        /// Import Csv format data for grocery
         /// </summary>
-        public Task ImportGrocery();
+        public Task ImportCSVGrocery(IFormFile formFile);
+        /// <summary>
+        /// Import Excel format data for grocery
+        /// </summary>
+        public Task ImportExcelGrocery(IFormFile formFile);
+        /// <summary>
+        /// Import Xml format data for grocery
+        /// </summary>
+        public Task ImportXMLGrocery(IFormFile formFile);
 
         /// <summary>
         /// Export data for grocery
@@ -19,19 +27,10 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// Count of grocery not implemented yet
         /// </summary>
-        public int GetCountOfGrocery();
+        public ValueTask <int> GetCountOfGrocery();
 
         /// <summary>
         /// taking items from Xlsx file and record to db
         /// </summary>
-        public Task<IServiceResult> RecordXlsxToDatabase(IFormFile formFile);
-        /// <summary>
-        /// taking items from csv file and record to db
-        /// </summary>
-        public Task<IServiceResult> RecordCsvToDatabase(IFormFile formFile);
-        /// <summary>
-        /// taking items from xml file and record to db
-        /// </summary>
-        public Task<IServiceResult> RecordXmlToDatabase(IFormFile formFile);
     }
 }

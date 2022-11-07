@@ -21,7 +21,7 @@ namespace iTechArt.Api.Controllers
         /// route: api/police/import. Takes xlsx
         /// Uploads xslx data about Police and saves in database
         /// </summary>
-        [HttpPost(ApiConstants.importExcel)]
+        [HttpPost(ApiConstants.IMPORTEXCEL)]
         public async Task<IActionResult> ImportExcel(IFormFile file)
         {
             string fileExtension = Path.GetExtension(file.FileName);
@@ -41,7 +41,7 @@ namespace iTechArt.Api.Controllers
         /// route: api/police/import. Takes xml
         /// Uploads xml data about Police and saves in database
         /// </summary>
-        [HttpPost(ApiConstants.importXml)]
+        [HttpPost(ApiConstants.IMPORTXML)]
         public async Task<IActionResult> ImportXml(IFormFile file)
         {
             string fileExtension = Path.GetExtension(file.FileName);
@@ -61,7 +61,7 @@ namespace iTechArt.Api.Controllers
         /// route: api/police/import. Takes csv
         /// Uploads csv data about Police and saves in database
         /// </summary>
-        [HttpPost(ApiConstants.importCsv)]
+        [HttpPost(ApiConstants.IMPORTCSV)]
         public async Task<IActionResult> ImportCsv(IFormFile file)
         {
             string fileExtension = Path.GetExtension(file.FileName);

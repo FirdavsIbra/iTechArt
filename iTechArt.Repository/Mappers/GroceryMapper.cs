@@ -89,10 +89,5 @@ namespace iTechArt.Repository.Mappers
                 Salary = salary,
             };      
         }
-
-        public static void MapBusinessModelToDbModel()
-        {
-           
-        }
     }
 }
