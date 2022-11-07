@@ -120,36 +120,34 @@ namespace iTechArt.Service.Parsers
 
                 await file.CopyToAsync(fileStream);
 
+                fileStream.Position = 0;
+
                 XmlDocument xmlDocument = new XmlDocument();
                 xmlDocument.Load(fileStream);
-                XmlReader xmlReader = XmlReader.Create(fileStream);
-                while (xmlReader.Read())
+
+                var nodes = xmlDocument.SelectNodes("/pupils/pupil");
+
+                IList<PupilForCreationDto> pupils = new List<PupilForCreationDto>(nodes.Count);
+
+                for (int node = 0; node < nodes.Count; node++)
                 {
-                    var nodes = xmlDocument.SelectNodes("/pupils/pupil");
-
-                    IList<PupilForCreationDto> pupils = new List<PupilForCreationDto>(nodes.Count);
-
-                    for (int node = 0; node < nodes.Count; node++)
+                    PupilForCreationDto pupil = new PupilForCreationDto
                     {
-                        PupilForCreationDto pupil = new PupilForCreationDto
-                        {
-                            FirstName = nodes[node]["FirstName"].InnerText,
-                            LastName = nodes[node]["LastName"].InnerText,
-                            DateOfBirth = DateOnly.Parse(nodes[node]["DateOfBirth"].InnerText),
-                            Gender = Enum.Parse<Gender>(nodes[node]["Gender"].InnerText),
-                            PhoneNumber = nodes[node]["PhoneNumber"].InnerText,
-                            Address = nodes[node]["Address"].InnerText,
-                            City = nodes[node]["City"].InnerText,
-                            SchoolName = nodes[node]["SchoolName"].InnerText,
-                            Grade = Convert.ToByte(nodes[node]["Grade"].InnerText),
-                            CourseLanguage = Enum.Parse<CourseLanguage>(nodes[node]["CourseLanguage"].InnerText),
-                            Shift = Enum.Parse<Shift>(nodes[node]["Shift"].InnerText)
-                        };
-                        pupils.Add(pupil);
-                    }
-                    await _pupilRepository.AddRangeAsync(pupils);
+                        FirstName = nodes[node]["FirstName"].InnerText,
+                        LastName = nodes[node]["LastName"].InnerText,
+                        DateOfBirth = DateOnly.Parse(nodes[node]["DateOfBirth"].InnerText),
+                        Gender = Enum.Parse<Gender>(nodes[node]["Gender"].InnerText),
+                        PhoneNumber = nodes[node]["PhoneNumber"].InnerText,
+                        Address = nodes[node]["Address"].InnerText,
+                        City = nodes[node]["City"].InnerText,
+                        SchoolName = nodes[node]["SchoolName"].InnerText,
+                        Grade = Convert.ToByte(nodes[node]["Grade"].InnerText),
+                        CourseLanguage = Enum.Parse<CourseLanguage>(nodes[node]["CourseLanguage"].InnerText),
+                        Shift = Enum.Parse<Shift>(nodes[node]["Shift"].InnerText)
+                    };
+                    pupils.Add(pupil);
                 }
-                xmlReader.Close();
+                await _pupilRepository.AddRangeAsync(pupils);
             }
         }
     }
