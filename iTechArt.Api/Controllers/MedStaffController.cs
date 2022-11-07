@@ -17,7 +17,7 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// Uploads file and saves in database
         /// </summary>
-        [HttpPost(ApiConstants.IMPORT)]
+        [HttpPost(ApiConstants.IMPORT), Obsolete]
         public async Task<IActionResult> Import(IFormFile file)
         {
             if (file != null)
@@ -26,7 +26,7 @@ namespace iTechArt.Api.Controllers
 
                 if (FileConstants.Extensions.Contains(fileExtension))
                 {
-                    await _medStaffService.ImportMedStaffFile(file);
+                    await _medStaffService.ImportMedStaffFileAsync(file);
 
                     return Ok();
                 }
@@ -47,7 +47,7 @@ namespace iTechArt.Api.Controllers
 
                 if (fileExtension == ".xlsx" || fileExtension == ".xls")
                 {
-                    await _medStaffService.ExcelParse(file);
+                    await _medStaffService.ExcelParseAsync(file);
 
                     return Ok();
                 }
@@ -68,7 +68,7 @@ namespace iTechArt.Api.Controllers
 
                 if (fileExtension == ".csv")
                 {
-                    await _medStaffService.CSVParse(file);
+                    await _medStaffService.CSVParseAsync(file);
 
                     return Ok();
                 }
@@ -89,7 +89,7 @@ namespace iTechArt.Api.Controllers
 
                 if (fileExtension == ".xml")
                 {
-                    await _medStaffService.XMLParse(file);
+                    await _medStaffService.XMLParseAsync(file);
 
                     return Ok();
                 }
@@ -104,7 +104,7 @@ namespace iTechArt.Api.Controllers
         [HttpGet(ApiConstants.EXPORT)]
         public async Task<IActionResult> ExportAsync([FromServices] IMedStaffService _medStaffService)
         {
-            return Ok(await _medStaffService.ExportMedStaffFile());
+            return Ok(await _medStaffService.ExportMedStaffFileAsync());
         }
     }
 }

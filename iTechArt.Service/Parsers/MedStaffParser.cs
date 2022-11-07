@@ -22,7 +22,7 @@ namespace iTechArt.Service.Parsers
         /// <summary>
         /// Parse CSV file into MedStaff business model
         /// </summary>
-        public async Task ParseCSV(IFormFile file)
+        public async Task ParseCSVAsync(IFormFile file)
         {
             string fileExtension = Path.GetExtension(file.FileName);
 
@@ -73,7 +73,7 @@ namespace iTechArt.Service.Parsers
         /// <summary>
         /// Parse Excel file into MedStaff business model
         /// </summary>
-        public async Task ParseExcel(IFormFile file)
+        public async Task ParseExcelAsync(IFormFile file)
         {
             string fileExtension = Path.GetExtension(file.FileName);
 
@@ -126,7 +126,7 @@ namespace iTechArt.Service.Parsers
         /// <summary>
         /// Parse XML file into MedStaff business model
         /// </summary>
-        public async Task ParseXML(IFormFile file)
+        public async Task ParseXMLAsync(IFormFile file)
         {
             string fileExtension = Path.GetExtension(file.FileName);
 

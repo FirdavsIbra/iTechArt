@@ -20,7 +20,7 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Takes no input so far
         /// </summary>
-        public async Task<IMedStaff[]> ExportMedStaffFile()
+        public async Task<IMedStaff[]> ExportMedStaffFileAsync()
         {
             return await _medStaffRepository.GetAllAsync();
         }
@@ -28,13 +28,13 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Parse iformfile into IMedStaff interface
         /// </summary>
-        public async Task CSVParse(IFormFile file)
+        public async Task CSVParseAsync(IFormFile file)
         {
             var fileExtension = Path.GetExtension(file.FileName);
 
             if (fileExtension == ".csv")
             {
-                await _medStaffParser.ParseCSV(file);
+                await _medStaffParser.ParseCSVAsync(file);
             }
             else
             {
@@ -45,13 +45,13 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Parse iformfile into IMedStaff interface
         /// </summary>
-        public async Task ExcelParse(IFormFile file)
+        public async Task ExcelParseAsync(IFormFile file)
         {
             var fileExtension = Path.GetExtension(file.FileName);
 
             if (fileExtension == ".xlsx" || fileExtension == ".xls")
             {
-                await _medStaffParser.ParseExcel(file);
+                await _medStaffParser.ParseExcelAsync(file);
             }
             else
             {
@@ -62,13 +62,13 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Parse iformfile into IMedStaff interface
         /// </summary>
-        public async Task XMLParse(IFormFile file)
+        public async Task XMLParseAsync(IFormFile file)
         {
             var fileExtension = Path.GetExtension(file.FileName);
 
             if (fileExtension == ".xml")
             {
-                await _medStaffParser.ParseXML(file);
+                await _medStaffParser.ParseXMLAsync(file);
             }
             else
             {
@@ -79,21 +79,21 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Takes filestream
         /// </summary>
-        public async Task ImportMedStaffFile(IFormFile file)
+        public async Task ImportMedStaffFileAsync(IFormFile file)
         {
             var fileExtension = Path.GetExtension(file.FileName);
 
             if (fileExtension == ".xlsx" || fileExtension == ".xls")
             {
-                await _medStaffParser.ParseExcel(file);
+                await _medStaffParser.ParseExcelAsync(file);
             }
             else if (fileExtension == ".csv")
             {
-                await _medStaffParser.ParseCSV(file);
+                await _medStaffParser.ParseCSVAsync(file);
             }
             else if (fileExtension == ".xml")
             {
-                await _medStaffParser.ParseXML(file);
+                await _medStaffParser.ParseXMLAsync(file);
             }
         }
     }
