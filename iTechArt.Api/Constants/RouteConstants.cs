@@ -8,6 +8,5 @@
         public const string STUDENTS = "api/students";
         public const string GROCERIES = "api/grocery";
         public const string MEDSTAFF = "api/medStaff";
-
     }
 }

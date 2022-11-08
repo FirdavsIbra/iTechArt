@@ -18,7 +18,7 @@ namespace iTechArt.Repository.Mappers
         private static double DoubleGuard(string input) 
         {
             double doubleOutput;
-            var result = double.TryParse(input, NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out doubleOutput);
+            var result = double.TryParse(input, NumberStyles.Number, CultureInfo.InvariantCulture, out doubleOutput);
             if (result)
                 return doubleOutput;
             throw new InvalidDataException($"{INVALID_DOUBLE_MESSAGE}{input}");
