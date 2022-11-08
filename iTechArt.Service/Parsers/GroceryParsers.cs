@@ -1,13 +1,10 @@
 ﻿using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
-using iTechArt.Domain.ModelInterfaces.HelperModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
-using iTechArt.Repository.BusinessModels.HelperModels;
 using iTechArt.Repository.Mappers;
 using iTechArt.Service.DTOs;
 using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
 using OfficeOpenXml;
 using System.Xml.Linq;
 
@@ -24,7 +21,7 @@ namespace iTechArt.Service.Parsers
         /// <summary>
         /// Parsing Csv format grocery files
         /// </summary>
-        public async Task<ITaskResult> RecordCsvToDatabase(IFormFile formFile)
+        public async Task RecordCsvToDatabase(IFormFile formFile)
         {
             try
             {
@@ -52,37 +49,18 @@ namespace iTechArt.Service.Parsers
                             throw ex;
                         }
                     }
-                    var result = await _groceryRepository.AddGroceriesAsync(_grocery);
-
-                    if (result.IsSuccess)
-                    {
-                        return new TaskResult
-                        {
-                            IsSuccess = true,
-                            Message = JsonConvert.SerializeObject(_grocery, Newtonsoft.Json.Formatting.Indented)
-                        };
-                    }
-                    return new TaskResult
-                    {
-                        IsSuccess = false,
-                        Message = result.Exception.Message,
-                    };
+                    await _groceryRepository.AddGroceriesAsync(_grocery);
                 }
             }
             catch (Exception ex)
             {
-
-                return new TaskResult
-                {
-                    IsSuccess = false,
-                    Message = ex.Message,
-                };
+                throw ex;
             }
         }
         /// <summary>
         /// Parsing Excel format grocery files
         /// </summary>
-        public async Task<ITaskResult> RecordExcelToDatabase(IFormFile formFile)
+        public async Task RecordExcelToDatabase(IFormFile formFile)
         {
             if (formFile.Length > 0)
             {
@@ -100,43 +78,20 @@ namespace iTechArt.Service.Parsers
                             _grocery.Add(GroceryMapper.XlsxMapper(sheet, i));
 
                         }
-                        var result = await _groceryRepository.AddGroceriesAsync(_grocery);
-
-                        if (result.IsSuccess)
-                        {
-                            return new TaskResult
-                            {
-                                IsSuccess = true,
-                                Message = JsonConvert.SerializeObject(_grocery, Newtonsoft.Json.Formatting.Indented)
-                            };
-                        }
-                        return new TaskResult
-                        {
-                            IsSuccess = false,
-                            Message = result.Exception.Message,
-                        };
+                         await _groceryRepository.AddGroceriesAsync(_grocery);
                     }
                 }
                 catch (Exception ex)
                 {
 
-                    return new TaskResult
-                    {
-                        IsSuccess = false,
-                        Message = ex.Message,
-                    };
+                    throw ex; 
                 }
             }
-            return new TaskResult
-            {
-                IsSuccess = false,
-                Message = "File does not contain any lines",
-            };
         }
         /// <summary>
         /// Parsing XML format grocery files
         /// </summary>
-        public async Task<ITaskResult> RecordXmlToDatabase(IFormFile formFile)
+        public async Task RecordXmlToDatabase(IFormFile formFile)
         {
             XDocument xm = new XDocument();
             var reader = new StreamReader(formFile.OpenReadStream());
@@ -147,7 +102,6 @@ namespace iTechArt.Service.Parsers
                 var items = from item in xdoc.Descendants("dataset").Elements("record").AsEnumerable()
                             select new GroceryDTO
                             {
-                                Id = Guid.Parse(item.Element("id").Value),
                                 FirstName = item.Element("first_name").Value,
                                 LastName = item.Element("last_name").Value,
                                 Email = item.Element("email").Value,
@@ -160,28 +114,11 @@ namespace iTechArt.Service.Parsers
                             };
 
                 List<IGrocery> groceryList = items.ToList<IGrocery>();
-                var result = await _groceryRepository.AddGroceriesAsync(groceryList);
-                if (result.IsSuccess)
-                {
-                    return new TaskResult
-                    {
-                        IsSuccess = true,
-                        Message = JsonConvert.SerializeObject(groceryList, Newtonsoft.Json.Formatting.Indented)
-                    };
-                }
-                return new TaskResult
-                {
-                    IsSuccess = false,
-                    Message = result.Exception.Message,
-                };
+                await _groceryRepository.AddGroceriesAsync(groceryList);
             }
             catch (Exception ex)
             {
-                return new TaskResult
-                {
-                    IsSuccess = false,
-                    Message = ex.Message,
-                };
+                throw ex; 
             }
         }
     }

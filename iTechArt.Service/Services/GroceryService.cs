@@ -1,18 +1,8 @@
-﻿using iTechArt.Domain.Enums;
-using iTechArt.Domain.ModelInterfaces;
-using iTechArt.Domain.ModelInterfaces.HelperModelInterfaces;
+﻿using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
-using iTechArt.Repository.BusinessModels.HelperModels;
-using iTechArt.Repository.Mappers;
-using iTechArt.Service.DTOs;
-using iTechArt.Service.Parsers;
-using LinqToDB;
 using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using OfficeOpenXml;
-using System.Xml.Linq;
 
 namespace iTechArt.Serivce.Services
 {
@@ -33,7 +23,6 @@ namespace iTechArt.Serivce.Services
         {
             return _groceryRepository.GetAllAsync();
         }
-
         /// <summary>
         /// Get Count of Groceries
         /// </summary>
