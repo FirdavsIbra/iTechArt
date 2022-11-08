@@ -7,7 +7,7 @@ namespace iTechArt.Domain.ModelInterfaces
         /// <summary>
         /// Id of grocery store
         /// </summary>
-        public Guid Id { get; }
+        public long Id { get; }
 
         /// <summary>
         /// First name of grocery employee

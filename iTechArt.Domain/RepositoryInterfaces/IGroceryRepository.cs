@@ -35,6 +35,6 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// <summary>
         /// Add groceries to database
         /// </summary>
-        public Task<ITaskResult> AddGroceriesAsync(IEnumerable<IGrocery> groceries);
+        public Task AddGroceriesAsync(IEnumerable<IGrocery> groceries);
     }
 }

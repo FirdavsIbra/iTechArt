@@ -18,7 +18,7 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// Upload pupil's file
         /// </summary>
-        [HttpPost(ApiConstants.IMPORT)]
+        [HttpPost(ApiConstants.IMPORT), Obsolete]
         public async Task<ActionResult> Import(IFormFile file)
         {
             if (file != null)
@@ -42,19 +42,10 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// Get all pupils
         /// </summary>
-        [HttpGet()]
+        [HttpGet("get_all")]
         public async Task<ActionResult<IPupil[]>> GetAllAsync()
         {
             return Ok(await _pupilService.GetAllAsync());
-        }
-
-        /// <summary>
-        /// Get pupil by id
-        /// </summary>
-        [HttpGet("{id}")]
-        public async Task<ActionResult<IPupil>> GetByIdAsync(long id)
-        {
-            return Ok(await _pupilService.GetByIdAsync(id));
         }
 
         /// <summary>
