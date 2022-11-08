@@ -17,6 +17,27 @@ namespace iTechArt.Api.Controllers
         {
             _groceryService = groceryService;
         }
+
+        [HttpPost(ApiConstants.IMPORT)]
+        public async ValueTask<IActionResult> ImportGroceryFiles(IFormFile file)
+        {
+            if (file != null && file.ContentType.Contains(CSV))
+            {
+                await _groceryService.ImportCSVGrocery(file);
+                return Ok();
+            }
+            else if (file != null && file.ContentType.Contains(EXCEL)) 
+            {
+                await _groceryService.ImportExcelGrocery(file);
+                return Ok();
+            }
+            else if (file != null && file.ContentType.Contains(XML))
+            {
+                await _groceryService.ImportXMLGrocery(file);
+                return Ok();
+            }
+            return BadRequest();
+        }
         /// <summary>
         /// api route which applies the following extensions
         /// will allow to upload the data from CSV file to db 

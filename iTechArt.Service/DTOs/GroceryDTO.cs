@@ -10,7 +10,7 @@ namespace iTechArt.Service.DTOs
         /// <summary>
         /// gets or internal sets Id of grocery
         /// </summary>
-        public Guid Id { get; internal set; }
+        public long Id { get; internal set; }
         /// <summary>
         /// gets or internal sets First name of grocery employee
         /// </summary>

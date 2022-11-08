@@ -2,9 +2,7 @@
 using iTechArt.Database.DbContexts;
 using iTechArt.Database.Entities.Groceries;
 using iTechArt.Domain.ModelInterfaces;
-using iTechArt.Domain.ModelInterfaces.HelperModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
-using iTechArt.Repository.BusinessModels.HelperModels;
 using iTechArt.Repository.BusinessModels;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,7 +28,7 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get grocery by id
         /// </summary>
-        public async Task<IGrocery> GetByIdAsync(Guid id)
+        public async Task<IGrocery> GetByIdAsync(long id)
         {
             return await _dbContext.Groceries.Select(entity => _mapper.Map<Grocery>(entity))
                                                       .FirstOrDefaultAsync(c => c.Id == id);
@@ -58,26 +56,17 @@ namespace iTechArt.Repository.Repositories
                 await _dbContext.SaveChangesAsync();
             }
         }
-        public async Task<ITaskResult> AddGroceriesAsync(IEnumerable<IGrocery> groceries)
+        public async Task AddGroceriesAsync(IEnumerable<IGrocery> groceries)
         {
             try
             {
-                //await _dbContext.AddRangeAsync(groceries.Select(_mapper.Map<GroceryDb>));
-                await _dbContext.AddRangeAsync(_mapper.Map<GroceryDb>(groceries));
+                await _dbContext.AddRangeAsync(groceries.Select(_mapper.Map<GroceryDb>));
                 await _dbContext.SaveChangesAsync();
-                return new TaskResult
-                {
-                    IsSuccess = true
-                };
+          
             }
             catch (Exception ex)
             {
-
-               return new TaskResult
-               {
-                    IsSuccess = false,
-                    Exception = ex
-                };
+                throw ex;
             }
         }
         /// <summary>
