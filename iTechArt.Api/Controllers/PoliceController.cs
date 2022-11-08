@@ -1,4 +1,5 @@
 ﻿using iTechArt.Api.Constants;
+using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,7 +27,7 @@ namespace iTechArt.Api.Controllers
         {
             string fileExtension = Path.GetExtension(file.FileName);
 
-            if (file != null && fileExtension == FileConstants.xlsx)
+            if (file != null && fileExtension == FileConstants.xlsx || fileExtension == FileConstants.xls)
             {
                 await _policeService.ImportExcel(file);
                 return Ok();
@@ -36,6 +37,7 @@ namespace iTechArt.Api.Controllers
                 return BadRequest("Invalid file format!");
             }
         }
+
 
         /// <summary>
         /// route: api/police/import. Takes xml
@@ -81,10 +83,10 @@ namespace iTechArt.Api.Controllers
         /// route: api/police/export
         /// Gets all data about police from the database
         /// </summary>
-        [HttpGet(ApiConstants.EXPORT)]
-        public IActionResult Export()
+        [HttpGet()]
+        public async Task<ActionResult<IPolice[]>> GetAllData()
         {
-            return Ok(_policeService.ExportPoliceData());
+            return Ok(await _policeService.GetAllPolice());
         }
 
 

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iTechArt.Domain.ParserInterfaces
+namespace iTechArt.Domain.ParserInterfaces.IPoliceParsers
 {
     public interface IXmlParser
     {

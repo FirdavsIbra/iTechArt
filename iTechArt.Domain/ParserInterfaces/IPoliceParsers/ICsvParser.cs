@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iTechArt.Domain.ParserInterfaces
+namespace iTechArt.Domain.ParserInterfaces.IPoliceParsers
 {
-    public interface IExcelParser
+    public interface ICsvParser
     {
         /// <summary>
-        /// Reads XLSX file and parses it
+        /// Reads CSV file and parses it
         /// </summary>
-        public Task ReadExcelAsync(IFormFile file);
+        public Task ReadCSVAsync(IFormFile file);
     }
 }
