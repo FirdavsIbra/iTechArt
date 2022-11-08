@@ -18,7 +18,7 @@ namespace iTechArt.Api.Controllers
             _groceryService = groceryService;
         }
 
-        [HttpPost(ApiConstants.IMPORT)]
+        [HttpPost(ApiConstants.IMPORT),Obsolete]
         public async ValueTask<IActionResult> ImportGroceryFiles(IFormFile file)
         {
             if (file != null && file.ContentType.Contains(CSV))
@@ -84,13 +84,12 @@ namespace iTechArt.Api.Controllers
             }
             else
                 return BadRequest();
-
         }
         /// <summary>
         /// api route which allows to get all info from db and parse it to the following format
         /// </summary>
-        [HttpGet(ApiConstants.EXPORT)]
-        public async Task<IActionResult> Export()
+        [HttpGet("get_all")]
+        public async Task<IActionResult> ExportGroceryData()
         {
             return Ok(await _groceryService.ExportGrocery());
         }
@@ -98,10 +97,10 @@ namespace iTechArt.Api.Controllers
         /// Get total amount of groceries
         /// </summary>
 
-        [HttpGet(ApiConstants.GETCOUNTOFGROCERY)]
-        public IActionResult GetCountOfGrocery()
-        {
-            return Ok(_groceryService.GetCountOfGrocery());
-        }
+        //[HttpGet(ApiConstants.GETCOUNTOFGROCERY)]
+        //public IActionResult GetCountOfGrocery()
+        //{
+        //    return Ok(_groceryService.GetCountOfGrocery());
+        //}
     }
 }

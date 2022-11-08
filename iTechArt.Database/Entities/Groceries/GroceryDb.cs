@@ -17,14 +17,14 @@ namespace iTechArt.Database.Entities.Groceries
         /// </summary>
         [MaxLength(32)]
         [Column("first_Name")]
-        public string First_Name { get; set; }
+        public string FirstName { get; set; }
 
         /// <summary>
         /// get or sets Surname of grocery employee
         /// </summary>
         [MaxLength(32)]
         [Column("last_Name")]
-        public string Last_Name { get; set; }
+        public string LastName { get; set; }
 
         /// <summary>
         /// get or sets Birthdate of grocery employee
@@ -48,13 +48,13 @@ namespace iTechArt.Database.Entities.Groceries
         /// get or sets Job position of grocery employee
         /// </summary>
         [Column("job_title")]
-        public string Job_title { get; set; }
+        public string Jobtitle { get; set; }
 
         /// <summary>
         /// get or sets Current department of grocery employee
         /// </summary>
         [Column("department_retail")]
-        public string Department_retail { get; set; }
+        public string Departmentretail { get; set; }
 
         /// <summary>
         /// get or sets Salary of each grocery employee
