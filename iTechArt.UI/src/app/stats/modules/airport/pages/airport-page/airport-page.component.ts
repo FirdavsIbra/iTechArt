@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { UnitsEnum } from '../../../../../shared/enums/units.enum';
-import { AirportService } from '../../airport.service';
-import { IAirport } from '../../interfaces/airport.interface';
+import { StatsService } from "../../../../stats.service";
+import { UnitsTypes } from "../../../../shared/types/units-types";
 
 @Component({
   selector: 'app-airport-page',
@@ -11,7 +11,7 @@ import { IAirport } from '../../interfaces/airport.interface';
 })
 export class AirportPageComponent implements OnInit {
   public unit: UnitsEnum = UnitsEnum.airport;
-  public data: IAirport[] | undefined;
+  public data: UnitsTypes | undefined;
   public props = [
     'id',
     'name',
@@ -35,11 +35,11 @@ export class AirportPageComponent implements OnInit {
     'Average Ticket Price',
   ];
 
-  public constructor(private _airportService: AirportService) {}
+  public constructor(private statsService: StatsService) {}
 
   public ngOnInit(): void {
-    this._airportService.getAirports().subscribe({
-      next: (data: IAirport[]) => this.data = data,
+    this.statsService.getAllStatsByUnit(this.unit).subscribe({
+      next: (data: UnitsTypes) => this.data = data,
       error: () => alert("Couldn't load data."),
     });
   }

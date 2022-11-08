@@ -1,9 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 import { UnitsEnum } from '../../../../shared/enums/units.enum';
-import { environment } from '../../../../../environments/environment';
 import { ApiService } from '../../../../shared/services/api.service';
 import { ContentTypeService } from '../../../../shared/services/content-type.service';
 import { ExtensionsEnum } from '../../../../shared/enums/extensions.enum';
@@ -13,15 +12,14 @@ import { ExtensionsEnum } from '../../../../shared/enums/extensions.enum';
   templateUrl: './excel-export.component.html',
   styleUrls: ['./excel-export.component.scss'],
 })
-export class ExcelExportComponent implements OnInit {
+export class ExcelExportComponent {
   @Input() public unit: UnitsEnum | undefined;
 
-  public url = environment.apiUrl;
   public api: string | undefined;
   public fileName: string | undefined;
   public isFormValid = false;
   public isFormButtonDisabled = false;
-  public fileExtension: ExtensionsEnum | string | undefined;
+  public fileExtension: string | undefined;
 
   public exportForm = new FormGroup({
     file: new FormControl('', [Validators.required]),
@@ -34,12 +32,9 @@ export class ExcelExportComponent implements OnInit {
     private contentTypeService: ContentTypeService
   ) {}
 
-  public ngOnInit(): void {
-    this.api = this.apiService.defineApiForUnitImport(this.unit, this.fileExtension);
-  }
-
   public onFileChange(event: any): void {
     this.isFormButtonDisabled = false;
+
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.fileName = file.name;
@@ -48,6 +43,11 @@ export class ExcelExportComponent implements OnInit {
       ); //refactor
 
       this.fileExtension = fileExtension;
+
+      this.api = this.apiService.defineImportApiForCurrentUnit(
+        this.unit,
+        this.fileExtension
+      );
 
       if (
         fileExtension === ExtensionsEnum.csv ||
@@ -71,17 +71,19 @@ export class ExcelExportComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', file!);
 
-    this.http.post<any>(`${this.url}${this.api}`, formData).subscribe({
+    console.log(this.api);
+
+    this.http.post<any>(`${this.api}`, formData).subscribe({
       next: (data: string) => {
         alert('Uploaded Successfully.');
-        console.log(data)
+        console.log(data);
         this.isFormButtonDisabled = false;
       },
       error: (error: string) => {
         alert(`There was an error! ${error}`);
         console.log(error);
         this.isFormButtonDisabled = false;
-      }
-    })
+      },
+    });
   }
 }

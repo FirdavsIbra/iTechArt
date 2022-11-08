@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 
 import { UnitsEnum } from '../../../../../shared/enums/units.enum';
-import { ImedStaff } from "../../interfaces/medStaff.interface";
+import { IMedStaff } from "../../interfaces/medStaff.interface";
 import { MedStaffService } from "../../medStaff.service";
 
 @Component({
@@ -11,7 +11,7 @@ import { MedStaffService } from "../../medStaff.service";
 })
 export class MedStaffPageComponent implements OnInit{
   public unit: UnitsEnum = UnitsEnum.medStaff;
-  public data: ImedStaff[] | undefined;
+  public data: IMedStaff[] | undefined;
 
   public columns = [
     'Id',
@@ -47,7 +47,7 @@ export class MedStaffPageComponent implements OnInit{
 
   public ngOnInit(): void {
     this._medStaffService.getMedStaff()
-      .subscribe((data: ImedStaff[]) => {
+      .subscribe((data: IMedStaff[]) => {
         this.data = data;
       });
   }

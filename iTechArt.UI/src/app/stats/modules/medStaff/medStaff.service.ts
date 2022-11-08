@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { APIS } from '../../../shared/constants/APIS';
+import { APIS } from '../../../shared/apis/constants/apis';
 
 import { environment } from '../../../../environments/environment';
-import { ImedStaff } from "./interfaces/medStaff.interface";
+import { IMedStaff } from "./interfaces/medStaff.interface";
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +14,7 @@ export class MedStaffService {
 
   public constructor(private http: HttpClient) { }
 
-  public getMedStaff(): Observable<ImedStaff[]> {
-    return this.http.get<ImedStaff[]>(`${environment.apiUrl}${this.urls.export}`);
+  public getMedStaff(): Observable<IMedStaff[]> {
+    return this.http.get<IMedStaff[]>(`${environment.apiUrl}${this.urls.export}`);
   }
 }

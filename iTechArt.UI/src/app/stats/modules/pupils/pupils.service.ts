@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { APIS } from '../../../shared/constants/APIS';
+import { APIS } from '../../../shared/apis/constants/apis';
 
 import { environment } from '../../../../environments/environment';
 import { IPupil } from "./interfaces/pupil.interface";
