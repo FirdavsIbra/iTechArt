@@ -1,5 +1,6 @@
 ﻿using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace iTechArt.Repository.BusinessModels
 {
