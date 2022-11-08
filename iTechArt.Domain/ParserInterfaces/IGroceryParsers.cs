@@ -10,10 +10,10 @@ namespace iTechArt.Domain.ParserInterfaces
 {
     public interface IGroceryParsers
     {
-        public Task<ITaskResult> RecordCsvToDatabase(IFormFile formFile);
+        public Task RecordCsvToDatabase(IFormFile formFile);
 
-        public Task<ITaskResult> RecordExcelToDatabase(IFormFile formFile);
+        public Task RecordExcelToDatabase(IFormFile formFile);
 
-        public Task<ITaskResult> RecordXmlToDatabase(IFormFile formFile);
+        public Task RecordXmlToDatabase(IFormFile formFile);
     }
 }
