@@ -1,11 +1,10 @@
 <table class="grid">
-  <thead>
+  <thead class="grid__columns">
     <tr>
       <th *ngFor="let column of columns">{{ column }}</th>
     </tr>
   </thead>
-
-  <tbody>
+  <tbody class="grid__rows">
     <tr *ngFor="let row of data">
       <td *ngFor="let prop of props">{{ row[prop] }}</td>
     </tr>

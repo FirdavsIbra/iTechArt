@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { UnitsEnum } from '../../../../../shared/enums/units.enum';
-import { PupilsService } from "../../pupils.service";
-import { IPupil } from "../../interfaces/pupil.interface";
+import { UnitsTypes } from '../../../../shared/types/units-types';
+import { StatsService } from '../../../../stats.service';
 
 @Component({
   selector: 'app-pupils-page',
@@ -11,8 +11,7 @@ import { IPupil } from "../../interfaces/pupil.interface";
 })
 export class PupilsPageComponent implements OnInit {
   public unit: UnitsEnum = UnitsEnum.pupils;
-  public data: IPupil[] | undefined;
-
+  public data: UnitsTypes | undefined;
   public columns = [
     'Id',
     'First Name',
@@ -27,7 +26,6 @@ export class PupilsPageComponent implements OnInit {
     'Course Language',
     'Shift',
   ];
-
   public props = [
     'id',
     'firstName',
@@ -43,12 +41,12 @@ export class PupilsPageComponent implements OnInit {
     'shift',
   ];
 
-  public constructor(private _pupilsService: PupilsService) {}
+  public constructor(private statsService: StatsService) {}
 
   public ngOnInit(): void {
-    this._pupilsService.getPupils()
-      .subscribe((data: IPupil[]) => {
-        this.data = data;
-      });
+    this.statsService.getAllStatsByUnit(this.unit).subscribe({
+      next: (data: UnitsTypes) => this.data = data,
+      error: () => alert("Couldn't load data."),
+    });
   }
 }

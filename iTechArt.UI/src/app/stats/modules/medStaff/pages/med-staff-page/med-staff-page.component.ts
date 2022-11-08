@@ -1,18 +1,17 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 
 import { UnitsEnum } from '../../../../../shared/enums/units.enum';
-import { IMedStaff } from "../../interfaces/medStaff.interface";
-import { MedStaffService } from "../../medStaff.service";
+import { UnitsTypes } from '../../../../shared/types/units-types';
+import { StatsService } from '../../../../stats.service';
 
 @Component({
   selector: 'app-med-staff-page',
   templateUrl: './med-staff-page.component.html',
   styleUrls: ['./med-staff-page.component.scss'],
 })
-export class MedStaffPageComponent implements OnInit{
+export class MedStaffPageComponent implements OnInit {
   public unit: UnitsEnum = UnitsEnum.medStaff;
-  public data: IMedStaff[] | undefined;
-
+  public data: UnitsTypes | undefined;
   public columns = [
     'Id',
     'First Name',
@@ -27,7 +26,6 @@ export class MedStaffPageComponent implements OnInit{
     'Postal Code',
     'Shift',
   ];
-
   public props = [
     'id',
     'firstName',
@@ -43,12 +41,12 @@ export class MedStaffPageComponent implements OnInit{
     'shift',
   ];
 
-  public constructor(private _medStaffService: MedStaffService) {}
+  public constructor(private statsService: StatsService) {}
 
   public ngOnInit(): void {
-    this._medStaffService.getMedStaff()
-      .subscribe((data: IMedStaff[]) => {
-        this.data = data;
-      });
+    this.statsService.getAllStatsByUnit(this.unit).subscribe({
+      next: (data: UnitsTypes) => this.data = data,
+      error: () => alert("Couldn't load data."),
+    });
   }
 }

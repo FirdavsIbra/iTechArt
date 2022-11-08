@@ -19,6 +19,9 @@ export class StatsService {
 
   public getAllStatsByUnit(unit: UnitsEnum): Observable<UnitsTypes> {
     this.api = this.apiService.defineExportApiForCurrentUnit(unit);
+
+    console.log(this.api)
+
     return this.http.get<UnitsTypes>(`${this.api}`);
   }
 }

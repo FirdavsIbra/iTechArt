@@ -1,18 +1,17 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 
-import { UnitsEnum } from "../../../../../shared/enums/units.enum";
-import { IGrocery } from "../../interfaces/grocery.interface";
-import { GroceryService } from "../../grocery.service";
+import { UnitsEnum } from '../../../../../shared/enums/units.enum';
+import { UnitsTypes } from '../../../../shared/types/units-types';
+import { StatsService } from '../../../../stats.service';
 
 @Component({
   selector: 'app-grocery-page',
   templateUrl: './grocery-page.component.html',
   styleUrls: ['./grocery-page.component.scss'],
 })
-export class GroceryPageComponent implements OnInit{
-  public unit: UnitsEnum = UnitsEnum.grocery
-  public data: IGrocery[] | undefined;
-
+export class GroceryPageComponent implements OnInit {
+  public unit: UnitsEnum = UnitsEnum.grocery;
+  public data: UnitsTypes | undefined;
   public columns = [
     'Id',
     'First Name',
@@ -22,9 +21,8 @@ export class GroceryPageComponent implements OnInit{
     'Date of Birth',
     'Salary',
     'Department Retail',
-    'Job Title'
+    'Job Title',
   ];
-
   public props = [
     'id',
     'firstName',
@@ -34,17 +32,15 @@ export class GroceryPageComponent implements OnInit{
     'dateOfBirth',
     'salary',
     'departmentRetail',
-    'jobTitle'
+    'jobTitle',
   ];
 
-  public constructor(private _GroceryService: GroceryService) {}
+  public constructor(private statsService: StatsService) {}
 
   public ngOnInit(): void {
-    this._GroceryService.getGrocery().subscribe((data: IGrocery[]) => {
-      this.data = data;
+    this.statsService.getAllStatsByUnit(this.unit).subscribe({
+      next: (data: UnitsTypes) => this.data = data,
+      error: () => alert("Couldn't load data."),
     });
   }
 }
-
-
-
