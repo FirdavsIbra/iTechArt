@@ -1,4 +1,5 @@
 ﻿using iTechArt.Api.Constants;
+using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -101,8 +102,8 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// Gets all data from database
         /// </summary>
-        [HttpGet(ApiConstants.EXPORT)]
-        public async Task<IActionResult> ExportAsync([FromServices] IMedStaffService _medStaffService)
+        [HttpGet("get_all")]
+        public async Task<ActionResult<IMedStaff[]>> ExportAsync([FromServices] IMedStaffService _medStaffService)
         {
             return Ok(await _medStaffService.ExportMedStaffFileAsync());
         }
