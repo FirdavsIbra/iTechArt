@@ -50,20 +50,19 @@ namespace iTechArt.Repository.Mappers
         /// </summary>
         public static IGrocery CsvMapper(string[] mappingItems) 
         {
-            var salary = DoubleGuard(mappingItems[8]);
-            var dateOfBirth = DateTimeGuard(mappingItems[5]);
-            var gender = EnumGuard(mappingItems[4]);
+            var salary = DoubleGuard(mappingItems[7]);
+            var dateOfBirth = DateTimeGuard(mappingItems[4]);
+            var gender = EnumGuard(mappingItems[3]);
             
             return new BusinessModels.Grocery
             {
-                Id = Guid.Parse(mappingItems[0]),
-                FirstName = mappingItems[1].ToString(),
-                LastName = mappingItems[2].ToString(),
+                FirstName = mappingItems[0].ToString(),
+                LastName = mappingItems[1].ToString(),
                 Birthday = dateOfBirth,
                 Gender = gender,
-                Email = mappingItems[3].ToString(),
-                JobTitle = mappingItems[6].ToString(),
-                DepartmentRetail = mappingItems[7].ToString(),
+                Email = mappingItems[2].ToString(),
+                JobTitle = mappingItems[5].ToString(),
+                DepartmentRetail = mappingItems[6].ToString(),
                 Salary = salary,
             };
        }
@@ -72,20 +71,19 @@ namespace iTechArt.Repository.Mappers
         /// </summary>
         public static IGrocery XlsxMapper(ExcelWorksheet sheet, int index)
         {
-            var salary = DoubleGuard(sheet.Cells[index, 9].Value?.ToString());
-            var dateOfBirth = DateTimeGuard(sheet.Cells[index, 6].Value?.ToString());
-            var gender = EnumGuard(sheet.Cells[index, 5].Value?.ToString());
+            var salary = DoubleGuard(sheet.Cells[index, 8].Value?.ToString());
+            var dateOfBirth = DateTimeGuard(sheet.Cells[index, 5].Value?.ToString());
+            var gender = EnumGuard(sheet.Cells[index, 4].Value?.ToString());
 
             return new BusinessModels.Grocery
             {
-                Id = Guid.Parse(sheet.Cells[index, 1].Value?.ToString()),
-                FirstName = sheet.Cells[index, 2].Value?.ToString(),
-                LastName = sheet.Cells[index, 3].Value?.ToString(),
+                FirstName = sheet.Cells[index, 1].Value?.ToString(),
+                LastName = sheet.Cells[index, 2].Value?.ToString(),
                 Birthday = dateOfBirth,
                 Gender = gender,
-                Email = sheet.Cells[index, 4].Value?.ToString(),
-                JobTitle = sheet.Cells[index, 7].Value?.ToString(),
-                DepartmentRetail = sheet.Cells[index, 8].Value?.ToString(),
+                Email = sheet.Cells[index, 3].Value?.ToString(),
+                JobTitle = sheet.Cells[index, 6].Value?.ToString(),
+                DepartmentRetail = sheet.Cells[index, 7].Value?.ToString(),
                 Salary = salary,
             };      
         }
