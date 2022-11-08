@@ -19,50 +19,26 @@ namespace iTechArt.Repository.Repositories
             _dbContext = dbContext;
             _mapper = mapper;
         }
-
-        /// <summary>
-        /// Add grocery to database
-        /// </summary>
-        /// <param name="grocery"></param>   
-        public async Task AddAsync(IGrocery grocery)
-        {
-            await _dbContext.Set<GroceryDb>().AddAsync(_mapper.Map<GroceryDb>(grocery));
-
-            await _dbContext.SaveChangesAsync();
-        }
-
         /// <summary>
         /// Get all entities from database
         /// </summary>
-        public IGrocery[] GetAll()
+        public async Task<IGrocery[]> GetAllAsync()
         {
-            var groceries = _dbContext.Set<GroceryDb>();
-
-            List<IGrocery> result = new List<IGrocery>();
-
-            foreach (var grocery in groceries)
-            {
-                result.Add(_mapper.Map<Grocery>(grocery));
-            }
-
-            return result.ToArray();
+            return await _dbContext.Groceries.Select(groceries => _mapper.Map<Grocery>(groceries)).ToArrayAsync();
         }
 
         /// <summary>
         /// Get grocery by id
         /// </summary>
-        /// <param name="id"></param>
-        //public async Task<IGrocery> GetByIdAsync(long id)
-        //{
-        //    var groceryDb = await _dbContext.Set<GroceryDb>().FirstOrDefaultAsync(g => g.Id == id);
-
-        //    return _mapper.Map<Grocery>(groceryDb);
-        //}
+        public async Task<IGrocery> GetByIdAsync(Guid id)
+        {
+            return await _dbContext.Groceries.Select(entity => _mapper.Map<Grocery>(entity))
+                                                      .FirstOrDefaultAsync(c => c.Id == id);
+        }
 
         /// <summary>
         /// Update grocery
         /// </summary>
-        /// <param name="grocery"></param>
         public async Task UpdateAsync(IGrocery grocery)
         {
             _dbContext.Set<GroceryDb>().Update(_mapper.Map<GroceryDb>(grocery));
@@ -73,16 +49,23 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Delete grocery from database
         /// </summary>
-        /// <param name="grocery"></param>
         public async Task DeleteAsync(long id)
         {
+            var groceries = await _dbContext.Groceries.FirstOrDefaultAsync(c => c.Id == id);
+            if (groceries != null)
+            {
+                _dbContext.Groceries.Remove(groceries);
+                await _dbContext.SaveChangesAsync();
+            }
         }
-        public async Task<IDbResult> AddGroceriesAsync(List<IGrocery> groceries)
+        public async Task<ITaskResult> AddGroceriesAsync(IEnumerable<IGrocery> groceries)
         {
             try
             {
-                await _dbContext.AddRangeAsync(groceries);
-                return new DbResult
+                //await _dbContext.AddRangeAsync(groceries.Select(_mapper.Map<GroceryDb>));
+                await _dbContext.AddRangeAsync(_mapper.Map<GroceryDb>(groceries));
+                await _dbContext.SaveChangesAsync();
+                return new TaskResult
                 {
                     IsSuccess = true
                 };
@@ -90,7 +73,8 @@ namespace iTechArt.Repository.Repositories
             catch (Exception ex)
             {
 
-               return new DbResult {
+               return new TaskResult
+               {
                     IsSuccess = false,
                     Exception = ex
                 };
@@ -99,9 +83,9 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get total count of groceries
         /// </summary>
-        public int GetCountOfGrocery()
+        public async ValueTask<int> GetCountOfGrocery()
         {
-            return _dbContext.Groceries.Count();
+            return await _dbContext.Groceries.CountAsync();
         }
     }
 }

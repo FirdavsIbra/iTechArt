@@ -18,10 +18,89 @@ namespace iTechArt.Api.Controllers
 
 
         /// <summary>
-        /// route: api/police/import. Takes csv or xlsx file
+        /// route: api/police/import. Takes xlsx
+        /// Uploads xslx data about Police and saves in database
+        /// </summary>
+        [HttpPost(ApiConstants.IMPORTEXCEL)]
+        public async Task<IActionResult> ImportExcel(IFormFile file)
+        {
+            string fileExtension = Path.GetExtension(file.FileName);
+
+            if (file != null && fileExtension == FileConstants.xlsx)
+            {
+                await _policeService.ImportExcel(file);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest("Invalid file format!");
+            }
+        }
+
+        /// <summary>
+        /// route: api/police/import. Takes xml
+        /// Uploads xml data about Police and saves in database
+        /// </summary>
+        [HttpPost(ApiConstants.IMPORTXML)]
+        public async Task<IActionResult> ImportXml(IFormFile file)
+        {
+            string fileExtension = Path.GetExtension(file.FileName);
+
+            if (file != null && fileExtension == FileConstants.xml)
+            {
+                await _policeService.ImportXml(file);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest("Invalid file format!");
+            }
+        }
+
+        /// <summary>
+        /// route: api/police/import. Takes csv
+        /// Uploads csv data about Police and saves in database
+        /// </summary>
+        [HttpPost(ApiConstants.IMPORTCSV)]
+        public async Task<IActionResult> ImportCsv(IFormFile file)
+        {
+            string fileExtension = Path.GetExtension(file.FileName);
+
+            if (file != null && fileExtension == FileConstants.csv)
+            {
+                await _policeService.ImportCsv(file);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest("Invalid file format!");
+            }
+        }
+
+        /// <summary>
+        /// route: api/police/export
+        /// Gets all data about police from the database
+        /// </summary>
+        [HttpGet(ApiConstants.EXPORT)]
+        public IActionResult Export()
+        {
+            return Ok(_policeService.ExportPoliceData());
+        }
+
+
+
+
+        ////////////////////////////////////////////////////////////////////////////////
+        ///  OLD APIS SECTION
+        ///////////////////////////////////////////////////////////////////////////////
+
+
+
+        /// <summary>
+        /// route: api/police/import. Takes csv, xml or xlsx file
         /// Uploads data about Police and saves in database
         /// </summary>
-        /// <param name="file"></param>
+        [Obsolete]
         [HttpPost(ApiConstants.IMPORT)]
         public async Task<IActionResult> Import(IFormFile file)
         {
@@ -44,16 +123,6 @@ namespace iTechArt.Api.Controllers
             {
                 return BadRequest("Invalid file format!");
             }
-        }
-
-        /// <summary>
-        /// route: api/police/export
-        /// Gets all data about police from the database
-        /// </summary>
-        [HttpGet(ApiConstants.EXPORT)]
-        public IActionResult Export()
-        {
-            return Ok(_policeService.ExportPoliceData());
         }
     }
 }

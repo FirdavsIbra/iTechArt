@@ -8,20 +8,16 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// <summary>
         /// Get all polices from database
         /// </summary>
-        /// <returns> Array of Repository Model Interfaces </returns>
         public Task<IPolice[]> GetAllAsync();
 
         /// <summary>
         /// Add police to database
         /// </summary>
-        /// <param name="police"></param>
-        public Task AddUpdateAsync(IPolice police);
+        public Task AddAsync(IPolice police);
 
         /// <summary>
         /// Get police by id
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns> Resopisitory model interface </returns>
         public Task<IPolice> GetByIdAsync(long id);
 
         /// <summary>
@@ -32,21 +28,17 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// </summary>
         /// Get count of polices
         /// </summary>
-        public int GetCountOfPolice();
+        public Task<int> GetCountOfPolice();
+
 
         /// <summary>
-        /// Parse and saves XLSX file into database
+        /// Updates entity in the database
         /// </summary>
-        public Task ReadExcelAsync(IFormFile file);
+        public Task UpdateAsync(IPolice police);
 
         /// <summary>
-        /// Parse and saves XML file into database
+        /// Adds collection of entities to the database
         /// </summary>
-        public Task ReadXMLAsync(IFormFile file);
-
-        /// <summary>
-        /// Parse and saves CSV file into database
-        /// </summary>
-        public Task ReadCSVAsync(IFormFile file);
+        public Task AddRangeAsync(IPolice[] police);
     }
 }

@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using iTechArt.Database.DbContexts;
-using iTechArt.Database.Entities.MedicalStaff;
 using iTechArt.Database.Entities.Students;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
+using iTechArt.Repository.BusinessModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace iTechArt.Repository.Repositories
@@ -12,11 +12,6 @@ namespace iTechArt.Repository.Repositories
     {
         private readonly AppDbContext _dbContext;
         private readonly IMapper _mapper;
-
-        /// <summary>
-        /// Dbcontext instance injected
-        /// </summary>
-        /// <param name="dbContext"></param>
         public StudentRepository(AppDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
@@ -24,74 +19,73 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Add entity to database
+        /// Add student to database
         /// </summary>
-        /// <param name="entity"></param>   
-        public async Task AddAsync(IStudents entity)
+        public async Task AddAsync(IStudent entity)
         {
-            var entry = await _dbContext.Set<StudentDb>().AddAsync(_mapper.Map<StudentDb>(entity));
+            await _dbContext.Students.AddAsync(_mapper.Map<StudentDb>(entity));
 
             await _dbContext.SaveChangesAsync();
         }
 
         /// <summary>
-        /// Get all entities from database
-        /// should be remade
+        /// Get all students from database
         /// </summary>
-        public async Task<IStudents[]> GetAll()
+        public async Task<IStudent[]> GetAllAsync()
         {
-            var models = _dbContext.Set<StudentDb>();
-
-            List<IStudents> result = new List<IStudents>();
-
-            foreach (var i in models)
-                result.Add(_mapper.Map<IStudents>(i));
-
-            return result.ToArray();
+            return await _dbContext.Students.Select(s => _mapper.Map<Student>(s))
+                                            .ToArrayAsync();
         }
 
         /// <summary>
         /// Get entity by id
         /// </summary>
-        /// <param name="id"></param>
-        public async Task<IStudents> GetByIdAsync(long id)
+        public async Task<IStudent> GetByIdAsync(long id)
         {
-            var databaseModel = await _dbContext.Set<StudentDb>().FirstOrDefaultAsync(s => s.Id == id);
-
-            return _mapper.Map<IStudents>(databaseModel);
+            return await _dbContext.Students.Select(s => _mapper.Map<Student>(s))
+                                            .FirstOrDefaultAsync(s => s.Id == id);
         }
 
         /// <summary>
-        /// Update entity
+        /// Update student
         /// </summary>
-        /// <param name="entity"></param>
-        public async Task UpdateAsync(IStudents entity)
+        public async Task UpdateAsync(IStudent entity)
         {
-            var entry = _dbContext.Set<StudentDb>().Update(_mapper.Map<StudentDb>(entity));
+            _dbContext.Students.Update(_mapper.Map<StudentDb>(entity));
 
             await _dbContext.SaveChangesAsync();
         }
 
         /// <summary>
-        /// Delete entity from database
+        /// Delete student from database
         /// </summary>
-        /// <param name="entity"></param>
         public async Task DeleteAsync(long id)
         {
             var student = await _dbContext.Students.FirstOrDefaultAsync(d => d.Id == id);
 
-            _dbContext.Students.Remove(_mapper.Map<StudentDb>(student));
-
-            await _dbContext.SaveChangesAsync();
+            if (student is not null)
+            {
+                _dbContext.Students.Remove(_mapper.Map<StudentDb>(student));
+                await _dbContext.SaveChangesAsync();
+            }
         }
 
         /// <summary>
         /// Get total count of students
         /// </summary>
-        /// <returns></returns>
-        public int GetCountOfStudents()
+        public async Task<int> GetCountOfStudentsAsync()
         {
-            return _dbContext.Students.Count();
+            return await _dbContext.Students.CountAsync();
+        }
+
+        /// <summary>
+        /// Add student array
+        /// </summary>
+        public async Task AddRangeAsync(IEnumerable<IStudent> pupils)
+        {
+            await _dbContext.Students.AddRangeAsync(pupils.Select(_mapper.Map<StudentDb>));
+
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

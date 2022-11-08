@@ -7,6 +7,6 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// Get count of users
         /// </summary>
-        public IDashboardInfo GetCountOfUsers();
+        public Task<IDashboardInfo> GetCountOfUsers();
     }
 }

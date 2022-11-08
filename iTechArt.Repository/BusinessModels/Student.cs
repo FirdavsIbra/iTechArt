@@ -1,9 +1,11 @@
 ﻿using iTechArt.Domain.Enums;
+using iTechArt.Domain.Helpers;
 using iTechArt.Domain.ModelInterfaces;
+using System.Text.Json.Serialization;
 
 namespace iTechArt.Repository.BusinessModels
 {
-    internal sealed class Student : IStudents
+    internal sealed class Student : IStudent
     {
         /// <summary>
         /// Gets/Sets Id of business model entities
@@ -43,7 +45,8 @@ namespace iTechArt.Repository.BusinessModels
         /// <summary>
         /// Gets/Sets Birthday of student
         /// </summary>
-        public DateTime DateOfBirth { get; internal set; }
+        [JsonConverter(typeof(DateOnlyJsonConverter))]
+        public DateOnly DateOfBirth { get; internal set; }
 
         /// <summary>
         /// Gets/Sets Name of university of student

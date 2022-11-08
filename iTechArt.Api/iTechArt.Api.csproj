@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="appsettings.Development.json" />
-    <Content Remove="appsettings.json" />
-  </ItemGroup>
-
-  <ItemGroup>
 
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
 
@@ -34,7 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="temp\" />
     <Folder Include="wwwroot\files\" />
   </ItemGroup>
 

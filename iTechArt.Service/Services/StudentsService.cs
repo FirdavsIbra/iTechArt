@@ -1,32 +1,29 @@
 ﻿using iTechArt.Domain.ModelInterfaces;
+using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
-using iTechArt.Service.Constants;
-using iTechArt.Service.DTOs;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic.FileIO;
-using System.Drawing;
-using System;
-using System.Globalization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Service.Services
 {
     public class StudentsService : IStudentsService
     {
         private readonly IStudentRepository _studentRepository;
-
-        public StudentsService(IStudentRepository studentRepository)
+        private readonly IStudentParsers _studentParsers;
+        public StudentsService(IStudentRepository studentRepository, IStudentParsers studentParsers)
         {
             _studentRepository = studentRepository;
+            _studentParsers = studentParsers;
         }
 
         /// <summary>
         /// Async method takes no parameters and returns serialized entities as file
         /// </summary>
-        public async Task<IStudents[]> ExportStudentsAsync()
+        [HttpGet()]
+        public async Task<IStudent[]> ExportStudentsAsync()
         {
-            return await _studentRepository.GetAll();
+            return await _studentRepository.GetAllAsync();
         }
 
         /// <summary>
@@ -36,91 +33,46 @@ namespace iTechArt.Service.Services
         {
             var fileExtension = Path.GetExtension(formFile.FileName);
 
-            if (fileExtension == ".xlsx")
+            if (fileExtension == ".xlsx" || fileExtension == ".xls")
             {
-                await ExcelImporter(formFile);
+                await ExcelImportAsync(formFile);
             }
             else if (fileExtension == ".csv")
             {
-                await CsvImporter(formFile);
+                await CsvImportAsync(formFile);
             }
             else if (fileExtension == ".xml")
             {
-                await XmlImporter(formFile);
+                await XmlImportAsync(formFile);
             }
             else
             {
-                throw new Exception("wrong file extention");
+                throw new Exception("wrong file extension");
             }
         }
 
-        private async Task XmlImporter(IFormFile formFile)
+        /// <summary>
+        /// Parse student's file from xml
+        /// </summary>
+        public async Task XmlImportAsync(IFormFile formFile)
         {
-            try
-            {
-                var xmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(StudentsDTO));
-                var streamReader = new StreamReader(formFile.OpenReadStream());
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            await _studentParsers.XmlParseAsync(formFile);
         }
 
-        private async Task CsvImporter(IFormFile formFile)
+        /// <summary>
+        /// Parse student's file from csv
+        /// </summary>
+        public async Task CsvImportAsync(IFormFile formFile)
         {
-            using (var parser = new TextFieldParser(formFile.OpenReadStream()))
-            {
-                var lines = new List<string>();
-                while (!parser.EndOfData)
-                {
-                    //Processing row
-                    lines.Add(parser.ReadLine());
-                }
-                foreach (var line in lines)
-                {
-                    string[] fields = line.Split(",");
-
-                    var obj = new StudentsDTO();
-                    // parse Id
-                    if (long.TryParse(fields[0], out var parsedId))
-                    {
-                        obj.Id = parsedId;
-                    }
-                    obj.FirstName = fields[1];
-                    obj.LastName = fields[2];
-                    // parse Gender
-                    if (byte.TryParse(fields[3], out var parsedGender))
-                    {
-                        obj.Gender = (Domain.Enums.Gender)parsedGender;
-                    }
-                    // parse birthday
-                    try
-                    {
-                        obj.DateOfBirth = DateTime.ParseExact(fields[4], "MM/dd/yyyy", CultureInfo.InvariantCulture);
-                    }
-                    catch (Exception)
-                    {
-
-                        throw new Exception("bad date format");
-                    }
-                    // parse email
-                    obj.Email = fields[5];
-                    // parse password
-                    obj.Password = fields[6];
-                    // parse university
-                    obj.University = fields[7];
-                    // parse majority
-                    obj.Majority = fields[8];
-                    await _studentRepository.AddAsync(obj);
-                }
-            }
+            await _studentParsers.CsvParseAsync(formFile);
         }
 
-        private async Task ExcelImporter(IFormFile formFile)
+        /// <summary>
+        /// Parse student's file from excel
+        /// </summary>
+        public async Task ExcelImportAsync(IFormFile formFile)
         {
-            throw new NotImplementedException();
+            await _studentParsers.ExcelParseAsync(formFile);
         }
     }
 }

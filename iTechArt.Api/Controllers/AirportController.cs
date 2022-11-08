@@ -48,5 +48,24 @@ namespace iTechArt.Api.Controllers
         {
             return Ok( await _airportsService.ExportAirportExcel());
         }
+
+        [HttpPost(ApiConstants.IMPORTEXCEL)]
+        public async Task<IActionResult> ImportExcelFile(IFormFile file)
+        {
+            await _airportsService.AirportExcelParser(file);
+            return Ok();
+        }
+        [HttpPost(ApiConstants.IMPORTCSV)]
+        public async Task<IActionResult> ImportCsvFile(IFormFile file)
+        {
+            await _airportsService.AirportCSVParser(file);
+            return Ok();
+        }
+        [HttpPost(ApiConstants.IMPORTXML)]
+        public async Task<IActionResult> ImportXmlFile(IFormFile file)
+        {
+            await _airportsService.AirportXMLParser(file);
+            return Ok();
+        }
     }
 }

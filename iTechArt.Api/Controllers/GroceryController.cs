@@ -5,11 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace iTechArt.Api.Controllers
 {
     [ApiController]
-    [Route("api/grocery")]
+    [Route(RouteConstants.GROCERIES)]
     public sealed class GroceryController : Controller
     {
         private readonly IGroceryService _groceryService;
-        private readonly string[] fileExtensions = { "xlsx", "xls", "csv", "application/vnd.ms-excel", "officedocument.spreadsheetml.sheet" };
+        private const string CSV = "csv";
+        private const string EXCEL = "officedocument.spreadsheetml.sheet";
+        private const string XML = "xml";
 
         public GroceryController(IGroceryService groceryService)
         {
@@ -17,34 +19,64 @@ namespace iTechArt.Api.Controllers
         }
         /// <summary>
         /// api route which applies the following extensions
-        /// will allow to upload the data from file to db 
+        /// will allow to upload the data from CSV file to db 
         /// </summary>
-        [HttpPost(ApiConstants.IMPORT)]
-        public async Task<IActionResult> Import(IFormFile file)
+        [HttpPost(ApiConstants.IMPORTCSV)]
+        public async ValueTask<IActionResult> ImportCsvGroceryFile(IFormFile file)
         {
-
-            if(file != null && file.ContentType.Contains("csv")) 
+            if (file != null && file.ContentType.Contains(CSV))
             {
-                return Ok(await _groceryService.RecordCsvToDatabase(file));
-            }
-            else if (file != null && file.ContentType.Contains("officedocument.spreadsheetml.sheet")) 
-            {
-                return Ok(await _groceryService.RecordXlsxToDatabase(file));
+                await _groceryService.ImportCSVGrocery(file);
+                return Ok();
             }
             else
-                return BadRequest("Invalid file format!");
+            return BadRequest();
+
+        }
+        /// <summary>
+        /// api route which applies the following extensions
+        /// will allow to upload the data from Excel file to db 
+        /// </summary>
+        [HttpPost(ApiConstants.IMPORTEXCEL)]
+        public async ValueTask<IActionResult> ImportExcelGroceryFile(IFormFile file)
+        {
+            if (file != null && file.ContentType.Contains(EXCEL))
+            {
+                await _groceryService.ImportExcelGrocery(file);
+                return Ok();
+            }
+            else
+                return BadRequest();
+
+        }
+        /// <summary>
+        /// api route which applies the following extensions
+        /// will allow to upload the data from XML file to db 
+        /// </summary>
+        [HttpPost(ApiConstants.IMPORTXML)]
+        public async ValueTask<IActionResult> ImportXMLGroceryFile(IFormFile file)
+        {
+            if (file != null && file.ContentType.Contains(XML))
+            {
+                await _groceryService.ImportXMLGrocery(file);
+                return Ok();
+            }
+            else
+                return BadRequest();
+
         }
         /// <summary>
         /// api route which allows to get all info from db and parse it to the following format
         /// </summary>
         [HttpGet(ApiConstants.EXPORT)]
-        public IActionResult Export()
+        public async Task<IActionResult> Export()
         {
-            return Ok(_groceryService.ExportGrocery());
+            return Ok(await _groceryService.ExportGrocery());
         }
         /// <summary>
-        /// Get count of grocery not implemented yet
+        /// Get total amount of groceries
         /// </summary>
+
         [HttpGet(ApiConstants.GETCOUNTOFGROCERY)]
         public IActionResult GetCountOfGrocery()
         {

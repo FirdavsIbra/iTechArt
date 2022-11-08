@@ -1,5 +1,7 @@
 ﻿using iTechArt.Domain.Enums;
+using iTechArt.Domain.Helpers;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace iTechArt.Database.Entities.Pupils
 {
@@ -13,19 +15,20 @@ namespace iTechArt.Database.Entities.Pupils
         /// <summary>
         /// Gets or sets name of pupil
         /// </summary>
-        [MaxLength(64)] 
+        [MaxLength(128)] 
         public string FirstName { get; set; }
 
         /// <summary>
         /// Gets or sets surname of pupil
         /// </summary>
-        [MaxLength(64)] 
+        [MaxLength(128)] 
         public string LastName { get; set; }
 
         /// <summary>
         /// Gets or sets birthdate of pupil
         /// </summary>
-        public DateTime DateOfBirth { get; set; }
+        [JsonConverter(typeof(DateOnlyJsonConverter))]
+        public DateOnly DateOfBirth { get; set; }
 
         /// <summary>
         /// Gets or sets gender of pupil
@@ -35,13 +38,13 @@ namespace iTechArt.Database.Entities.Pupils
         /// <summary>
         /// Gets or sets phone number of pupil
         /// </summary>
-        [MaxLength(32)]
+        [MaxLength(64)]
         public string PhoneNumber { get; set; }
 
         /// <summary>
         /// Gets or sets address of pupil
         /// </summary>
-        [MaxLength(64)]
+        [MaxLength(128)]
         public string Address { get; set; }
 
         /// <summary>
@@ -53,7 +56,7 @@ namespace iTechArt.Database.Entities.Pupils
         /// <summary>
         /// Gets or sets a name of school, where pupil study
         /// </summary>
-        [MaxLength(128)]
+        [MaxLength(256)]
         public string SchoolName { get; set; }
 
         /// <summary>

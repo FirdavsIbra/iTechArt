@@ -19,5 +19,20 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// Get pupil by id
         /// </summary>
         public Task<IPupil> GetByIdAsync(long id);
+
+        /// <summary>
+        /// Parse pupil's file from excel
+        /// </summary>
+        public Task ImportExcelAsync(IFormFile file);
+
+        /// <summary>
+        /// Parse pupil's file from csv
+        /// </summary>
+        public Task ImportCsvAsync(IFormFile file);
+
+        /// <summary>
+        /// Parse pupil's file from xml
+        /// </summary>
+        public Task ImportXmlAsync(IFormFile file);
     }
 }

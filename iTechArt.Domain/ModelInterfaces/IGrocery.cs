@@ -22,7 +22,7 @@ namespace iTechArt.Domain.ModelInterfaces
         /// <summary>
         /// Date of birth of grocery employee
         /// </summary>
-        public DateTime DateOfBirth { get; }
+        public DateTime Birthday { get; }
 
         /// <summary>
         /// Gender of grocery employee

@@ -1,5 +1,7 @@
 ﻿using iTechArt.Api.Constants;
+using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
+using iTechArt.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
@@ -18,32 +20,78 @@ namespace iTechArt.Api.Controllers
         }
 
         /// <summary>
-        /// route: api/students/import. Takes csv or xlsx file and injects into IStudentService.ImportStudentAsync(IFormFile) 
+        /// Takes csv or xlsx file
         /// </summary>
-        /// <param name="file"></param>
-        /// <returns>if successful returns Status200OK, otherwise Status400BadRequest</returns>
         [HttpPost(ApiConstants.IMPORT)]
-        public async Task<IActionResult> Import(IFormFile file)
+        public async Task<ActionResult> ImportAsync(IFormFile file)
         {
-            var allowedTypes = FileConstants.Extensions;
-            if (file != null && allowedTypes.Contains(Path.GetExtension(file.FileName)))
+            if (file != null)
             {
-                await _studentsService.ImportStudentsAsync(file);
-                return Ok();
+                var fileExtension = Path.GetExtension(file.FileName);
+
+                if (FileConstants.Extensions.Contains(fileExtension))
+                {
+                    await _studentsService.ImportStudentsAsync(file);
+                    return Ok();
+                }
+
+                return BadRequest("Invalid file format!");
             }
             else
             {
-                return BadRequest("Invalid file type!");
+                return BadRequest("Invalid file format!");
             }
         }
 
         /// <summary>
-        /// route: api/students/export. Returns Status200OK
+        /// Get all students
         /// </summary>
-        [HttpGet(ApiConstants.EXPORT)]
-        public async Task<IActionResult> Export()
+        [HttpGet()]
+        public async Task<ActionResult<IStudent[]>> GetAllAsync()
         {
             return Ok(await _studentsService.ExportStudentsAsync());
+        }
+
+        /// <summary>
+        /// Parse student's file from excel
+        /// </summary>
+        [HttpPost(ApiConstants.IMPORTEXCEL)]
+        public async Task<ActionResult> ImportExcelFileAsync(IFormFile file)
+        {
+            if (file is not null)
+            {
+                await _studentsService.ExcelImportAsync(file);
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+        /// <summary>
+        /// Parse student's file from csv
+        /// </summary>
+        [HttpPost(ApiConstants.IMPORTCSV)]
+        public async Task<ActionResult> ImportCsvFileAsync(IFormFile file)
+        {
+            if (file is not null)
+            {
+                await _studentsService.CsvImportAsync(file);
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+        /// <summary>
+        /// Parse student's file from xml
+        /// </summary>
+        [HttpPost(ApiConstants.IMPORTXML)]
+        public async Task<ActionResult> ImportXmlFileAsync(IFormFile file)
+        {
+            if (file is not null)
+            {
+                await _studentsService.XmlImportAsync(file);
+                return Ok();
+            }
+            return BadRequest();
         }
     }
 }

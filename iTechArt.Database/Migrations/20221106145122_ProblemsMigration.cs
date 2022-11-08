@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace iTechArt.Database.Migrations
 {
-    public partial class dataTypeChangeda : Migration
+    public partial class ProblemsMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,8 +19,8 @@ namespace iTechArt.Database.Migrations
                     AirportName = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
                     BuiltDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Capacity = table.Column<int>(type: "integer", nullable: false),
-                    Address = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
-                    City = table.Column<string>(type: "character varying(16)", maxLength: 16, nullable: true),
+                    Address = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    City = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
                     EmpoyeesCount = table.Column<int>(type: "integer", nullable: false),
                     PassengersPerYear = table.Column<long>(type: "bigint", nullable: false),
                     FlightsPerYear = table.Column<long>(type: "bigint", nullable: false),
@@ -35,20 +35,20 @@ namespace iTechArt.Database.Migrations
                 name: "Groceries",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    FirstName = table.Column<string>(type: "text", nullable: true),
-                    LastName = table.Column<string>(type: "text", nullable: true),
-                    DateOfBirth = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Gender = table.Column<byte>(type: "smallint", nullable: false),
-                    Email = table.Column<string>(type: "text", nullable: true),
-                    JobTitle = table.Column<string>(type: "text", nullable: true),
-                    DepartmentRetail = table.Column<string>(type: "text", nullable: true),
-                    Salary = table.Column<double>(type: "double precision", nullable: false)
+                    first_Name = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
+                    last_Name = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
+                    birthday = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    gender = table.Column<byte>(type: "smallint", nullable: false),
+                    email = table.Column<string>(type: "text", nullable: true),
+                    job_title = table.Column<string>(type: "text", nullable: true),
+                    department_retail = table.Column<string>(type: "text", nullable: true),
+                    salary = table.Column<double>(type: "double precision", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Groceries", x => x.Id);
+                    table.PrimaryKey("PK_Groceries", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -76,14 +76,14 @@ namespace iTechArt.Database.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    FirstName = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
-                    LastName = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    FirstName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
+                    LastName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Gender = table.Column<byte>(type: "smallint", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
-                    Address = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
-                    City = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
-                    SchoolName = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
+                    PhoneNumber = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    Address = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
+                    City = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    SchoolName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     Grade = table.Column<byte>(type: "smallint", nullable: false),
                     CourseLanguage = table.Column<byte>(type: "smallint", nullable: false),
                     Shift = table.Column<byte>(type: "smallint", nullable: false)
@@ -103,7 +103,7 @@ namespace iTechArt.Database.Migrations
                     LastName = table.Column<string>(type: "character varying(24)", maxLength: 24, nullable: true),
                     Gender = table.Column<byte>(type: "smallint", nullable: false),
                     Email = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
-                    PhoneNumber = table.Column<string>(type: "character varying(14)", maxLength: 14, nullable: true),
+                    PhoneNumber = table.Column<string>(type: "character varying(16)", maxLength: 16, nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Address = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
                     Salary = table.Column<decimal>(type: "numeric", nullable: false),

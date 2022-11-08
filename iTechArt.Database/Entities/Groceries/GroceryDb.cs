@@ -1,5 +1,6 @@
 ﻿using iTechArt.Domain.Enums;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace iTechArt.Database.Entities.Groceries
 {
@@ -8,52 +9,57 @@ namespace iTechArt.Database.Entities.Groceries
         /// <summary>
         /// get or sets ID of grocery employee
         /// </summary>
-        public long id { get; set; }
+        [Column("id")]
+        public long Id { get; set; }
 
         /// <summary>
         /// get or sets Fist Name of grocery employee
         /// </summary>
         [MaxLength(32)]
-        public string first_Name { get; set; }
+        [Column("first_Name")]
+        public string First_Name { get; set; }
 
         /// <summary>
         /// get or sets Surname of grocery employee
         /// </summary>
         [MaxLength(32)]
-        public string last_Name { get; set; }
+        [Column("last_Name")]
+        public string Last_Name { get; set; }
 
         /// <summary>
         /// get or sets Birthdate of grocery employee
         /// </summary>
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
-        public DateTime birthday { get; set; }
+        [Column("birthday")]
+        public DateTime Birthday { get; set; }
 
         /// <summary>
         /// get or sets Gender of grocery employee
         /// </summary>
-        public Gender gender { get; set; }
+        [Column("gender")]
+        public Gender Gender { get; set; }
 
         /// <summary>
         /// get or sets Email of grocery employee
         /// </summary>
-        [Required]
-        [DataType(DataType.EmailAddress)]
-        [EmailAddress]
-        public string email { get; set; }
+        [Column("email")]
+        public string Email { get; set; }
 
         /// <summary>
         /// get or sets Job position of grocery employee
         /// </summary>
-        public string job_title { get; set; }
+        [Column("job_title")]
+        public string Job_title { get; set; }
 
         /// <summary>
         /// get or sets Current department of grocery employee
         /// </summary>
-        public string department_retail { get; set; }
+        [Column("department_retail")]
+        public string Department_retail { get; set; }
 
         /// <summary>
         /// get or sets Salary of each grocery employee
         /// </summary>
-        public double salary { get; set; }
+        [Column("salary")]
+        public double Salary { get; set; }
     }
 }

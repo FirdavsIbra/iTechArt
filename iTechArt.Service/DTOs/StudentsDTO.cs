@@ -1,58 +1,58 @@
 ﻿using iTechArt.Domain.Enums;
+using iTechArt.Domain.Helpers;
 using iTechArt.Domain.ModelInterfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json.Serialization;
+using System.Xml.Serialization;
 
 namespace iTechArt.Service.DTOs
 {
-    internal sealed class StudentsDTO:IStudents
+    [XmlRoot("record")]
+    public sealed class StudentsDTO: IStudent
     {
         /// <summary>
-        /// Gets/Sets Id of business model entities
+        /// Gets or sets id of student
         /// </summary>
-        public long Id { get; internal set; }
+        public long Id { get; set; }
+        
+        /// <summary>
+        /// Gets or sets name of student
+        /// </summary>
+        public string FirstName { get; set; }
 
         /// <summary>
-        /// Gets/Sets First name of student
+        /// Gets or sets last name of student
         /// </summary>
-        public string FirstName { get; internal set; }
+        public string LastName { get; set; }
 
         /// <summary>
-        /// Gets/Sets Last name of student
+        /// Gets or sets email of student
         /// </summary>
-        public string LastName { get; internal set; }
+        public string Email { get; set; }
 
         /// <summary>
-        /// Gets/Sets Email of student
+        /// Gets or sets password of student
         /// </summary>
-        public string Email { get; internal set; }
+        public string Password { get; set; }
 
         /// <summary>
-        /// Gets/Sets Password of student
+        /// Gets or sets string value majority, field of study
         /// </summary>
-        public string Password { get; internal set; }
+        public string Majority { get; set; }
 
         /// <summary>
-        /// Gets/Sets String value majority, field of study
+        /// Gets or sets gender of student
         /// </summary>
-        public string Majority { get; internal set; }
+        public Gender Gender { get; set; }
 
         /// <summary>
-        /// Gets/Sets boolean Gender entity of student
+        /// Gets or sets birth date of student
         /// </summary>
-        public Gender Gender { get; internal set; }
+        [JsonConverter(typeof(DateOnlyJsonConverter))]
+        public DateOnly DateOfBirth { get; set; }
 
         /// <summary>
-        /// Gets/Sets Birthday of student
+        /// Gets or sets name of university of student
         /// </summary>
-        public DateTime DateOfBirth { get; internal set; }
-
-        /// <summary>
-        /// Gets/Sets Name of university of student
-        /// </summary>
-        public string University { get; internal set; }
+        public string University { get; set; }
     }
 }
