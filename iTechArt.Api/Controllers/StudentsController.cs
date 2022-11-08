@@ -22,7 +22,7 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// Takes csv or xlsx file
         /// </summary>
-        [HttpPost(ApiConstants.IMPORT)]
+        [HttpPost(ApiConstants.IMPORT), Obsolete]
         public async Task<ActionResult> ImportAsync(IFormFile file)
         {
             if (file != null)
@@ -46,7 +46,7 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// Get all students
         /// </summary>
-        [HttpGet()]
+        [HttpGet("get_all")]
         public async Task<ActionResult<IStudent[]>> GetAllAsync()
         {
             return Ok(await _studentsService.ExportStudentsAsync());
