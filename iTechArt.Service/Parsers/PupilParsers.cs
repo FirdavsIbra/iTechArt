@@ -1,13 +1,10 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
-using CsvHelper.TypeConversion;
 using iTechArt.Domain.Enums;
 using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Service.Constants;
 using iTechArt.Service.DTOs;
-using iTechArt.Service.Helpers;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;
 using System.Globalization;
@@ -134,15 +131,13 @@ namespace iTechArt.Service.Parsers
             }
         }
     }
-    internal sealed class PupilMap : ClassMap<PupilForCreationDto>
+    public sealed class PupilMap : ClassMap<PupilForCreationDto>
     {
         public PupilMap()
         {
-            var tmpConverter = new DateOnlyHelper();
-
             Map(p => p.FirstName).Name("FirstName");
             Map(p => p.LastName).Name("LastName");
-            Map(p => p.DateOfBirth).Name("DateOfBirth").TypeConverter(tmpConverter);
+            Map(p => p.DateOfBirth).Name("DateOfBirth");
             Map(p => p.Gender).Name("Gender");
             Map(p => p.PhoneNumber).Name("PhoneNumber");
             Map(p => p.Address).Name("Address");

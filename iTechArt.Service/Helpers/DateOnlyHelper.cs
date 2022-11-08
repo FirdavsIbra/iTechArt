@@ -4,11 +4,10 @@ using CsvHelper.TypeConversion;
 
 namespace iTechArt.Service.Helpers
 {
-    internal class DateOnlyHelper : DefaultTypeConverter
+    public class DateOnlyHelper : StringTypeConverterBase<DateOnly>
     {
-        public override object ConvertFromString(string text, IReaderRow row, MemberMapData memberMapData)
-        {
-            return new DateOnly(2000, 12, 12);
-        }
+        protected override DateOnly Parse(string s) => DateOnly.Parse(s);
+
+        protected override string ToIsoString(DateOnly source) => source.ToString();
     }
 }
