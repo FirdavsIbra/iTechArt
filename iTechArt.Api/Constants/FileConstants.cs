@@ -13,6 +13,7 @@
         public static readonly string csv = ".csv";
         public static readonly string xml = ".xml";
         public static readonly string xlsx = ".xlsx";
+        public static readonly string xls = ".xls";
 
         /// <summary>
         /// Content types of CSV files

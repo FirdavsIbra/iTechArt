@@ -1,6 +1,6 @@
 ﻿using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
-using iTechArt.Domain.ParserInterfaces;
+using iTechArt.Domain.ParserInterfaces.IPoliceParsers;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Service.DTOs;
 using Microsoft.AspNetCore.Http;
@@ -18,10 +18,11 @@ namespace iTechArt.Service.Parsers.PoliceParser
         }
 
         /// <summary>
-        /// Parse XLSX file and save to database
+        /// Parse XLSX or XLS file and save to database
         /// </summary>
         public async Task ReadExcelAsync(IFormFile file)
         {
+            string fileExtension = Path.GetExtension(file.FileName);
             var polices = new List<IPolice>();
 
             using (var fileStream = new MemoryStream())
@@ -31,6 +32,7 @@ namespace iTechArt.Service.Parsers.PoliceParser
                 {
                     ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
                     ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
+
                     var rowCount = worksheet.Dimension.Rows;
                     for (int row = 2; row <= rowCount; row++)
                     {

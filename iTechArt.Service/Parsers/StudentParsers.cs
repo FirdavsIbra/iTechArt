@@ -4,7 +4,6 @@ using iTechArt.Domain.Enums;
 using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Service.DTOs;
-using iTechArt.Service.Helpers;
 using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;
 using System.Globalization;
@@ -126,19 +125,17 @@ namespace iTechArt.Service.Parsers
         }
     }
 
-    internal sealed class StudentMap : ClassMap<StudentsDTO>
+    public sealed class StudentMap : ClassMap<StudentsDTO>
     {
         public StudentMap()
         {
-            var tmpConverter = new DateOnlyHelper();
-
             Map(s => s.FirstName).Name("FirstName");
             Map(s => s.LastName).Name("LastName");
             Map(s => s.Email).Name("Email");
             Map(s => s.Password).Name("Password");
             Map(s => s.Majority).Name("Majority");
             Map(s => s.Gender).Name("Gender");
-            Map(s => s.DateOfBirth).Name("DateOfBirth").TypeConverter(tmpConverter);
+            Map(s => s.DateOfBirth).Name("DateOfBirth");
             Map(s => s.University).Name("University");
         }
     }

@@ -10,8 +10,9 @@
 
         public const string IMPORTCSV = "import_csv";
 
-        public const string IMPORTEXCEL = "import_xlsx";
+        public const string IMPORTEXCEL = "import_excel";
 
         public const string IMPORTXML = "import_xml";
+
     }
 }

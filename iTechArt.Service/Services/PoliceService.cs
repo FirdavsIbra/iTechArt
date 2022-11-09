@@ -1,7 +1,7 @@
 ﻿using CsvHelper;
 using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
-using iTechArt.Domain.ParserInterfaces;
+using iTechArt.Domain.ParserInterfaces.IPoliceParsers;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using iTechArt.Service.Constants;
@@ -35,13 +35,13 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Export data from the databse
         /// </summary>
-        public async Task<IPolice[]> ExportPoliceData()
+        public async Task<IPolice[]> GetAllPolice()
         {
             return await _policeRepository.GetAllAsync();
         }
 
         /// <summary>
-        /// Import XLSX data to the database
+        /// Import XLSX or XLS data to the database
         /// </summary>
         public async Task ImportExcel(IFormFile formFile)
         {
@@ -72,14 +72,6 @@ namespace iTechArt.Service.Services
         public async Task AddPolice(IPolice police)
         {
             await _policeRepository.AddAsync(police);
-        }
-
-        /// <summary>
-        /// Get all Police entities from database
-        /// </summary>
-        public async Task<IPolice[]> GetAllPolice()
-        {
-            return await _policeRepository.GetAllAsync();
         }
 
 

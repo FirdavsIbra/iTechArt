@@ -1,6 +1,6 @@
 ﻿using CsvHelper;
 using iTechArt.Domain.ModelInterfaces;
-using iTechArt.Domain.ParserInterfaces;
+using iTechArt.Domain.ParserInterfaces.IPoliceParsers;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Service.DTOs;
 using Microsoft.AspNetCore.Http;

@@ -6,9 +6,10 @@ namespace iTechArt.Domain.ServiceInterfaces
     public interface IPoliceService
     {
         /// <summary>
-        /// function to import XLSX data to the database
+        /// function to import XLSX or XLS data to the database
         /// </summary>
         public Task ImportExcel(IFormFile formFile);
+
 
         /// <summary>
         /// function to import XML data to the database
@@ -23,17 +24,13 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// function to export data from the database
         /// </summary>
-        public Task<IPolice[]> ExportPoliceData();
+        public Task<IPolice[]> GetAllPolice();
 
         // <summary>
         /// Add or Update Police entity to/from database
         /// </summary>
         public Task AddPolice(IPolice police);
 
-        /// <summary>
-        /// Get all Police entities from database
-        /// </summary>
-        public Task<IPolice[]> GetAllPolice();
 
 
         ////////////////////////////////////////////////////////////////////////
