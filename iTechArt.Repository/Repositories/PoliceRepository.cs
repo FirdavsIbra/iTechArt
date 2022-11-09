@@ -27,7 +27,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Add or Update Police entity to/from database
+        /// Add or Update Police entity to/from database.
         /// </summary>
         public async Task AddAsync(IPolice entity)
         {
@@ -40,7 +40,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Get all Police data from database
+        /// Get all Police data from database.
         /// </summary>
         public async Task<IPolice[]> GetAllAsync()
         {
@@ -48,7 +48,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Get Police by id
+        /// Get Police by id.
         /// </summary>
         public async Task<IPolice> GetByIdAsync(long id)
         {
@@ -57,7 +57,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Delete Police from database
+        /// Delete Police from database.
         /// </summary>
         public async Task DeleteAsync(long id)
         {
@@ -70,7 +70,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Get total count of police
+        /// Get total count of police.
         /// </summary>
         public async Task<int> GetCountOfPolice()
         {
@@ -79,7 +79,7 @@ namespace iTechArt.Repository.Repositories
 
 
         ///// <summary>
-        ///// Update entity
+        ///// Update entity.
         ///// </summary>
         public async Task UpdateAsync(IPolice entity)
         {
@@ -92,7 +92,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Adds collection of entities to the database
+        /// Adds collection of entities to the database.
         /// </summary>
         public async Task AddRangeAsync(IPolice[] polices)
         {

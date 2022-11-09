@@ -1,54 +1,52 @@
-﻿using CsvHelper.Configuration.Attributes;
-using iTechArt.Domain.Enums;
+﻿using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iTechArt.Service.DTOs
+namespace ITechArt.Parsers.Dtos
 {
     public class PoliceDto : IPolice
     {
         /// <summary>
-        /// Police Officers Id
+        /// Gets and Sets Police Officers Id.
         /// </summary>
-        public long Id { get; set; } 
+        public long Id { get; set; }
 
         /// <summary>
-        /// Police Officers Firstname
+        /// Gets and Sets Police Officers Firstname.
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// Police Officers Lastname
+        /// Gets and Sets Police Officers Lastname.
         /// </summary>
         public string Surname { get; set; }
 
         /// <summary>
-        /// Police Officers email address
+        /// Gets and Sets Police Officers email address.
         /// </summary>
         public string Email { get; set; }
 
         /// <summary>
-        /// Police Officers gender
+        /// Gets and Sets Police Officers gender.
         /// </summary>
         public Gender Gender { get; set; }
 
         /// <summary>
-        /// Police Officers address
+        /// Gets and Sets Police Officers address.
         /// </summary>
         public string Address { get; set; }
 
         /// <summary>
-        /// Police Officers job title
+        /// Gets and Sets Police Officers job title.
         /// </summary> 
         public string JobTitle { get; set; }
 
         /// <summary>
-        /// Police Officers salary in US dollars with 2 double precision
+        /// Gets and Sets Police Officers salary in US dollars with 2 double precision.
         /// </summary>
         public double Salary { get; set; }
     }

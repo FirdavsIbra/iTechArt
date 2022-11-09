@@ -3,22 +3,22 @@
     public static class FileConstants
     {
         /// <summary>
-        /// types of extensions
+        /// types of extensions.
         /// </summary>
         public static readonly string[] Extensions = { ".xlsx", ".xls", ".csv", ".xml" };
 
         /// <summary>
-        /// excel extensions
+        /// excel extensions.
         /// </summary>
         public static readonly string[] excelExtensions = { ".xlsx", ".xls", ".xlsm", ".xlsb", ".xltx", ".xltm", ".xlt", ".xlam", ".xla", ".xlw" };
         
         /// <summary>
-        /// csv extensions
+        /// csv extensions.
         /// </summary>
         public static readonly string[] csvExtensions = { ".csv" };
 
         /// <summary>
-        /// Constant extensions for file
+        /// Constant extensions for file.
         /// </summary>
         public static string xlsxExt = ".xlsx";
         public static string csvExt = ".csv";
@@ -26,12 +26,12 @@
 
 
         /// <summary>
-        /// xml extensions
+        /// xml extensions.
         /// </summary>
         public static readonly string[] xmlExtensions = { ".xml" };
 
         /// <summary>
-        /// Content types of CSV files
+        /// Content types of CSV files.
         /// </summary>
         public static readonly string[] CSV =
         {
@@ -39,7 +39,7 @@
         };
 
         /// <summary>
-        /// Content types of XML files
+        /// Content types of XML files.
         /// </summary>
         public static readonly string[] XML =
         {
@@ -50,7 +50,7 @@
         };
 
         /// <summary>
-        /// Content types of EXCEL files
+        /// Content types of EXCEL files.
         /// </summary>
         public static readonly string[] EXCEL =
         {

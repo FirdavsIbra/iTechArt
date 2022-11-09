@@ -24,6 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="..\iTechArt.Database\iTechArt.Database.csproj" />
     <ProjectReference Include="..\iTechArt.Domain\iTechArt.Domain.csproj" />
+    <ProjectReference Include="..\ITechArt.Parsers\ITechArt.Parsers.csproj" />
     <ProjectReference Include="..\iTechArt.Repository\iTechArt.Repository.csproj" />
     <ProjectReference Include="..\iTechArt.Service\iTechArt.Service.csproj" />
   </ItemGroup>

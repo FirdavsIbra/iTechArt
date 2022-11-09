@@ -1,6 +1,5 @@
 using iTechArt.Database.DbContexts;
 using iTechArt.Domain.ParserInterfaces;
-using iTechArt.Domain.ParserInterfaces.IPoliceParsers;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using iTechArt.Repository.Mappers;
@@ -8,8 +7,9 @@ using iTechArt.Repository.Repositories;
 using iTechArt.Serivce.Services;
 using iTechArt.Service.Helpers;
 using iTechArt.Service.Parsers;
-using iTechArt.Service.Parsers.PoliceParser;
 using iTechArt.Service.Services;
+using ITechArt.Parsers.IPoliceParsers;
+using ITechArt.Parsers.PoliceParsers;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,9 +32,9 @@ builder.Services.AddScoped<IPoliceService, PoliceService>();
 builder.Services.AddScoped<IPupilService, PupilService>();
 
 // Parser Services
-builder.Services.AddScoped<IExcelParser, ExcelParser>();
-builder.Services.AddScoped<IXmlParser, XmlParser>();
-builder.Services.AddScoped<ICsvParser, CsvParser>();
+builder.Services.AddScoped<IExcelParse, ParseExcel>();
+builder.Services.AddScoped<IXmlParse, ParseXml>();
+builder.Services.AddScoped<ICsvParse, ParseCsv>();
 builder.Services.AddScoped<IMedStaffParser, MedStaffParser>();
 builder.Services.AddScoped<IGroceryParsers, GroceryParsers>();
 builder.Services.AddScoped<IAirportParsers, AirportParser>();

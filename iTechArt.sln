@@ -15,7 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A3A8E85F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iTechArt.Repository", "iTechArt.Repository\iTechArt.Repository.csproj", "{A0856B03-9E51-4EC7-8A7E-ED16393B813F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iTechArt.Database", "iTechArt.Database\iTechArt.Database.csproj", "{D35EAFEA-C992-4315-A9FC-751B4B524212}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iTechArt.Database", "iTechArt.Database\iTechArt.Database.csproj", "{D35EAFEA-C992-4315-A9FC-751B4B524212}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITechArt.Parsers", "ITechArt.Parsers\ITechArt.Parsers.csproj", "{2A0AAF84-ED95-4581-96F8-84106BF00B10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{D35EAFEA-C992-4315-A9FC-751B4B524212}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D35EAFEA-C992-4315-A9FC-751B4B524212}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D35EAFEA-C992-4315-A9FC-751B4B524212}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A0AAF84-ED95-4581-96F8-84106BF00B10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A0AAF84-ED95-4581-96F8-84106BF00B10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A0AAF84-ED95-4581-96F8-84106BF00B10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A0AAF84-ED95-4581-96F8-84106BF00B10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +59,7 @@ Global
 		{1A084046-35A3-45A2-9CF9-84AE9FB15BB3} = {9CA3BFE5-883A-4999-A14C-3C5885E36D26}
 		{A0856B03-9E51-4EC7-8A7E-ED16393B813F} = {9CA3BFE5-883A-4999-A14C-3C5885E36D26}
 		{D35EAFEA-C992-4315-A9FC-751B4B524212} = {9CA3BFE5-883A-4999-A14C-3C5885E36D26}
+		{2A0AAF84-ED95-4581-96F8-84106BF00B10} = {9CA3BFE5-883A-4999-A14C-3C5885E36D26}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D246BE6A-6129-4AAE-AA25-888B1EAADEA7}

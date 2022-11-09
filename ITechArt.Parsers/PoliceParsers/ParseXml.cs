@@ -1,31 +1,26 @@
 ﻿using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
-using iTechArt.Domain.ParserInterfaces.IPoliceParsers;
 using iTechArt.Domain.RepositoryInterfaces;
-using iTechArt.Service.DTOs;
-using Microsoft.AspNetCore.Hosting;
+using ITechArt.Parsers.Dtos;
+using ITechArt.Parsers.IPoliceParsers;
 using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Xml;
 
-namespace iTechArt.Service.Parsers.PoliceParser
+namespace ITechArt.Parsers.PoliceParsers
 {
-    public class XmlParser : IXmlParser
+    public class ParseXml : IXmlParse
     {
-        private readonly IPoliceRepository _policeRepository;
-
-        public XmlParser(IPoliceRepository policeRepository)
-        {
-            _policeRepository = policeRepository;
-        }
-
-
         /// <summary>
-        /// Parse XML file and save to database
+        /// Parse XML file and returns array of entities.
         /// </summary>
-        public async Task ReadXMLAsync(IFormFile file)
+        public async Task<IPolice[]> ParseXMLAsync(IFormFile file)
         {
             List<IPolice> polices = new List<IPolice>();
-
             using (var fileStream = new MemoryStream())
             {
                 await file.CopyToAsync(fileStream);
@@ -40,14 +35,14 @@ namespace iTechArt.Service.Parsers.PoliceParser
                         Name = node["Name"].InnerText,
                         Surname = node["Surname"].InnerText,
                         Email = node["Email"].InnerText,
-                        Gender = (Gender)Convert.ToByte(node["Gender"].InnerText),
+                        Gender = Enum.Parse<Gender>(node["Gender"].InnerText),
                         Address = node["Address"].InnerText,
                         JobTitle = node["JobTitle"].InnerText,
                         Salary = Convert.ToDouble(node["Salary"].InnerText)
                     };
                     polices.Add(policeDto);
                 }
-                await _policeRepository.AddRangeAsync(polices.ToArray());
+                return polices.ToArray();
             }
         }
     }
