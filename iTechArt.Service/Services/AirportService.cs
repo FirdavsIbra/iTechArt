@@ -70,7 +70,7 @@ namespace iTechArt.Service.Services
         /// </summary>
         public async Task AirportCSVParser(IFormFile file)
         {
-            await _airportParsers.CsvParser(file);
+            await _airportParsers.CsvParserAsync(file);
         }
 
         /// <summary>
