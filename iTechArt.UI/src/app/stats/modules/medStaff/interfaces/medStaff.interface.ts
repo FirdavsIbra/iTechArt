@@ -1,4 +1,4 @@
-export interface ImedStaff {
+export interface IMedStaff {
   id: number;
   firstName: string;
   lastName: string;

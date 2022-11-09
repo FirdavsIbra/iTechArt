@@ -19,6 +19,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Spire.XLS" Version="12.10.1" />
     <PackageReference Include="System.Collections" Version="4.3.0" />
   </ItemGroup>
 

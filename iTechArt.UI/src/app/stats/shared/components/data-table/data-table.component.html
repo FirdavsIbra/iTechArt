@@ -1,13 +1,16 @@
 <table class="grid">
-  <thead>
-    <tr>
-      <th *ngFor="let column of columns">{{ column }}</th>
-    </tr>
+  <thead class="grid__columns">
+  <th *ngFor="let col of columns" [style.width.px]="col.width">
+    {{ col.header }}
+  </th>
   </thead>
-
-  <tbody>
+  <tbody class="grid__rows">
     <tr *ngFor="let row of data">
-      <td *ngFor="let prop of props">{{ row[prop] }}</td>
+      <td
+        *ngFor="let col of columns"
+        style="padding-left: 1rem"
+      > {{row[col.field]}}
+      </td>
     </tr>
   </tbody>
 </table>

@@ -25,16 +25,23 @@ namespace iTechArt.Api.Controllers
         [HttpPost(ApiConstants.IMPORTEXCEL)]
         public async Task<IActionResult> ImportExcel(IFormFile file)
         {
-            string fileExtension = Path.GetExtension(file.FileName);
-
-            if (file != null && fileExtension == FileConstants.xlsx || fileExtension == FileConstants.xls)
+            if (file != null)
             {
-                await _policeService.ImportExcel(file);
-                return Ok();
+                string fileExtension = Path.GetExtension(file.FileName);
+
+                if (fileExtension == FileConstants.xlsx || fileExtension == FileConstants.xls)
+                {
+                    await _policeService.ImportExcel(file);
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest("Invalid file format!");
+                }
             }
             else
             {
-                return BadRequest("Invalid file format!");
+                return BadRequest("No input found!");
             }
         }
 
@@ -83,13 +90,11 @@ namespace iTechArt.Api.Controllers
         /// route: api/police/export
         /// Gets all data about police from the database
         /// </summary>
-        [HttpGet()]
+        [HttpGet("get_all")]
         public async Task<ActionResult<IPolice[]>> GetAllData()
         {
             return Ok(await _policeService.GetAllPolice());
         }
-
-
 
 
         ////////////////////////////////////////////////////////////////////////////////
