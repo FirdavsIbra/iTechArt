@@ -12,27 +12,18 @@ import { UnitsTypes } from "../../../../shared/types/units-types";
 export class AirportPageComponent implements OnInit {
   public unit: UnitsEnum = UnitsEnum.airport;
   public data: UnitsTypes | undefined;
-  public props = [
-    'id',
-    'name',
-    'builtDate',
-    'capacity',
-    'address',
-    'city',
-    'passengersPerYear',
-    'flightsPerYear',
-    'averageTicketPrice',
-  ];
+
   public columns = [
-    'Id',
-    'Name',
-    'Built Date',
-    'Capacity',
-    'Address',
-    'City',
-    'Passengers Per Year',
-    'Flights Per Year',
-    'Average Ticket Price',
+    { field: 'id', header: 'Id', width: 450 },
+    { field: 'name', header: 'Name', width: 200 },
+    { field: 'builtDate', header: 'Built Date', width: 100 },
+    { field: 'capacity', header: 'Capacity', width: 100 },
+    { field: 'address', header: 'Address', width: 100 },
+    { field: 'city', header: 'City', width: 100 },
+    { field: 'passengersPerYear', header: 'Passangers per Year', width: 100 },
+    { field: 'flightsPerYear', header: 'Flights per Year', width: 100 },
+    { field: 'averageTicketPrice', header: 'Average Ticket Price', width: 100 },
+
   ];
 
   public constructor(private statsService: StatsService) {}

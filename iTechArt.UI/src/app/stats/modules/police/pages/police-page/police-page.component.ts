@@ -12,27 +12,17 @@ import { StatsService } from '../../../../stats.service';
 export class PolicePageComponent implements OnInit {
   public unit: UnitsEnum = UnitsEnum.police;
   public data: UnitsTypes | undefined;
+
   public columns = [
-    'Id',
-    'First Name',
-    'Last Name',
-    'Gender',
-    'Email',
-    'Address',
-    'Job Title',
-    'Weight In Kg',
-    'Height In Cm',
+    { field: 'id', header: 'Id', width: 450 },
+    { field: 'firstName', header: 'First Name', width: 200 },
+    { field: 'lastName', header: 'Last Name', width: 100 },
+    { field: 'gender', header: 'Gender', width: 100 },
+    { field: 'email', header: 'Email', width:100 },
+    { field: 'address', header: 'Address', width:100 },
+    { field: 'jobTitle', header: 'Job Title', width:100 }
   ];
-  public props = [
-    'id',
-    'firstName',
-    'lastName',
-    'gender',
-    'email',
-    'address',
-    'weightInKg',
-    'heightInCM',
-  ];
+
 
   public constructor(private statsService: StatsService) {}
 

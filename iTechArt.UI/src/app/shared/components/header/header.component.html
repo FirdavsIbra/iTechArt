@@ -24,32 +24,32 @@
     <ul class="menu" [ngClass]="{ menu_active: menuIsActive }">
       <div>
         <li>
-          <p class="nav-cursor" routerLink="{{ units.police.path }}">
+          <p class="nav-cursor" routerLink="{{ units.police.path }" (click)="toggleMenu()">
             {{ unitsTitles.police.toString().toUpperCase() }}
           </p>
         </li>
         <li>
-          <p class="nav-cursor" routerLink="{{ units.pupils.path }}">
+          <p class="nav-cursor" routerLink="{{ units.pupils.path }}"  (click)="toggleMenu()">
             {{ unitsTitles.pupils.toString().toUpperCase() }}
           </p>
         </li>
         <li>
-          <p class="nav-cursor" routerLink="{{ units.students.path }}">
+          <p class="nav-cursor" routerLink="{{ units.students.path }}"  (click)="toggleMenu()">
             {{ unitsTitles.students.toString().toUpperCase() }}
           </p>
         </li>
         <li>
-          <p class="nav-cursor" routerLink="{{ units.airport.path }}">
+          <p class="nav-cursor" routerLink="{{ units.airport.path }}"  (click)="toggleMenu()">
             {{ unitsTitles.airport.toString().toUpperCase() }}
           </p>
         </li>
         <li>
-          <p class="nav-cursor" routerLink="{{ units.grocery.path }}">
+          <p class="nav-cursor" routerLink="{{ units.grocery.path }}"  (click)="toggleMenu()">
             {{ unitsTitles.grocery.toString().toUpperCase() }}
           </p>
         </li>
         <li>
-          <p class="nav-cursor" routerLink="{{ units.medStaff.path }}">
+          <p class="nav-cursor" routerLink="{{ units.medStaff.path }}"  (click)="toggleMenu()">
             {{ unitsTitles.medStaff.toString().toUpperCase() }}
           </p>
         </li>

@@ -78,6 +78,7 @@ export class ExcelExportComponent {
         alert('Uploaded Successfully.');
         console.log(data);
         this.isFormButtonDisabled = false;
+        location.reload();
       },
       error: (error: string) => {
         alert(`There was an error! ${error}`);

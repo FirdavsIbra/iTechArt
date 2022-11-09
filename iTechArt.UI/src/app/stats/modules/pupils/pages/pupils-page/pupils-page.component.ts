@@ -12,34 +12,21 @@ import { StatsService } from '../../../../stats.service';
 export class PupilsPageComponent implements OnInit {
   public unit: UnitsEnum = UnitsEnum.pupils;
   public data: UnitsTypes | undefined;
+
   public columns = [
-    'Id',
-    'First Name',
-    'Last Name',
-    'Date of Birth',
-    'Gender',
-    'Phone Number',
-    'Address',
-    'City',
-    'School Name',
-    'Grade',
-    'Course Language',
-    'Shift',
+    { field: 'id', header: 'Id', width: 450 },
+    { field: 'firstName', header: 'First Name', width: 200 },
+    { field: 'lastName', header: 'Last Name', width: 100 },
+    { field: 'dateOfBirth', header: 'Date of Birth', width: 100 },
+    { field: 'phoneNumber', header: 'Phone Number' },
+    { field: 'address', header: 'Address' },
+    { field: 'city', header: 'City' },
+    { field: 'schoolName', header: 'School Name' },
+    { field: 'grade', header: 'Grade' },
+    { field: 'course', header: 'Course' },
+    { field: 'shift', header: 'Shift' },
   ];
-  public props = [
-    'id',
-    'firstName',
-    'lastName',
-    'dateOfBirth',
-    'gender',
-    'phoneNumber',
-    'address',
-    'city',
-    'schoolName',
-    'grade',
-    'courseLanguage',
-    'shift',
-  ];
+
 
   public constructor(private statsService: StatsService) {}
 
