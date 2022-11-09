@@ -4,7 +4,7 @@ export interface IGrocery {
   lastName: string;
   gender: number;
   email: string;
-  birthDay: number;
+  birthday: number | Date; //or date
   salary: number;
   departmentRetail: string;
   jobTitle: string;

@@ -1,12 +1,23 @@
 .grid {
   border-collapse: collapse;
-  margin: 20px;
-
-}
-
-.grid th, td {
-  border: 1px solid black;
-  padding: 0.5em;
-  background-color: #3a5696;
-  color:white;
+  margin: 30px;
+  th,
+  td {
+    border: 1px solid black;
+    padding: 0.5em;
+  }
+  &__columns {
+    th,
+    td {
+      background-color: #3a5696;
+      color: white;
+    }
+  }
+  &__rows {
+    th,
+    td {
+      background-color: white;
+      color: #3a5696;
+    }
+  }
 }

@@ -1,5 +1,5 @@
 <header class="header">
-  <nav>
+  <nav style="min-height: 100%">
     <div class="logo-container header-element">
       <div routerLink="">
         <img class="logo-image" src="/assets/logo.png" alt="" />
@@ -7,53 +7,56 @@
       </div>
     </div>
 
-    <div class="hamburger nav-cursor"
-         (click)="toggleMenu()"
-         [ngClass]="{ 'hamburger_active': menuIsActive } ">
-      <span class="line line1 nav-cursor "></span>
-      <span class="line line2 nav-cursor"></span>
-      <span class="line line3 nav-cursor"></span>
+    <div class="hamburger-container">
+      <div
+        class="hamburger nav-cursor"
+        (click)="toggleMenu()"
+        [ngClass]="{ hamburger_active: menuIsActive }"
+      >
+        <span class="line line1 nav-cursor"></span>
+        <span class="line line2 nav-cursor"></span>
+        <span class="line line3 nav-cursor"></span>
+      </div>
     </div>
-
 
     <div class="overlay" *ngIf="menuIsActive" (click)="toggleMenu()"></div>
 
-    <ul class="menu" [ngClass]="{ 'menu_active': menuIsActive } ">
-
-      <li>
-        <p class="nav-cursor" routerLink="{{ units.police.path }}">
-          {{ unitsTitles.police.toString().toUpperCase() }}
-        </p>
-      </li>
-      <li>
-        <p class="nav-cursor" routerLink="{{ units.pupils.path }}">
-          {{ unitsTitles.pupils.toString().toUpperCase() }}
-        </p>
-      </li>
-      <li>
-        <p class="nav-cursor" routerLink="{{ units.students.path }}">
-          {{ unitsTitles.students.toString().toUpperCase() }}
-        </p>
-      </li>
-      <li>
-        <p class="nav-cursor" routerLink="{{ units.airport.path }}">
-          {{ unitsTitles.airport.toString().toUpperCase() }}
-        </p>
-      </li>
-      <li>
-        <p class="nav-cursor" routerLink="{{ units.grocery.path }}">
-          {{ unitsTitles.grocery.toString().toUpperCase() }}
-        </p>
-      </li>
-      <li>
-        <p class="nav-cursor" routerLink="{{ units.medStaff.path }}">
-          {{ unitsTitles.medStaff.toString().toUpperCase() }}
-        </p>
-      </li>
+    <ul class="menu" [ngClass]="{ menu_active: menuIsActive }">
+      <div>
+        <li>
+          <p class="nav-cursor" routerLink="{{ units.police.path }" (click)="toggleMenu()">
+            {{ unitsTitles.police.toString().toUpperCase() }}
+          </p>
+        </li>
+        <li>
+          <p class="nav-cursor" routerLink="{{ units.pupils.path }}"  (click)="toggleMenu()">
+            {{ unitsTitles.pupils.toString().toUpperCase() }}
+          </p>
+        </li>
+        <li>
+          <p class="nav-cursor" routerLink="{{ units.students.path }}"  (click)="toggleMenu()">
+            {{ unitsTitles.students.toString().toUpperCase() }}
+          </p>
+        </li>
+        <li>
+          <p class="nav-cursor" routerLink="{{ units.airport.path }}"  (click)="toggleMenu()">
+            {{ unitsTitles.airport.toString().toUpperCase() }}
+          </p>
+        </li>
+        <li>
+          <p class="nav-cursor" routerLink="{{ units.grocery.path }}"  (click)="toggleMenu()">
+            {{ unitsTitles.grocery.toString().toUpperCase() }}
+          </p>
+        </li>
+        <li>
+          <p class="nav-cursor" routerLink="{{ units.medStaff.path }}"  (click)="toggleMenu()">
+            {{ unitsTitles.medStaff.toString().toUpperCase() }}
+          </p>
+        </li>
+      </div>
+      <div class="button-container header-element">
+        <button class="button-secondary">Log Out</button>
+      </div>
     </ul>
-
-    <div class="button-container header-element">
-      <button class="button-secondary">Log Out</button>
-    </div>
   </nav>
 </header>

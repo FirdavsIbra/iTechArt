@@ -29,6 +29,7 @@ body {
   border-radius: 5px;
   cursor: pointer;
   transition: all 1s ease;
+  min-width: 90px;
   &:hover {
     background-color: #3a5696;
     color: white;
