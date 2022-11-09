@@ -132,13 +132,11 @@ namespace iTechArt.Service.Parsers
             }         
     }
 
-    internal class AirportMap : ClassMap<AirportDTO>
+    public sealed class AirportMap : ClassMap<AirportDTO>
     {
         public AirportMap()
         {
-            var tmpConverter = new DateOnlyHelper();
-
-            Map(a => a.AirportName).Name("Airportname");
+            Map(a => a.AirportName).Name("AirportName");
             Map(a => a.BuiltDate).Name("BuiltDate");
             Map(a => a.Capacity).Name("Capacity");
             Map(a => a.Address).Name("Address");
