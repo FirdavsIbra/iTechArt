@@ -1,6 +1,6 @@
 <table class="grid">
   <thead class="grid__columns">
-  <th *ngFor="let col of columns" [style.max-width.px]="col.width">
+  <th *ngFor="let col of columns" [style.width.px]="col.width">
     {{ col.header }}
   </th>
   </thead>
@@ -8,9 +8,9 @@
     <tr *ngFor="let row of data">
       <td
         *ngFor="let col of columns"
-        [style.max-width.px]="col.width"
         style="padding-left: 1rem"
-      >
+      > {{row[col.field]}}
+      </td>
     </tr>
   </tbody>
 </table>

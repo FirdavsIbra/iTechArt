@@ -14,17 +14,17 @@ export class PupilsPageComponent implements OnInit {
   public data: UnitsTypes | undefined;
 
   public columns = [
-    { field: 'id', header: 'Id', width: 450 },
-    { field: 'firstName', header: 'First Name', width: 200 },
-    { field: 'lastName', header: 'Last Name', width: 100 },
-    { field: 'dateOfBirth', header: 'Date of Birth', width: 100 },
-    { field: 'phoneNumber', header: 'Phone Number' },
-    { field: 'address', header: 'Address' },
-    { field: 'city', header: 'City' },
-    { field: 'schoolName', header: 'School Name' },
-    { field: 'grade', header: 'Grade' },
-    { field: 'course', header: 'Course' },
-    { field: 'shift', header: 'Shift' },
+    { field: 'id', header: 'Id', width: 41 },
+    { field: 'firstName', header: 'First Name', width: 101 },
+    { field: 'lastName', header: 'Last Name', width: 125 },
+    { field: 'dateOfBirth', header: 'Date of Birth', width: 78 },
+    { field: 'phoneNumber', header: 'Phone Number', width: 95 },
+    { field: 'address', header: 'Address', width: 164  },
+    { field: 'city', header: 'City', width: 169 },
+    { field: 'schoolName', header: 'School Name', width: 402  },
+    { field: 'grade', header: 'Grade', width: 61 },
+    { field: 'courseLanguage', header: 'Course', width:108 },
+    { field: 'shift', header: 'Shift', width: 50 },
   ];
 
 

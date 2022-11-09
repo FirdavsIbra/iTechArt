@@ -14,7 +14,7 @@ export class PolicePageComponent implements OnInit {
   public data: UnitsTypes | undefined;
 
   public columns = [
-    { field: 'id', header: 'Id', width: 450 },
+    { field: 'id', header: 'Id', width: 41 },
     { field: 'firstName', header: 'First Name', width: 200 },
     { field: 'lastName', header: 'Last Name', width: 100 },
     { field: 'gender', header: 'Gender', width: 100 },

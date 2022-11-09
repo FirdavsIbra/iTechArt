@@ -13,20 +13,20 @@ export class StudentsPageComponent implements OnInit {
   public unit: UnitsEnum = UnitsEnum.students;
   public data: UnitsTypes | undefined;
   public columns = [
-    { field: 'id', header: 'Company', width: 450 },
-    { field: 'firstName', header: 'First Name', width: 200 },
-    { field: 'lastName', header: 'Last Name', width: 100 },
-    { field: 'gender', header: 'Gender', width: 100 },
-    { field: 'email', header: 'Email' },
-    { field: 'dateOfBirth', header: 'Date of Birth' },
-    { field: 'university', header: 'University' },
+    { field: 'id', header: 'Id', width: 57 },
+    { field: 'firstName', header: 'First Name', width: 217 },
+    { field: 'lastName', header: 'Last Name', width: 124 },
+    { field: 'gender', header: 'Gender', width: 117 },
+    { field: 'email', header: 'Email', width: 267 },
+    { field: 'dateOfBirth', header: 'Date of Birth', width: 107 },
+    { field: 'university', header: 'University', width: 615 },
   ];
 
   public constructor(private statsService: StatsService) {}
 
   public ngOnInit(): void {
     this.statsService.getAllStatsByUnit(this.unit).subscribe({
-      next: (data: UnitsTypes) => this.data = data,
+      next: (data: UnitsTypes) => (this.data = data),
       error: () => alert("Couldn't load data."),
     });
   }
