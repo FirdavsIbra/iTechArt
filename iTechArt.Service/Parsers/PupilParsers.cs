@@ -38,7 +38,7 @@ namespace iTechArt.Service.Parsers
                     using (var csv = new CsvReader(csvReader, CultureInfo.InvariantCulture))
                     {
                         csv.Context.RegisterClassMap<PupilMap>();
-                        var records = csv.GetRecords<PupilForCreationDto>().ToArray();
+                        var records = csv.GetRecords<PupilForCreationDto>();
                        
                         await _pupilRepository.AddRangeAsync(records);
                     }
