@@ -1,5 +1,7 @@
-﻿using iTechArt.Domain.ModelInterfaces;
+﻿using iTechArt.Domain.Helpers;
+using iTechArt.Domain.ModelInterfaces;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace iTechArt.Repository.BusinessModels
 {
@@ -21,7 +23,8 @@ namespace iTechArt.Repository.BusinessModels
         /// gets or internal sets The built date of airport
         /// </summary>
 
-        public DateTime BuiltDate { get; internal set; }
+        [JsonConverter(typeof(DateOnlyJsonConverter))]
+        public DateOnly BuiltDate { get; internal set; }
 
         /// <summary>
         /// gets or internal sets A number of people can be in at the same time at the airport

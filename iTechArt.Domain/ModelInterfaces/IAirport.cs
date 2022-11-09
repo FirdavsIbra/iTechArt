@@ -1,4 +1,7 @@
-﻿namespace iTechArt.Domain.ModelInterfaces
+﻿using iTechArt.Domain.Helpers;
+using System.Text.Json.Serialization;
+
+namespace iTechArt.Domain.ModelInterfaces
 {
     public interface IAirport
     {
@@ -15,7 +18,9 @@
         /// <summary>
         /// Gets the built date of airport
         /// </summary>
-        public DateTime BuiltDate { get; }
+
+        [JsonConverter(typeof(DateOnlyJsonConverter))]
+        public DateOnly BuiltDate { get; }
 
         /// <summary>
         /// Gets a number of people can be in at the same time at the airport

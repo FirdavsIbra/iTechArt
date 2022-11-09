@@ -29,6 +29,7 @@ namespace iTechArt.Service.Parsers.PoliceParser
                 using(var sr = new StreamReader(fileStream))
                 {
                     using(var csv = new CsvReader(sr, CultureInfo.InvariantCulture))
+
                     {
                         csv.Context.RegisterClassMap<PoliceMap>();
                         var records = csv.GetRecords<PoliceDto>().ToArray();

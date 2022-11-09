@@ -1,10 +1,15 @@
-﻿using iTechArt.Domain.ModelInterfaces;
+﻿using CsvHelper;
+using CsvHelper.Configuration;
+using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
+using iTechArt.Repository.Repositories;
 using iTechArt.Service.Constants;
 using iTechArt.Service.DTOs;
+using iTechArt.Service.Helpers;
 using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;
+using System.Globalization;
 using System.Xml;
 
 namespace iTechArt.Service.Parsers
@@ -16,76 +21,35 @@ namespace iTechArt.Service.Parsers
         {
             _airportRepository= airportRepository;
         }
-        public async Task CsvParser(IFormFile file)
+
+        /// <summary>
+        /// csv airport parser
+        /// </summary>
+        public async Task CsvParserAsync(IFormFile file)
         {
-            try
+            var fileExtension = Path.GetExtension(file.FileName);
+
+            if (fileExtension == ".csv")
             {
-                var fileExtension = Path.GetExtension(file.FileName);
+                using var fileStream = new MemoryStream();
 
-                if (FileConstants.csvExtensions.Contains(fileExtension))
+                await file.CopyToAsync(fileStream);
+                fileStream.Position = 0;
+                using (TextReader csvReader = new StreamReader(fileStream))
                 {
-                    var fileName = DateTime.Now.Ticks + ".csv"; //Create a new Name for the file due to security reasons.
-                    var pathBuilt = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
-
-                    if (!Directory.Exists(pathBuilt))
+                    using (var csv = new CsvReader(csvReader, CultureInfo.InvariantCulture))
                     {
-                        Directory.CreateDirectory(pathBuilt);
-                    }
+                        csv.Context.RegisterClassMap<AirportMap>();
+                        var records = csv.GetRecords<AirportDTO>().ToArray();
 
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", file.FileName);
-
-                    using (var stream = new FileStream(path, FileMode.Create))
-                    {
-                        await file.CopyToAsync(stream);
-                    }
-
-                    var csvLines = File.ReadAllLines(path);
-
-                    IList<IAirport> airports = new List<IAirport>(csvLines.Length - 1);
-
-                    for (int i = 1; i < csvLines.Length; i++)
-                    {
-                        var rowData = csvLines[i].Split(',');
-
-                        var airport = new AirportDTO
-                        {
-                            AirportName = rowData[0].ToString().Trim(),
-                            BuiltDate = Convert.ToDateTime(rowData[1]),
-                            Capacity = Convert.ToUInt16(rowData[2]),
-                            Address = rowData[3].ToString().Trim(),
-                            City = rowData[4].ToString().Trim(),
-                            EmployeesCount = Convert.ToUInt16(rowData[5]),
-                            PassengersPerYear = Convert.ToInt64(rowData[6]),
-                            FlightsPerYear = Convert.ToUInt32(rowData[7]),
-                            AverageTicketPrice = Convert.ToUInt16(rowData[8])
-                        };
-                        airports.Add(airport);
-                    }
-                    await _airportRepository.AddRangeAsync(airports);
-
-
-                    //Deleting after having used the created path
-                    if (File.Exists(path))
-                    {
-                        File.Delete(path);
+                        await _airportRepository.AddRangeAsync(records);
                     }
                 }
-                else
-                {
-                    throw new Exception("Upload correct File!!!");
-                }
             }
-            catch (Exception e)
-            {
-                throw new ArgumentException(nameof(e));
-            }
-        }
-
+        }   
         public async Task ExcelParser(IFormFile file)
         {
-           try
-            {
-                var fileExtension = Path.GetExtension(file.FileName);
+              var fileExtension = Path.GetExtension(file.FileName);
 
                 if (FileConstants.excelExtensions.Contains(fileExtension))
                 {
@@ -98,14 +62,14 @@ namespace iTechArt.Service.Parsers
                             ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
                             var rowCount = worksheet.Dimension.Rows;
 
-                            IList<IAirport> airports = new List<IAirport>(rowCount - 2);
+                            IList<AirportDTO> airports = new List<AirportDTO>(rowCount - 2);
 
                             for (int row = 2; row <= rowCount; row++)
                             {
                                 var airport = new AirportDTO
                                 {
                                     AirportName = worksheet.Cells[row,AirportIndexConstants.AIRPORTNAMEINDEX].Value.ToString().Trim(),
-                                    BuiltDate = Convert.ToDateTime(worksheet.Cells[row, AirportIndexConstants.BUILDDATEINDEX].Value),
+                                    BuiltDate = DateOnly.Parse(worksheet.Cells[row, AirportIndexConstants.BUILDDATEINDEX].Value.ToString()),
                                     Capacity = Convert.ToUInt16(worksheet.Cells[row, AirportIndexConstants.CAPACITYINDEX].Value),
                                     Address = worksheet.Cells[row, AirportIndexConstants.ADDRESSINDEX].Value.ToString().Trim(),
                                     City = worksheet.Cells[row, AirportIndexConstants.CITYINDEX].Value.ToString().Trim(),
@@ -125,74 +89,64 @@ namespace iTechArt.Service.Parsers
                 {
                     throw new Exception("Upload correct File!!!");
                 }
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
         }
 
         public async Task XmlParser(IFormFile file)
         {
-            try
-            {
-                var fileExtension = Path.GetExtension(file.FileName);
+             var fileExtension = Path.GetExtension(file.FileName);
 
-                if (FileConstants.xmlExtensions.Contains(fileExtension))
-                {
-                    var fileName = DateTime.Now.Ticks + ".xml"; //Create a new Name for the file due to security reasons.
-                    var pathBuilt = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+             if (FileConstants.xmlExtensions.Contains(fileExtension))
+             {
+                using var fileStream = new MemoryStream();
+                await file.CopyToAsync(fileStream);
+                fileStream.Position = 0;
+                XmlDocument xmlDocument = new XmlDocument();
+                xmlDocument.Load(fileStream);
 
-                    if (!Directory.Exists(pathBuilt))
+                var nodes = xmlDocument.SelectNodes("/airports/airport");
+
+                    IList<AirportDTO> airports = new List<AirportDTO>(nodes.Count);
+
+                    for (int node = 0; node < nodes.Count; node++)
                     {
-                        Directory.CreateDirectory(pathBuilt);
-                    }
-
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", file.FileName);
-
-                    using (var fileStream = new FileStream(path, FileMode.Create))
-                    {
-                        await file.CopyToAsync(fileStream);
-                    }
-
-                    XmlDocument xmlDocument = new XmlDocument();
-                    xmlDocument.Load(path);
-
-                    IList<IAirport> airports = new List<IAirport>(xmlDocument.SelectNodes("/airports/airport").Count);
-
-                    foreach (XmlNode node in xmlDocument.SelectNodes("/airports/airport"))
-                    {
-                        var airport = new AirportDTO
+                        AirportDTO airport = new AirportDTO
                         {
-                            AirportName = node["AirportName"].InnerText,
-                            BuiltDate = Convert.ToDateTime(node["BuiltDate"].InnerText),
-                            Capacity = Convert.ToUInt16(node["Capacity"].InnerText),
-                            Address = node["Address"].InnerText,
-                            City = node["City"].InnerText,
-                            EmployeesCount = Convert.ToUInt16(node["EmployeesCount"].InnerText),
-                            PassengersPerYear = Convert.ToInt64(node["PassengersPerYear"].InnerText),
-                            FlightsPerYear = Convert.ToUInt32(node["FlightsPerYear"].InnerText),
-                            AverageTicketPrice = Convert.ToUInt16(node["AverageTicketPrice"].InnerText),
+                            AirportName = nodes[node]["AirportName"].InnerText,
+                            BuiltDate = DateOnly.Parse(nodes[node]["BuiltDate"].InnerText),
+                            Capacity = Convert.ToUInt16(nodes[node]["Capacity"].InnerText),
+                            Address = nodes[node]["Address"].InnerText,
+                            City = nodes[node]["City"].InnerText,
+                            EmployeesCount = Convert.ToUInt16(nodes[node]["EmployeesCount"].InnerText),
+                            PassengersPerYear = Convert.ToInt64(nodes[node]["PassengersPerYear"].InnerText),
+                            FlightsPerYear = Convert.ToUInt32(nodes[node]["FlightsPerYear"].InnerText),
+                            AverageTicketPrice = Convert.ToUInt16(nodes[node]["AverageTicketPrice"].InnerText),
                         };
                         airports.Add(airport);
                     }
                     await _airportRepository.AddRangeAsync(airports);
-
-                    //Deleting after having used the created path
-                    if (File.Exists(path))
-                    {
-                        File.Delete(path);
-                    }
                 }
                 else
                 {
                     throw new ArgumentException("Invalid file format");
                 }
-            }
-            catch (Exception e)
-            {
-                throw new ArgumentException(nameof(e));
-            }
+            }         
+    }
+
+    internal class AirportMap : ClassMap<AirportDTO>
+    {
+        public AirportMap()
+        {
+            var tmpConverter = new DateOnlyHelper();
+
+            Map(a => a.AirportName).Name("Airportname");
+            Map(a => a.BuiltDate).Name("BuiltDate");
+            Map(a => a.Capacity).Name("Capacity");
+            Map(a => a.Address).Name("Address");
+            Map(a => a.City).Name("City");
+            Map(a => a.EmployeesCount).Name("EmployeesCount");
+            Map(a => a.PassengersPerYear).Name("PassengersPerYear");
+            Map(a => a.FlightsPerYear).Name("FlightsPerYear");
+            Map(a => a.AverageTicketPrice).Name("AverageTicketPrice");
         }
     }
 }

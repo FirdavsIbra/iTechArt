@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using iTechArt.Domain.Helpers;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace iTechArt.Database.Entities.Airports
 {
@@ -18,7 +20,9 @@ namespace iTechArt.Database.Entities.Airports
         /// <summary>
         /// gets or sets The built date of airport
         /// </summary>
-        public DateTime BuiltDate { get; set; }
+
+        [JsonConverter(typeof(DateOnlyJsonConverter))]
+        public DateOnly BuiltDate { get; set; }
 
         /// <summary>
         /// gets or sets A number of people can be in at the same time at the airport
