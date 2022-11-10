@@ -9,15 +9,15 @@ namespace iTechArt.Service.Services
     public sealed class PupilService : IPupilService
     {
         private readonly IPupilRepository _pupilRepository;
-        private readonly IPupilParsers _pupilParsers;
-        public PupilService(IPupilRepository pupilRepository, IPupilParsers pupilParsers)
+        private readonly IPupilParser _pupilParsers;
+        public PupilService(IPupilRepository pupilRepository, IPupilParser pupilParsers)
         {
             _pupilRepository = pupilRepository;
             _pupilParsers = pupilParsers;
         }
 
         /// <summary>
-        /// Get all pupils
+        /// Get all pupils.
         /// </summary>
         public async Task<IPupil[]> GetAllAsync()
         {
@@ -25,7 +25,7 @@ namespace iTechArt.Service.Services
         }
 
         /// <summary>
-        /// Import pupil's file
+        /// Import pupil's file.
         /// </summary>
         public async Task ImportPupilsFileAsync(IFormFile file)
         {
@@ -46,51 +46,33 @@ namespace iTechArt.Service.Services
         }
 
         /// <summary>
-        /// Get pupil by id
-        /// </summary>
-        public async Task<IPupil> GetByIdAsync(long id) 
-        { 
-            return await _pupilRepository.GetByIdAsync(id);
-        }
-
-        /// <summary>
-        /// Add pupil to database
-        /// </summary>
-        public async Task AddAsync(IPupil pupil)
-        {
-            await _pupilRepository.AddAsync(pupil);
-        }
-
-        /// <summary>
-        /// Delete pupil
-        /// </summary>
-        public async Task DeleteAsync(long id)
-        {
-            await _pupilRepository.DeleteAsync(id);
-        }
-
-        /// <summary>
-        /// Parse pupil's file from excel
+        /// Parse pupil's file from excel.
         /// </summary>
         public async Task ImportExcelAsync(IFormFile file)
         {
-            await _pupilParsers.ExcelParseAsync(file);
+            var pupilsFromExcel = await _pupilParsers.ExcelParseAsync(file);
+
+            await _pupilRepository.AddRangeAsync(pupilsFromExcel);
         }
 
         /// <summary>
-        /// Parse pupil's file from csv
+        /// Parse pupil's file from csv.
         /// </summary>
         public async Task ImportCsvAsync(IFormFile file)
         {
-            await _pupilParsers.CsvParseAsync(file);
+            var pupilsFromCsv = await _pupilParsers.CsvParseAsync(file);
+
+            await _pupilRepository.AddRangeAsync(pupilsFromCsv);
         }
 
         /// <summary>
-        /// Parse pupil's file from xml
+        /// Parse pupil's file from xml.
         /// </summary>
         public async Task ImportXmlAsync(IFormFile file)
         {
-            await _pupilParsers.XmlParseAsync(file);
+            var pupilsFromXml = await _pupilParsers.XmlParseAsync(file);
+         
+            await _pupilRepository.AddRangeAsync(pupilsFromXml);
         }
     }
 }

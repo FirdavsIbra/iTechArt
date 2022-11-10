@@ -5,37 +5,37 @@ namespace iTechArt.Domain.RepositoryInterfaces
     public interface IPupilRepository
     {
         /// <summary>
-        /// Add pupil to database
+        /// Add pupil to database.
         /// </summary>
         public Task AddAsync(IPupil pupil);
 
         /// <summary>
-        /// Get all pupils
+        /// Get all pupils.
         /// </summary>
         public Task<IPupil[]> GetAllAsync();
 
         /// <summary>
-        /// Get pupil by id
+        /// Get pupil by id.
         /// </summary>
         public Task<IPupil> GetByIdAsync(long id);
         
         /// <summary>
-        /// Add pupil array
+        /// Add pupil array.
         /// </summary>
         public Task AddRangeAsync(IEnumerable<IPupil> pupils);
 
         /// <summary>
-        /// Update pupil
+        /// Update pupil.
         /// </summary>
         public Task UpdateAsync(IPupil pupil);
 
         /// <summary>
-        /// Delete pupil from database
+        /// Delete pupil from database.
         /// </summary>
         public Task DeleteAsync(long id);
 
         /// </summary>
-        /// Get count of pupils
+        /// Get count of pupils.
         /// </summary>
         public Task<int> GetCountOfPupilsAsync();
     }

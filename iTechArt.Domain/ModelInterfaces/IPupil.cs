@@ -1,69 +1,66 @@
 ﻿using iTechArt.Domain.Enums;
-using iTechArt.Domain.Helpers;
-using System.Text.Json.Serialization;
 
 namespace iTechArt.Domain.ModelInterfaces
 {
     public interface IPupil
     {
         /// <summary>
-        /// Gets id if pupil
+        /// Gets id if pupil.
         /// </summary>
         public long Id { get; }
 
         /// <summary>
-        /// Gets name of pupil
+        /// Gets name of pupil.
         /// </summary>
         public string FirstName { get; }
 
         /// <summary>
-        /// Gets surname of pupil
+        /// Gets surname of pupil.
         /// </summary>
         public string LastName { get; }
 
         /// <summary>
-        /// Gets birthdate of pupil
+        /// Gets birthdate of pupil.
         /// </summary>
-        [JsonConverter(typeof(DateOnlyJsonConverter))]
         public DateOnly DateOfBirth { get; }
 
         /// <summary>
-        /// Gets gender of pupil
+        /// Gets gender of pupil.
         /// </summary>
         public Gender Gender { get; }
 
         /// <summary>
-        /// Gets phone number of pupil
+        /// Gets phone number of pupil.
         /// </summary>
         public string PhoneNumber { get; }
 
         /// <summary>
-        /// Gets address of pupil
+        /// Gets address of pupil.
         /// </summary>
         public string Address { get; }
 
         /// <summary>
-        /// Gets a city, where pupil lives
+        /// Gets a city, where pupil lives.
         /// </summary>
         public string City { get; }
 
         /// <summary>
-        /// Gets name of school, where pupil study
+        /// Gets name of school, where pupil study.
         /// </summary>
         public string SchoolName { get; }
 
         /// <summary>
-        /// Gets grade of study of pupil
+        /// Gets grade of study of pupil.
         /// </summary>
-        public byte Grade { get; }
+        public int Grade { get; }
 
         /// <summary>
-        /// Gets a language of education
+        /// Gets a language of education.
         /// </summary>
         public CourseLanguage CourseLanguage { get; }
 
         /// <summary>
-        /// Gets a shift of study
+        /// Gets a shift of study.
         /// </summary>
         public Shift Shift { get; }
     }

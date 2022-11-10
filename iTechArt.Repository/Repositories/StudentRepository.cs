@@ -19,7 +19,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Add student to database
+        /// Add student to database.
         /// </summary>
         public async Task AddAsync(IStudent entity)
         {
@@ -29,7 +29,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Get all students from database
+        /// Get all students from database.
         /// </summary>
         public async Task<IStudent[]> GetAllAsync()
         {
@@ -38,7 +38,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Get entity by id
+        /// Get entity by id.
         /// </summary>
         public async Task<IStudent> GetByIdAsync(long id)
         {
@@ -47,7 +47,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Update student
+        /// Update student.
         /// </summary>
         public async Task UpdateAsync(IStudent entity)
         {
@@ -57,7 +57,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Delete student from database
+        /// Delete student from database.
         /// </summary>
         public async Task DeleteAsync(long id)
         {
@@ -71,7 +71,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Get total count of students
+        /// Get total count of students.
         /// </summary>
         public async Task<int> GetCountOfStudentsAsync()
         {
@@ -79,7 +79,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Add student array
+        /// Add student array.
         /// </summary>
         public async Task AddRangeAsync(IEnumerable<IStudent> pupils)
         {

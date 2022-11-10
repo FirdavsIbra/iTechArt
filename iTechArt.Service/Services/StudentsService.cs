@@ -10,8 +10,8 @@ namespace iTechArt.Service.Services
     public class StudentsService : IStudentsService
     {
         private readonly IStudentRepository _studentRepository;
-        private readonly IStudentParsers _studentParsers;
-        public StudentsService(IStudentRepository studentRepository, IStudentParsers studentParsers)
+        private readonly IStudentParser _studentParsers;
+        public StudentsService(IStudentRepository studentRepository, IStudentParser studentParsers)
         {
             _studentRepository = studentRepository;
             _studentParsers = studentParsers;

@@ -11,7 +11,7 @@ using System.Xml;
 
 namespace iTechArt.Service.Parsers
 {
-    public sealed class StudentParsers : IStudentParsers
+    public sealed class StudentParsers : IStudentParser
     {
         private readonly IStudentRepository _studentRepository;
         public StudentParsers(IStudentRepository studentRepository)

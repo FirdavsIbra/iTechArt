@@ -19,7 +19,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Add pupil to database
+        /// Add pupil to database.
         /// </summary>
         public async Task AddAsync(IPupil pupil)
         {
@@ -29,7 +29,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Get all pupils
+        /// Get all pupils.
         /// </summary>
         public async Task<IPupil[]> GetAllAsync()
         {
@@ -38,7 +38,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Get pupil by id
+        /// Get pupil by id.
         /// </summary>
         public async Task<IPupil> GetByIdAsync(long id)
         {
@@ -47,7 +47,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Update pupil
+        /// Update pupil.
         /// </summary>
         public async Task UpdateAsync(IPupil pupil)
         {
@@ -57,7 +57,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Delete pupil from database
+        /// Delete pupil from database.
         /// </summary>
         public async Task DeleteAsync(long id)
         {
@@ -71,7 +71,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Get total count of pupils
+        /// Get total count of pupils.
         /// </summary>
         public async Task<int> GetCountOfPupilsAsync()
         {
@@ -79,7 +79,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Add pupil array
+        /// Add pupil array.
         /// </summary>
         public async Task AddRangeAsync(IEnumerable<IPupil> pupils)
         {

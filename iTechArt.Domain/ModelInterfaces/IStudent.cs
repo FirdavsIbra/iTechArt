@@ -7,48 +7,48 @@ namespace iTechArt.Domain.ModelInterfaces
     public interface IStudent
     {
         /// <summary>
-        /// Gets Id of business model entities
+        /// Gets id of student.
         /// </summary>
         public long Id { get; }
 
         /// <summary>
-        /// Gets First name of student
+        /// Gets first name of student.
         /// </summary>
         public string FirstName { get; }
 
         /// <summary>
-        /// Gets Last name of student
+        /// Gets last name of student.
         /// </summary>
         public string LastName { get; }
 
         /// <summary>
-        /// Gets Email of student
+        /// Gets email of student.
         /// </summary>
         public string Email { get; }
 
         /// <summary>
-        /// Gets Password of student
+        /// Gets password of student.
         /// </summary>
         public string Password { get; }
 
         /// <summary>
-        /// Gets String value majority, field of study
+        /// Gets string value majority, field of study.
         /// </summary>
         public string Majority { get; }
 
         /// <summary>
-        /// Gets boolean Gender entity of student
+        /// Gets gender of student.
         /// </summary>
         public Gender Gender { get; }
 
         /// <summary>
-        /// Gets Birthday of student
+        /// Gets birthday of student
         /// </summary>
         [JsonConverter(typeof(DateOnlyJsonConverter))]
         public DateOnly DateOfBirth { get; }
 
         /// <summary>
-        /// Gets Name of university of student
+        /// Gets name of university of student.
         /// </summary>
         public string University { get; }
     }

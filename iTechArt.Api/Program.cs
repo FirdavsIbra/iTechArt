@@ -9,6 +9,7 @@ using iTechArt.Service.Helpers;
 using iTechArt.Service.Parsers;
 using iTechArt.Service.Services;
 using ITechArt.Parsers.IPoliceParsers;
+using ITechArt.Parsers.Parsers;
 using ITechArt.Parsers.PoliceParsers;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,8 +39,8 @@ builder.Services.AddScoped<ICsvParse, ParseCsv>();
 builder.Services.AddScoped<IMedStaffParser, MedStaffParser>();
 builder.Services.AddScoped<IGroceryParsers, GroceryParsers>();
 builder.Services.AddScoped<IAirportParsers, AirportParser>();
-builder.Services.AddScoped<IPupilParsers, PupilParsers>();
-builder.Services.AddScoped<IStudentParsers, StudentParsers>();
+builder.Services.AddScoped<IPupilParser, PupilParser>();
+builder.Services.AddScoped<IStudentParser, StudentParsers>();
 
 
 builder.Services.AddCors(option =>

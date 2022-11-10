@@ -1,6 +1,6 @@
-﻿namespace iTechArt.Service.Constants
+﻿namespace ITechArt.Parsers.Constants
 {
-    internal sealed class PupilIndexConstants
+    public static class PupilConstants
     {
         public const int FIRSTNAME = 1;
         public const int LASTNAME = 2;

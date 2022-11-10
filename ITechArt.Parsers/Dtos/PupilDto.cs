@@ -4,9 +4,9 @@ using iTechArt.Domain.ModelInterfaces;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace iTechArt.Service.DTOs
+namespace ITechArt.Parsers.Dtos
 {
-    public sealed class PupilForCreationDto : IPupil
+    public class PupilDto : IPupil
     {
         /// <summary>
         /// Gets or sets id of pupil
@@ -63,7 +63,7 @@ namespace iTechArt.Service.DTOs
         /// <summary>
         /// Gets or sets the grade of study of pupil
         /// </summary>
-        public byte Grade { get; set; }
+        public int Grade { get; set; }
 
         /// <summary>
         /// Gets or sets the language of education
