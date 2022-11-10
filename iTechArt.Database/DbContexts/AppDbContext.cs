@@ -11,7 +11,7 @@ namespace iTechArt.Database.DbContexts
     public class AppDbContext : DbContext
     {
         /// <summary>
-        /// Makes DI into DbContext
+        /// Makes DI into DbContext.
         /// </summary>
         /// <param name="options"></param>
         public AppDbContext(DbContextOptions<AppDbContext> options)
@@ -20,33 +20,33 @@ namespace iTechArt.Database.DbContexts
         }
 
         /// <summary>
-        /// Airport tables
+        /// Airport tables.
         /// </summary>
         public virtual DbSet<AirportDb> Airports { get; set; }
 
 
         /// <summary>
-        /// Medicine staff tables
+        /// Medicine staff tables.
         /// </summary>
         public virtual DbSet<MedStaffDb> Staffs { get; set; }
 
         /// <summary>
-        /// Pupil tables
+        /// Pupil tables.
         /// </summary>
         public virtual DbSet<PupilDb> Pupils { get; set; }
 
         /// <summary>
-        /// Student tables
+        /// Student tables.
         /// </summary>
         public virtual DbSet<StudentDb> Students { get; set; }
 
         /// <summary>
-        /// Police tables
+        /// Police tables.
         /// </summary>
         public virtual DbSet<PoliceDb> Police { get; set; }
 
         /// <summary>
-        /// Grocery tables
+        /// Grocery tables.
         /// </summary>
         public virtual DbSet<GroceryDb> Groceries { get; set; }
     }

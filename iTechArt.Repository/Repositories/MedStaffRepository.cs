@@ -19,7 +19,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Add medStaff to database
+        /// Add medStaff to database.
         /// </summary>  
         public async Task AddAsync(IMedStaff medStaff)
         {
@@ -31,7 +31,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Add list of medStaffs to database
+        /// Add collection of medStaffs to database.
         /// </summary>
         public async Task AddRangeAsync(IEnumerable<IMedStaff> medStaffs)
         {
@@ -41,7 +41,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Get all medStaffs from database
+        /// Get all medStaffs from database.
         /// </summary>
         public async Task<IMedStaff[]> GetAllAsync()
         {
@@ -51,7 +51,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Get medStaff by id
+        /// Get medStaff by id.
         /// </summary>
         public async Task<IMedStaff> GetByIdAsync(long id)
         {
@@ -60,7 +60,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Update medStaff
+        /// Update medStaff.
         /// </summary>
         public async Task UpdateAsync(IMedStaff doctor)
         {
@@ -72,7 +72,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Delete medStaff from database
+        /// Delete medStaff from database.
         /// </summary>
         public async Task DeleteAsync(long id)
         {
@@ -84,7 +84,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Get total count of medStaff
+        /// Get total count of medStaff.
         /// </summary>
         public async Task<int> GetCountOfDoctors()
         {

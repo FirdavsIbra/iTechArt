@@ -18,7 +18,7 @@ namespace iTechArt.Service.Services
         }
 
         /// <summary>
-        /// Takes no input so far
+        /// Takes no input so far.
         /// </summary>
         public async Task<IMedStaff[]> ExportMedStaffFileAsync()
         {
@@ -26,7 +26,7 @@ namespace iTechArt.Service.Services
         }
 
         /// <summary>
-        /// Parse iformfile into IMedStaff interface
+        /// Parse iformfile into IMedStaff interface.
         /// </summary>
         public async Task CSVParseAsync(IFormFile file)
         {
@@ -43,7 +43,7 @@ namespace iTechArt.Service.Services
         }
 
         /// <summary>
-        /// Parse iformfile into IMedStaff interface
+        /// Parse iformfile into IMedStaff interface.
         /// </summary>
         public async Task ExcelParseAsync(IFormFile file)
         {
@@ -60,7 +60,7 @@ namespace iTechArt.Service.Services
         }
 
         /// <summary>
-        /// Parse iformfile into IMedStaff interface
+        /// Parse iformfile into IMedStaff interface.
         /// </summary>
         public async Task XMLParseAsync(IFormFile file)
         {
@@ -77,7 +77,7 @@ namespace iTechArt.Service.Services
         }
 
         /// <summary>
-        /// Takes filestream
+        /// Takes filestream.
         /// </summary>
         public async Task ImportMedStaffFileAsync(IFormFile file)
         {

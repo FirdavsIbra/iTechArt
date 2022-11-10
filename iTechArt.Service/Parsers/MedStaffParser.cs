@@ -20,7 +20,7 @@ namespace iTechArt.Service.Parsers
         }
 
         /// <summary>
-        /// Parse CSV file into MedStaff business model
+        /// Parse CSV file into MedStaff business model.
         /// </summary>
         public async Task ParseCSVAsync(IFormFile file)
         {
@@ -71,7 +71,7 @@ namespace iTechArt.Service.Parsers
         }
 
         /// <summary>
-        /// Parse Excel file into MedStaff business model
+        /// Parse Excel file into MedStaff business model.
         /// </summary>
         public async Task ParseExcelAsync(IFormFile file)
         {
@@ -124,7 +124,7 @@ namespace iTechArt.Service.Parsers
         }
         
         /// <summary>
-        /// Parse XML file into MedStaff business model
+        /// Parse XML file into MedStaff business model.
         /// </summary>
         public async Task ParseXMLAsync(IFormFile file)
         {

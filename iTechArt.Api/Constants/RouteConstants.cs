@@ -2,6 +2,9 @@
 {
     public static class RouteConstants
     {
+        /// <summary>
+        /// Constant Api endpoints.
+        /// </summary>
         public const string PUPIL = "api/pupils";
         public const string POLICE = "api/police";
         public const string AIRPORT = "api/airport";
