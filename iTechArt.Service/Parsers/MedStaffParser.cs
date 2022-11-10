@@ -1,11 +1,15 @@
-﻿using iTechArt.Domain.Enums;
+﻿using CsvHelper;
+using CsvHelper.Configuration;
+using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
+using iTechArt.Service.Constants;
 using iTechArt.Service.DTOs;
 using iTechArt.Service.Helpers;
 using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;
+using System.Globalization;
 using System.Xml;
 
 namespace iTechArt.Service.Parsers
@@ -24,49 +28,60 @@ namespace iTechArt.Service.Parsers
         /// </summary>
         public async Task ParseCSVAsync(IFormFile file)
         {
-            string fileExtension = Path.GetExtension(file.FileName);
+            //using var fileStream = new MemoryStream();
 
-            if (fileExtension.Equals(".csv"))
+            //await file.CopyToAsync(fileStream);
+
+            //fileStream.Position = 0;
+
+            //using var csvReader = new StreamReader(fileStream);
+
+            //using CsvReader csv = new CsvReader(csvReader, CultureInfo.InvariantCulture);
+
+            //csv.Context.RegisterClassMap<MedStaffMap>();
+
+            //var results = csv.GetRecords<MedStaffDTO>();
+
+            //await _medStaffRepository.AddRangeAsync(results);
+
+            var filePath = Path.Combine(EnvironmentHelper.AttachmentPath, file.FileName);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
             {
-                var filePath = Path.Combine(EnvironmentHelper.AttachmentPath, file.FileName);
+                await file.CopyToAsync(fileStream);
+            }
 
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
+            var csvLines = File.ReadAllLines(filePath);
+
+            IList<IMedStaff> medStaffs = new List<IMedStaff>(csvLines.Length - 1);
+
+            for (int i = 1; i < csvLines.Length; i++)
+            {
+                string[] rowData = csvLines[i].Split(',');
+
+                MedStaffDTO medStaff = new MedStaffDTO()
                 {
-                    await file.CopyToAsync(fileStream);
-                }
+                    FirstName = rowData[0].ToString().Trim(),
+                    LastName = rowData[1].ToString().Trim(),
+                    Gender = Enum.Parse<Gender>(rowData[2]),
+                    Email = rowData[3].ToString().Trim(),
+                    PhoneNumber = rowData[4].ToString().Trim(),
+                    DateOfBirth = DateOnly.Parse(rowData[5]),
+                    Address = rowData[6],
+                    Salary = Decimal.Parse(rowData[7]),
+                    HospitalName = rowData[8],
+                    PostalCode = rowData[9] is null ? String.Empty : rowData[9],
+                    Shift = Enum.Parse<Shift>(rowData[10])
+                };
 
-                var csvLines = File.ReadAllLines(filePath);
+                medStaffs.Add(medStaff);
+            }
 
-                IList<IMedStaff> medStaffs = new List<IMedStaff>(csvLines.Length - 1);
+            await _medStaffRepository.AddRangeAsync(medStaffs);
 
-                for (int i = 1; i < csvLines.Length; i++)
-                {
-                    string[] rowData = csvLines[i].Split(',');
-
-                    MedStaffDTO medStaff = new MedStaffDTO()
-                    {
-                        FirstName = rowData[0].ToString().Trim(),
-                        LastName = rowData[1].ToString().Trim(),
-                        Gender = Enum.Parse<Gender>(rowData[2]),
-                        Email = rowData[3].ToString().Trim(),
-                        PhoneNumber = rowData[4].ToString().Trim(),
-                        DateOfBirth = DateOnly.Parse(rowData[5]),
-                        Address = rowData[6],
-                        Salary = Decimal.Parse(rowData[7]),
-                        HospitalName = rowData[8],
-                        PostalCode = rowData[9] is null ? String.Empty : rowData[9],
-                        Shift = Enum.Parse<Shift>(rowData[10])
-                    };
-
-                    medStaffs.Add(medStaff);
-                }
-
-                await _medStaffRepository.AddRangeAsync(medStaffs);
-
-                if (File.Exists(filePath))
-                {
-                    File.Delete(filePath);
-                }
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
             }
         }
 
@@ -75,52 +90,37 @@ namespace iTechArt.Service.Parsers
         /// </summary>
         public async Task ParseExcelAsync(IFormFile file)
         {
-            string fileExtension = Path.GetExtension(file.FileName);
+            using var stream = new MemoryStream();
+            file.CopyTo(stream);
+            using var package = new ExcelPackage(stream);
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
+            var rowCount = worksheet.Dimension.Rows;
 
-            if (fileExtension.Equals(".xlsx") || fileExtension.Equals(".xls"))
+            IList<IMedStaff> medStaffs = new List<IMedStaff>(rowCount - 2);
+
+            for (int row = 2; row <= rowCount; row++)
             {
-                try
+                var medStaff = new MedStaffDTO()
                 {
-                    using (var stream = new MemoryStream())
-                    {
-                        file.CopyTo(stream);
-                        using (var package = new ExcelPackage(stream))
-                        {
-                            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-                            ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
-                            var rowCount = worksheet.Dimension.Rows;
+                    FirstName = worksheet.Cells[row, MedStaffIndexConstants.FIRSTNAMEn].Value.ToString().Trim(),
+                    LastName = worksheet.Cells[row, MedStaffIndexConstants.LASTNAMEn].Value.ToString().Trim(),
+                    Gender = Enum.Parse<Gender>(worksheet.Cells[row, MedStaffIndexConstants.GENDERn].Value.ToString()),
+                    Email = worksheet.Cells[row, MedStaffIndexConstants.EMAILn].Value.ToString().Trim(),
+                    PhoneNumber = worksheet.Cells[row, MedStaffIndexConstants.PHONENUMBERn].Value.ToString().Trim(),
+                    DateOfBirth = DateOnly.Parse(worksheet.Cells[row, MedStaffIndexConstants.DATEOFBIRTHn].Value.ToString()),
+                    Address = worksheet.Cells[row, MedStaffIndexConstants.ADDRESSn].Value.ToString(),
+                    Salary = Convert.ToDecimal(worksheet.Cells[row, MedStaffIndexConstants.SALARYn].Value),
+                    HospitalName = worksheet.Cells[row, MedStaffIndexConstants.HOSPITALNAMEn].Value.ToString(),
+                    PostalCode = worksheet.Cells[row, MedStaffIndexConstants.POSTALCODEn].Value is null 
+                            ? string.Empty : worksheet.Cells[row, MedStaffIndexConstants.POSTALCODEn].Value.ToString().Trim(),
+                    Shift = Enum.Parse<Shift>(worksheet.Cells[row, MedStaffIndexConstants.SHIFTn].Value.ToString())
+                };
 
-                            IList<IMedStaff> medStaffs = new List<IMedStaff>(rowCount - 2);
-
-                            for (int row = 2; row <= rowCount; row++)
-                            {
-                                var medStaff = new MedStaffDTO()
-                                {
-                                    FirstName = worksheet.Cells[row, 1].Value.ToString().Trim(),
-                                    LastName = worksheet.Cells[row, 2].Value.ToString().Trim(),
-                                    Gender = Enum.Parse<Gender>(worksheet.Cells[row, 3].Value.ToString()),
-                                    Email = worksheet.Cells[row, 4].Value.ToString().Trim(),
-                                    PhoneNumber = worksheet.Cells[row, 5].Value.ToString().Trim(),
-                                    DateOfBirth = DateOnly.Parse(worksheet.Cells[row, 6].Value.ToString()),
-                                    Address = worksheet.Cells[row, 7].Value.ToString(),
-                                    Salary = Convert.ToDecimal(worksheet.Cells[row, 8].Value),
-                                    HospitalName = worksheet.Cells[row, 9].Value.ToString(),
-                                    PostalCode = worksheet.Cells[row, 10].Value is null ? string.Empty : worksheet.Cells[row, 10].Value.ToString().Trim(),
-                                    Shift = Enum.Parse<Shift>(worksheet.Cells[row, 11].Value.ToString())
-                                };
-
-                                medStaffs.Add(medStaff);
-                            }
-
-                            await _medStaffRepository.AddRangeAsync(medStaffs);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw new ArgumentException(nameof(ex));
-                }
+                medStaffs.Add(medStaff);
             }
+
+            await _medStaffRepository.AddRangeAsync(medStaffs);
         }
         
         /// <summary>
@@ -128,53 +128,58 @@ namespace iTechArt.Service.Parsers
         /// </summary>
         public async Task ParseXMLAsync(IFormFile file)
         {
-            string fileExtension = Path.GetExtension(file.FileName);
+            using var fileStream = new MemoryStream();
+            await file.CopyToAsync(fileStream);
 
-            if (fileExtension.Equals(".xml"))
+            fileStream.Position = 0;
+
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.Load(fileStream);
+
+            var nodes = xmlDocument.SelectNodes(MedStaffIndexConstants.XPATH);
+
+            IList<MedStaffDTO> medStaffDTOs = new List<MedStaffDTO>(nodes.Count);
+
+            for(int node = 0; node < nodes.Count; node++)
             {
-                var filePath = Path.Combine(EnvironmentHelper.AttachmentPath, file.FileName);
-
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                MedStaffDTO medStaff = new MedStaffDTO
                 {
-                    await file.CopyToAsync(fileStream);
-                }
+                    FirstName = nodes[node][MedStaffIndexConstants.FIRSTNAME].InnerText,
+                    LastName = nodes[node][MedStaffIndexConstants.LASTNAME].InnerText,
+                    Gender = Enum.Parse<Gender>(nodes[node][MedStaffIndexConstants.GENDER].InnerText),
+                    Email = nodes[node][MedStaffIndexConstants.EMAIL].InnerText,
+                    PhoneNumber = nodes[node][MedStaffIndexConstants.PHONENUMBER].InnerText,
+                    DateOfBirth = DateOnly.Parse(nodes[node][MedStaffIndexConstants.DATEOFBIRTH].InnerText),
+                    Address = nodes[node][MedStaffIndexConstants.ADDRESS].InnerText,
+                    Salary = Decimal.Parse(nodes[node][MedStaffIndexConstants.SALARY].InnerText),
+                    HospitalName = nodes[node][MedStaffIndexConstants.HOSPITALNAME].InnerText,
+                    PostalCode = nodes[node][MedStaffIndexConstants.POSTALCODE] is null? String.Empty
+                            : nodes[node][MedStaffIndexConstants.POSTALCODE].InnerText,
+                    Shift = Enum.Parse<Shift>(nodes[node][MedStaffIndexConstants.SHIFT].InnerText),
+                };
 
-                XmlDocument xmlDocument = new XmlDocument();
-                xmlDocument.Load(filePath);
-
-                var nodes = xmlDocument.SelectNodes("/dataset/record");
-
-                IList<IMedStaff> medStaffs = new List<IMedStaff>(nodes.Count);
-
-                foreach (XmlNode node in nodes)
-                {
-                    MedStaffDTO medStaff = new MedStaffDTO
-                    {
-                        FirstName = node[nameof(medStaff.FirstName)].InnerText,
-                        LastName = node[nameof(medStaff.LastName)].InnerText,
-                        Gender = Enum.Parse<Gender>(node[nameof(medStaff.Gender)].InnerText),
-                        Email = node[nameof(medStaff.Email)].InnerText,
-                        PhoneNumber = node[nameof(medStaff.PhoneNumber)].InnerText,
-                        DateOfBirth = DateOnly.Parse(node[nameof(medStaff.DateOfBirth)].InnerText),
-                        Address = node[nameof(medStaff.Address)].InnerText,
-                        Salary = Decimal.Parse(node[nameof(medStaff.Salary)].InnerText),
-                        HospitalName = node[nameof(medStaff.HospitalName)].InnerText,
-                        PostalCode = node[nameof(medStaff.PostalCode)]
-                                            is null ? String.Empty 
-                                                    : node[nameof(medStaff.PostalCode)].InnerText,
-                        Shift = Enum.Parse<Shift>(node[nameof(medStaff.Shift)].InnerText)
-                    };
-
-                    medStaffs.Add(medStaff);
-                }
-
-                await _medStaffRepository.AddRangeAsync(medStaffs);
-
-                if (File.Exists(filePath))
-                {
-                    File.Delete(filePath);
-                }
+                medStaffDTOs.Add(medStaff);
             }
+
+            await _medStaffRepository.AddRangeAsync(medStaffDTOs);
+        }
+    }
+
+    public sealed class MedStaffMap: ClassMap<MedStaffDTO>
+    {
+        public MedStaffMap()
+        {
+            Map(m => m.FirstName).Name(MedStaffIndexConstants.FIRSTNAME);
+            Map(m => m.LastName).Name(MedStaffIndexConstants.LASTNAME);
+            Map(m => m.Gender).Name(MedStaffIndexConstants.GENDER);
+            Map(m => m.Email).Name(MedStaffIndexConstants.EMAIL);
+            Map(m => m.PhoneNumber).Name(MedStaffIndexConstants.PHONENUMBER);
+            Map(m => m.DateOfBirth).Name(MedStaffIndexConstants.DATEOFBIRTH);
+            Map(m => m.Address).Name(MedStaffIndexConstants.ADDRESS);
+            Map(m => m.Salary).Name(MedStaffIndexConstants.SALARY);
+            Map(m => m.HospitalName).Name(MedStaffIndexConstants.HOSPITALNAME);
+            Map(m => m.PostalCode).Name(MedStaffIndexConstants.POSTALCODE);
+            Map(m => m.Shift).Name(MedStaffIndexConstants.SHIFT);
         }
     }
 }

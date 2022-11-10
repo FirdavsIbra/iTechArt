@@ -30,16 +30,7 @@ namespace iTechArt.Service.Services
         /// </summary>
         public async Task CSVParseAsync(IFormFile file)
         {
-            var fileExtension = Path.GetExtension(file.FileName);
-
-            if (fileExtension == ".csv")
-            {
-                await _medStaffParser.ParseCSVAsync(file);
-            }
-            else
-            {
-                throw new ArgumentException("Invalid file format");
-            }
+            await _medStaffParser.ParseCSVAsync(file);
         }
 
         /// <summary>
@@ -47,16 +38,7 @@ namespace iTechArt.Service.Services
         /// </summary>
         public async Task ExcelParseAsync(IFormFile file)
         {
-            var fileExtension = Path.GetExtension(file.FileName);
-
-            if (fileExtension == ".xlsx" || fileExtension == ".xls")
-            {
-                await _medStaffParser.ParseExcelAsync(file);
-            }
-            else
-            {
-                throw new ArgumentException("Invalid file format");
-            }
+            await _medStaffParser.ParseExcelAsync(file);
         }
 
         /// <summary>
@@ -64,16 +46,7 @@ namespace iTechArt.Service.Services
         /// </summary>
         public async Task XMLParseAsync(IFormFile file)
         {
-            var fileExtension = Path.GetExtension(file.FileName);
-
-            if (fileExtension == ".xml")
-            {
-                await _medStaffParser.ParseXMLAsync(file);
-            }
-            else
-            {
-                throw new ArgumentException("Invalid file format");
-            }
+            await _medStaffParser.ParseXMLAsync(file);
         }
 
         /// <summary>
