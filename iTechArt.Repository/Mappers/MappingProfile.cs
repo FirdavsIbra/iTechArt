@@ -13,38 +13,38 @@ namespace iTechArt.Repository.Mappers
     {
         public MappingProfile()
         {
-            // map from IAirport to AirportDb
+            // Map from IAirport to AirportDb.
             CreateMap<IAirport, AirportDb>();
-            // map from AirportDb to AirportBm
+            // Map from AirportDb to AirportBm.
             CreateMap<AirportDb, BusinessModels.Airport>();
 
 
-            // map from IMedStaff to MedStaffDb
+            // Map from IMedStaff to MedStaffDb.
             CreateMap<IMedStaff, MedStaffDb>();
-            // map from MedStaffDb to MedStaffBm
+            // Map from MedStaffDb to MedStaffBm.
             CreateMap<MedStaffDb, BusinessModels.MedStaff>();
 
 
-            // map from IGrocery to GroceryDb
+            // Map from IGrocery to GroceryDb.
             CreateMap<IGrocery, GroceryDb>();
-            // map from GroceryDb to GroceryBm
+            // Map from GroceryDb to GroceryBm.
             CreateMap<GroceryDb, BusinessModels.Grocery>();
 
 
-            // mapping from IPolice to Police Database Model
+            // Mapping from IPolice to Police Database Model.
             CreateMap<IPolice, PoliceDb>();
-            // mapping from PoliceDb to Police Business Model
+            // Mapping from PoliceDb to Police Business Model.
             CreateMap<PoliceDb, BusinessModels.Police>();
 
-            // map from IPupil to PupilDb
+            // Map from IPupil to PupilDb.
             CreateMap<IPupil, PupilDb>();
-            // map from PupilDb to PupilBm
+            // Map from PupilDb to PupilBm.
             CreateMap<PupilDb, BusinessModels.Pupil>();
 
 
-            // map from IStudent to StudentDb
+            // Map from IStudent to StudentDb.
             CreateMap<IStudent, StudentDb>();
-            // map from StudentDb to StudentBm
+            // Map from StudentDb to StudentBm.
             CreateMap<StudentDb, BusinessModels.Student>();
         }
     }

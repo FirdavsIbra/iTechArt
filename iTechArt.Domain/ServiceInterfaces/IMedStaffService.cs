@@ -6,27 +6,27 @@ namespace iTechArt.Domain.ServiceInterfaces
     public interface IMedStaffService
     {
         /// <summary>
-        /// Uploads a file of data 
+        /// Uploads a file of data. 
         /// </summary>
         public Task ImportMedStaffFileAsync(IFormFile file);
 
         /// <summary>
-        /// Uploads excel file of data
+        /// Uploads excel file of data.
         /// </summary>
         public Task ExcelParseAsync(IFormFile file);
 
         /// <summary>
-        /// Uploads xml file of data
+        /// Uploads xml file of data.
         /// </summary>
         public Task XMLParseAsync(IFormFile file);
 
         /// <summary>
-        /// Uploads csv file of data
+        /// Uploads csv file of data.
         /// </summary>
         public Task CSVParseAsync(IFormFile file);
 
         /// <summary>
-        /// Gets all info from database
+        /// Gets all info from database.
         /// </summary>
         public Task<IMedStaff[]> ExportMedStaffFileAsync();
 

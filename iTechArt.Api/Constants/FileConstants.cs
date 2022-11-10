@@ -3,12 +3,12 @@
     public static class FileConstants
     {
         /// <summary>
-        /// types of extensions.
+        /// Types of extensions.
         /// </summary>
         public static readonly string[] Extensions = { ".csv", ".xml",".xlsx", ".xls", ".xlsm", ".xlsb", ".xltx", ".xltm", ".xlt", ".xlam", ".xla", ".xlw" };
 
         /// <summary>
-        /// constant file extension strings.
+        /// Constant file extension strings.
         /// </summary>
         public static readonly string csv = ".csv";
         public static readonly string xml = ".xml";
