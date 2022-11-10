@@ -5,39 +5,39 @@ namespace iTechArt.Domain.RepositoryInterfaces
     public interface IMedStaffRepository
     {
         /// <summary>
-        /// Get all medStaff from database
+        /// Get all medStaff from database.
         /// </summary>
         /// <returns> Array of Repository Model Interfaces </returns>
         Task<IMedStaff[]> GetAllAsync();
 
         /// <summary>
-        /// Add medStaff to database
+        /// Add medStaff to database.
         /// </summary>
         Task AddAsync(IMedStaff medStaff);
 
         /// <summary>
-        /// Add array of medStaff
+        /// Add array of medStaff.
         /// </summary>
         Task AddRangeAsync(IEnumerable<IMedStaff> medStaffs);
 
         /// <summary>
-        /// Get medStaff by id
+        /// Get medStaff by id.
         /// </summary>
         /// <returns> Resopisitory model interface </returns>
         Task<IMedStaff> GetByIdAsync(long id);
 
         /// <summary>
-        /// Update medStaff
+        /// Update medStaff.
         /// </summary>
         Task UpdateAsync(IMedStaff doctor);
 
         /// <summary>
-        /// Delete doctor from database
+        /// Delete doctor from database.
         /// </summary>
         Task DeleteAsync(long id);
 
         /// </summary>
-        /// Get count of medStaff
+        /// Get count of medStaff.
         /// </summary>
         public Task<int> GetCountOfDoctors();
     }

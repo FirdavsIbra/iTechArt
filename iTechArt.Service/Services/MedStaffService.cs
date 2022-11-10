@@ -18,7 +18,7 @@ namespace iTechArt.Service.Services
         }
 
         /// <summary>
-        /// Takes no input so far
+        /// Takes no input so far.
         /// </summary>
         public async Task<IMedStaff[]> ExportMedStaffFileAsync()
         {
@@ -26,58 +26,31 @@ namespace iTechArt.Service.Services
         }
 
         /// <summary>
-        /// Parse iformfile into IMedStaff interface
+        /// Parse iformfile into IMedStaff interface.
         /// </summary>
         public async Task CSVParseAsync(IFormFile file)
         {
-            var fileExtension = Path.GetExtension(file.FileName);
-
-            if (fileExtension == ".csv")
-            {
-                await _medStaffParser.ParseCSVAsync(file);
-            }
-            else
-            {
-                throw new ArgumentException("Invalid file format");
-            }
+            await _medStaffParser.ParseCSVAsync(file);
         }
 
         /// <summary>
-        /// Parse iformfile into IMedStaff interface
+        /// Parse iformfile into IMedStaff interface.
         /// </summary>
         public async Task ExcelParseAsync(IFormFile file)
         {
-            var fileExtension = Path.GetExtension(file.FileName);
-
-            if (fileExtension == ".xlsx" || fileExtension == ".xls")
-            {
-                await _medStaffParser.ParseExcelAsync(file);
-            }
-            else
-            {
-                throw new ArgumentException("Invalid file format");
-            }
+            await _medStaffParser.ParseExcelAsync(file);
         }
 
         /// <summary>
-        /// Parse iformfile into IMedStaff interface
+        /// Parse iformfile into IMedStaff interface.
         /// </summary>
         public async Task XMLParseAsync(IFormFile file)
         {
-            var fileExtension = Path.GetExtension(file.FileName);
-
-            if (fileExtension == ".xml")
-            {
-                await _medStaffParser.ParseXMLAsync(file);
-            }
-            else
-            {
-                throw new ArgumentException("Invalid file format");
-            }
+            await _medStaffParser.ParseXMLAsync(file);
         }
 
         /// <summary>
-        /// Takes filestream
+        /// Takes filestream.
         /// </summary>
         public async Task ImportMedStaffFileAsync(IFormFile file)
         {

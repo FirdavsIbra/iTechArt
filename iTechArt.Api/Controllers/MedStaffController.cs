@@ -16,7 +16,7 @@ namespace iTechArt.Api.Controllers
         }
 
         /// <summary>
-        /// Uploads file and saves in database
+        /// Uploads file and saves in database.
         /// </summary>
         [HttpPost(ApiConstants.IMPORT), Obsolete]
         public async Task<IActionResult> Import(IFormFile file)
@@ -37,7 +37,7 @@ namespace iTechArt.Api.Controllers
         }
 
         /// <summary>
-        /// Uploads excel file and saves in database
+        /// Uploads excel file and saves in database.
         /// </summary>
         [HttpPost(ApiConstants.IMPORTEXCEL)]
         public async Task<IActionResult> ImportExcel(IFormFile file)
@@ -58,7 +58,7 @@ namespace iTechArt.Api.Controllers
         }
 
         /// <summary>
-        /// Uploads csv file and saves in database
+        /// Uploads csv file and saves in database.
         /// </summary>
         [HttpPost(ApiConstants.IMPORTCSV)]
         public async Task<IActionResult> ImportCSV(IFormFile file)
@@ -79,7 +79,7 @@ namespace iTechArt.Api.Controllers
         }
 
         /// <summary>
-        /// Uploads xml file and saves in database
+        /// Uploads xml file and saves in database.
         /// </summary>
         [HttpPost(ApiConstants.IMPORTXML)]
         public async Task<IActionResult> ImportXML(IFormFile file)
@@ -100,7 +100,7 @@ namespace iTechArt.Api.Controllers
         }
 
         /// <summary>
-        /// Gets all data from database
+        /// Gets all data from database.
         /// </summary>
         [HttpGet("get_all")]
         public async Task<ActionResult<IMedStaff[]>> ExportAsync([FromServices] IMedStaffService _medStaffService)
