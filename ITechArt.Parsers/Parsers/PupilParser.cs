@@ -15,7 +15,7 @@ namespace ITechArt.Parsers.Parsers
     public sealed class PupilParser : IPupilParser
     {
         /// <summary>
-        /// Parse pupil's file from csv.
+        /// Parse pupil's file from csv
         /// </summary>
         public async Task<IPupil[]> CsvParseAsync(IFormFile file)
         {
